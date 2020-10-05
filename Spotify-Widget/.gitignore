@@ -6,3 +6,4 @@
 
 # Specific files
 *.DS_Store
+*credentials.json
