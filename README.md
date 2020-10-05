@@ -12,8 +12,8 @@
 <!--
 <img src="https://spotify-readme-sivertutne.vercel.app/api/spotify" alt="Nothing currently playing"/>
 -->
-###  Tools and frameworks
 
+###  Tools and frameworks
 <img align="left" title="React" alt="React" width="32px" style="margin: 5px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png" />
 <img align="left" title="Node.js" alt="Node.js" width="32px" style="margin: 5px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nodejs/nodejs.png" />
 <img align="left" title="MySQL" alt="MySQL" width="42px" style="margin-top: 7px" src="https://cdn.worldvectorlogo.com/logos/mysql.svg" />
@@ -24,8 +24,6 @@
 <img align="left" title="GitHub" alt="GitHub" width="32px" style="margin: 5px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />
 <img align="left" title="GitLab" alt="gitLab" width="32px" style="margin: 5px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/GitLab_Logo.svg/1200px-GitLab_Logo.svg.png" />
 <img align="MATLAB" title="MATLAB" alt="MATLAB" width="32px" style="margin: 5px" src="https://i.imgur.com/xohInMq.png" />   
-<br />  
-
 
 ### IDEs
 <img align="left" title="Intellij" alt="intellij" width="32px" style="margin: 5px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/IntelliJ_IDEA_Logo.svg/480px-IntelliJ_IDEA_Logo.svg.png" />
