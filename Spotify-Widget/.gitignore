@@ -1,6 +1,8 @@
-venv
-__pycache__
-.cache*
-env
-.env
+# Folders
 .idea/
+
+# Filetypes
+
+
+# Specific files
+*.DS_Store
