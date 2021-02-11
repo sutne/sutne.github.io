@@ -2,17 +2,20 @@
 
 ## 🤔 What am i up to
 - 🍲 Currently having lunch
-- ✍🏻 On the last year of my bachelor, taking the following courses:
+- ✍🏻 On the last year of my bachelor
+<!--, taking the following courses:
   - Applied machine learning
   - Application development for Android
   - C++ for programmers
   - Python for programmers
   - Physics and Mathematics  
+-->
 
 <!--
 <img src="https://spotify-readme-sivertutne.vercel.app/api/spotify" alt="Nothing currently playing"/>
 -->
 
+<!--
 ###  Tools and frameworks
 <img align="left" title="React" alt="React" width="32px" style="margin: 5px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png" />
 <img align="left" title="Node.js" alt="Node.js" width="32px" style="margin: 5px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nodejs/nodejs.png" />
@@ -24,7 +27,9 @@
 <img align="left" title="GitHub" alt="GitHub" width="32px" style="margin: 5px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />
 <img align="left" title="GitLab" alt="gitLab" width="32px" style="margin: 5px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/GitLab_Logo.svg/1200px-GitLab_Logo.svg.png" />
 <img align="MATLAB" title="MATLAB" alt="MATLAB" width="32px" style="margin: 5px" src="https://i.imgur.com/xohInMq.png" />   
+-->
 
+<!--
 ### IDEs
 <img align="left" title="Intellij" alt="intellij" width="32px" style="margin: 5px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/IntelliJ_IDEA_Logo.svg/480px-IntelliJ_IDEA_Logo.svg.png" />
 <img align="left" title="PyCharm" alt="PyCharm" width="32px" style="margin: 5px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/PyCharm_Logo.svg/1024px-PyCharm_Logo.svg.png" />
@@ -34,6 +39,7 @@
 <img align="left" title="eclipse" alt="eclipse" width="32px" style="margin: 5px" src="https://cdn.worldvectorlogo.com/logos/eclipse-11.svg" />
 <img align="left" title="NetBeans" alt="NetBeans" width="32px" style="margin: 5px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/888px-Apache_NetBeans_Logo.svg.png" />
 <br />
+-->
 
 ### Operating system
 <img align="left" title="macOS Catalina" alt="IOS" width="32px" style="margin: 5px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/863px-Apple_logo_black.svg.png" />
