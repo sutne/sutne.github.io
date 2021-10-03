@@ -149,10 +149,12 @@ Live "multiplayer" drawing application
 
 Demonstration of transformations and rotations in OpenGL, where i created Steve from Minecraft.
 
-<img src="highlights/TDAT1001/walking1.gif" width="49%">
-<img src="highlights/TDAT1001/walking2.gif" width="49%">
-<img src="highlights/TDAT1001/walking3.gif" width="49%">
-<img src="highlights/TDAT1001/dabbing.gif" width="49%">
+<p align="center">
+  <img src="highlights/TDAT1001/walking1.gif" width="49%">
+  <img src="highlights/TDAT1001/walking2.gif" width="49%">
+  <img src="highlights/TDAT1001/walking3.gif" width="49%">
+  <img src="highlights/TDAT1001/dabbing.gif" width="49%">
+</p>
 
 
 
