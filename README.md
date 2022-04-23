@@ -4,7 +4,6 @@ I am currently on the first year of my 2-year Master's Degree in Computer Scienc
 
 If you are interested in looking at any of the code from my time at university, all of it is located in the my [NTNU Courses Organization](https://github.com/sutne-NTNU).
 
----
 
 ## More about me  👋🏻
 
@@ -31,7 +30,6 @@ If you are interested in looking at any of the code from my time at university, 
 </br>
 </br>
 
----
 
 ## My Tools and Frameworks dump
 
