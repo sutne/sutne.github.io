@@ -21,10 +21,11 @@ If you are interested in looking at any of the code from my time at university, 
 
 <img src="https://spotify-readme-sivertutne.vercel.app/api/spotify" alt="Nothing currently playing"/>
 
-<!-- <img align="left" alt="My Github Stats" src="https://github-readme-stats.vercel.app/api?username=sutne&show_icons=true&count_private=true&hide=contribs&theme=radical&include_all_commits=true&hide_border=true"/> -->
+<!-- 
+<img align="left" alt="My Github Stats" src="https://github-readme-stats.vercel.app/api?username=sutne&show_icons=true&count_private=true&hide=contribs&theme=radical&include_all_commits=true&hide_border=true"/> 
 
 <img align="left" alt="My Most Used Languages" src="https://github-readme-stats.vercel.app/api/top-langs/?username=sutne&layout=compact&theme=radical&hide_border=true&card_width=445"/>
-<!-- 
+
 </br>
 </br>
 </br>
