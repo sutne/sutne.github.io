@@ -1,18 +1,19 @@
-# 🎓 Sivert Utne - Computer Science Student
+# Sivert Utne
+#### Computer Science Student 🎓</h4>
 
-I am currently on the first year of my 2-year Master's Degree in Computer Science. From before i have a Bachelor as a computer engineer.
+Currently on the first year of my 2-year Master's Degree in Computer Science. I have previously completed a Bachelor as a computer engineer.
 
-If you are interested in looking at any of the code from my time at university, all of it is located in the my [NTNU Courses Organization](https://github.com/sutne-NTNU).
+If you are interested in looking at any of the code from my time at university, all of it is located in my [NTNU Courses Organization](https://github.com/sutne-NTNU).
 
 
 ## More about me  👋🏻
 
+[instagram]: https://instagram.com/sivertutne
+[linkedin]: https://linkedin.com/in/sivert-utne
+
 [<img align="left" title="LinkedIn" alt="SivertUtne | LinkedIn" width="50px" style="margin: 10px" src="https://i.pinimg.com/originals/30/c4/53/30c453b7f5fbdb09ea0cb42a5dc7a6e5.png"/>][linkedin]
 
 [<img align="left" title="Instagram" alt="SivertUtne | Instagram" width="50px" style="margin: 10px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Instagram.svg/1200px-Instagram.svg.png"/>][instagram]  
-
-[instagram]: https://instagram.com/sivertutne
-[linkedin]: https://linkedin.com/in/sivert-utne
 
 </br>
 </br>
