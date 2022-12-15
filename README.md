@@ -1,11 +1,11 @@
 # Sivert Utne
-#### Computer Science Student 🎓</h4>
+#### Computer Science Student 🎓 
 
-Currently on the first year of my 2-year Master's Degree in Computer Science. I have previously completed a Bachelor as a computer engineer.
+Currently finishing my 2-year Master's Degree in Computer Science. I have previously completed a Bachelor as a computer engineer.
 
 If you are interested in looking at any of the code from my time at university, all of it is located in my [NTNU Courses Organization](https://github.com/sutne-NTNU).
 
-
+<!-- 
 ## More about me  👋🏻
 
 [instagram]: https://instagram.com/sivertutne
@@ -15,13 +15,14 @@ If you are interested in looking at any of the code from my time at university, 
 
 [<img align="left" title="Instagram" alt="SivertUtne | Instagram" width="50px" style="margin: 10px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Instagram.svg/1200px-Instagram.svg.png"/>][instagram]  
 
+
 </br>
 </br>
 </br>
 
 <img src="https://spotify-readme-sivertutne.vercel.app/api/spotify" alt="Nothing currently playing"/>
 
-<!-- 
+
 <img align="left" alt="My Github Stats" src="https://github-readme-stats.vercel.app/api?username=sutne&show_icons=true&count_private=true&hide=contribs&theme=radical&include_all_commits=true&hide_border=true"/> 
 
 <img align="left" alt="My Most Used Languages" src="https://github-readme-stats.vercel.app/api/top-langs/?username=sutne&layout=compact&theme=radical&hide_border=true&card_width=445"/>
