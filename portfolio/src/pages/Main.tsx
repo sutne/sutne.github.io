@@ -21,7 +21,7 @@ export function Main() {
         <AppDrawer title="Productivity">
           <App name="Mail" onClick={() => window.open("mailto:sivertutne@gmail.com")} />
           <App name="Github" onClick={() => window.open("https://github.com/sutne")} />
-          <App name="Spotify" onClick={() => window.open("https://spotify-readme-sivertutne.vercel.app/api/spotify")} />
+          <App name="Spotify" onClick={() => window.open("https://spotify-widget-sutne.vercel.app/api")} />
         </AppDrawer>
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
