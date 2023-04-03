@@ -1,9 +1,12 @@
 import React from 'react';
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 
 import { PersonalCard } from 'cards/personal-card';
 import { App } from 'components/app';
 import { AppDrawer } from 'components/app-drawer';
+import { ThemeProvider } from 'providers/theme-provider';
+
+import { Spotify } from './Spotify/Spotify';
 
 
 
@@ -13,23 +16,25 @@ import { AppDrawer } from 'components/app-drawer';
 
 export function Main() {
   return (
-    <Grid container>
-      <Grid item xs={12} sm={12} md={8}>
-        <PersonalCard />
+    <ThemeProvider >
+      <Grid container>
+        <Grid item xs={12} sm={12} md={8}>
+          <PersonalCard />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <AppDrawer title="Productivity">
+            <App name="Mail" ><Typography variant="body1">Spotify</Typography></App>
+            <App name="Github" ><Typography variant="body1">Spotify</Typography></App>
+            <Spotify />
+          </AppDrawer>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <AppDrawer title="Games">
+            <App name="Playstation" ><Typography variant="body1">Spotify</Typography></App>
+            <App name="Minesweeper" ><Typography variant="body1">Spotify</Typography></App>
+          </AppDrawer>
+        </Grid>
       </Grid>
-      <Grid item xs={12} sm={6} md={4}>
-        <AppDrawer title="Productivity">
-          <App name="Mail" onClick={() => window.open("mailto:sivertutne@gmail.com")} />
-          <App name="Github" onClick={() => window.open("https://github.com/sutne")} />
-          <App name="Spotify" onClick={() => window.open("https://spotify-widget-sutne.vercel.app/api")} />
-        </AppDrawer>
-      </Grid>
-      <Grid item xs={12} sm={6} md={4}>
-        <AppDrawer title="Games">
-          <App name="Playstation" onClick={() => window.open("https://card.psnprofiles.com/2/Sutne_.png")} />
-          <App name="Minesweeper" onClick={() => window.open("https://sutne.github.io/games/#/Minesweeper")} />
-        </AppDrawer>
-      </Grid>
-    </Grid>
+    </ThemeProvider>
   );
 }
