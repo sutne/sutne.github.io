@@ -24,12 +24,12 @@ const style = {
       fontSmoothing: "antialiased",
       WebKitFontSmoothing: "antialiased",
       MozOsxFontSmoothing: "grayscale",
-    }
-  ]
+    },
+  ],
 };
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById('root') as HTMLElement,
 );
 document.body.style.margin = "0px";
 document.body.style.padding = "0px";
@@ -41,7 +41,7 @@ root.render(
         <Main />
       </Box>
     </Box>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 

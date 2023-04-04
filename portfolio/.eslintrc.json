@@ -22,6 +22,15 @@
         "simple-import-sort"
     ],
     "rules": {
+        "semi": [
+            "error",
+            "always"
+        ],
+        "no-extra-semi": "error",
+        "comma-dangle": [
+            2,
+            "always-multiline"
+        ],
         "simple-import-sort/imports": "error",
         "simple-import-sort/exports": "error",
         "@typescript-eslint/no-explicit-any": "off",
@@ -30,8 +39,8 @@
     "overrides": [
         {
             "files": [
-                "**/*.jsx",
                 "**/*.js",
+                "**/*.jsx",
                 "**/*.ts",
                 "**/*.tsx"
             ],

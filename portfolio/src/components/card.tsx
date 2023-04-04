@@ -30,7 +30,7 @@ export function Card({ ...props }: props) {
             // transform: "scale(1.01)",
             boxShadow: "5px 5px 12px 2pt rgba(0,0,0, 20%)",
           },
-        }
+        },
       ],
     };
   }

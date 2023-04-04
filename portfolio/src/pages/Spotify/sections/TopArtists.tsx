@@ -13,16 +13,16 @@ export function TopArtists(): JSX.Element {
     const getTracks = async () => {
       const response = await API.getTopArtists();
       setArtists(response);
-    }
+    };
     getTracks();
-  }, [])
+  }, []);
 
-  if (!artists) return <></>
+  if (!artists) return <></>;
 
   return <>
     <SectionTitle title="Top Artists" />
     <ItemRow>
       {artists.map((artist: TypeArtist, i: number) => <Artist key={i} artist={artist} />)}
     </ItemRow>
-  </>
+  </>;
 }

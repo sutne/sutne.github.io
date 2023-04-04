@@ -33,7 +33,7 @@ export function MusicPlayerProvider({ ...props }: props) {
     }
     currentSong.pause();
     setCurrentSong(undefined);
-  }
+  };
 
   const addSample = (sample: string | undefined) => {
     if (!sample) return;
@@ -42,23 +42,23 @@ export function MusicPlayerProvider({ ...props }: props) {
     newSample.onended = () => {
       newSample.currentTime = 0;
       setCurrentSong(undefined);
-    }
+    };
     setSamples(prev => {
       prev.set(sample, newSample);
       return prev;
-    })
-  }
+    });
+  };
 
   const isPlaying = (sample: string) => {
     if (!currentSong) return false;
     return currentSong.src === sample && !currentSong.paused;
-  }
+  };
 
   const contextValues = {
     currentSong,
     handlePlayPause,
     addSample,
-    isPlaying
+    isPlaying,
   };
 
   return (

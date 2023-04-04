@@ -21,7 +21,7 @@ const ThemeContext = React.createContext<
 export function ThemeProvider({ ...props }: props) {
   const prefersDarkTheme = useMediaQuery("(prefers-color-scheme: dark)");
   const [theme, setTheme] = useState(
-    props.theme ?? (!prefersDarkTheme ? darkTheme : lightTheme)
+    props.theme ?? (!prefersDarkTheme ? darkTheme : lightTheme),
   );
 
   const swapTheme = () => {

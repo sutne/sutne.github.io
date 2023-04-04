@@ -18,11 +18,13 @@ export function Artist({ ...props }: props) {
       bgcolor: "rgb(24,24,24)",
       "&:hover": {
         bgcolor: "background.paper",
-      }
+      },
     }],
     image: [{
       borderRadius: "8px",
       marginBottom: "0.6em",
+      aspectRatio: "1",
+      objectFit: "cover",
     }],
     name: [{
       color: "text.primary",
@@ -39,11 +41,11 @@ export function Artist({ ...props }: props) {
       overflow: "hidden",
       textOverflow: "ellipsis",
     }],
-  }
+  };
 
   return <Stack direction="column" sx={classes.container}>
     <Box component="img" src={props.artist.image} sx={classes.image} />
     <Typography sx={classes.name}>{props.artist.name}</Typography>
     <Typography sx={classes.genres}>{props.artist.genres.join(", ")}</Typography>
-  </Stack >
+  </Stack >;
 }

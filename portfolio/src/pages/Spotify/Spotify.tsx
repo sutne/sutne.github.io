@@ -29,8 +29,10 @@ const spotifyTheme = responsiveFontSizes(
         secondary: "rgba(255,255,255,50%)",
       },
     },
-  })
+  }),
 );
+
+
 
 export function Spotify() {
   return <ThemeProvider theme={spotifyTheme}>
@@ -44,5 +46,5 @@ export function Spotify() {
         </Box>
       </MusicPlayerProvider>
     </App>
-  </ThemeProvider>
+  </ThemeProvider>;
 }

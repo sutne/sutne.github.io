@@ -16,19 +16,19 @@ export function RecentlyPlayed(): JSX.Element {
       const response = await API.getRecentlyPlayed();
       setTracks(response);
       for (const track of response) {
-        addSample(track.sample)
+        addSample(track.sample);
       }
-    }
+    };
     getTracks();
-  }, [])
+  }, []);
 
-  if (!tracks) return <></>
+  if (!tracks) return <></>;
   return <>
     <SectionTitle title="Recently Played" />
     <ItemRow>
       {tracks.map((track: TypeTrack, i: number) => {
-        return <Track key={i} track={track} />
+        return <Track key={i} track={track} />;
       })}
     </ItemRow>
-  </>
+  </>;
 }

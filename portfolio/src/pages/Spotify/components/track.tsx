@@ -27,11 +27,13 @@ export function Track({ ...props }: props): JSX.Element {
       bgcolor: "rgb(24,24,24)",
       "&:hover": {
         bgcolor: "background.paper",
-      }
+      },
     }],
     cover: [{
       borderRadius: "8px",
       marginBottom: "0.6em",
+      aspectRatio: "1",
+      objectFit: "cover",
     }],
     title: [{
       color: "text.primary",
@@ -61,14 +63,14 @@ export function Track({ ...props }: props): JSX.Element {
       "&:hover": {
         bgcolor: theme.palette.primary.light,
         transform: "scale(1.05) ",
-      }
+      },
     }],
     button_icon: {
       color: "rgb(24,24,24)",
       transition: "all 0.125s ease",
       fontSize: "1.3em",
-    }
-  }
+    },
+  };
 
 
   return <Stack direction="column" sx={classes.container}
@@ -81,5 +83,5 @@ export function Track({ ...props }: props): JSX.Element {
     <IconButton sx={classes.button} onClick={() => handlePlayPause(props.track.sample)}>
       {isPlaying(props.track.sample) ? <Pause sx={classes.button_icon} /> : <PlayArrow sx={classes.button_icon} />}
     </IconButton>
-  </Stack >
+  </Stack >;
 }

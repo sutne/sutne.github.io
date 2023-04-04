@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { Box, Fade, Grow, Stack, Typography } from '@mui/material'
+import React, { useState } from 'react';
+import { Minimize } from '@mui/icons-material';
+import { Box, Fade, Grow, IconButton, Stack, Typography } from '@mui/material';
 
 import { useTheme } from 'providers/theme-provider';
 
@@ -38,13 +39,14 @@ export function App({ ...props }: props) {
                 src={require(`assets/apps/${props.name}.png`)}
               />
               <Typography alignSelf="center" sx={classes.app_name}>{props.name}</Typography>
+              <IconButton sx={classes.close_button} onClick={() => setOpen(false)}><Minimize /></IconButton>
             </Stack>
             <Box sx={classes.app_content}>{props.children}</Box>
           </Box>
         </Box>
       </Grow>
     </>
-  )
+  );
 
   function getClasses() {
     return {
@@ -59,7 +61,7 @@ export function App({ ...props }: props) {
         "&:hover": {
           transform: "scale(1.05)",
         },
-      }
+      },
       ],
       icon: [
         {
@@ -78,6 +80,11 @@ export function App({ ...props }: props) {
           overflowWrap: "break-word",
         },
       ],
+      close_button: [{
+        alignSelf: "center",
+        height: "2em",
+        width: "2em",
+      }],
       open_background: [
         {
           zIndex: "100",
@@ -87,7 +94,7 @@ export function App({ ...props }: props) {
           height: "100%",
           width: "100%",
           bgcolor: "rgba(0, 0, 0, 25%)",
-        }
+        },
       ],
       content_wrapper: [{
         zIndex: "150",
@@ -97,7 +104,6 @@ export function App({ ...props }: props) {
         right: "0",
         bottom: "0",
         width: "min(1024px, 100%)",
-        // bgcolor: "red",
         margin: "auto",
         paddingY: "2em",
         overflow: "auto",
@@ -130,10 +136,11 @@ export function App({ ...props }: props) {
         paddingLeft: "16px",
         fontSize: "1.5em",
         lineHeight: "100%",
+        width: "100%",
       }],
       app_content: [{
         padding: "24px",
-        boxShadow: "inset 0px 3px 3px rgba(0,0,0,40%)"
+        boxShadow: "inset 0px 3px 3px rgba(0,0,0,40%)",
       }],
     };
   }

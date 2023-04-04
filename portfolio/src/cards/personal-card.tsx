@@ -34,5 +34,5 @@ export function PersonalCard() {
         </Box>
       </Grid>
     </Grid>
-  </Card>
+  </Card>;
 }

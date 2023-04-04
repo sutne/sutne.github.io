@@ -9,7 +9,7 @@ export const darkTheme = responsiveFontSizes(
         paper: "rgb(44,49,62)",
       },
     },
-  })
+  }),
 );
 
 export const lightTheme = responsiveFontSizes(
@@ -24,5 +24,5 @@ export const lightTheme = responsiveFontSizes(
         primary: "rgb(13,17,23)",
       },
     },
-  })
+  }),
 );

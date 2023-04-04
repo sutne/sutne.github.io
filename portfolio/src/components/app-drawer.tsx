@@ -37,7 +37,7 @@ export function AppDrawer({ ...props }: props) {
             // transform: "scale(1.01)",
             boxShadow: "5px 5px 12px 2pt rgba(0,0,0, 20%)",
           },
-        }
+        },
       ],
       drawer: [{
         padding: "24px",
@@ -48,7 +48,7 @@ export function AppDrawer({ ...props }: props) {
         color: "rgb(0, 0, 0, 70%)",
         padding: "12px 16px",
         backgroundImage: "linear-gradient(70deg, rgba(221,236,250,0.45) 60%, rgba(221,236,250,0.75) 100%)",
-      }]
+      }],
     };
   }
 }
