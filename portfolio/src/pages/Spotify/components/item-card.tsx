@@ -12,23 +12,21 @@ import { SampleButton } from './sample-button';
 type props = {
   title: string,
   subtitle: string,
-  imageUrl: string,
-  trackSample?: string,
+  image: string,
+  sample?: string,
 }
 export function ItemCard({ ...props }: props): JSX.Element {
   const [isHovered, setHovered] = useState(false);
 
   const { theme } = useTheme();
 
-  const button = props.trackSample ? <SampleButton sample={props.trackSample} show={isHovered} /> : <></>;
-
   const sx = getSx();
   return <Stack sx={sx.container} direction='column'
     onMouseEnter={() => setHovered(true)}
     onMouseLeave={() => setHovered(false)}
   >
-    <Image src={props.imageUrl}>
-      {button}
+    <Image src={props.image}>
+      {props.sample ? <SampleButton sample={props.sample} show={isHovered} /> : <></>}
     </Image>
     <Box sx={sx.info}>
       <ItemTitle>{props.title}</ItemTitle>

@@ -24,7 +24,7 @@ export function TopArtists(): JSX.Element {
     <ItemRow>
       {artists.map((artist: ArtistType, i: number) => {
         return <ItemCard key={i}
-          imageUrl={artist.image}
+          image={artist.image}
           title={artist.name}
           subtitle={artist.genres.join(', ')}
         />;

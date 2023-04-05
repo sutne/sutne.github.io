@@ -30,8 +30,8 @@ export function TopTracks(): JSX.Element {
     <ItemRow>
       {tracks.map((track: TrackType, i: number) => {
         return <ItemCard key={i}
-          imageUrl={track.art}
-          trackSample={track.sample}
+          image={track.image}
+          sample={track.sample}
           title={track.title}
           subtitle={track.artists.join(', ')}
         />;

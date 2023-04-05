@@ -42,7 +42,7 @@ export function NowPlaying(): JSX.Element {
           onMouseLeave={() => setIsHovering(false)}
         >
           <Box sx={sx.image}>
-            <Image src={track.art} size='60mm'>
+            <Image src={track.image} size='60mm'>
               <SampleButton
                 sample={track.sample}
                 show={isHovering}
@@ -58,7 +58,7 @@ export function NowPlaying(): JSX.Element {
               <Box sx={sx.progress}>
                 <TimeDuration
                   length={track.length}
-                  progress={track.progress}
+                  startedAt={track.startedAt}
                   onCompletion={() => { setTrack(undefined); }}
                 />
               </Box>

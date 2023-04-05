@@ -9,27 +9,29 @@ import { msToString } from '../util';
 
 type props = {
   length: number;
-  progress: number;
+  startedAt: number;
   onCompletion?: () => void;
 }
 export function TimeDuration({ ...props }: props): JSX.Element {
-  const [currentProgress, setProgress] = useState(props.progress);
+  // offset time a little to prevent website refresing to same song
+  const getElapsed = () => Date.now() - 4000 - props.startedAt;
+
+  const [elapsed, setElapsed] = useState(getElapsed());
 
   const { theme } = useTheme();
 
   let timer: NodeJS.Timer;
   useEffect(() => {
-    timer = setInterval(() => {
-      setProgress(prev => Math.min(props.length, prev + 1000));
-    }, 1000);
+    timer = setInterval(() => setElapsed(getElapsed()), 1000);
     return () => clearInterval(timer);
   }, []);
 
   useEffect(() => {
-    if (currentProgress < props.length) return;
+    if (elapsed < props.length) return;
+    setElapsed(props.length);
     clearInterval(timer);
     props.onCompletion?.();
-  }, [currentProgress]);
+  }, [elapsed]);
 
   const classes = {
     progress: [{
@@ -53,9 +55,9 @@ export function TimeDuration({ ...props }: props): JSX.Element {
     }],
   };
 
-  const progress = Math.min(100, 100 * currentProgress / props.length);
+  const progress = Math.min(100, 100 * elapsed / props.length);
   return <Stack direction='row' spacing={1} sx={classes.progress}>
-    <Typography sx={classes.timeMarker}>{msToString(currentProgress)}</Typography>
+    <Typography sx={classes.timeMarker}>{msToString(elapsed)}</Typography>
     <LinearProgress sx={classes.bar} variant='determinate' value={progress} />
     <Typography sx={classes.timeMarker}>{msToString(props.length)}</Typography>
   </Stack>;
