@@ -11,62 +11,51 @@ import { ItemTitle } from '../components/item-title';
 import { SampleButton } from '../components/sample-button';
 import { TrackProgress } from '../components/track-progress';
 import { SectionTitle } from '../components/typography';
-import { useMusicPlayer } from '../providers/music-player';
-import * as API from '../service/api';
-import { NowPlayingType } from '../service/types';
+import { useNowPlaying } from '../providers/now-playing-provider';
 
 
 export function NowPlaying(): JSX.Element {
-  const [track, setTrack] = useState<NowPlayingType | undefined>();
   const [isHovering, setIsHovering] = useState(false);
 
-  const { addSample } = useMusicPlayer();
   const { theme } = useTheme();
-
-  useEffect(() => {
-    if (track) return;
-    const getTrack = async () => {
-      // console.log('Getting track...');
-      const response = await API.getNowPlaying();
-      if (!response) return;
-      setTrack(response);
-      addSample(response.sample);
-    };
-    getTrack();
-  }, [track]);
+  const { track, loading } = useNowPlaying();
 
   const sx = getSx();
-  return <Grow in={track != undefined} timeout={4000}>
+  return <Grow in={!loading} timeout={2000}>
     <Box>
-      {track ? <>
-        <SectionTitle title='Currently Listening To' />
-        <Stack sx={sx.background}
-          direction={{ xs: 'column', sm: 'row' }}
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
-        >
-          <Box sx={sx.image}>
-            <Image src={track.image} size='60mm'>
-              <SampleButton
-                sample={track.sample}
-                show={isHovering}
-                playIcon={VolumeOff}
-                pauseIcon={VolumeUp}
-              />
-            </Image>
-          </Box>
-          <Stack sx={sx.container} direction='column'>
-            <Box sx={sx.content}>
-              <ItemTitle sx={sx.title}>{track.title}</ItemTitle>
-              <ItemSubtitle sx={sx.artists}>{track.artists.join(', ')}</ItemSubtitle>
-              <Box sx={sx.progress}>
-                <TrackProgress track={track} onCompletion={() => setTrack(undefined)} />
-              </Box>
+      {track
+        ?
+        <>
+          <SectionTitle title='Currently Listening To' />
+          <Stack sx={sx.background}
+            direction={{ xs: 'column', sm: 'row' }}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+          >
+            <Box sx={sx.image}>
+              <Image src={track.image} size='60mm'>
+                <SampleButton
+                  sample={track.sample}
+                  show={isHovering}
+                  playIcon={VolumeOff}
+                  pauseIcon={VolumeUp}
+                />
+              </Image>
             </Box>
+            <Stack sx={sx.container} direction='column'>
+              <Box sx={sx.content}>
+                <ItemTitle sx={sx.title}>{track.title}</ItemTitle>
+                <ItemSubtitle sx={sx.artists}>{track.artists.join(', ')}</ItemSubtitle>
+                <Box sx={sx.progress}>
+                  <TrackProgress />
+                </Box>
+              </Box>
+            </Stack>
           </Stack>
-        </Stack></>
+        </>
         :
-        <></>}
+        <></>
+      }
     </Box>
   </Grow >;
 

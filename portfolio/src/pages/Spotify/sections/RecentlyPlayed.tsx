@@ -4,6 +4,7 @@ import { ItemCard } from '../components/item-card';
 import { ItemRow } from '../components/item-row';
 import { SectionTitle } from '../components/typography';
 import { useMusicPlayer } from '../providers/music-player';
+import { useNowPlaying } from '../providers/now-playing-provider';
 import * as API from '../service/api';
 import { TrackType } from '../service/types';
 
@@ -12,6 +13,7 @@ export function RecentlyPlayed(): JSX.Element {
   const [tracks, setTracks] = useState<TrackType[]>([]);
 
   const { addSample } = useMusicPlayer();
+  const { track } = useNowPlaying();
 
   useEffect(() => {
     const getTracks = async () => {
@@ -22,7 +24,7 @@ export function RecentlyPlayed(): JSX.Element {
       }
     };
     getTracks();
-  }, []);
+  }, [track]);
 
   if (!tracks) return <></>;
   return <>
