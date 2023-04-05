@@ -6,6 +6,7 @@ import { App } from 'components/app';
 import { ThemeProvider } from 'providers/theme-provider';
 
 import { MusicPlayerProvider } from './providers/music-player';
+import { NowPlayingProvider } from './providers/now-playing-provider';
 import { NowPlaying } from './sections/NowPlaying';
 import { RecentlyPlayed } from './sections/RecentlyPlayed';
 import { TopArtists } from './sections/TopArtists';
@@ -35,16 +36,20 @@ const spotifyTheme = responsiveFontSizes(
 
 
 export function Spotify() {
-  return <ThemeProvider theme={spotifyTheme}>
-    <App name='Spotify'>
+  return (
+    <App name='Spotify' theme={spotifyTheme}>
       <MusicPlayerProvider>
         <Box marginTop='-2em'>
-          <NowPlaying />
-          <RecentlyPlayed />
+          <NowPlayingProvider>
+            <>
+              <NowPlaying />
+              <RecentlyPlayed />
+            </>
+          </NowPlayingProvider>
           <TopTracks />
           <TopArtists />
         </Box>
       </MusicPlayerProvider>
     </App>
-  </ThemeProvider>;
+  );
 }
