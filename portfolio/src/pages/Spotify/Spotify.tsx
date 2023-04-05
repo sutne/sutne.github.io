@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { createTheme, responsiveFontSizes } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 import { App } from 'components/app';
 import { ThemeProvider } from 'providers/theme-provider';
@@ -14,19 +14,19 @@ import { TopTracks } from './sections/TopTracks';
 const spotifyTheme = responsiveFontSizes(
   createTheme({
     palette: {
-      mode: "dark",
+      mode: 'dark',
       primary: {
-        main: "rgb(30,215,96)",
-        light: "rgb(35,227,107)",
-        dark: "rgba(30,215,96,20%)",
+        main: 'rgb(30,215,96)',
+        light: 'rgb(35,227,107)',
+        dark: 'rgba(30,215,96,20%)',
       },
       background: {
-        default: "rgb(14,14,14)",
-        paper: "rgb(40,40,40)",
+        default: 'rgb(14,14,14)',
+        paper: 'rgb(40,40,40)',
       },
       text: {
-        primary: "rgba(255,255,255,90%)",
-        secondary: "rgba(255,255,255,50%)",
+        primary: 'rgba(255,255,255,90%)',
+        secondary: 'rgba(255,255,255,40%)',
       },
     },
   }),
@@ -36,9 +36,9 @@ const spotifyTheme = responsiveFontSizes(
 
 export function Spotify() {
   return <ThemeProvider theme={spotifyTheme}>
-    <App name="Spotify">
+    <App name='Spotify'>
       <MusicPlayerProvider>
-        <Box marginTop="-2em">
+        <Box marginTop='-2em'>
           <NowPlaying />
           <RecentlyPlayed />
           <TopTracks />

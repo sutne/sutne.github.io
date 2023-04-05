@@ -33,30 +33,30 @@ export function TimeDuration({ ...props }: props): JSX.Element {
 
   const classes = {
     progress: [{
-      width: "100%",
+      width: '100%',
     }],
     timeMarker: [{
-      fontSize: "0.8em",
-      alignSelf: "center",
+      fontSize: '0.8em',
+      alignSelf: 'center',
       color: theme.palette.text.primary,
     }],
     bar: [{
-      alignSelf: "center",
-      height: "0.4em",
-      borderRadius: "0.5em",
+      alignSelf: 'center',
+      height: '0.4em',
+      borderRadius: '0.5em',
       backgroundColor: theme.palette.primary.dark,
-      "& .MuiLinearProgress-bar": {
-        transition: "all 0.05s ease",
+      '& .MuiLinearProgress-bar': {
+        transition: 'all 0.05s ease',
         backgroundColor: theme.palette.primary.main,
       },
-      width: "100%",
+      width: '100%',
     }],
   };
 
   const progress = Math.min(100, 100 * currentProgress / props.length);
-  return <Stack direction="row" spacing={1} sx={classes.progress}>
+  return <Stack direction='row' spacing={1} sx={classes.progress}>
     <Typography sx={classes.timeMarker}>{msToString(currentProgress)}</Typography>
-    <LinearProgress sx={classes.bar} variant="determinate" value={progress} />
+    <LinearProgress sx={classes.bar} variant='determinate' value={progress} />
     <Typography sx={classes.timeMarker}>{msToString(props.length)}</Typography>
   </Stack>;
 }

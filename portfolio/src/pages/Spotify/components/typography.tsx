@@ -8,7 +8,17 @@ type title_props = {
   title: string
 }
 export function SectionTitle({ ...props }: title_props): JSX.Element {
-  return <Typography variant="h5" sx={{ margin: "1.4em 0 0.6em 0" }}>
+
+  const sx = getSx();
+  return <Typography variant='h5' sx={sx.title}>
     {props.title}
   </Typography>;
+
+  function getSx() {
+    return {
+      title: [{
+        margin: '1.4em 0 0.6em 0',
+      }],
+    };
+  }
 }

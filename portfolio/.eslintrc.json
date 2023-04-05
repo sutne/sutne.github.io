@@ -28,8 +28,20 @@
         ],
         "no-extra-semi": "error",
         "comma-dangle": [
-            2,
+            "error",
             "always-multiline"
+        ],
+        "quotes": [
+            "error",
+            "single",
+            {
+                "avoidEscape": true,
+                "allowTemplateLiterals": true
+            }
+        ],
+        "jsx-quotes": [
+            "error",
+            "prefer-single"
         ],
         "simple-import-sort/imports": "error",
         "simple-import-sort/exports": "error",

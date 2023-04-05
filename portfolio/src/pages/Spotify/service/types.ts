@@ -1,4 +1,4 @@
-export type TypeTrack = {
+export type TrackType = {
   title: string,
   artists: string[],
   art: string,
@@ -8,12 +8,12 @@ export type TypeTrack = {
   sample: string,
 }
 
-export type TypeNowPlaying = TypeTrack & {
+export type NowPlayingType = TrackType & {
   length: number,
   progress: number,
 }
 
-export type TypeArtist = {
+export type ArtistType = {
   name: string,
   genres: string[],
   image: string,

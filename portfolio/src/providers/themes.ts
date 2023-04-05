@@ -1,12 +1,12 @@
-import { createTheme, responsiveFontSizes } from "@mui/material";
+import { createTheme, responsiveFontSizes } from '@mui/material';
 
 export const darkTheme = responsiveFontSizes(
   createTheme({
     palette: {
-      mode: "dark",
+      mode: 'dark',
       background: {
-        default: "rgb(29,39,51)",
-        paper: "rgb(44,49,62)",
+        default: 'rgb(29,39,51)',
+        paper: 'rgb(44,49,62)',
       },
     },
   }),
@@ -15,13 +15,13 @@ export const darkTheme = responsiveFontSizes(
 export const lightTheme = responsiveFontSizes(
   createTheme({
     palette: {
-      mode: "light",
+      mode: 'light',
       background: {
-        default: "#e0e0e0",
-        paper: "#e0e0e0",
+        default: '#e0e0e0',
+        paper: '#e0e0e0',
       },
       text: {
-        primary: "rgb(13,17,23)",
+        primary: 'rgb(13,17,23)',
       },
     },
   }),

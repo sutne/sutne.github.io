@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const MusicPlayerContext = React.createContext<
   | {
@@ -71,7 +71,7 @@ export function MusicPlayerProvider({ ...props }: props) {
 export function useMusicPlayer() {
   const context = React.useContext(MusicPlayerContext);
   if (context === undefined) {
-    throw new Error("useMusicPlayer must be used within a MusicPlayerProvider");
+    throw new Error('useMusicPlayer must be used within a MusicPlayerProvider');
   }
   return { ...context };
 }

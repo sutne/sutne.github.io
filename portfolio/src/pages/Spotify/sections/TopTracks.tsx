@@ -5,10 +5,12 @@ import { Track } from '../components/track';
 import { SectionTitle } from '../components/typography';
 import { useMusicPlayer } from '../providers/music-player';
 import * as API from '../service/api';
-import { TypeTrack } from '../service/types';
+import { TrackType } from '../service/types';
 
 export function TopTracks(): JSX.Element {
-  const [tracks, setTracks] = useState<TypeTrack[]>([]);
+
+  const [tracks, setTracks] = useState<TrackType[]>([]);
+
   const { addSample } = useMusicPlayer();
 
   useEffect(() => {
@@ -24,9 +26,9 @@ export function TopTracks(): JSX.Element {
 
   if (!tracks) return <></>;
   return <>
-    <SectionTitle title="Top Tracks" />
+    <SectionTitle title='Top Tracks' />
     <ItemRow>
-      {tracks.map((track: TypeTrack, i: number) => {
+      {tracks.map((track: TrackType, i: number) => {
         return <Track key={i} track={track}
         />;
       })}

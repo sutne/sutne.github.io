@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Theme,
   ThemeProvider as MuiThemeProvider,
   useMediaQuery,
-} from "@mui/material";
+} from '@mui/material';
 
-import { darkTheme, lightTheme } from "./themes";
+import { darkTheme, lightTheme } from './themes';
 
 type props = {
   children: JSX.Element;
@@ -19,7 +19,7 @@ const ThemeContext = React.createContext<
   | undefined
 >(undefined);
 export function ThemeProvider({ ...props }: props) {
-  const prefersDarkTheme = useMediaQuery("(prefers-color-scheme: dark)");
+  const prefersDarkTheme = useMediaQuery('(prefers-color-scheme: dark)');
   const [theme, setTheme] = useState(
     props.theme ?? (!prefersDarkTheme ? darkTheme : lightTheme),
   );
@@ -47,7 +47,7 @@ export function ThemeProvider({ ...props }: props) {
 export function useTheme() {
   const context = React.useContext(ThemeContext);
   if (context === undefined) {
-    throw new Error("useTheme must be used within a ThemeProvider");
+    throw new Error('useTheme must be used within a ThemeProvider');
   }
   return { ...context };
 }

@@ -4,10 +4,11 @@ import { Artist } from '../components/artist';
 import { ItemRow } from '../components/item-row';
 import { SectionTitle } from '../components/typography';
 import * as API from '../service/api';
-import { TypeArtist } from '../service/types';
+import { ArtistType } from '../service/types';
 
 export function TopArtists(): JSX.Element {
-  const [artists, setArtists] = useState<TypeArtist[]>([]);
+
+  const [artists, setArtists] = useState<ArtistType[]>([]);
 
   useEffect(() => {
     const getTracks = async () => {
@@ -18,11 +19,10 @@ export function TopArtists(): JSX.Element {
   }, []);
 
   if (!artists) return <></>;
-
   return <>
-    <SectionTitle title="Top Artists" />
+    <SectionTitle title='Top Artists' />
     <ItemRow>
-      {artists.map((artist: TypeArtist, i: number) => <Artist key={i} artist={artist} />)}
+      {artists.map((artist: ArtistType, i: number) => <Artist key={i} artist={artist} />)}
     </ItemRow>
   </>;
 }

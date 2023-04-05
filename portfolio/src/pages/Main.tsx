@@ -22,16 +22,16 @@ export function Main() {
           <PersonalCard />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <AppDrawer title="Productivity">
-            <App name="Mail" ><Typography variant="body1">Spotify</Typography></App>
-            <App name="Github" ><Typography variant="body1">Spotify</Typography></App>
+          <AppDrawer title='Productivity'>
+            <App name='Mail' ><Typography variant='body1'>Spotify</Typography></App>
+            <App name='Github' ><Typography variant='body1'>Spotify</Typography></App>
             <Spotify />
           </AppDrawer>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <AppDrawer title="Games">
-            <App name="Playstation" ><Typography variant="body1">Spotify</Typography></App>
-            <App name="Minesweeper" ><Typography variant="body1">Spotify</Typography></App>
+          <AppDrawer title='Games'>
+            <App name='Playstation' ><Typography variant='body1'>Spotify</Typography></App>
+            <App name='Minesweeper' ><Typography variant='body1'>Spotify</Typography></App>
           </AppDrawer>
         </Grid>
       </Grid>

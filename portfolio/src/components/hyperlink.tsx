@@ -6,11 +6,11 @@ type props = {
 };
 export function Hyperlink({ ...props }: props) {
   return <a href={props.url} style={{
-    textDecoration: "none",
-    color: "rgb(97,175,239)",
-    cursor: "pointer",
+    textDecoration: 'none',
+    color: 'rgb(97,175,239)',
+    cursor: 'pointer',
   }}>
-    {" " + props.text}
+    {' ' + props.text}
   </a>;
 
 }
