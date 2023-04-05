@@ -4,41 +4,44 @@ import { LinearProgress, Stack, Typography } from '@mui/material';
 
 import { useTheme } from 'providers/theme-provider';
 
+import { NowPlayingType } from '../service/types';
 import { msToString } from '../util';
 
 
 type props = {
-  length: number;
-  startedAt: number;
+  track: NowPlayingType;
   onCompletion?: () => void;
 }
-export function TimeDuration({ ...props }: props): JSX.Element {
+export function TrackProgress({ ...props }: props): JSX.Element {
   // offset time a little to prevent website refresing to same song
-  const getElapsed = () => Math.max(0, Date.now() - (props.startedAt + 4000));
+  // this is due to the API not actually giving a proper timestamp and progress
+  // https://stackoverflow.com/questions/59029450/how-to-synchronize-clock-with-spotify-servers
+  const getElapsed = () => Math.max(0, Date.now() - (props.track.startedAt + 10_000));
 
   const [elapsed, setElapsed] = useState(getElapsed());
 
   const { theme } = useTheme();
 
-  let timer: NodeJS.Timer;
   useEffect(() => {
-    timer = setInterval(() => setElapsed(getElapsed()), 1000);
+    const timer = setInterval(() => {
+      const newElapsed = getElapsed();
+      if (newElapsed < props.track.length) {
+        setElapsed(newElapsed);
+      } else {
+        clearInterval(timer);
+        props.onCompletion?.();
+      }
+    }, 1000);
     return () => clearInterval(timer);
-  }, [props.startedAt]);
+  }, []);
 
-  useEffect(() => {
-    if (elapsed < props.length) return;
-    clearInterval(timer);
-    props.onCompletion?.();
-  }, [elapsed]);
-
-  const progress = Math.min(100, 100 * elapsed / props.length);
+  const progress = Math.min(100, 100 * elapsed / props.track.length);
 
   const sx = getSx();
   return <Stack direction='row' spacing={1} sx={sx.progress}>
     <Typography sx={sx.timeMarker}>{msToString(elapsed)}</Typography>
     <LinearProgress sx={sx.bar} variant='determinate' value={progress} />
-    <Typography sx={sx.timeMarker}>{msToString(props.length)}</Typography>
+    <Typography sx={sx.timeMarker}>{msToString(props.track.length)}</Typography>
   </Stack>;
 
   function getSx() {

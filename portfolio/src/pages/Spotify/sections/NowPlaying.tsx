@@ -3,12 +3,13 @@ import { VolumeOff, VolumeUp } from '@mui/icons-material';
 import { alpha, Box, Grow, Stack } from '@mui/material';
 
 import { Image } from 'components/image';
+import { useApp } from 'providers/app-provider';
 import { useTheme } from 'providers/theme-provider';
 
 import { ItemSubtitle } from '../components/item-subtitle';
 import { ItemTitle } from '../components/item-title';
-import { TimeDuration } from '../components/progressbar';
 import { SampleButton } from '../components/sample-button';
+import { TrackProgress } from '../components/track-progress';
 import { SectionTitle } from '../components/typography';
 import { useMusicPlayer } from '../providers/music-player';
 import * as API from '../service/api';
@@ -25,6 +26,7 @@ export function NowPlaying(): JSX.Element {
   useEffect(() => {
     if (track) return;
     const getTrack = async () => {
+      // console.log('Getting track...');
       const response = await API.getNowPlaying();
       if (!response) return;
       setTrack(response);
@@ -34,9 +36,9 @@ export function NowPlaying(): JSX.Element {
   }, [track]);
 
   const sx = getSx();
-  return <Grow in={false} timeout={200}>
-    {track ?
-      <>
+  return <Grow in={track != undefined} timeout={4000}>
+    <Box>
+      {track ? <>
         <SectionTitle title='Currently Listening To' />
         <Stack sx={sx.background}
           direction={{ xs: 'column', sm: 'row' }}
@@ -58,17 +60,14 @@ export function NowPlaying(): JSX.Element {
               <ItemTitle sx={sx.title}>{track.title}</ItemTitle>
               <ItemSubtitle sx={sx.artists}>{track.artists.join(', ')}</ItemSubtitle>
               <Box sx={sx.progress}>
-                <TimeDuration
-                  length={track.length}
-                  startedAt={track.startedAt}
-                  onCompletion={() => { setTrack(undefined); }}
-                />
+                <TrackProgress track={track} onCompletion={() => setTrack(undefined)} />
               </Box>
             </Box>
           </Stack>
-        </Stack>
-      </> : <></>
-    }
+        </Stack></>
+        :
+        <></>}
+    </Box>
   </Grow >;
 
   function getSx() {
