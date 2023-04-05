@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { VolumeOff, VolumeUp } from '@mui/icons-material';
-import { alpha, Box, Grow, Stack } from '@mui/material';
+import { alpha, Box, Collapse, Stack } from '@mui/material';
 
 import { Image } from 'components/image';
-import { useApp } from 'providers/app-provider';
 import { useTheme } from 'providers/theme-provider';
 
 import { ItemSubtitle } from '../components/item-subtitle';
@@ -18,46 +17,49 @@ export function NowPlaying(): JSX.Element {
   const [isHovering, setIsHovering] = useState(false);
 
   const { theme } = useTheme();
-  const { track, loading } = useNowPlaying();
+  const { track, shouldShow } = useNowPlaying();
 
   const sx = getSx();
-  return <Grow in={!loading} timeout={2000}>
-    <Box>
-      {track
-        ?
-        <>
-          <SectionTitle title='Currently Listening To' />
-          <Stack sx={sx.background}
-            direction={{ xs: 'column', sm: 'row' }}
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-          >
-            <Box sx={sx.image}>
-              <Image src={track.image} size='60mm'>
-                <SampleButton
-                  sample={track.sample}
-                  show={isHovering}
-                  playIcon={VolumeOff}
-                  pauseIcon={VolumeUp}
-                />
-              </Image>
-            </Box>
-            <Stack sx={sx.container} direction='column'>
-              <Box sx={sx.content}>
-                <ItemTitle sx={sx.title}>{track.title}</ItemTitle>
-                <ItemSubtitle sx={sx.artists}>{track.artists.join(', ')}</ItemSubtitle>
-                <Box sx={sx.progress}>
-                  <TrackProgress />
-                </Box>
+
+  return (
+    <Collapse in={shouldShow} timeout={2000}>
+      <Box>
+        {track
+          ?
+          <>
+            <SectionTitle title='Currently Listening To' />
+            <Stack sx={sx.background}
+              direction={{ xs: 'column', sm: 'row' }}
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              <Box sx={sx.image}>
+                <Image src={track.image} size='60mm'>
+                  <SampleButton
+                    sample={track.sample}
+                    show={isHovering}
+                    playIcon={VolumeOff}
+                    pauseIcon={VolumeUp}
+                  />
+                </Image>
               </Box>
+              <Stack sx={sx.container} direction='column'>
+                <Box sx={sx.content}>
+                  <ItemTitle sx={sx.title}>{track.title}</ItemTitle>
+                  <ItemSubtitle sx={sx.artists}>{track.artists.join(', ')}</ItemSubtitle>
+                  <Box sx={sx.progress}>
+                    <TrackProgress />
+                  </Box>
+                </Box>
+              </Stack>
             </Stack>
-          </Stack>
-        </>
-        :
-        <></>
-      }
-    </Box>
-  </Grow >;
+          </>
+          :
+          <></>
+        }
+      </Box>
+    </Collapse>
+  );
 
   function getSx() {
     return {

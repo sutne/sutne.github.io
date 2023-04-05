@@ -38,7 +38,7 @@ export function MusicPlayerProvider({ ...props }: props) {
   const addSample = (sample: string | undefined) => {
     if (!sample) return;
     const newSample = new Audio(sample);
-    newSample.volume = 0.2;
+    newSample.volume = 0.1;
     newSample.onended = () => {
       newSample.currentTime = 0;
       setCurrentSong(undefined);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Minimize } from '@mui/icons-material';
-import { alpha, Box, Fade, Grow, IconButton, Stack, Typography } from '@mui/material';
+import { alpha, Box, Fade, IconButton, Stack, Typography, Zoom } from '@mui/material';
 
 import { useApp } from 'providers/app-provider';
 import { useTheme } from 'providers/theme-provider';
@@ -22,7 +22,7 @@ export function AppContent({ children }: props) {
       <Fade in={isOpen} timeout={animationDuration}>
         <Box sx={sx.open_background} onClick={() => close()} />
       </Fade>
-      <Grow in={isOpen} timeout={animationDuration}>
+      <Zoom in={isOpen} timeout={animationDuration}>
         <Box sx={sx.content_wrapper}>
           <Box sx={sx.content}>
             <Stack direction='row' sx={sx.title}>
@@ -37,7 +37,7 @@ export function AppContent({ children }: props) {
             </Box>
           </Box>
         </Box>
-      </Grow>
+      </Zoom>
     </>
   );
 

@@ -7,7 +7,8 @@ import { useMusicPlayer } from './music-player';
 const NowPlayingContext = React.createContext<undefined |
 {
   track: NowPlayingType | undefined;
-  loading: boolean;
+  shouldShow: boolean;
+  setShouldShow: React.Dispatch<React.SetStateAction<boolean>>;
   refresh: () => void;
 }
 >(undefined);
@@ -15,17 +16,17 @@ const NowPlayingContext = React.createContext<undefined |
 type props = object;
 export function NowPlayingProvider({ ...props }: props & { children: JSX.Element }) {
   const [track, setTrack] = useState<NowPlayingType | undefined>(undefined);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [shouldShow, setShouldShow] = useState(false);
 
   const { addSample } = useMusicPlayer();
 
   const refresh = async () => {
-    setLoading(true);
+    setTrack(undefined);
     const response = await API.getNowPlaying();
-    if (!response) return;
     setTrack(response);
+    if (!response) return;
+    setShouldShow(true);
     addSample(response.sample);
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -34,8 +35,9 @@ export function NowPlayingProvider({ ...props }: props & { children: JSX.Element
 
   const contextValues = {
     track,
-    loading,
     refresh,
+    shouldShow,
+    setShouldShow,
   };
   return (
     <NowPlayingContext.Provider value={contextValues}>

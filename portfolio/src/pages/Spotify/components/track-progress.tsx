@@ -10,7 +10,7 @@ import { msToString } from '../util';
 
 export function TrackProgress() {
 
-  const { track, refresh } = useNowPlaying();
+  const { track, refresh, setShouldShow } = useNowPlaying();
   if (!track) return <></>;
 
   // offset time a little to prevent website refresing to same song
@@ -23,9 +23,12 @@ export function TrackProgress() {
   const { theme } = useTheme();
 
   useEffect(() => {
+    if (!track) return;
     const timer = setInterval(() => {
       const newElapsed = getElapsed();
       if (newElapsed < track.length) {
+        const timeLeft = track.length - newElapsed;
+        if (timeLeft < 2000) setShouldShow(false);
         setElapsed(newElapsed);
       } else {
         clearInterval(timer);
