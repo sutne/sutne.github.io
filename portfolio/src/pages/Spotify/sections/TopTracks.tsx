@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import { ItemCard } from '../components/item-card';
 import { ItemRow } from '../components/item-row';
-import { Track } from '../components/track';
 import { SectionTitle } from '../components/typography';
 import { useMusicPlayer } from '../providers/music-player';
 import * as API from '../service/api';
@@ -29,7 +29,11 @@ export function TopTracks(): JSX.Element {
     <SectionTitle title='Top Tracks' />
     <ItemRow>
       {tracks.map((track: TrackType, i: number) => {
-        return <Track key={i} track={track}
+        return <ItemCard key={i}
+          imageUrl={track.art}
+          trackSample={track.sample}
+          title={track.title}
+          subtitle={track.artists.join(', ')}
         />;
       })}
     </ItemRow>

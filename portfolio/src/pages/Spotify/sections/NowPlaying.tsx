@@ -86,7 +86,7 @@ export function NowPlaying(): JSX.Element {
         position: 'relative',
         width: '100%',
         tableLayout: 'fixed',
-        margin: { xs: '0px', sm: '0 0 0 12px' },
+        margin: { xs: '0px', sm: '0 12px' },
         display: 'table',
       }],
       content: [{

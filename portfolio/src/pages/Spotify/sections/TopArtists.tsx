@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Artist } from '../components/artist';
+import { ItemCard } from '../components/item-card';
 import { ItemRow } from '../components/item-row';
 import { SectionTitle } from '../components/typography';
 import * as API from '../service/api';
@@ -22,7 +22,13 @@ export function TopArtists(): JSX.Element {
   return <>
     <SectionTitle title='Top Artists' />
     <ItemRow>
-      {artists.map((artist: ArtistType, i: number) => <Artist key={i} artist={artist} />)}
+      {artists.map((artist: ArtistType, i: number) => {
+        return <ItemCard key={i}
+          imageUrl={artist.image}
+          title={artist.name}
+          subtitle={artist.genres.join(', ')}
+        />;
+      })}
     </ItemRow>
   </>;
 }
