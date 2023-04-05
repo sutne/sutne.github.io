@@ -1,12 +1,16 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { alpha, Box } from '@mui/material';
+
+import { useTheme } from 'providers/theme-provider';
 
 type props = {
   children: JSX.Element | JSX.Element[] | string;
 };
 export function Card({ ...props }: props) {
-  const classes = getClasses();
 
+  const { theme } = useTheme();
+
+  const classes = getClasses();
   return (
     <Box sx={classes.card}>
       {props.children}
@@ -20,7 +24,7 @@ export function Card({ ...props }: props) {
           height: 'fit-content',
           margin: '8px',
           display: 'flex',
-          backgroundImage: 'linear-gradient(-70deg, rgba(240,240,240,0.85) 60%, rgba(240,240,240,0.95) 100%)',
+          backgroundImage: `linear-gradient(-70deg, ${alpha(theme.palette.background.paper, 0.85)} 60%, ${alpha(theme.palette.background.paper, 0.95)} 100%)`,
           borderRadius: '16px',
           padding: '24px',
           transition: 'all ease-in-out 0.125s',

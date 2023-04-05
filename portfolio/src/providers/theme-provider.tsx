@@ -1,24 +1,22 @@
 import React, { useState } from 'react';
-import {
-  Theme,
-  ThemeProvider as MuiThemeProvider,
-  useMediaQuery,
-} from '@mui/material';
+import { Theme, ThemeProvider as MuiThemeProvider, useMediaQuery } from '@mui/material';
 
-import { darkTheme, lightTheme } from './themes';
+import { darkTheme } from './darkTheme';
+import { lightTheme } from './lightTheme';
 
+// Define the Context, which is the values accessible from within the provider
+const ThemeContext = React.createContext<undefined |
+{
+  theme: Theme;
+  swapTheme: () => void;
+}
+>(undefined);
+
+// Optional Arguments For the provider
 type props = {
-  children: JSX.Element;
   theme?: Theme;
 };
-const ThemeContext = React.createContext<
-  | {
-    theme: Theme;
-    swapTheme: () => void;
-  }
-  | undefined
->(undefined);
-export function ThemeProvider({ ...props }: props) {
+export function ThemeProvider({ ...props }: props & { children: JSX.Element }) {
   const prefersDarkTheme = useMediaQuery('(prefers-color-scheme: dark)');
   const [theme, setTheme] = useState(
     props.theme ?? (!prefersDarkTheme ? darkTheme : lightTheme),
@@ -27,7 +25,7 @@ export function ThemeProvider({ ...props }: props) {
   const swapTheme = () => {
     if (theme === lightTheme) {
       setTheme(darkTheme);
-    } else {
+    } else if (theme === darkTheme) {
       setTheme(lightTheme);
     }
   };
@@ -51,3 +49,7 @@ export function useTheme() {
   }
   return { ...context };
 }
+
+
+
+

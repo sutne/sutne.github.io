@@ -2,19 +2,17 @@ import React from 'react';
 import { Box } from '@mui/material';
 
 
-
-
 type props = {
   src: string;
-  size?: string;
+  size?: any;
   borderRadius?: string;
-  children?: JSX.Element;
+  sx?: any;
 }
-export function Image({ ...props }: props): JSX.Element {
+export function Image({ ...props }: props & { children?: JSX.Element }): JSX.Element {
 
   const sx = getSx();
   return <Box sx={sx.container}>
-    <Box sx={sx.cover} component='img' src={props.src} />
+    <Box sx={sx.image} component='img' src={props.src} />
     {props.children}
   </Box>;
 
@@ -25,13 +23,14 @@ export function Image({ ...props }: props): JSX.Element {
         width: props.size ?? '100%',
         height: props.size ?? '100%',
       }],
-      cover: [{
+      image: [{
         borderRadius: props.borderRadius ?? '8px',
         objectFit: 'cover',
         width: '100%',
         height: '100%',
         aspectRatio: '1',
-      }],
+        boxShadow: '0 0 12px 0px rgba(0,0,0,0.5)',
+      }].concat(props.sx ?? [{}]),
     };
   }
 }

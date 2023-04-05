@@ -25,10 +25,10 @@ export function PersonalCard() {
       </Grid>
       <Grid item xs={12} sm={8} md={8} alignContent={'center'}>
         <Box style={{ padding: '3mm' }}>
-          <Typography variant='h4' color='rgb(0,0,0,80%)' marginBottom='3mm'>
+          <Typography variant='h4' color='text.primary' marginBottom='3mm'>
             Sivert Utne
           </Typography>
-          <Typography variant='body1' color='rgb(0,0,0,60%)'>
+          <Typography variant='body1' color='text.secondary'>
             Completing my M.Sc Computer Science Degree at NTNU in Trondheim
           </Typography>
         </Box>
