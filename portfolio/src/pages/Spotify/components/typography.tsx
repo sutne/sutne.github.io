@@ -10,7 +10,7 @@ type title_props = {
 export function SectionTitle({ ...props }: title_props): JSX.Element {
 
   const sx = getSx();
-  return <Typography variant='h5' sx={sx.title}>
+  return <Typography variant='h4' sx={sx.title}>
     {props.title}
   </Typography>;
 

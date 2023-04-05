@@ -44,6 +44,7 @@ export function SampleButton({ ...props }: props): JSX.Element {
           transition: 'all 300ms ease-in-out',
           bgcolor: theme.palette.primary.main,
           opacity: '0%',
+          boxShadow: '0 12px 12px 0px rgba(0,0,0,0.4)',
           transform: 'translate(0,3mm)',
           '&:hover': {
             transition: 'all 120ms ease',

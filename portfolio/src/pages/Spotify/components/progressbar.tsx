@@ -14,7 +14,7 @@ type props = {
 }
 export function TimeDuration({ ...props }: props): JSX.Element {
   // offset time a little to prevent website refresing to same song
-  const getElapsed = () => Date.now() - 4000 - props.startedAt;
+  const getElapsed = () => Math.max(0, Date.now() - (props.startedAt + 4000));
 
   const [elapsed, setElapsed] = useState(getElapsed());
 
@@ -24,41 +24,44 @@ export function TimeDuration({ ...props }: props): JSX.Element {
   useEffect(() => {
     timer = setInterval(() => setElapsed(getElapsed()), 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [props.startedAt]);
 
   useEffect(() => {
     if (elapsed < props.length) return;
-    setElapsed(props.length);
     clearInterval(timer);
     props.onCompletion?.();
   }, [elapsed]);
 
-  const classes = {
-    progress: [{
-      width: '100%',
-    }],
-    timeMarker: [{
-      fontSize: '0.8em',
-      alignSelf: 'center',
-      color: theme.palette.text.primary,
-    }],
-    bar: [{
-      alignSelf: 'center',
-      height: '0.4em',
-      borderRadius: '0.5em',
-      backgroundColor: theme.palette.primary.dark,
-      '& .MuiLinearProgress-bar': {
-        transition: 'all 0.05s ease',
-        backgroundColor: theme.palette.primary.main,
-      },
-      width: '100%',
-    }],
-  };
-
   const progress = Math.min(100, 100 * elapsed / props.length);
-  return <Stack direction='row' spacing={1} sx={classes.progress}>
-    <Typography sx={classes.timeMarker}>{msToString(elapsed)}</Typography>
-    <LinearProgress sx={classes.bar} variant='determinate' value={progress} />
-    <Typography sx={classes.timeMarker}>{msToString(props.length)}</Typography>
+
+  const sx = getSx();
+  return <Stack direction='row' spacing={1} sx={sx.progress}>
+    <Typography sx={sx.timeMarker}>{msToString(elapsed)}</Typography>
+    <LinearProgress sx={sx.bar} variant='determinate' value={progress} />
+    <Typography sx={sx.timeMarker}>{msToString(props.length)}</Typography>
   </Stack>;
+
+  function getSx() {
+    return {
+      progress: [{
+        width: '100%',
+      }],
+      timeMarker: [{
+        fontSize: '0.8em',
+        alignSelf: 'center',
+        color: theme.palette.text.primary,
+      }],
+      bar: [{
+        alignSelf: 'center',
+        height: '0.4em',
+        borderRadius: '0.5em',
+        backgroundColor: theme.palette.primary.dark,
+        '& .MuiLinearProgress-bar': {
+          transition: 'all 0.05s ease',
+          backgroundColor: theme.palette.primary.main,
+        },
+        width: '100%',
+      }],
+    };
+  }
 }

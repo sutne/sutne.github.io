@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { VolumeOff, VolumeUp } from '@mui/icons-material';
-import { Box, Grow, Stack } from '@mui/material';
+import { alpha, Box, Grow, Stack } from '@mui/material';
 
 import { Image } from 'components/image';
+import { useTheme } from 'providers/theme-provider';
 
 import { ItemSubtitle } from '../components/item-subtitle';
 import { ItemTitle } from '../components/item-title';
@@ -19,6 +20,7 @@ export function NowPlaying(): JSX.Element {
   const [isHovering, setIsHovering] = useState(false);
 
   const { addSample } = useMusicPlayer();
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (track) return;
@@ -75,7 +77,10 @@ export function NowPlaying(): JSX.Element {
         borderRadius: '8px',
         padding: { xs: '12px 12px 6px 12px', sm: '12px' },
         margin: '0px',
-        bgcolor: 'background.paper',
+        background: `linear-gradient(0deg,
+          ${theme.palette.background.paper} 10%,
+          ${alpha(theme.palette.background.paper, 0.2)} 100%
+        )`,
       }],
       image: [{
         display: 'flex',
@@ -98,6 +103,7 @@ export function NowPlaying(): JSX.Element {
       }],
       title: [{
         fontSize: { xs: '1.2em', sm: '1.8em' },
+        fontWeight: 600,
       }],
       artists: [{
         fontSize: { xs: '0.9em', sm: '1.2em' },
