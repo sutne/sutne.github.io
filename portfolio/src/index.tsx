@@ -32,10 +32,10 @@ export function Root() {
     return {
       root: [
         {
-          width: '100vw',
-          height: '100vh',
+          width: '100%',
+          height: '100%',
           overflow: 'auto',
-          backgroundImage: `linear-gradient(70deg,  ${alpha(theme.palette.background.paper, 0.75)} 60%, ${alpha(theme.palette.background.paper, 0.95)} 100%)`,
+          backgroundImage: `linear-gradient(90deg,  ${alpha(theme.palette.background.default, 1)} 0%, ${alpha(theme.palette.background.default, 0.95)} 50%, ${alpha(theme.palette.background.default, 1)} 100%)`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
@@ -44,7 +44,7 @@ export function Root() {
         {
           width: 'min(1024px, 100%)',
           margin: '0 auto',
-          height: '100%',
+          height: '100vh',
           fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen','Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
           fontSmoothing: 'antialiased',
           WebKitFontSmoothing: 'antialiased',

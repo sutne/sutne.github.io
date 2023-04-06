@@ -3,7 +3,6 @@ import { Box } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 import { App } from 'components/app';
-import { ThemeProvider } from 'providers/theme-provider';
 
 import { MusicPlayerProvider } from './providers/music-player';
 import { NowPlayingProvider } from './providers/now-playing-provider';
@@ -18,7 +17,7 @@ const spotifyTheme = responsiveFontSizes(
       mode: 'dark',
       primary: {
         main: 'rgb(30,215,96)',
-        light: 'rgb(35,227,107)',
+        light: 'rgb(38,227,116)',
         dark: 'rgba(30,215,96,20%)',
       },
       background: {
