@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/static/js/main.0679afe4.js",
+    "main.js": "/static/js/main.274ab25b.js",
     "static/media/me.png": "/static/media/me.9b3e5a51b6b6047c5009.png",
     "static/media/Github.png": "/static/media/Github.ff2648078e819f6a9666.png",
     "static/media/Spotify.png": "/static/media/Spotify.385940fe0dded418ae1a.png",
@@ -8,9 +8,9 @@
     "static/media/Minesweeper.png": "/static/media/Minesweeper.21bd2ce52a9407172f38.png",
     "static/media/Playstation.png": "/static/media/Playstation.9d3d4ee1b7478cb9d5a6.png",
     "index.html": "/index.html",
-    "main.0679afe4.js.map": "/static/js/main.0679afe4.js.map"
+    "main.274ab25b.js.map": "/static/js/main.274ab25b.js.map"
   },
   "entrypoints": [
-    "static/js/main.0679afe4.js"
+    "static/js/main.274ab25b.js"
   ]
 }
