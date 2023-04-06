@@ -24,7 +24,7 @@ export function RecentlyPlayed(): JSX.Element {
       }
     };
     getTracks();
-  }, [track]);
+  }, [track]); // Refresh when the current track changes
 
   if (!tracks) return <></>;
   return <>

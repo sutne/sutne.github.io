@@ -10,7 +10,8 @@ export type TrackType = {
 
 export type NowPlayingType = TrackType & {
   length: number,
-  startedAt: number,
+  elapsed: number,
+  timestamp: number,
 }
 
 export type ArtistType = {

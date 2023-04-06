@@ -28,9 +28,11 @@ export function SampleButton({ ...props }: props): JSX.Element {
     : props.playIcon ?? PlayArrow;
 
   const sx = getSx();
-  return <IconButton sx={sx.button} onClick={() => handlePlayPause(props.sample)}>
-    <Icon sx={sx.button_icon} />
-  </IconButton>;
+  return (
+    <IconButton sx={sx.button} onClick={() => handlePlayPause(props.sample)}>
+      <Icon sx={sx.button_icon} />
+    </IconButton>
+  );
 
   function getSx() {
     return {

@@ -9,7 +9,7 @@ const NowPlayingContext = React.createContext<undefined |
   track: NowPlayingType | undefined;
   shouldShow: boolean;
   setShouldShow: React.Dispatch<React.SetStateAction<boolean>>;
-  refresh: () => void;
+  refresh: () => Promise<void>;
 }
 >(undefined);
 
@@ -21,16 +21,16 @@ export function NowPlayingProvider({ ...props }: props & { children: JSX.Element
   const { addSample } = useMusicPlayer();
 
   const refresh = async () => {
-    setTrack(undefined);
-    const response = await API.getNowPlaying();
-    setTrack(response);
+    const response = await API.getNowPlaying().catch((err) => console.error(err));
+    if (track?.href == response?.href) return;
+    setTrack(response ?? undefined);
     if (!response) return;
-    setShouldShow(true);
     addSample(response.sample);
+    setShouldShow(true);
   };
 
   useEffect(() => {
-    refresh();
+    refresh(); // Refresh on mount
   }, []);
 
   const contextValues = {
