@@ -9,7 +9,6 @@ import * as API from '../service/api';
 import { TrackType } from '../service/types';
 
 export function RecentlyPlayed(): JSX.Element {
-
   const [tracks, setTracks] = useState<TrackType[]>([]);
 
   const { addSample } = useMusicPlayer();
@@ -27,17 +26,22 @@ export function RecentlyPlayed(): JSX.Element {
   }, [track]); // Refresh when the current track changes
 
   if (!tracks) return <></>;
-  return <>
-    <SectionTitle title='Recently Played' />
-    <ItemRow>
-      {tracks.map((track: TrackType, i: number) => {
-        return <ItemCard key={i}
-          image={track.image}
-          sample={track.sample}
-          title={track.title}
-          subtitle={track.artists.join(', ')}
-        />;
-      })}
-    </ItemRow>
-  </>;
+  return (
+    <>
+      <SectionTitle title='Recently Played' />
+      <ItemRow>
+        {tracks.map((track: TrackType, i: number) => {
+          return (
+            <ItemCard
+              key={i}
+              image={track.image}
+              sample={track.sample}
+              title={track.title}
+              subtitle={track.artists.join(', ')}
+            />
+          );
+        })}
+      </ItemRow>
+    </>
+  );
 }

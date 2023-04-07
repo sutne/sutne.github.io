@@ -26,6 +26,7 @@
             "error",
             "always"
         ],
+        "no-console": "warn",
         "no-extra-semi": "error",
         "comma-dangle": [
             "error",

@@ -3,11 +3,9 @@ import { Box, Stack } from '@mui/material';
 
 import { useTheme } from 'providers/theme-provider';
 
-
-
 type props = {
   children: JSX.Element[];
-}
+};
 export function ItemRow({ ...props }: props): JSX.Element {
   const { theme } = useTheme();
 
@@ -35,13 +33,17 @@ export function ItemRow({ ...props }: props): JSX.Element {
       pointerEvents: 'none',
       width: '100%',
       height: '95%',
-      backgroundImage: `linear-gradient(to right, ${theme.palette.background.default}, rgba(0, 0, 0, 0) 1% 98%, ${theme.palette.background.default})`,
+      backgroundImage: `linear-gradient(to right, 
+        ${theme.palette.background.default}, 
+        rgba(0, 0, 0, 0) 1% 98%, 
+        ${theme.palette.background.default})`,
     },
   };
-  return <Box sx={container}>
-    <Stack direction='row' spacing={3} sx={style}>
-      {props.children}
-    </Stack>
-  </Box>;
-
+  return (
+    <Box sx={container}>
+      <Stack direction='row' spacing={3} sx={style}>
+        {props.children}
+      </Stack>
+    </Box>
+  );
 }

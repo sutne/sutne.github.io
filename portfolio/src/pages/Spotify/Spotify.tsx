@@ -32,23 +32,23 @@ const spotifyTheme = responsiveFontSizes(
   }),
 );
 
-
-
 export function Spotify() {
   return (
     <App name='Spotify' theme={spotifyTheme}>
-      <MusicPlayerProvider>
-        <Box marginTop='-2em'>
-          <NowPlayingProvider>
-            <>
-              <NowPlaying />
-              <RecentlyPlayed />
-            </>
-          </NowPlayingProvider>
-          <TopTracks />
-          <TopArtists />
-        </Box>
-      </MusicPlayerProvider>
+      <Box style={{ padding: '24px' }}>
+        <MusicPlayerProvider>
+          <Box marginTop='-2em'>
+            <NowPlayingProvider>
+              <>
+                <NowPlaying />
+                <RecentlyPlayed />
+              </>
+            </NowPlayingProvider>
+            <TopTracks />
+            <TopArtists />
+          </Box>
+        </MusicPlayerProvider>
+      </Box>
     </App>
   );
 }

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { LinearProgress, Stack, Typography } from '@mui/material';
 
@@ -6,7 +5,6 @@ import { useTheme } from 'providers/theme-provider';
 
 import { useNowPlaying } from '../providers/now-playing-provider';
 import { msToString } from '../util';
-
 
 export function TrackProgress() {
   const { theme } = useTheme();
@@ -21,7 +19,7 @@ export function TrackProgress() {
     setElapsed(Math.max(track.elapsed - 1000, 0));
 
     timer = setInterval(() => {
-      setElapsed(prev => Math.min(prev + 1000, track.length));
+      setElapsed((prev) => Math.min(prev + 1000, track.length));
     }, 1000);
 
     return () => clearInterval(timer);
@@ -41,37 +39,45 @@ export function TrackProgress() {
     }
   }, [elapsed]);
 
-  const progress = Math.min(100, 100 * elapsed / track.length);
+  const progress = Math.min(100, (100 * elapsed) / track.length);
 
   const sx = getSx();
-  return <Stack direction='row' spacing={1} sx={sx.progress}>
-    <Typography sx={sx.timeMarker}>{msToString(elapsed)}</Typography>
-    <LinearProgress sx={sx.bar} variant='determinate' value={progress} />
-    <Typography sx={sx.timeMarker}>{msToString(track.length)}</Typography>
-  </Stack>;
+  return (
+    <Stack direction='row' spacing={1} sx={sx.progress}>
+      <Typography sx={sx.timeMarker}>{msToString(elapsed)}</Typography>
+      <LinearProgress sx={sx.bar} variant='determinate' value={progress} />
+      <Typography sx={sx.timeMarker}>{msToString(track.length)}</Typography>
+    </Stack>
+  );
 
   function getSx() {
     return {
-      progress: [{
-        width: '100%',
-      }],
-      timeMarker: [{
-        fontSize: '0.8em',
-        alignSelf: 'center',
-        color: theme.palette.text.primary,
-      }],
-      bar: [{
-        alignSelf: 'center',
-        height: '0.4em',
-        borderRadius: '0.5em',
-        backgroundColor: theme.palette.primary.dark,
-        '& .MuiLinearProgress-bar': {
-          transition: 'all 0s',
-          backgroundColor: theme.palette.primary.main,
-          borderRight: `1px solid ${theme.palette.primary.light}`,
+      progress: [
+        {
+          width: '100%',
         },
-        width: '100%',
-      }],
+      ],
+      timeMarker: [
+        {
+          fontSize: '0.8em',
+          alignSelf: 'center',
+          color: theme.palette.text.primary,
+        },
+      ],
+      bar: [
+        {
+          alignSelf: 'center',
+          height: '0.4em',
+          borderRadius: '0.5em',
+          backgroundColor: theme.palette.primary.dark,
+          '& .MuiLinearProgress-bar': {
+            transition: 'all 0s',
+            backgroundColor: theme.palette.primary.main,
+            borderRight: `1px solid ${theme.palette.primary.light}`,
+          },
+          width: '100%',
+        },
+      ],
     };
   }
 }

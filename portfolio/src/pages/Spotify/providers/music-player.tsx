@@ -2,18 +2,22 @@ import React, { useState } from 'react';
 
 const MusicPlayerContext = React.createContext<
   | {
-    currentSong: HTMLAudioElement | undefined;
-    handlePlayPause: (sample: string) => void;
-    addSample: (sample: string) => void;
-    isPlaying: (sample: string) => boolean;
-  }
+      currentSong: HTMLAudioElement | undefined;
+      handlePlayPause: (sample: string) => void;
+      addSample: (sample: string) => void;
+      isPlaying: (sample: string) => boolean;
+    }
   | undefined
 >(undefined);
 
 type props = { children: JSX.Element };
 export function MusicPlayerProvider({ ...props }: props) {
-  const [currentSample, setCurrentSong] = useState<HTMLAudioElement | undefined>(undefined);
-  const [samples, setSamples] = useState<Map<string, HTMLAudioElement>>(new Map());
+  const [currentSample, setCurrentSong] = useState<
+    HTMLAudioElement | undefined
+  >();
+  const [samples, setSamples] = useState<Map<string, HTMLAudioElement>>(
+    new Map(),
+  );
 
   const handlePlayPause = (sample: string) => {
     if (!currentSample) {
@@ -45,7 +49,7 @@ export function MusicPlayerProvider({ ...props }: props) {
       newSample.currentTime = 0;
       setCurrentSong(undefined);
     };
-    setSamples(prev => {
+    setSamples((prev) => {
       prev.set(sample, newSample);
       return prev;
     });
@@ -64,9 +68,9 @@ export function MusicPlayerProvider({ ...props }: props) {
   };
 
   return (
-    <MusicPlayerContext.Provider value={contextValues} >
+    <MusicPlayerContext.Provider value={contextValues}>
       {props.children}
-    </MusicPlayerContext.Provider >
+    </MusicPlayerContext.Provider>
   );
 }
 

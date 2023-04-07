@@ -1,20 +1,13 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 
-
-
 type props = {
-  children: string,
-  sx?: any,
-}
+  children: string;
+  sx?: any;
+};
 export function ItemSubtitle({ ...props }: props): JSX.Element {
-
   const sx = getSx();
-  return (
-    <Typography sx={sx}>
-      {props.children}
-    </Typography>
-  );
+  return <Typography sx={sx}>{props.children}</Typography>;
 
   function getSx() {
     return [

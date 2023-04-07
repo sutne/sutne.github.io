@@ -8,7 +8,6 @@ import * as API from '../service/api';
 import { TrackType } from '../service/types';
 
 export function TopTracks(): JSX.Element {
-
   const [tracks, setTracks] = useState<TrackType[]>([]);
 
   const { addSample } = useMusicPlayer();
@@ -25,17 +24,22 @@ export function TopTracks(): JSX.Element {
   }, []);
 
   if (!tracks) return <></>;
-  return <>
-    <SectionTitle title='Top Tracks' />
-    <ItemRow>
-      {tracks.map((track: TrackType, i: number) => {
-        return <ItemCard key={i}
-          image={track.image}
-          sample={track.sample}
-          title={track.title}
-          subtitle={track.artists.join(', ')}
-        />;
-      })}
-    </ItemRow>
-  </>;
+  return (
+    <>
+      <SectionTitle title='Top Tracks' />
+      <ItemRow>
+        {tracks.map((track: TrackType, i: number) => {
+          return (
+            <ItemCard
+              key={i}
+              image={track.image}
+              sample={track.sample}
+              title={track.title}
+              subtitle={track.artists.join(', ')}
+            />
+          );
+        })}
+      </ItemRow>
+    </>
+  );
 }

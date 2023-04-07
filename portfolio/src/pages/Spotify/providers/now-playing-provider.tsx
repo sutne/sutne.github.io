@@ -4,24 +4,29 @@ import * as API from '../service/api';
 import { NowPlayingType } from '../service/types';
 import { useMusicPlayer } from './music-player';
 
-const NowPlayingContext = React.createContext<undefined |
-{
-  track: NowPlayingType | undefined;
-  shouldShow: boolean;
-  setShouldShow: React.Dispatch<React.SetStateAction<boolean>>;
-  refresh: () => Promise<void>;
-}
+const NowPlayingContext = React.createContext<
+  | {
+      track: NowPlayingType | undefined;
+      shouldShow: boolean;
+      setShouldShow: React.Dispatch<React.SetStateAction<boolean>>;
+      refresh: () => Promise<void>;
+    }
+  | undefined
 >(undefined);
 
 type props = object;
-export function NowPlayingProvider({ ...props }: props & { children: JSX.Element }) {
+export function NowPlayingProvider({
+  ...props
+}: props & { children: JSX.Element }) {
   const [track, setTrack] = useState<NowPlayingType | undefined>(undefined);
   const [shouldShow, setShouldShow] = useState(false);
 
   const { addSample } = useMusicPlayer();
 
   const refresh = async () => {
-    const response = await API.getNowPlaying().catch((err) => console.error(err));
+    const response = await API.getNowPlaying().catch((err) =>
+      console.error(err),
+    );
     if (track?.href == response?.href) return;
     setTrack(response ?? undefined);
     if (!response) return;

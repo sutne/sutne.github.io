@@ -7,18 +7,16 @@ import { useTheme } from 'providers/theme-provider';
 
 import { useMusicPlayer } from '../providers/music-player';
 
-
 type MuiIcon = OverridableComponent<SvgIconTypeMap<object, 'svg'>> & {
   muiName: string;
-}
+};
 type props = {
-  sample: string,
-  show: boolean,
-  playIcon?: MuiIcon,
-  pauseIcon?: MuiIcon,
-}
+  sample: string;
+  show: boolean;
+  playIcon?: MuiIcon;
+  pauseIcon?: MuiIcon;
+};
 export function SampleButton({ ...props }: props): JSX.Element {
-
   const { theme } = useTheme();
   const { isPlaying, handlePlayPause } = useMusicPlayer();
 
