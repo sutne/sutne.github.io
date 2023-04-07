@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Minimize } from '@mui/icons-material';
-import { alpha, Box, Fade, IconButton, Stack, Typography, Zoom } from '@mui/material';
+import { alpha, Box, IconButton, Stack, Typography } from '@mui/material';
 
 import { useApp } from 'providers/app-provider';
 import { useTheme } from 'providers/theme-provider';
 
-
 type props = {
-  children: JSX.Element
-}
+  children: JSX.Element;
+};
 export function AppContent({ children }: props) {
-
   const { theme } = useTheme();
   const { name, close } = useApp();
 
@@ -18,16 +16,20 @@ export function AppContent({ children }: props) {
   return (
     <AppContentWrapper>
       <Box sx={sx.content}>
-        <Stack direction='row' sx={sx.title}>
-          <Box sx={sx.title_icon} component='img'
+        <Stack direction='row' sx={sx.title_bar}>
+          <Box
+            sx={sx.title_icon}
+            component='img'
             src={require(`assets/apps/${name}.png`)}
           />
-          <Typography sx={sx.app_name} alignSelf='center'>{name}</Typography>
-          <IconButton sx={sx.close_button} onClick={() => close()}><Minimize /></IconButton>
+          <Typography sx={sx.title_name} alignSelf='center'>
+            {name}
+          </Typography>
+          <IconButton sx={sx.title_close_button} onClick={() => close()}>
+            <Minimize />
+          </IconButton>
         </Stack>
-        <Box sx={sx.app_content}>
-          {children}
-        </Box>
+        {children}
       </Box>
     </AppContentWrapper>
   );
@@ -36,17 +38,17 @@ export function AppContent({ children }: props) {
     return {
       content: {
         width: { xs: '100%', sm: 'fit-content' },
-        margin: 'auto',
         maxWidth: '100%',
         height: 'fit-content',
+        margin: 'auto',
         borderRadius: '16px',
-        overflow: 'hidden',
         bgcolor: theme.palette.background.default,
         color: theme.palette.text.primary,
         boxShadow: '0px 4px 12px rgba(0, 0, 0, 70%)',
       },
-      title: {
+      title_bar: {
         padding: '12px',
+        borderRadius: '16px 16px 0 0',
         background: `linear-gradient(0deg, 
           ${alpha(theme.palette.background.paper, 0.4)} 0%,
           ${alpha(theme.palette.background.paper, 1)} 100%
@@ -57,85 +59,115 @@ export function AppContent({ children }: props) {
         width: '3em',
         height: '3em',
         borderRadius: '25%',
+        boxShadow: '0px 2px 5px rgba(0, 0, 0, 30%)',
       },
-      app_name: {
-        paddingX: '16px',
+      title_name: {
+        paddingLeft: '16px',
+        paddingRight: '24px',
         fontSize: '1.5em',
+        fontWeight: 300,
         lineHeight: '100%',
         width: '100%',
       },
-      close_button: {
+      title_close_button: {
         alignSelf: 'center',
         height: '2em',
         width: '2em',
         color: theme.palette.text.primary,
-      },
-      app_content: {
-        padding: '24px',
+        '&:hover': {
+          bgcolor: 'transparent',
+        },
       },
     };
   }
 }
 
-
-
-
 type wrapper_props = {
-  children: JSX.Element
-}
+  children: JSX.Element;
+};
 export function AppContentWrapper({ children }: wrapper_props) {
+  const { isOpen, close, iconReference } = useApp();
 
-  const { close, isOpen } = useApp();
-  const animationDuration = isOpen ? 750 : 350;
-
-  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.preventDefault();
-    if (e.target === e.currentTarget) {
-      close();
-    }
+  // want to target the center of the app icon
+  const [target, setTarget] = useState({ x: 0, y: 0 });
+  useEffect(() => {
+    if (!iconReference?.current) return;
+    setTarget({
+      x: iconReference.current.x + iconReference.current.clientWidth / 2,
+      y: iconReference.current.y + iconReference.current.clientHeight / 2,
+    });
+  }, [iconReference]);
+  // apps are center, so origin is center of screen
+  const origin = {
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2,
+  };
+  // translation from origin to target
+  const transform = {
+    x: target.x - origin.x,
+    y: target.y - origin.y,
   };
 
+  const handleClose = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.preventDefault();
+    if (e.target === e.currentTarget) close();
+  };
+
+  const animation = isOpen ? '400ms ease-out' : '300ms ease-in';
   const sx = getSx();
   return (
-    <>
-      <Fade in={isOpen} timeout={animationDuration}>
-        <Box sx={sx.background} onClick={handleClick} >
-          <Box sx={sx.reset} onClick={handleClick}>
-            <Box sx={sx.container} onClick={handleClick}>
-              <Zoom in={isOpen} timeout={animationDuration}>
-                {children}
-              </Zoom>
-            </Box>
-          </Box>
+    <Box sx={sx.background} onClick={(e) => handleClose(e)}>
+      <Box sx={sx.reset} onClick={(e) => handleClose(e)}>
+        <Box sx={sx.container} onClick={(e) => handleClose(e)}>
+          {children}
         </Box>
-      </Fade>
-    </>
+      </Box>
+    </Box>
   );
 
   function getSx() {
     return {
       background: {
-        zIndex: 1,
         position: 'fixed',
+        zIndex: 1,
         top: '0',
         left: '0',
         width: '100vw',
         height: '100vh',
         display: 'flex',
         justifyContent: 'center',
-        backgroundColor: 'rgba(0,0,0,70%)',
         overflowY: 'auto',
+        scrollBar: 'none',
         '&::-webkit-scrollbar': {
-          width: '0em',
+          width: '0px',
         },
+        transition: `background-color ${animation}`,
+        backgroundColor: isOpen ? 'rgba(0,0,0,70%)' : 'rgba(0,0,0,0%)',
+        pointerEvents: isOpen ? 'auto' : 'none',
       },
       reset: {
-        zIndex: 1,
+        zIndex: 2,
         position: 'absolute',
         width: 'min(1024px, 100%)',
+        height: '100%',
       },
       container: {
-        margin: '16px',
+        padding: '16px',
+        boxSizing: 'border-box',
+        height: '100%',
+        transition: `transform ${animation}, opacity ${animation}`,
+        opacity: isOpen ? '100%' : '0%',
+        transform: isOpen
+          ? `none`
+          : `translate(${transform.x}px,${transform.y}px) scale(0)`,
+        '&:first-of-type': {
+          '&:after': {
+            content: '""',
+            display: 'block',
+            height: '16px',
+            width: '100%',
+          },
+        },
       },
     };
   }

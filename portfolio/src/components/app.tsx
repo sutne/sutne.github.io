@@ -7,27 +7,30 @@ import { ThemeProvider } from 'providers/theme-provider';
 import { AppContent } from './app-content';
 import { AppIcon } from './app-icon';
 
-
 type props = {
   name: string;
-  theme?: Theme
+  theme?: Theme;
+  onTap?: () => void;
 };
-export function App({ ...props }: props & { children: JSX.Element }) {
+export function App({ ...props }: props & { children?: JSX.Element }) {
+  if (!props.children)
+    return (
+      <AppProvider name={props.name}>
+        <AppIcon onTap={props.onTap} />
+      </AppProvider>
+    );
+
   return (
     <AppProvider name={props.name}>
       <>
         <AppIcon />
-        {props.theme
-          ?
-          <ThemeProvider theme={props.theme} >
-            <AppContent>
-              {props.children}
-            </AppContent>
+        {props.theme ? (
+          <ThemeProvider theme={props.theme}>
+            <AppContent>{props.children}</AppContent>
           </ThemeProvider>
-          :
-          <AppContent>
-            {props.children}
-          </AppContent>}
+        ) : (
+          <AppContent>{props.children}</AppContent>
+        )}
       </>
     </AppProvider>
   );
