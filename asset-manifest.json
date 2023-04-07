@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/static/js/main.b9348d58.js",
+    "main.js": "/static/js/main.cb9a302e.js",
     "static/media/me.png": "/static/media/me.9b3e5a51b6b6047c5009.png",
     "static/media/Settings.png": "/static/media/Settings.4ee15c57209d1ba2edb3.png",
     "static/media/Github.png": "/static/media/Github.ff2648078e819f6a9666.png",
@@ -9,9 +9,9 @@
     "static/media/Minesweeper.png": "/static/media/Minesweeper.21bd2ce52a9407172f38.png",
     "static/media/Playstation.png": "/static/media/Playstation.9d3d4ee1b7478cb9d5a6.png",
     "index.html": "/index.html",
-    "main.b9348d58.js.map": "/static/js/main.b9348d58.js.map"
+    "main.cb9a302e.js.map": "/static/js/main.cb9a302e.js.map"
   },
   "entrypoints": [
-    "static/js/main.b9348d58.js"
+    "static/js/main.cb9a302e.js"
   ]
 }
