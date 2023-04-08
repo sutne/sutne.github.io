@@ -5,7 +5,8 @@ import { PersonalCard } from 'cards/personal-card';
 import { App } from 'components/app';
 import { AppDrawer } from 'components/app-drawer';
 
-import { Playstation } from './Playstation/Playtsation';
+import { GitHub } from './GitHub/GitHub';
+import { Playstation } from './Playstation/Playstation';
 import { Settings } from './Settings/Settings';
 import { Spotify } from './Spotify/Spotify';
 
@@ -20,6 +21,7 @@ export function Main() {
           <Settings />
           <Spotify />
           <Playstation />
+          <GitHub />
         </AppDrawer>
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -27,6 +29,10 @@ export function Main() {
           <App
             name='Mail'
             onTap={() => (window.location.href = `mailto:sivertutne@gmail.com`)}
+          />
+          <App
+            name='Minesweeper'
+            onTap={() => window.open(`https://sutne.github.io/games`, '_blank')}
           />
         </AppDrawer>
       </Grid>

@@ -27,6 +27,10 @@
             "always"
         ],
         "no-console": "warn",
+        "no-useless-constructor": "warn",
+        "no-useless-return": "error",
+        "no-useless-concat": "error",
+        "no-useless-escape": "error",
         "no-extra-semi": "error",
         "comma-dangle": [
             "error",

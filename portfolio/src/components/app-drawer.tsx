@@ -16,7 +16,7 @@ export function AppDrawer({ ...props }: props) {
   return (
     <Box sx={sx.card}>
       <Box sx={sx.title}>{props.title}</Box>
-      <Grid container sx={sx.drawer} spacing={1}>
+      <Grid container sx={sx.drawer} columnSpacing={1} rowSpacing={2}>
         {props.children.map((child, index) => (
           <Grid item key={index}>
             {React.cloneElement(child, { ...child.props })}

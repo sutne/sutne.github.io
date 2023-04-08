@@ -10,6 +10,7 @@ import { AppIcon } from './app-icon';
 type props = {
   name: string;
   theme?: Theme;
+  appBarColor?: string;
   onTap?: () => void;
 };
 export function App({ ...props }: props & { children?: JSX.Element }) {
@@ -26,7 +27,9 @@ export function App({ ...props }: props & { children?: JSX.Element }) {
         <AppIcon />
         {props.theme ? (
           <ThemeProvider theme={props.theme}>
-            <AppContent>{props.children}</AppContent>
+            <AppContent appBarColor={props.appBarColor}>
+              {props.children}
+            </AppContent>
           </ThemeProvider>
         ) : (
           <AppContent>{props.children}</AppContent>

@@ -7,10 +7,15 @@ import { useTheme } from 'providers/theme-provider';
 
 type props = {
   children: JSX.Element;
+  appBarColor?: string;
 };
-export function AppContent({ children }: props) {
+export function AppContent({ appBarColor, children }: props) {
   const { theme } = useTheme();
   const { name, close } = useApp();
+
+  const titleBackground = appBarColor
+    ? appBarColor
+    : theme.palette.background.paper;
 
   const sx = getSx();
   return (
@@ -50,8 +55,8 @@ export function AppContent({ children }: props) {
         padding: '12px',
         borderRadius: '16px 16px 0 0',
         background: `linear-gradient(0deg, 
-          ${alpha(theme.palette.background.paper, 0.4)} 0%,
-          ${alpha(theme.palette.background.paper, 1)} 100%
+          ${alpha(titleBackground, 0.4)} 0%,
+          ${alpha(titleBackground, 1)} 100%
         )`,
         boxShadow: '0px 3px 3px rgba(0,0,0,40%)',
       },

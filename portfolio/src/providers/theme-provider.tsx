@@ -32,7 +32,7 @@ export function ThemeProvider({ ...props }: props & { children: JSX.Element }) {
     swapTheme: () => {
       if (theme === lightTheme) {
         setTheme(darkTheme);
-      } else if (theme === darkTheme) {
+      } else {
         setTheme(lightTheme);
       }
     },
