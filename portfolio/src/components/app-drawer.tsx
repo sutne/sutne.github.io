@@ -16,7 +16,7 @@ export function AppDrawer({ ...props }: props) {
   return (
     <Box sx={sx.card}>
       <Box sx={sx.title}>{props.title}</Box>
-      <Grid container sx={sx.drawer} columnSpacing={1} rowSpacing={2}>
+      <Grid sx={sx.drawer} container columnSpacing={1} rowSpacing={2}>
         {props.children.map((child, index) => (
           <Grid item key={index}>
             {React.cloneElement(child, { ...child.props })}
@@ -30,7 +30,6 @@ export function AppDrawer({ ...props }: props) {
     return {
       card: [
         {
-          overflow: 'hidden',
           backgroundImage: `linear-gradient(-70deg, ${alpha(
             theme.palette.background.default,
             0.85,
@@ -50,6 +49,7 @@ export function AppDrawer({ ...props }: props) {
           fontWeight: 'bold',
           color: 'text.primary',
           padding: '12px 16px',
+          borderRadius: '16px 16px 0px 0px',
           backgroundImage: `linear-gradient(70deg,  ${alpha(
             theme.palette.background.paper,
             0.75,

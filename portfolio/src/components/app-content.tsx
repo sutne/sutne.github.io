@@ -43,9 +43,9 @@ export function AppContent({ appBarColor, children }: props) {
     return {
       content: {
         width: { xs: '100%', sm: 'fit-content' },
-        maxWidth: '100%',
         height: 'fit-content',
         margin: 'auto',
+        maxWidth: '100%',
         borderRadius: '16px',
         bgcolor: theme.palette.background.default,
         color: theme.palette.text.primary,
@@ -118,7 +118,7 @@ export function AppContentWrapper({ children }: wrapper_props) {
     if (e.target === e.currentTarget) close();
   };
 
-  const animation = isOpen ? '400ms ease-out' : '300ms ease-in';
+  const animation = '400ms cubic-bezier(.15,.01,.79,.42)';
   const sx = getSx();
   return (
     <Box sx={sx.background} onClick={(e) => handleClose(e)}>
@@ -157,11 +157,11 @@ export function AppContentWrapper({ children }: wrapper_props) {
         height: '100%',
       },
       container: {
+        height: '100%',
         padding: '16px',
         boxSizing: 'border-box',
-        height: '100%',
         transition: `transform ${animation}, opacity ${animation}`,
-        opacity: isOpen ? '100%' : '0%',
+        // opacity: isOpen ? '100%' : '0%',
         transform: isOpen
           ? `none`
           : `translate(${transform.x}px,${transform.y}px) scale(0)`,
