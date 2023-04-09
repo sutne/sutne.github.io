@@ -21,6 +21,13 @@ export type RepoType = {
   };
 };
 
+export type LanguageStatsType = {
+  total: number;
+  languages: {
+    [name: string]: number;
+  };
+};
+
 export const LanguageColorMap: { [key: string]: string } = {
   JavaScript: '#f1e05a',
   TypeScript: '#2b7489',
@@ -60,4 +67,27 @@ export const LanguageColorMap: { [key: string]: string } = {
   PowerShell: '#012456',
   'F#': '#b845fc',
   Jinja: '#a52a22',
+  MATLAB: '#e16737',
+  M: '#fcd12a',
+  '1C Enterprise': '#814CCC',
+  'AGS Script': '#B9D9FF',
+  AMPL: '#E6EFBB',
+  ANTLR: '#9DC3FF',
+  'API Blueprint': '#2ACCA8',
+  APL: '#5A8164',
+  Arc: '#aa2afe',
+  Arduino: '#bd79d1',
+  ASP: '#6a40fd',
+  AspectJ: '#a957b0',
+  Assembly: '#6E4C13',
+  ATS: '#1ac620',
+  AutoHotkey: '#6594b9',
+  AutoIt: '#1C3552',
+  Awk: '#c30f3e',
+  Batchfile: '#C1F12E',
+  BlitzMax: '#cd6400',
+  Boo: '#d4bec1',
+  GLSL: '#5686a5',
+  Cuda: '#3A4E3A',
+  Makefile: '#427819',
 };

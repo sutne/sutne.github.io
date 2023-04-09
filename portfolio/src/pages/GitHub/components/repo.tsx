@@ -1,4 +1,5 @@
 import React from 'react';
+import { LinkRounded } from '@mui/icons-material';
 import { alpha, Box, Collapse, Stack, Typography } from '@mui/material';
 
 import { useTheme } from 'providers/theme-provider';
@@ -27,20 +28,34 @@ export function Repository({ repo }: props) {
     <Box sx={sx.wrapper} onClick={() => setExpanded((prev) => !prev)}>
       <RepoCard>
         <>
-          <Stack direction='row' spacing={2}>
+          <Box sx={sx.titleRow}>
             <Box sx={sx.owner} component='img' src={repo.owner.image} />
             <Typography sx={sx.name}>{repo.name}</Typography>
             <Box sx={sx.dominantLanguage}>{dominantLanguage}</Box>
-            <Box sx={sx.private}>{repo.isPrivate ? 'Private' : 'Public'}</Box>
-          </Stack>
+            <Box
+              sx={sx.private}
+              onClick={() => (repo.isPrivate ? null : open(repo.href))}
+            >
+              {repo.isPrivate ? (
+                <></>
+              ) : (
+                <LinkRounded sx={{ marginRight: '5px' }} />
+              )}
+              {repo.isPrivate ? 'Private' : 'Public'}
+            </Box>
+          </Box>
           <Collapse in={expanded} timeout={200}>
-            <Typography sx={sx.description}>{repo.description}</Typography>
-            <Typography sx={sx.timestamp}>
-              Created {toTimeDiffString(repo.createdAt)}
-            </Typography>
-            <Typography sx={sx.timestamp}>
-              Updated {toTimeDiffString(repo.updatedAt)}
-            </Typography>
+            <Stack sx={sx.info} direction='row'>
+              <Typography sx={sx.description}>{repo.description}</Typography>
+              <Stack sx={sx.metadata}>
+                <Typography sx={sx.timestamp}>
+                  Created {toTimeDiffString(repo.createdAt)}
+                </Typography>
+                <Typography sx={sx.timestamp}>
+                  Updated {toTimeDiffString(repo.updatedAt)}
+                </Typography>
+              </Stack>
+            </Stack>
             <LanguageBar size={repo.size} languages={repo.languages} />
           </Collapse>
         </>
@@ -50,62 +65,85 @@ export function Repository({ repo }: props) {
 
   function getSx() {
     return {
+      wrapper: {
+        cursor: expanded ? 'default' : 'pointer',
+        '& > * ::selection': {
+          background: 'transparent',
+        },
+      },
+      titleRow: {
+        display: 'flex',
+        alignItems: 'center',
+      },
       name: [
         {
           color: 'text.primary',
+          flex: 1,
           fontWeight: 500,
-          fontSize: '1.3rem',
+          fontSize: { xs: '1rem', sm: '1.3rem' },
           marginBottom: '4px',
           alignSelf: 'center',
+          overflow: 'hidden',
+          whiteSpace: 'nowrap',
+          textOverflow: 'ellipsis',
+          width: '100%',
         },
       ],
-      description: {
-        color: 'text.secondary',
-        fontWeight: 300,
-        fontSize: '0.9rem',
-      },
-      private: {
-        position: 'absolute',
-        right: '16px',
-        alignSelf: 'center',
-        width: 'fit-content',
-        padding: '4px 8px',
-        bgcolor: 'background.paper',
-        border: `1px solid ${alpha(theme.palette.text.secondary, 0.3)}`,
-        borderRadius: '0.9rem',
-        color: 'text.secondary',
-        fontWeight: 500,
-        fontSize: '0.9rem',
-      },
       owner: {
         height: '36px',
         width: '36px',
+        marginRight: '16px',
         borderRadius: '50%',
-      },
-      timestamp: {
-        color: 'text.secondary',
       },
       dominantLanguage: {
         transition: 'opacity 0.2s ease-in-out',
         opacity: expanded ? '0' : '1',
-        alignSelf: 'center',
-        width: 'fit-content',
-        padding: '4px 8px',
+        margin: '0 12px',
         bgcolor: 'background.paper',
-        '&:before': {
+        '&:after': {
           content: '""',
           display: 'inline-block',
+          position: 'relative',
+          top: '2px',
           height: '1rem',
           width: '1rem',
+          marginLeft: '12px',
           borderRadius: '50%',
-          marginRight: '4px',
           backgroundColor: LanguageColorMap[dominantLanguage],
         },
       },
-      wrapper: {
-        '& > * ::selection': {
-          background: 'transparent',
-        },
+      private: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '76px',
+        padding: '4px 8px',
+        fontSize: '0.9rem',
+        fontWeight: 500,
+        bgcolor: 'background.paper',
+        border: `1px solid ${alpha(theme.palette.text.secondary, 0.3)}`,
+        borderRadius: '0.9rem',
+        color: repo.isPrivate ? theme.palette.error.main : 'text.secondary',
+        cursor: repo.isPrivate ? 'default' : 'pointer',
+      },
+      description: {
+        maxWidth: '50%',
+        color: 'text.secondary',
+        fontWeight: 300,
+        fontSize: '1rem',
+      },
+      info: {
+        marginY: '6mm',
+      },
+      metadata: {
+        marginLeft: 'auto',
+        textAlign: 'right',
+      },
+      timestamp: {
+        color: 'text.secondary',
+        fontWeight: 300,
+        fontSize: '0.9rem',
+        marginY: '2px',
       },
     };
   }

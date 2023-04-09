@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 import { App } from 'components/app';
@@ -7,6 +7,7 @@ import { darkTheme } from 'providers/darkTheme';
 import { lightTheme } from 'providers/lightTheme';
 import { useTheme } from 'providers/theme-provider';
 
+import { LanguagesCard } from './components/languages-card';
 import { RepoList } from './components/repo-list';
 
 const githubLightTheme = responsiveFontSizes(
@@ -23,6 +24,9 @@ const githubLightTheme = responsiveFontSizes(
       text: {
         primary: 'rgb(31,35,40)',
         secondary: 'rgb(101,109,118)',
+      },
+      error: {
+        main: 'rgb(130,30,30)',
       },
     },
   }),
@@ -43,6 +47,9 @@ const githubDarkTheme = responsiveFontSizes(
         primary: 'rgb(230,237,243)',
         secondary: 'rgba(125,133,144)',
       },
+      error: {
+        main: 'rgb(130,30,30)',
+      },
     },
   }),
 );
@@ -55,13 +62,16 @@ export function GitHub() {
   );
 
   useEffect(() => {
-    console.log({ themeIsDark });
     setTheme(themeIsDark ? githubDarkTheme : githubLightTheme);
   }, [themeIsDark]);
 
   return (
     <App name='GitHub' theme={theme} appBarColor={theme.palette.primary.main}>
       <Box style={{ padding: '24px' }}>
+        <LanguagesCard />
+        <Typography variant='h3' sx={{ margin: '12mm 0 6mm 0' }}>
+          My Repositories
+        </Typography>
         <RepoList />
       </Box>
     </App>

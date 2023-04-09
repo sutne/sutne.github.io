@@ -1,3 +1,5 @@
+import { RepoType } from './service/types';
+
 export function toTimeDiffString(utcString: string) {
   const date = new Date(utcString);
   if (date.toString() === 'Invalid Date') {
@@ -31,4 +33,37 @@ export function toTimeDiffString(utcString: string) {
     return 'a year ago';
   }
   return `${Math.floor(diffInDays / 365)} years ago`;
+}
+
+export type SortOrderOrder = 'asc' | 'desc';
+export type SortOrderSort = 'Updated' | 'Created' | 'Language' | 'Name';
+export type SortOrder = {
+  order: SortOrderOrder;
+  sort: SortOrderSort;
+};
+export function sortRepos(repos: RepoType[], sorting: SortOrder): RepoType[] {
+  const sorted = repos.sort((a, b) => {
+    const langA = Object.keys(a.languages)[0];
+    const langB = Object.keys(b.languages)[0];
+    switch (sorting.sort) {
+      case 'Language':
+        if (!langA) return 1;
+        if (!langB) return -1;
+        return langA.localeCompare(langB);
+      case 'Name':
+        return a.name.localeCompare(b.name);
+      case 'Updated':
+        return (
+          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+        );
+      case 'Created':
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+      default:
+        return 0;
+    }
+  });
+  if (sorting.order === 'desc') return sorted.reverse();
+  return sorted;
 }

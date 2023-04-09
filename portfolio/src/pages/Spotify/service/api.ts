@@ -5,6 +5,7 @@ const API_URL = 'https://personal-sutne.vercel.app/api/spotify';
 export async function getNowPlaying(): Promise<NowPlayingType | undefined> {
   const result = await fetch(`${API_URL}/now-playing`)
     .then((res) => res.json())
+    .then((data) => (JSON.stringify(data) === '{}' ? undefined : data))
     .catch((err) => console.error(err));
   return result;
 }
