@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { LinearProgress, Stack, Typography } from '@mui/material';
 
-import { useTheme } from 'providers/theme-provider';
+import { useApp } from 'providers/app-provider';
 
 import { useNowPlaying } from '../providers/now-playing-provider';
 import { msToString } from '../util';
 
 export function TrackProgress() {
-  const { theme } = useTheme();
+  const { theme } = useApp();
   const { track, refresh, setShouldShow } = useNowPlaying();
   if (!track) return <></>;
 
@@ -35,7 +35,7 @@ export function TrackProgress() {
     }
     if (remaining <= 0) {
       clearInterval(timer);
-      refresh().catch((err) => console.error(err));
+      refresh();
     }
   }, [elapsed]);
 

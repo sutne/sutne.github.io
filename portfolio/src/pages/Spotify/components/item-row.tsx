@@ -1,13 +1,13 @@
 import React from 'react';
 import { Box, Stack } from '@mui/material';
 
-import { useTheme } from 'providers/theme-provider';
+import { useApp } from 'providers/app-provider';
 
 type props = {
   children: JSX.Element[];
 };
 export function ItemRow({ ...props }: props): JSX.Element {
-  const { theme } = useTheme();
+  const { theme } = useApp();
 
   const style = {
     overflowX: 'auto',

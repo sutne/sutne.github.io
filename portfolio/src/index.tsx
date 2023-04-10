@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Box } from '@mui/material';
 
 import { Main } from 'pages/Main';
-import { ThemeProvider, useTheme } from 'providers/theme-provider';
+import { MainThemeProvider, useMainTheme } from 'providers/main-theme-provider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -13,14 +13,14 @@ document.body.style.padding = '0px';
 
 root.render(
   <React.StrictMode>
-    <ThemeProvider>
+    <MainThemeProvider>
       <Root />
-    </ThemeProvider>
+    </MainThemeProvider>
   </React.StrictMode>,
 );
 
 export function Root() {
-  const { themeIsDark } = useTheme();
+  const { themeIsDark } = useMainTheme();
 
   const sx = getSx();
   return (

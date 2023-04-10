@@ -1,13 +1,13 @@
 import React from 'react';
 import { alpha, Box } from '@mui/material';
 
-import { useTheme } from 'providers/theme-provider';
+import { useMainTheme } from 'providers/main-theme-provider';
 
 type props = {
   children: JSX.Element | JSX.Element[] | string;
 };
 export function Card({ ...props }: props) {
-  const { theme } = useTheme();
+  const { theme } = useMainTheme();
 
   const classes = getClasses();
   return <Box sx={classes.card}>{props.children}</Box>;

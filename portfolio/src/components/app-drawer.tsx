@@ -1,14 +1,14 @@
 import React from 'react';
 import { alpha, Box, Grid } from '@mui/material';
 
-import { useTheme } from 'providers/theme-provider';
+import { useMainTheme } from 'providers/main-theme-provider';
 
 type props = {
   title: string;
   children: JSX.Element[] | JSX.Element;
 };
 export function AppDrawer({ ...props }: props) {
-  const { theme } = useTheme();
+  const { theme } = useMainTheme();
 
   if (!Array.isArray(props.children)) props.children = [props.children];
 

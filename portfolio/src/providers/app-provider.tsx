@@ -1,7 +1,13 @@
-import React, { createRef, useState } from 'react';
+import React, { createRef, useEffect, useState } from 'react';
+import { Theme, ThemeProvider as MuiThemeProvider } from '@mui/material';
+
+import { darkTheme } from './darkTheme';
+import { lightTheme } from './lightTheme';
+import { useMainTheme } from './main-theme-provider';
 
 const AppContext = React.createContext<
   | {
+      theme: Theme;
       name: string;
       isOpen: boolean;
       open: () => void;
@@ -11,13 +17,31 @@ const AppContext = React.createContext<
   | undefined
 >(undefined);
 
-type props = { name: string };
+type props = {
+  name: string;
+  theme?: Theme;
+  lightTheme?: Theme;
+  darkTheme?: Theme;
+};
 export function AppProvider({ ...props }: props & { children: JSX.Element }) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const { themeIsDark } = useMainTheme();
+  const themeThatIsDark = props.theme ?? props.darkTheme ?? darkTheme;
+  const themeThatIsLight = props.theme ?? props.lightTheme ?? lightTheme;
+
+  const [theme, setTheme] = useState(
+    themeIsDark ? themeThatIsDark : themeThatIsLight,
+  );
+
+  useEffect(() => {
+    setTheme(themeIsDark ? themeThatIsDark : themeThatIsLight);
+  }, [themeIsDark]);
+
   const contextValues = {
-    isOpen,
+    theme,
     name: props.name,
+    isOpen,
     open: () => setIsOpen(true),
     close: () => setIsOpen(false),
     iconReference: createRef<HTMLImageElement>(),
@@ -25,7 +49,7 @@ export function AppProvider({ ...props }: props & { children: JSX.Element }) {
 
   return (
     <AppContext.Provider value={contextValues}>
-      {props.children}
+      <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>
     </AppContext.Provider>
   );
 }
@@ -33,7 +57,7 @@ export function AppProvider({ ...props }: props & { children: JSX.Element }) {
 export function useApp() {
   const context = React.useContext(AppContext);
   if (context === undefined) {
-    throw new Error('useAppMust be used within a AppProvider');
+    throw new Error('useApp must be used within a AppProvider');
   }
   return { ...context };
 }

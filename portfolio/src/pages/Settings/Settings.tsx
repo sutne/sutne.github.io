@@ -2,12 +2,12 @@ import React from 'react';
 import { Divider, Stack, Typography } from '@mui/material';
 
 import { App } from 'components/app';
-import { useTheme } from 'providers/theme-provider';
+import { useMainTheme } from 'providers/main-theme-provider';
 
 import { ToggleSwitch } from './components/toggle-switch';
 
 export function Settings() {
-  const { themeIsDark, swapTheme } = useTheme();
+  const { themeIsDark, swapTheme } = useMainTheme();
 
   const sx = getSx();
   return (

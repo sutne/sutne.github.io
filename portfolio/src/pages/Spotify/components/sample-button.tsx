@@ -3,7 +3,7 @@ import { Pause, PlayArrow } from '@mui/icons-material';
 import { IconButton, SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 
-import { useTheme } from 'providers/theme-provider';
+import { useApp } from 'providers/app-provider';
 
 import { useMusicPlayer } from '../providers/music-player';
 
@@ -17,7 +17,7 @@ type props = {
   pauseIcon?: MuiIcon;
 };
 export function SampleButton({ ...props }: props): JSX.Element {
-  const { theme } = useTheme();
+  const { theme } = useApp();
   const { isPlaying, handlePlayPause } = useMusicPlayer();
 
   const showButton = props.show || isPlaying(props.sample);

@@ -2,38 +2,49 @@ import React from 'react';
 import { Theme } from '@mui/material';
 
 import { AppProvider } from 'providers/app-provider';
-import { ThemeProvider } from 'providers/theme-provider';
 
 import { AppContent } from './app-content';
 import { AppIcon } from './app-icon';
 
+export type AppBarTheme = {
+  background: string;
+  textColor: string;
+};
+
 type props = {
   name: string;
-  theme?: Theme;
-  appBarColor?: string;
   onTap?: () => void;
+  theme?: Theme;
+  lightTheme?: Theme;
+  darkTheme?: Theme;
+  appBarTheme?: AppBarTheme;
 };
 export function App({ ...props }: props & { children?: JSX.Element }) {
-  if (!props.children)
+  if (!props.children) {
     return (
-      <AppProvider name={props.name}>
+      <AppProvider
+        name={props.name}
+        theme={props.theme}
+        lightTheme={props.lightTheme}
+        darkTheme={props.darkTheme}
+      >
         <AppIcon onTap={props.onTap} />
       </AppProvider>
     );
+  }
 
   return (
-    <AppProvider name={props.name}>
+    <AppProvider
+      name={props.name}
+      theme={props.theme}
+      lightTheme={props.lightTheme}
+      darkTheme={props.darkTheme}
+    >
       <>
-        <AppIcon />
-        {props.theme ? (
-          <ThemeProvider theme={props.theme}>
-            <AppContent appBarColor={props.appBarColor}>
-              {props.children}
-            </AppContent>
-          </ThemeProvider>
-        ) : (
-          <AppContent>{props.children}</AppContent>
-        )}
+        <AppIcon onTap={props.onTap} />
+        <AppContent appBarTheme={props.appBarTheme}>
+          {props.children}
+        </AppContent>
       </>
     </AppProvider>
   );

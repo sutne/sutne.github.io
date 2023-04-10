@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 import { App } from 'components/app';
 import { darkTheme } from 'providers/darkTheme';
 import { lightTheme } from 'providers/lightTheme';
-import { useTheme } from 'providers/theme-provider';
 
 import { LanguagesCard } from './components/languages-card';
 import { RepoList } from './components/repo-list';
@@ -26,7 +25,7 @@ const githubLightTheme = responsiveFontSizes(
         secondary: 'rgb(101,109,118)',
       },
       error: {
-        main: 'rgb(130,30,30)',
+        main: 'rgb(190,50,50)',
       },
     },
   }),
@@ -55,18 +54,19 @@ const githubDarkTheme = responsiveFontSizes(
 );
 
 export function GitHub() {
-  const { themeIsDark } = useTheme();
-
-  const [theme, setTheme] = useState(
-    themeIsDark ? githubDarkTheme : githubLightTheme,
-  );
-
-  useEffect(() => {
-    setTheme(themeIsDark ? githubDarkTheme : githubLightTheme);
-  }, [themeIsDark]);
-
   return (
-    <App name='GitHub' theme={theme} appBarColor={theme.palette.primary.main}>
+    <App
+      name='GitHub'
+      lightTheme={githubLightTheme}
+      darkTheme={githubDarkTheme}
+      appBarTheme={{
+        background: `linear-gradient(180deg, 
+          rgb(35,40,45) 0%,
+          rgb(16,20,25) 100%
+        )`,
+        textColor: githubDarkTheme.palette.text.primary,
+      }}
+    >
       <Box style={{ padding: '24px' }}>
         <LanguagesCard />
         <Typography variant='h3' sx={{ margin: '12mm 0 6mm 0' }}>

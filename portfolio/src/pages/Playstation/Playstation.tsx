@@ -29,13 +29,11 @@ const playstationTheme = responsiveFontSizes(
 export function Playstation() {
   return (
     <App name='Playstation' theme={playstationTheme}>
-      <Box style={{ padding: '24px' }}>
-        <Box
-          style={{ borderRadius: '8px' }}
-          component='img'
-          src='https://card.psnprofiles.com/1/Sutne_.png'
-        />
-      </Box>
+      <Box
+        style={{ maxWidth: '100%' }}
+        component='img'
+        src='https://card.psnprofiles.com/1/Sutne_.png'
+      />
     </App>
   );
 }

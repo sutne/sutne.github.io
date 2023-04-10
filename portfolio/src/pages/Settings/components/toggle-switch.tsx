@@ -1,14 +1,14 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
-import { useTheme } from 'providers/theme-provider';
+import { useMainTheme } from 'providers/main-theme-provider';
 
 type props = {
   isOn: boolean;
   onChange: () => void;
 };
 export function ToggleSwitch({ ...props }: props) {
-  const { themeIsDark } = useTheme();
+  const { themeIsDark } = useMainTheme();
 
   const IOS = getIOSStyle();
   return (

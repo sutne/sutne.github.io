@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
 
-import { useTheme } from 'providers/theme-provider';
+import { useApp } from 'providers/app-provider';
 
 import { LanguageColorMap } from '../service/types';
 
@@ -14,33 +14,33 @@ type props = {
 export function LanguageBar({ ...props }: props) {
   const height = props.height ?? 12;
   const textSize = props.textSize ?? 12;
-  const num_langs = Object.keys(props.languages).length;
-  if (num_langs == 0) return <></>;
+  const numLangs = Object.keys(props.languages).length;
+  const amount = (lang: string) => props.languages[lang];
 
-  const { theme } = useTheme();
+  const { theme } = useApp();
 
-  const toPercentString = (num: number) => {
-    const percent = (100 * num) / props.size;
+  const toPercentage = (lang: string) => {
+    const percent = (100 * amount(lang)) / props.size;
     return (Math.round(percent * 100) / 100).toFixed(1);
   };
 
   const sx = getSx();
+
+  if (numLangs == 0) return <></>;
   return (
     <>
       <Box sx={sx.colorBar}>
         {Object.keys(props.languages).map((language, i) => {
-          return <Box key={i} sx={getBarSx(language)}></Box>;
+          return <Box key={i} sx={getBarSx(language)} />;
         })}
       </Box>
-      <Grid container sx={sx.nameBar} rowSpacing={1} columnSpacing={2}>
+      <Grid container rowSpacing={1} columnSpacing={2}>
         {Object.keys(props.languages).map((language, i) => {
-          const amount = props.languages[language];
-          if (num_langs > 5 && amount / props.size < 0.001) return <></>;
           return (
             <Grid item key={i}>
               <LanguageName
                 name={language}
-                percentage={toPercentString(amount)}
+                percentage={toPercentage(language)}
               />
             </Grid>
           );
@@ -57,17 +57,21 @@ export function LanguageBar({ ...props }: props) {
       index += 1;
       amountBefore += props.languages[key];
     }
-    let border = 'none';
-    if (index < 10) {
+    let border = '';
+    if (index == numLangs - 1) {
+      border = 'none';
+    } else if (index < 10) {
       border = '2px solid ' + theme.palette.background.paper;
-    } else if (index < num_langs - 1) {
+    } else if (index < 17) {
       border = '1px solid ' + theme.palette.background.paper;
+    } else {
+      border = 'none';
     }
 
     return {
       height: '100%',
-      width: `${100 * (props.languages[language] / props.size)}%`,
-      bgcolor: LanguageColorMap[language] ?? 'pink',
+      width: `${100 * (amount(language) / props.size)}%`,
+      bgcolor: LanguageColorMap[language] ?? 'white',
       position: 'absolute',
       boxSizing: 'border-box',
       borderRight: border,
@@ -78,14 +82,12 @@ export function LanguageBar({ ...props }: props) {
   function getSx() {
     return {
       colorBar: {
+        marginY: '8px',
         position: 'relative',
         height: height,
         bgcolor: 'pink',
         borderRadius: height / 2,
         overflow: 'hidden',
-      },
-      nameBar: {
-        marginTop: '8px',
       },
     };
   }
@@ -118,7 +120,8 @@ export function LanguageBar({ ...props }: props) {
             backgroundColor: LanguageColorMap[props.name],
           },
           '&:after': {
-            content: `" ${props.percentage}%"`,
+            content: `"${props.percentage}%"`,
+            marginLeft: '5px',
             fontWeight: 300,
           },
         },

@@ -5,7 +5,7 @@ import {
 } from '@mui/icons-material';
 import { Box, Stack, Typography } from '@mui/material';
 
-import { useTheme } from 'providers/theme-provider';
+import { useApp } from 'providers/app-provider';
 
 import * as API from '../service/api';
 import { RepoType } from '../service/types';
@@ -19,7 +19,7 @@ export function RepoList() {
     order: 'asc',
   });
 
-  const { theme } = useTheme();
+  const { theme } = useApp();
 
   useEffect(() => {
     const getData = async () => {
@@ -37,10 +37,17 @@ export function RepoList() {
   return (
     <>
       <Stack
+        sx={{
+          marginBottom: '3mm',
+          overflow: 'hidden',
+          overflowX: 'auto',
+          '&::-webkit-scrollbar': {
+            height: '0',
+          },
+        }}
         direction='row'
         spacing={1}
         alignItems={'center'}
-        sx={{ marginBottom: '3mm' }}
       >
         <SortButton order='Updated' />
         <SortButton order='Created' />
@@ -78,9 +85,9 @@ export function RepoList() {
     const icon = () => {
       if (sortOrder.sort != order) return <></>;
       return sortOrder.order == 'asc' ? (
-        <KeyboardArrowDownRounded />
+        <KeyboardArrowDownRounded sx={sx.label} />
       ) : (
-        <KeyboardArrowUpRounded />
+        <KeyboardArrowUpRounded sx={sx.label} />
       );
     };
 
@@ -104,23 +111,20 @@ export function RepoList() {
         button: [
           {
             border: '1px dashed',
-            borderColor: theme.palette.text.secondary,
+            color: theme.palette.text.secondary,
             borderRadius: '20px',
-            backgroundColor: 'background.paper',
+            backgroundColor: 'background.default',
             '&:hover': {
-              backgroundColor: 'primary.main',
+              backgroundColor: 'background.paper',
+              color: theme.palette.text.primary,
             },
             cursor: 'pointer',
           },
           order == sortOrder.sort && {
-            borderColor: theme.palette.text.secondary,
-            border: '2px solid',
+            border: '1px solid',
           },
         ],
         label: [
-          {
-            color: 'text.secondary',
-          },
           order == sortOrder.sort && {
             color: 'text.primary',
           },
