@@ -23,16 +23,9 @@ export function toTimeDiffString(utcString: string) {
   if (diffInDays < 30) {
     return `${Math.floor(diffInDays / 7)} weeks ago`;
   }
-  if (diffInDays < 60) {
-    return 'a month ago';
-  }
-  if (diffInDays < 365) {
-    return `${Math.floor(diffInDays / 30)} months ago`;
-  }
-  if (diffInDays < 365 * 2) {
-    return 'a year ago';
-  }
-  return `${Math.floor(diffInDays / 365)} years ago`;
+  const year = date.getFullYear();
+  const monthName = date.toLocaleString('en-US', { month: 'long' });
+  return `${monthName} ${year}`;
 }
 
 export type SortOrderOrder = 'asc' | 'desc';

@@ -55,14 +55,14 @@ export function LanguageBar({ ...props }: props) {
     for (const key in props.languages) {
       if (key == language) break;
       index += 1;
-      amountBefore += props.languages[key];
+      amountBefore += amount(key);
     }
     let border = '';
     if (index == numLangs - 1) {
       border = 'none';
-    } else if (index < 10) {
+    } else if (amount(language) > 0.05 * props.size) {
       border = '2px solid ' + theme.palette.background.paper;
-    } else if (index < 17) {
+    } else if (amount(language) > 0.01 * props.size) {
       border = '1px solid ' + theme.palette.background.paper;
     } else {
       border = 'none';
@@ -82,7 +82,7 @@ export function LanguageBar({ ...props }: props) {
   function getSx() {
     return {
       colorBar: {
-        marginY: '8px',
+        marginY: '12px',
         position: 'relative',
         height: height,
         bgcolor: 'pink',

@@ -1,6 +1,14 @@
 import React from 'react';
 import { LinkRounded } from '@mui/icons-material';
-import { alpha, Box, Collapse, Stack, Typography } from '@mui/material';
+import {
+  alpha,
+  Box,
+  Collapse,
+  Grid,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from '@mui/material';
 
 import { useApp } from 'providers/app-provider';
 
@@ -24,13 +32,21 @@ export function Repository({ repo }: props) {
   );
 
   const sx = getSx();
+  const isPhone = useMediaQuery(theme.breakpoints.only('xs'));
   return (
     <Box sx={sx.wrapper} onClick={() => setExpanded((prev) => !prev)}>
       <RepoCard>
         <>
           <Box sx={sx.titleRow}>
             <Box sx={sx.owner} component='img' src={repo.owner.image} />
-            <Typography sx={sx.name}>{repo.name}</Typography>
+            <Box sx={sx.nameBox}>
+              <Typography sx={sx.name}>{repo.name}</Typography>
+              {repo.isArchived && (
+                <Typography sx={sx.archived}>
+                  {isPhone ? 'A' : 'Archived'}
+                </Typography>
+              )}
+            </Box>
             <Box sx={sx.dominantLanguage}>{dominantLanguage}</Box>
             <Box
               sx={sx.private}
@@ -52,6 +68,13 @@ export function Repository({ repo }: props) {
                 </Typography>
               </Stack>
             </Stack>
+            <Grid sx={sx.topics} container spacing={1}>
+              {repo.topics.map((topic, i) => (
+                <Grid item key={i}>
+                  <Typography sx={sx.topic}>{topic}</Typography>
+                </Grid>
+              ))}
+            </Grid>
             <LanguageBar size={repo.size} languages={repo.languages} />
           </Collapse>
         </>
@@ -77,19 +100,34 @@ export function Repository({ repo }: props) {
         marginRight: '16px',
         borderRadius: '50%',
       },
+      nameBox: {
+        display: 'flex',
+        alignItems: 'center',
+        flex: 1,
+        overflow: 'hidden',
+      },
       name: [
         {
           color: 'text.primary',
-          flex: 1,
+          display: 'block',
           fontWeight: 500,
           fontSize: { xs: '1rem', sm: '1.3rem' },
           alignSelf: 'center',
           overflow: 'hidden',
           whiteSpace: 'nowrap',
           textOverflow: 'ellipsis',
-          width: '100%',
         },
       ],
+      archived: {
+        color: 'warning.main',
+        fontWeight: 400,
+        fontSize: { xs: '0.6rem', sm: '0.9rem' },
+        width: 'fit-content',
+        padding: { xs: '2px 6px', sm: '2px 12px' },
+        marginLeft: '12px',
+        borderRadius: '2rem',
+        border: `1px solid ${theme.palette.warning.main}`,
+      },
       dominantLanguage: {
         visibility: { xs: 'hidden', sm: 'visible' },
         position: { xs: 'fixed', sm: 'relative' },
@@ -127,6 +165,17 @@ export function Repository({ repo }: props) {
         marginRight: '5px',
         fontSize: { xs: '0.9rem', sm: '1.5rem' },
       },
+      topics: {
+        marginY: repo.topics ? '6px' : '0px',
+      },
+      topic: {
+        padding: '4px 12px',
+        fontSize: '0.8rem',
+        fontWeight: 600,
+        border: `1px solid ${alpha(theme.palette.text.secondary, 0.3)}`,
+        borderRadius: '2rem',
+        color: 'text.secondary',
+      },
       description: {
         maxWidth: { xs: '100%', sm: '50%' },
         color: 'text.secondary',
@@ -144,7 +193,7 @@ export function Repository({ repo }: props) {
       timestamp: {
         color: 'text.secondary',
         fontWeight: 300,
-        fontSize: '0.9rem',
+        fontSize: '0.8rem',
         marginY: '2px',
       },
     };
