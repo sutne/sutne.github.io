@@ -3,25 +3,29 @@ import { Minimize } from '@mui/icons-material';
 import { alpha, Box, IconButton, Stack, Typography } from '@mui/material';
 
 import { useApp } from 'providers/app-provider';
-import { useTheme } from 'providers/theme-provider';
+
+import { AppBarTheme } from './app';
 
 type props = {
   children: JSX.Element;
-  appBarColor?: string;
+  appBarTheme?: AppBarTheme;
 };
-export function AppContent({ appBarColor, children }: props) {
-  const { theme } = useTheme();
-  const { name, close } = useApp();
+export function AppContent({ ...props }: props) {
+  const { theme, name, close } = useApp();
 
-  const titleBackground = appBarColor
-    ? appBarColor
-    : theme.palette.background.paper;
+  const appBarTheme = props.appBarTheme ?? {
+    background: `linear-gradient(180deg, 
+      ${alpha(theme.palette.background.paper, 1)} 0%,
+      ${alpha(theme.palette.background.paper, 0.4)} 100%
+    )`,
+    textColor: theme.palette.text.primary,
+  };
 
   const sx = getSx();
   return (
     <AppContentWrapper>
       <Box sx={sx.content}>
-        <Stack direction='row' sx={sx.title_bar}>
+        <Stack sx={sx.title_bar} direction='row'>
           <Box
             sx={sx.title_icon}
             component='img'
@@ -34,7 +38,7 @@ export function AppContent({ appBarColor, children }: props) {
             <Minimize />
           </IconButton>
         </Stack>
-        {children}
+        {props.children}
       </Box>
     </AppContentWrapper>
   );
@@ -47,6 +51,7 @@ export function AppContent({ appBarColor, children }: props) {
         margin: 'auto',
         maxWidth: '100%',
         borderRadius: '16px',
+        overflow: 'hidden',
         bgcolor: theme.palette.background.default,
         color: theme.palette.text.primary,
         boxShadow: '0px 4px 12px rgba(0, 0, 0, 70%)',
@@ -54,10 +59,8 @@ export function AppContent({ appBarColor, children }: props) {
       title_bar: {
         padding: '12px',
         borderRadius: '16px 16px 0 0',
-        background: `linear-gradient(0deg, 
-          ${alpha(titleBackground, 0.4)} 0%,
-          ${alpha(titleBackground, 1)} 100%
-        )`,
+        background: appBarTheme.background,
+        color: appBarTheme.textColor,
         boxShadow: '0px 3px 3px rgba(0,0,0,40%)',
       },
       title_icon: {
@@ -78,7 +81,7 @@ export function AppContent({ appBarColor, children }: props) {
         alignSelf: 'center',
         height: '2em',
         width: '2em',
-        color: theme.palette.text.primary,
+        color: appBarTheme.textColor,
         '&:hover': {
           bgcolor: 'transparent',
         },
@@ -94,6 +97,7 @@ export function AppContentWrapper({ children }: wrapper_props) {
   const { isOpen, close, iconReference } = useApp();
 
   // want to target the center of the app icon
+  const [origin, setOrigin] = useState({ x: 0, y: 0 });
   const [target, setTarget] = useState({ x: 0, y: 0 });
   useEffect(() => {
     if (!iconReference?.current) return;
@@ -102,11 +106,15 @@ export function AppContentWrapper({ children }: wrapper_props) {
       y: iconReference.current.y + iconReference.current.clientHeight / 2,
     });
   }, [iconReference]);
-  // apps are center, so origin is center of screen
-  const origin = {
-    x: window.innerWidth / 2,
-    y: window.innerHeight / 2,
-  };
+
+  useEffect(() => {
+    // apps are center, so origin is center of screen
+    setOrigin({
+      x: document.body.clientWidth / 2,
+      y: document.body.clientHeight / 2,
+    });
+  }, [document.body.clientWidth, document.body.clientHeight]);
+
   // translation from origin to target
   const transform = {
     x: target.x - origin.x,
@@ -118,7 +126,7 @@ export function AppContentWrapper({ children }: wrapper_props) {
     if (e.target === e.currentTarget) close();
   };
 
-  const animation = '400ms cubic-bezier(.15,.01,.79,.42)';
+  const animation = '300ms ease-in';
   const sx = getSx();
   return (
     <Box sx={sx.background} onClick={(e) => handleClose(e)}>
@@ -161,16 +169,19 @@ export function AppContentWrapper({ children }: wrapper_props) {
         padding: '16px',
         boxSizing: 'border-box',
         transition: `transform ${animation}, opacity ${animation}`,
-        // opacity: isOpen ? '100%' : '0%',
-        transform: isOpen
-          ? `none`
-          : `translate(${transform.x}px,${transform.y}px) scale(0)`,
-        '&:first-of-type': {
-          '&:after': {
-            content: '""',
-            display: 'block',
-            height: '16px',
-            width: '100%',
+        opacity: { xs: isOpen ? 1 : 0, sm: 1 },
+        transform: {
+          xs: 'none',
+          sm: isOpen
+            ? `none`
+            : `translate(${transform.x}px,${transform.y}px) scale(0)`,
+          '&:first-of-type': {
+            '&:after': {
+              content: '""',
+              display: 'block',
+              height: '16px',
+              width: '100%',
+            },
           },
         },
       },

@@ -2,35 +2,47 @@ import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 
 import { useApp } from 'providers/app-provider';
+import { useMainTheme } from 'providers/main-theme-provider';
 
 type props = {
   onTap?: () => void;
 };
 export function AppIcon({ ...props }: props) {
   const { name, open, iconReference, isOpen } = useApp();
+  const { theme } = useMainTheme();
 
   // want to target the center of the app icon
   const [origin, setOrigin] = useState({ x: 0, y: 0 });
+  const [target, setTarget] = useState({ x: 0, y: 0 });
   useEffect(() => {
     if (!iconReference?.current) return;
     setOrigin({
       x: iconReference.current.x,
       y: iconReference.current.y,
     });
+    // apps are center, so target is center of screen
+    setTarget({
+      x: document.body.clientWidth / 2 - iconReference.current.clientWidth / 2,
+      y: iconReference.current.clientHeight / 2,
+    });
   }, [iconReference]);
 
-  // apps are center, so target is center of screen
-  const target = {
-    x: window.innerWidth / 2 - 40,
-    y: 40, // app content is always at top of page
-  };
+  useEffect(() => {
+    if (!iconReference?.current) return;
+    // apps are center, so target is center of screen
+    setTarget({
+      x: document.body.clientWidth / 2 - iconReference.current.clientWidth / 2,
+      y: iconReference.current.clientHeight / 2,
+    });
+  }, [document.body.clientWidth, document.body.clientHeight]);
+
   // translation from origin to target
   const transform = {
     x: target.x - origin.x,
     y: target.y - origin.y,
   };
 
-  const animation = '400ms cubic-bezier(.15,.01,.79,.42)';
+  const animation = '300ms ease-in';
   const sx = getSx();
   return (
     <>
@@ -66,9 +78,14 @@ export function AppIcon({ ...props }: props) {
           cursor: 'pointer',
           transition: `transform ${animation}, opacity ${animation}`,
           transform: 'none',
+          opacity: 1,
         },
         isOpen && {
-          transform: `translate(${transform.x}px,${transform.y}px) scale(0)`,
+          transform: {
+            xs: 'none',
+            sm: `translate(${transform.x}px,${transform.y}px)`,
+          },
+          opacity: 0,
         },
       ],
       icon: [
@@ -81,7 +98,7 @@ export function AppIcon({ ...props }: props) {
       ],
       name: [
         {
-          color: 'text.primary',
+          color: theme.palette.text.primary,
           textWrap: 'wrap',
           overflowWrap: 'break-word',
           fontSize: { xs: '0.7em', sm: '0.8em' },
