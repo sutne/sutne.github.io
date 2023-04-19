@@ -10,3 +10,17 @@ export function getTrophyLevelImage(level: number): string {
   if (level < 900) return '800-899.png';
   return 'platinum.png';
 }
+
+export function getDateString(date: string | undefined): string {
+  if (!date) return 'Unknown';
+  const dateObj = new Date(date);
+
+  const year = dateObj.getFullYear();
+  const month = dateObj.getMonth() + 1;
+  const day = dateObj.getDate();
+  const hours = dateObj.getHours();
+  const minutes = dateObj.getMinutes();
+  return `${day}/${month}/${year} ${hours}:${
+    minutes < 10 ? '0' : ''
+  }${minutes}`;
+}

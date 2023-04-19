@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Grid } from '@mui/material';
+import { Route, Routes } from 'react-router-dom';
+import { Box, Stack } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
-import { App } from 'components/app';
+import { AppContent } from 'components/app-content';
 import { darkTheme } from 'providers/darkTheme';
+import { lightTheme } from 'providers/lightTheme';
 
-import { ProfileOverview } from './components/profile-overview';
-import { RecentlyPlayed } from './components/recently-played';
-import { Section } from './components/section';
-import { TrophyOverview } from './components/trophy-overview';
+import { PlaystationTrophiesGame } from './pages/Game/TrophiesForGame';
+import { Main } from './pages/Main/Main';
+import { PlaystationTrophies } from './pages/Trophies/Trophies';
 import * as API from './service/api';
-import { ProfileType } from './service/types';
+import { Profile } from './service/types';
 
-const playstationTheme = responsiveFontSizes(
+const playstationDarkTheme = responsiveFontSizes(
   createTheme(darkTheme, {
     palette: {
-      mode: 'dark',
       primary: {
         main: 'rgb(30,215,96)',
         light: 'rgb(38,227,116)',
@@ -33,8 +33,14 @@ const playstationTheme = responsiveFontSizes(
   }),
 );
 
+const playstationLightTheme = responsiveFontSizes(
+  createTheme(lightTheme, {
+    palette: {},
+  }),
+);
+
 export function Playstation() {
-  const [profile, setProfile] = useState<ProfileType | undefined>();
+  const [profile, setProfile] = useState<Profile | undefined>();
 
   useEffect(() => {
     const getData = async () => {
@@ -45,26 +51,40 @@ export function Playstation() {
     getData();
   }, []);
 
-  const tokenExpired = new Date().valueOf() > new Date('31-5-2023').valueOf();
+  const tokenExpired = new Date() > new Date('31-5-2023');
+  if (!profile) return <></>;
   return (
-    <App name='Playstation' theme={playstationTheme}>
-      {!profile || tokenExpired ? (
-        <Box
-          style={{ maxWidth: '100%' }}
-          component='img'
-          src='https://card.psnprofiles.com/1/Sutne_.png'
-        />
-      ) : (
-        <Box sx={{ padding: '24px' }}>
-          <ProfileOverview profile={profile} />
-          <Section title='Trophies'>
-            <TrophyOverview profile={profile} />
-          </Section>
-          <Section title='Recently Played' padding='8px'>
-            <RecentlyPlayed />
-          </Section>
-        </Box>
-      )}
-    </App>
+    <AppContent
+      name='Playstation'
+      darkTheme={playstationDarkTheme}
+      lightTheme={playstationLightTheme}
+      fillWidth
+    >
+      <Box sx={{ padding: '24px', width: '100%', boxSizing: 'border-box' }}>
+        {tokenExpired ? (
+          <Stack>
+            <Box
+              style={{
+                minWidth: '500px',
+                maxWidth: '100%',
+                borderRadius: '8px',
+              }}
+              component='img'
+              src='https://card.psnprofiles.com/1/Sutne_.png'
+            />
+          </Stack>
+        ) : (
+          <Routes>
+            <Route path='/' element={<Main />} />
+            <Route path='/trophies' element={<PlaystationTrophies />} />
+            <Route
+              path='/trophies/game/:gameId/platform/:platform'
+              element={<PlaystationTrophiesGame />}
+            />
+            <Route path='*' element={<>404</>} />
+          </Routes>
+        )}
+      </Box>
+    </AppContent>
   );
 }
