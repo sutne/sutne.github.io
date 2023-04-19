@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { alpha, Box, Stack } from '@mui/material';
+import { alpha, Box, Stack, useTheme } from '@mui/material';
 
 import { Image } from 'components/image';
-import { useApp } from 'providers/app-provider';
 
 import { ItemSubtitle } from './item-subtitle';
 import { ItemTitle } from './item-title';
@@ -17,7 +16,7 @@ type props = {
 export function ItemCard({ ...props }: props): JSX.Element {
   const [isHovered, setHovered] = useState(false);
 
-  const { theme } = useApp();
+  const theme = useTheme();
 
   const sx = getSx();
   return (

@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
-import { App } from 'components/app';
+import { AppContent } from 'components/app-content';
 
 import { MusicPlayerProvider } from './providers/music-player';
 import { NowPlayingProvider } from './providers/now-playing-provider';
@@ -34,9 +34,10 @@ const spotifyTheme = responsiveFontSizes(
 
 export function Spotify() {
   return (
-    <App name='Spotify' theme={spotifyTheme}>
+    <AppContent name='Spotify' theme={spotifyTheme}>
       <Box style={{ padding: '24px' }}>
         <MusicPlayerProvider>
+          {/* Remove margin from top header, regardless of which is on top */}
           <Box marginTop='-2em'>
             <NowPlayingProvider>
               <>
@@ -49,6 +50,6 @@ export function Spotify() {
           </Box>
         </MusicPlayerProvider>
       </Box>
-    </App>
+    </AppContent>
   );
 }

@@ -12,7 +12,7 @@ const MusicPlayerContext = React.createContext<
 
 type props = { children: JSX.Element };
 export function MusicPlayerProvider({ ...props }: props) {
-  const [currentSample, setCurrentSong] = useState<
+  const [currentSample, setCurrentSample] = useState<
     HTMLAudioElement | undefined
   >();
   const [samples, setSamples] = useState<Map<string, HTMLAudioElement>>(
@@ -25,7 +25,7 @@ export function MusicPlayerProvider({ ...props }: props) {
       if (!newSample) return;
       newSample.play();
       newSample.volume = 0.1;
-      setCurrentSong(newSample);
+      setCurrentSample(newSample);
       return;
     }
     if (currentSample.src !== sample) {
@@ -34,11 +34,11 @@ export function MusicPlayerProvider({ ...props }: props) {
       if (!newSample) return;
       newSample.play();
       newSample.volume = 0.1;
-      setCurrentSong(newSample);
+      setCurrentSample(newSample);
       return;
     }
     currentSample.pause();
-    setCurrentSong(undefined);
+    setCurrentSample(undefined);
   };
 
   const addSample = (sample: string | undefined) => {
@@ -47,7 +47,7 @@ export function MusicPlayerProvider({ ...props }: props) {
     newSample.volume = 0.1;
     newSample.onended = () => {
       newSample.currentTime = 0;
-      setCurrentSong(undefined);
+      setCurrentSample(undefined);
     };
     setSamples((prev) => {
       prev.set(sample, newSample);
@@ -66,6 +66,15 @@ export function MusicPlayerProvider({ ...props }: props) {
     addSample,
     isPlaying,
   };
+
+  React.useEffect(() => {
+    return () => {
+      if (!currentSample) return;
+      console.log('unmounting');
+      currentSample.pause();
+      setCurrentSample(undefined);
+    };
+  }, []);
 
   return (
     <MusicPlayerContext.Provider value={contextValues}>

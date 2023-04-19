@@ -18,10 +18,10 @@ export function Card({ ...props }: props) {
         {
           height: 'fit-content',
           display: 'flex',
-          backgroundImage: `linear-gradient(-70deg, ${alpha(
-            theme.palette.background.paper,
-            0.85,
-          )} 60%, ${alpha(theme.palette.background.paper, 0.95)} 100%)`,
+          background: `linear-gradient(-70deg, 
+            ${alpha(theme.palette.background.paper, 0.85)} 60%, 
+            ${alpha(theme.palette.background.paper, 0.95)} 100%)
+          `,
           borderRadius: '16px',
           padding: '24px',
           boxShadow: '3px 3px 10px 1pt rgba(0,0,0, 30%)',

@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
-import { App } from 'components/app';
+import { AppContent } from 'components/app-content';
 import { darkTheme } from 'providers/darkTheme';
 import { lightTheme } from 'providers/lightTheme';
 
@@ -55,7 +55,7 @@ const githubDarkTheme = responsiveFontSizes(
 
 export function GitHub() {
   return (
-    <App
+    <AppContent
       name='GitHub'
       lightTheme={githubLightTheme}
       darkTheme={githubDarkTheme}
@@ -74,6 +74,6 @@ export function GitHub() {
         </Typography>
         <RepoList />
       </Box>
-    </App>
+    </AppContent>
   );
 }

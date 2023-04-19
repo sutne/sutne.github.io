@@ -1,8 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Box } from '@mui/material';
 
-import { Main } from 'pages/Main';
+import { GitHub } from 'pages/GitHub/GitHub';
+import { Main } from 'pages/Main/Main';
+import { Playstation } from 'pages/Playstation/Playstation';
+import { Settings } from 'pages/Settings/Settings';
+import { Spotify } from 'pages/Spotify/Spotify';
+import { AppProvider } from 'providers/app-provider';
 import { MainThemeProvider, useMainTheme } from 'providers/main-theme-provider';
 
 const root = ReactDOM.createRoot(
@@ -26,7 +32,19 @@ export function Root() {
   return (
     <Box sx={sx.root}>
       <Box sx={sx.content}>
-        <Main />
+        <AppProvider>
+          <HashRouter>
+            <Routes>
+              <Route path='/' element={<Main />}>
+                <Route path='Settings' element={<Settings />} />
+                <Route path='Spotify' element={<Spotify />} />
+                <Route path='GitHub' element={<GitHub />} />
+                <Route path='Playstation/*' element={<Playstation />} />
+              </Route>
+              <Route path='*' element={<>404</>} />
+            </Routes>
+          </HashRouter>
+        </AppProvider>
       </Box>
     </Box>
   );

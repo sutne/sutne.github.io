@@ -1,38 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 
 import { useApp } from 'providers/app-provider';
 import { useMainTheme } from 'providers/main-theme-provider';
 
-type props = {
-  onTap?: () => void;
-};
-export function AppIcon({ ...props }: props) {
-  const { name, open, iconReference, isOpen } = useApp();
+export function AppIcon(props: { name: string; onTap?: () => void }) {
+  const { iconReferences } = useApp();
   const { theme } = useMainTheme();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const icon = React.createRef<HTMLImageElement>();
+  const isOpen = location.pathname.startsWith(`/${props.name}`);
+  iconReferences.set(props.name, icon);
 
   // want to target the center of the app icon
-  const [origin, setOrigin] = useState({ x: 0, y: 0 });
-  const [target, setTarget] = useState({ x: 0, y: 0 });
-  useEffect(() => {
-    if (!iconReference?.current) return;
+  const [origin, setOrigin] = React.useState({ x: 0, y: 0 });
+  const [target, setTarget] = React.useState({ x: 0, y: 0 });
+  React.useEffect(() => {
+    if (!icon?.current) return;
     setOrigin({
-      x: iconReference.current.x,
-      y: iconReference.current.y,
+      x: icon.current.x,
+      y: icon.current.y,
     });
     // apps are center, so target is center of screen
     setTarget({
-      x: document.body.clientWidth / 2 - iconReference.current.clientWidth / 2,
-      y: iconReference.current.clientHeight / 2,
+      x: document.body.clientWidth / 2 - icon.current.clientWidth / 2,
+      y: icon.current.clientHeight / 2,
     });
-  }, [iconReference]);
+  }, [iconReferences]);
 
-  useEffect(() => {
-    if (!iconReference?.current) return;
+  React.useEffect(() => {
+    if (!icon?.current) return;
     // apps are center, so target is center of screen
     setTarget({
-      x: document.body.clientWidth / 2 - iconReference.current.clientWidth / 2,
-      y: iconReference.current.clientHeight / 2,
+      x: document.body.clientWidth / 2 - icon.current.clientWidth / 2,
+      y: icon.current.clientHeight / 2,
     });
   }, [document.body.clientWidth, document.body.clientHeight]);
 
@@ -49,15 +53,17 @@ export function AppIcon({ ...props }: props) {
       <Box sx={sx.hover}>
         <Box
           sx={sx.container}
-          onClick={() => (props.onTap ? props.onTap() : open())}
+          onClick={() =>
+            props.onTap ? props.onTap() : navigate(`/${props.name}`)
+          }
         >
           <Box
-            ref={iconReference}
+            ref={icon}
             sx={sx.icon}
             component='img'
-            src={require(`assets/apps/${name}.png`)}
+            src={require(`assets/apps/${props.name}.png`)}
           />
-          <Box sx={sx.name}>{name}</Box>
+          <Box sx={sx.name}>{props.name}</Box>
         </Box>
       </Box>
     </>

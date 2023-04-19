@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { VolumeOff, VolumeUp } from '@mui/icons-material';
-import { alpha, Box, Collapse, Stack } from '@mui/material';
+import { alpha, Box, Collapse, Stack, useTheme } from '@mui/material';
 
 import { Image } from 'components/image';
-import { useApp } from 'providers/app-provider';
 
 import { ItemSubtitle } from '../components/item-subtitle';
 import { ItemTitle } from '../components/item-title';
@@ -15,7 +14,7 @@ import { useNowPlaying } from '../providers/now-playing-provider';
 export function NowPlaying(): JSX.Element {
   const [isHovering, setIsHovering] = useState(false);
 
-  const { theme } = useApp();
+  const theme = useTheme();
   const { track, shouldShow } = useNowPlaying();
 
   const sx = getSx();

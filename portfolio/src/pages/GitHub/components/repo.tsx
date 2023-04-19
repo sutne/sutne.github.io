@@ -8,9 +8,8 @@ import {
   Stack,
   Typography,
   useMediaQuery,
+  useTheme,
 } from '@mui/material';
-
-import { useApp } from 'providers/app-provider';
 
 import { LanguageColorMap, RepoType } from '../service/types';
 import { toTimeDiffString } from '../util';
@@ -23,7 +22,7 @@ type props = {
 export function Repository({ repo }: props) {
   const [expanded, setExpanded] = React.useState(false);
 
-  const { theme } = useApp();
+  const theme = useTheme();
 
   // find language with highest value
   const dominantLanguage = Object.keys(repo.languages).reduce(

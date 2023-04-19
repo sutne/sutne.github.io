@@ -1,52 +1,104 @@
-import React, { useEffect, useState } from 'react';
-import { Minimize } from '@mui/icons-material';
-import { alpha, Box, IconButton, Stack, Typography } from '@mui/material';
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { KeyboardArrowLeftRounded, Minimize } from '@mui/icons-material';
+import {
+  alpha,
+  Box,
+  IconButton,
+  Stack,
+  Theme,
+  ThemeProvider as MuiThemeProvider,
+  Typography,
+} from '@mui/material';
 
 import { useApp } from 'providers/app-provider';
+import { darkTheme } from 'providers/darkTheme';
+import { lightTheme } from 'providers/lightTheme';
+import { useMainTheme } from 'providers/main-theme-provider';
 
-import { AppBarTheme } from './app';
-
-type props = {
+export function AppContent(props: {
+  name: string;
   children: JSX.Element;
-  appBarTheme?: AppBarTheme;
-};
-export function AppContent({ ...props }: props) {
-  const { theme, name, close } = useApp();
+  theme?: Theme;
+  lightTheme?: Theme;
+  darkTheme?: Theme;
+  appBarTheme?: {
+    background: string;
+    textColor: string;
+  };
+  fillWidth?: boolean;
+}) {
+  const [isOpen, setIsOpen] = React.useState(false);
+  React.useEffect(() => {
+    setIsOpen(true);
+  }, []);
+  const animationMs = 300;
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { themeIsDark } = useMainTheme();
+
+  const themeThatIsDark = props.theme ?? props.darkTheme ?? darkTheme;
+  const themeThatIsLight = props.theme ?? props.lightTheme ?? lightTheme;
+  const theme = themeIsDark ? themeThatIsDark : themeThatIsLight;
 
   const appBarTheme = props.appBarTheme ?? {
     background: `linear-gradient(180deg, 
-      ${alpha(theme.palette.background.paper, 1)} 0%,
+      ${alpha(theme.palette.background.paper, 1)} 0%, 
       ${alpha(theme.palette.background.paper, 0.4)} 100%
     )`,
     textColor: theme.palette.text.primary,
   };
 
+  const isAtRoot = location.pathname == `/${props.name}`;
+
   const sx = getSx();
   return (
-    <AppContentWrapper>
-      <Box sx={sx.content}>
-        <Stack sx={sx.title_bar} direction='row'>
-          <Box
-            sx={sx.title_icon}
-            component='img'
-            src={require(`assets/apps/${name}.png`)}
-          />
-          <Typography sx={sx.title_name} alignSelf='center'>
-            {name}
-          </Typography>
-          <IconButton sx={sx.title_close_button} onClick={() => close()}>
-            <Minimize />
-          </IconButton>
-        </Stack>
-        {props.children}
-      </Box>
-    </AppContentWrapper>
+    <MuiThemeProvider theme={theme}>
+      <AppContentWrapper
+        name={props.name}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        animationMs={animationMs}
+      >
+        <Box sx={sx.content}>
+          <Stack sx={sx.title_bar} direction='row'>
+            <Box
+              sx={sx.title_icon}
+              component='img'
+              src={require(`assets/apps/${props.name}.png`)}
+            />
+            <Typography sx={sx.title_name} alignSelf='center'>
+              {props.name}
+            </Typography>
+            {!isAtRoot && (
+              <IconButton sx={sx.title_bar_button} onClick={() => navigate(-1)}>
+                <KeyboardArrowLeftRounded sx={sx.title_bar_button_icon} />
+              </IconButton>
+            )}
+            <IconButton
+              sx={sx.title_bar_button}
+              onClick={() => {
+                setIsOpen(false);
+                // wait for animation to finish
+                setTimeout(() => {
+                  navigate('/');
+                }, animationMs);
+              }}
+            >
+              <Minimize sx={sx.title_bar_button_icon} />
+            </IconButton>
+          </Stack>
+          {props.children}
+        </Box>
+      </AppContentWrapper>
+    </MuiThemeProvider>
   );
 
   function getSx() {
     return {
       content: {
-        width: { xs: '100%', sm: 'fit-content' },
+        width: { xs: '100%', sm: props.fillWidth ? '100%' : 'fit-content' },
         height: 'fit-content',
         margin: 'auto',
         maxWidth: '100%',
@@ -77,37 +129,46 @@ export function AppContent({ ...props }: props) {
         lineHeight: '100%',
         width: '100%',
       },
-      title_close_button: {
+      title_bar_button: {
         alignSelf: 'center',
         height: '2em',
         width: '2em',
+        margin: '0 8px',
         color: appBarTheme.textColor,
         '&:hover': {
           bgcolor: 'transparent',
         },
       },
+      title_bar_button_icon: {
+        fontSize: '1.3em',
+      },
     };
   }
 }
 
-type wrapper_props = {
+export function AppContentWrapper(props: {
+  name: string;
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  animationMs: number;
   children: JSX.Element;
-};
-export function AppContentWrapper({ children }: wrapper_props) {
-  const { isOpen, close, iconReference } = useApp();
+}) {
+  const navigate = useNavigate();
+  const { iconReferences } = useApp();
+  const icon = iconReferences.get(props.name);
 
   // want to target the center of the app icon
-  const [origin, setOrigin] = useState({ x: 0, y: 0 });
-  const [target, setTarget] = useState({ x: 0, y: 0 });
-  useEffect(() => {
-    if (!iconReference?.current) return;
+  const [origin, setOrigin] = React.useState({ x: 0, y: 0 });
+  const [target, setTarget] = React.useState({ x: 0, y: 0 });
+  React.useEffect(() => {
+    if (!icon?.current) return;
     setTarget({
-      x: iconReference.current.x + iconReference.current.clientWidth / 2,
-      y: iconReference.current.y + iconReference.current.clientHeight / 2,
+      x: icon.current.x + icon.current.clientWidth / 2,
+      y: icon.current.y + icon.current.clientHeight / 2,
     });
-  }, [iconReference]);
+  }, [icon]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     // apps are center, so origin is center of screen
     setOrigin({
       x: document.body.clientWidth / 2,
@@ -123,16 +184,20 @@ export function AppContentWrapper({ children }: wrapper_props) {
 
   const handleClose = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
-    if (e.target === e.currentTarget) close();
+    if (e.target !== e.currentTarget) return;
+    props.setIsOpen(false);
+    setTimeout(() => {
+      navigate('/');
+    }, props.animationMs);
   };
 
-  const animation = '300ms ease-in';
+  const animation = `${props.animationMs}ms ease-in`;
   const sx = getSx();
   return (
     <Box sx={sx.background} onClick={(e) => handleClose(e)}>
       <Box sx={sx.reset} onClick={(e) => handleClose(e)}>
         <Box sx={sx.container} onClick={(e) => handleClose(e)}>
-          {children}
+          {props.children}
         </Box>
       </Box>
     </Box>
@@ -155,8 +220,8 @@ export function AppContentWrapper({ children }: wrapper_props) {
           width: '0px',
         },
         transition: `background-color ${animation}`,
-        backgroundColor: isOpen ? 'rgba(0,0,0,70%)' : 'rgba(0,0,0,0%)',
-        pointerEvents: isOpen ? 'auto' : 'none',
+        backgroundColor: props.isOpen ? 'rgba(0,0,0,70%)' : 'rgba(0,0,0,0%)',
+        pointerEvents: props.isOpen ? 'auto' : 'none',
       },
       reset: {
         zIndex: 2,
@@ -169,10 +234,10 @@ export function AppContentWrapper({ children }: wrapper_props) {
         padding: '16px',
         boxSizing: 'border-box',
         transition: `transform ${animation}, opacity ${animation}`,
-        opacity: { xs: isOpen ? 1 : 0, sm: 1 },
+        opacity: { xs: props.isOpen ? 1 : 0, sm: 1 },
         transform: {
           xs: 'none',
-          sm: isOpen
+          sm: props.isOpen
             ? `none`
             : `translate(${transform.x}px,${transform.y}px) scale(0)`,
           '&:first-of-type': {

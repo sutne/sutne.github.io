@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { LinearProgress, Stack, Typography } from '@mui/material';
-
-import { useApp } from 'providers/app-provider';
+import { LinearProgress, Stack, Typography, useTheme } from '@mui/material';
 
 import { useNowPlaying } from '../providers/now-playing-provider';
 import { msToString } from '../util';
 
 export function TrackProgress() {
-  const { theme } = useApp();
-  const { track, refresh, setShouldShow } = useNowPlaying();
-  if (!track) return <></>;
-
   const [elapsed, setElapsed] = useState(0);
+
+  const { track, refresh, setShouldShow } = useNowPlaying();
+  const theme = useTheme();
+
+  if (!track) return <></>;
 
   let timer: NodeJS.Timer;
   useEffect(() => {

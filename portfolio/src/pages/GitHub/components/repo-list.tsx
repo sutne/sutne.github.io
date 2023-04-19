@@ -3,9 +3,7 @@ import {
   KeyboardArrowDownRounded,
   KeyboardArrowUpRounded,
 } from '@mui/icons-material';
-import { Box, Stack, Typography } from '@mui/material';
-
-import { useApp } from 'providers/app-provider';
+import { Box, Stack, Typography, useTheme } from '@mui/material';
 
 import * as API from '../service/api';
 import { RepoType } from '../service/types';
@@ -19,7 +17,7 @@ export function RepoList() {
     order: 'asc',
   });
 
-  const { theme } = useApp();
+  const theme = useTheme();
 
   useEffect(() => {
     const getData = async () => {

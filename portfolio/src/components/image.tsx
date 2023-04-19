@@ -1,15 +1,12 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
-type props = {
+export function Image(props: {
   src: string;
   size?: any;
-  borderRadius?: string;
   sx?: any;
-};
-export function Image({
-  ...props
-}: props & { children?: JSX.Element }): JSX.Element {
+  children?: JSX.Element;
+}) {
   const sx = getSx();
   return (
     <Box sx={sx.container}>
@@ -20,16 +17,14 @@ export function Image({
 
   function getSx() {
     return {
-      container: [
-        {
-          position: 'relative',
-          width: props.size ?? '100%',
-          height: props.size ?? '100%',
-        },
-      ],
+      container: {
+        position: 'relative',
+        width: props.size ?? '100%',
+        height: props.size ?? '100%',
+      },
       image: [
         {
-          borderRadius: props.borderRadius ?? '8px',
+          borderRadius: '8px',
           objectFit: 'cover',
           width: '100%',
           height: '100%',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, Box, Grid, Typography } from '@mui/material';
 
-import { Card } from 'components/card';
+import { Card } from 'pages/Main/components/card';
 
 export function PersonalCard() {
   return (

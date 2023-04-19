@@ -1,7 +1,5 @@
 import React from 'react';
-import { Box, Grid } from '@mui/material';
-
-import { useApp } from 'providers/app-provider';
+import { Box, Grid, useTheme } from '@mui/material';
 
 import { LanguageColorMap } from '../service/types';
 
@@ -17,7 +15,7 @@ export function LanguageBar({ ...props }: props) {
   const numLangs = Object.keys(props.languages).length;
   const amount = (lang: string) => props.languages[lang];
 
-  const { theme } = useApp();
+  const theme = useTheme();
 
   const toPercentage = (lang: string) => {
     const percent = (100 * amount(lang)) / props.size;

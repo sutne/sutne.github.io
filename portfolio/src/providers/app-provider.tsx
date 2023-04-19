@@ -1,55 +1,24 @@
-import React, { createRef, useEffect, useState } from 'react';
-import { Theme, ThemeProvider as MuiThemeProvider } from '@mui/material';
-
-import { darkTheme } from './darkTheme';
-import { lightTheme } from './lightTheme';
-import { useMainTheme } from './main-theme-provider';
+import React from 'react';
 
 const AppContext = React.createContext<
   | {
-      theme: Theme;
-      name: string;
-      isOpen: boolean;
-      open: () => void;
-      close: () => void;
-      iconReference: React.RefObject<HTMLImageElement>;
+      iconReferences: Map<string, React.RefObject<HTMLImageElement>>;
     }
   | undefined
 >(undefined);
 
-type props = {
-  name: string;
-  theme?: Theme;
-  lightTheme?: Theme;
-  darkTheme?: Theme;
-};
-export function AppProvider({ ...props }: props & { children: JSX.Element }) {
-  const [isOpen, setIsOpen] = useState(false);
+export function AppProvider(props: { children: JSX.Element }) {
+  const iconReferences = new Map<string, React.RefObject<HTMLImageElement>>();
 
-  const { themeIsDark } = useMainTheme();
-  const themeThatIsDark = props.theme ?? props.darkTheme ?? darkTheme;
-  const themeThatIsLight = props.theme ?? props.lightTheme ?? lightTheme;
-
-  const [theme, setTheme] = useState(
-    themeIsDark ? themeThatIsDark : themeThatIsLight,
-  );
-
-  useEffect(() => {
-    setTheme(themeIsDark ? themeThatIsDark : themeThatIsLight);
-  }, [themeIsDark]);
+  // const [isOpen, setIsOpen] = React.useState(false);
 
   const contextValues = {
-    theme,
-    name: props.name,
-    isOpen,
-    open: () => setIsOpen(true),
-    close: () => setIsOpen(false),
-    iconReference: createRef<HTMLImageElement>(),
+    iconReferences,
   };
 
   return (
     <AppContext.Provider value={contextValues}>
-      <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>
+      {props.children}
     </AppContext.Provider>
   );
 }

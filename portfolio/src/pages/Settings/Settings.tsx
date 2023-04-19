@@ -1,7 +1,7 @@
 import React from 'react';
 import { Divider, Stack, Typography } from '@mui/material';
 
-import { App } from 'components/app';
+import { AppContent } from 'components/app-content';
 import { useMainTheme } from 'providers/main-theme-provider';
 
 import { ToggleSwitch } from './components/toggle-switch';
@@ -11,11 +11,11 @@ export function Settings() {
 
   const sx = getSx();
   return (
-    <App name='Settings'>
+    <AppContent name='Settings'>
       <Stack sx={sx.container} divider={<Divider />}>
         <ToggleItem name='Dark Mode' isOn={themeIsDark} onChange={swapTheme} />
       </Stack>
-    </App>
+    </AppContent>
   );
 
   function getSx() {
