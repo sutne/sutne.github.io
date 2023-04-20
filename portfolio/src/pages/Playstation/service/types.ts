@@ -46,7 +46,7 @@ export type TrophyGroup = {
 };
 
 export type Trophy = {
-  id: string;
+  id: number;
   title: string;
   description: string;
   isEarned: boolean;
@@ -55,6 +55,6 @@ export type Trophy = {
   earnedAt: string | undefined;
   type: TrophyType;
   /** % of players who have earned this trophy */
-  rarity: number | undefined;
+  rarity: string | undefined;
   progress: string | undefined;
 };

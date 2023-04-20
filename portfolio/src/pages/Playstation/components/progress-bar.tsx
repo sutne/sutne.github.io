@@ -24,7 +24,7 @@ export function ProgressBar({ progress }: { progress: number }) {
         width: '100%',
         overflow: 'hidden',
         alignSelf: 'center',
-        height: '0.4rem',
+        height: { xs: '0.2rem', sm: '0.4rem' },
         borderRadius: '0.2rem',
         bgcolor: alpha(theme.palette.text.primary, 0.1),
         '&:after': {

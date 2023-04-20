@@ -42,7 +42,7 @@ export function TrophyWithCount(props: {
         top: { xs: '0', sm: '-10px' },
         textAlign: 'center',
         fontWeight: 200,
-        fontSize: { xs: '14px', sm: '18px', md: '24px' },
+        fontSize: { xs: '10px', sm: '18px', md: '24px' },
       },
     };
   }

@@ -23,9 +23,9 @@ export function Trophy(props: { trophy: Trophy }) {
           </Typography>
           <Box sx={sx.stats}>
             <Box sx={sx.trophyIcon} component='img' src={trophyIcon} />
+            <Typography sx={sx.rarity}>{props.trophy.rarity}%</Typography>
             {props.trophy.isEarned && (
               <>
-                <Typography sx={sx.rarity}>{props.trophy.rarity}%</Typography>
                 <Typography sx={sx.earnedTime}>
                   {getDateString(props.trophy.earnedAt)}
                 </Typography>
@@ -43,8 +43,9 @@ export function Trophy(props: { trophy: Trophy }) {
         width: '100%',
         overflow: 'hidden',
         bgcolor: 'background.paper',
-        padding: '16px',
-        borderRadius: '16px',
+        padding: { xs: '8px', sm: '16px' },
+        borderRadius: { xs: '8px', sm: '16px' },
+        boxSizing: 'border-box',
       },
       icon: {
         height: height,
@@ -80,7 +81,7 @@ export function Trophy(props: { trophy: Trophy }) {
       rarity: {
         alignSelf: 'center',
         flexGrow: 1,
-        fontSize: { xs: '1rem', sm: '1.2rem' },
+        fontSize: { xs: '0.7rem', sm: '1.2rem' },
         color: 'text.secondary',
         fontWeight: 300,
       },

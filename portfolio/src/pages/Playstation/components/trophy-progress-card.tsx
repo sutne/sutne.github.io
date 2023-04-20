@@ -13,8 +13,9 @@ export function TrophyProgressCard(props: {
   earnedCount: TrophyCount;
   platform?: string;
   children?: JSX.Element;
+  expanded?: boolean;
 }) {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(props.expanded ?? false);
 
   const TrophyCount = ({ type }: { type: TrophyType }) => {
     const count = props.earnedCount[type];
@@ -61,7 +62,7 @@ export function TrophyProgressCard(props: {
     </>
   );
   function getSx() {
-    const height = { xs: '20mm', sm: '40mm', md: '60mm' };
+    const height = { xs: '26mm', sm: '40mm', md: '60mm' };
     return {
       container: {
         position: 'relative',
@@ -76,6 +77,7 @@ export function TrophyProgressCard(props: {
         width: height,
         objectFit: 'contain',
         borderRadius: '16px',
+        alignSelf: 'center',
       },
       info: {
         position: 'relative',
@@ -84,17 +86,19 @@ export function TrophyProgressCard(props: {
         overflow: 'hidden',
       },
       title: {
-        fontSize: { xs: '1rem', sm: '1.5rem' },
+        fontSize: { xs: '0.7rem', sm: '1.1rem', md: '1.5rem' },
+        height: '100%',
         color: 'text.primary',
+        width: '100%',
         overflow: 'hidden',
         whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',
-        height: { xs: '2.2rem', sm: '3.4rem' },
-        lineHeight: { xs: '1.1rem', sm: '1.7rem' },
       },
       trophyCount: {
         alignSelf: 'flex-end',
-        width: '50%',
+        maxWidth: '50%',
+        height: '100%',
+        marginBottom: '8px',
       },
       platform: {
         position: 'absolute',
@@ -104,7 +108,7 @@ export function TrophyProgressCard(props: {
         color: props.platform == 'PS5' ? 'black' : 'white',
         borderRadius: '8px',
         padding: '0 8px',
-        fontSize: '0.8rem',
+        fontSize: { xs: '0.5rem', sm: '0.8rem' },
         fontWeight: 400,
         boxShadow:
           props.platform == 'PS5'

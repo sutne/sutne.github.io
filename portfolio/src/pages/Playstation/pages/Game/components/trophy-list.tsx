@@ -13,28 +13,16 @@ export function TrophyList(props: { list: Trophy[] }) {
   const { sorting } = useSorting();
 
   React.useEffect(() => {
-    setTrophies((prev) => sortTrophies(prev, sorting));
+    setTrophies(sortTrophies([...props.list], sorting));
   }, [sorting]);
 
   const sx = getSx();
   return (
     <Box sx={sx.trophyList}>
-      <Stack
-        sx={{
-          marginBottom: '3mm',
-          overflow: 'hidden',
-          overflowX: 'auto',
-          '&::-webkit-scrollbar': {
-            height: '0',
-          },
-        }}
-        direction='row'
-        spacing={1}
-        alignItems={'center'}
-      >
+      <Stack sx={sx.buttonRow} direction='row' spacing={1}>
         <SortButton type='Default' />
-        <SortButton type='Earned Time' />
         <SortButton type='Rarity' />
+        <SortButton type='Earned Time' />
         <SortButton type='Grade' />
       </Stack>
       <Stack spacing={'4px'} alignItems={'center'}>
@@ -53,6 +41,18 @@ export function TrophyList(props: { list: Trophy[] }) {
           display: 'block',
           width: '100%',
           height: '64px',
+        },
+      },
+      buttonRow: {
+        padding: '8px 16px',
+        width: 'fit-content',
+        bgcolor: 'background.paper',
+        borderRadius: '30mm',
+        marginBottom: '16px',
+        overflow: 'hidden',
+        overflowX: 'auto',
+        '&::-webkit-scrollbar': {
+          height: '0',
         },
       },
     };

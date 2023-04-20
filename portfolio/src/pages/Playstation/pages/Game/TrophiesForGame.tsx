@@ -29,7 +29,7 @@ export function PlaystationTrophiesGame() {
     <Stack spacing={2}>
       {groups.map((group, i) => (
         <SortProvider key={i}>
-          <Group group={group} />
+          <Group group={group} hasGroups={groups.length > 1} />
         </SortProvider>
       ))}
     </Stack>

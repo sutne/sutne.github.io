@@ -53,6 +53,7 @@ export function Playstation() {
 
   const tokenExpired = new Date() > new Date('31-5-2023');
   if (!profile) return <></>;
+  const sx = getSx();
   return (
     <AppContent
       name='Playstation'
@@ -60,19 +61,9 @@ export function Playstation() {
       lightTheme={playstationLightTheme}
       fillWidth
     >
-      <Box sx={{ padding: '24px', width: '100%', boxSizing: 'border-box' }}>
+      <Box sx={sx.container}>
         {tokenExpired ? (
-          <Stack>
-            <Box
-              style={{
-                minWidth: '500px',
-                maxWidth: '100%',
-                borderRadius: '8px',
-              }}
-              component='img'
-              src='https://card.psnprofiles.com/1/Sutne_.png'
-            />
-          </Stack>
+          <PsnProfilesCard />
         ) : (
           <Routes>
             <Route path='/' element={<Main />} />
@@ -81,10 +72,35 @@ export function Playstation() {
               path='/trophies/game/:gameId/platform/:platform'
               element={<PlaystationTrophiesGame />}
             />
-            <Route path='*' element={<>404</>} />
+            <Route path='/*' element={<>404</>} />
           </Routes>
         )}
       </Box>
     </AppContent>
+  );
+  function getSx() {
+    return {
+      container: {
+        padding: { xs: '8px', sm: '24px' },
+        width: '100%',
+        boxSizing: 'border-box',
+      },
+    };
+  }
+}
+
+function PsnProfilesCard() {
+  return (
+    <Stack>
+      <Box
+        style={{
+          minWidth: '500px',
+          maxWidth: '100%',
+          borderRadius: '8px',
+        }}
+        component='img'
+        src='https://card.psnprofiles.com/1/Sutne_.png'
+      />
+    </Stack>
   );
 }

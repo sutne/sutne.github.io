@@ -3,7 +3,7 @@ import {
   KeyboardArrowDownRounded,
   KeyboardArrowUpRounded,
 } from '@mui/icons-material';
-import { Box, Stack, Typography, useTheme } from '@mui/material';
+import { alpha, Box, Stack, Typography, useTheme } from '@mui/material';
 
 import * as API from '../service/api';
 import { RepoType } from '../service/types';
@@ -64,8 +64,9 @@ export function RepoList() {
     order: SortOrderSort;
   };
   function SortButton({ order }: prp) {
+    const isSelected = sortOrder.sort == order;
     const handleClick = () => {
-      if (sortOrder.sort == order) {
+      if (isSelected) {
         setSortOrder({
           sort: order,
           order: sortOrder.order == 'asc' ? 'desc' : 'asc',
@@ -83,14 +84,14 @@ export function RepoList() {
     const icon = () => {
       if (sortOrder.sort != order) return <></>;
       return sortOrder.order == 'asc' ? (
-        <KeyboardArrowDownRounded sx={sx.label} />
+        <KeyboardArrowDownRounded sx={sx.icon} />
       ) : (
-        <KeyboardArrowUpRounded sx={sx.label} />
+        <KeyboardArrowUpRounded sx={sx.icon} />
       );
     };
 
     return (
-      <Box sx={sx.button} onClick={handleClick}>
+      <Box sx={sx.container} onClick={handleClick}>
         <Stack
           sx={sx.content}
           direction='row'
@@ -106,32 +107,34 @@ export function RepoList() {
     );
     function getSx() {
       return {
-        button: [
+        container: [
           {
             border: '1px dashed',
-            color: theme.palette.text.secondary,
+            color: 'text.secondary',
             borderRadius: '20px',
-            backgroundColor: 'background.default',
             '&:hover': {
-              backgroundColor: 'background.paper',
-              color: theme.palette.text.primary,
+              backgroundColor: alpha(theme.palette.text.secondary, 0.15),
+              color: 'text.primary',
             },
             cursor: 'pointer',
           },
-          order == sortOrder.sort && {
+          isSelected && {
             border: '1px solid',
-          },
-        ],
-        label: [
-          order == sortOrder.sort && {
             color: 'text.primary',
           },
         ],
-        content: [
-          {
-            margin: '1mm 4mm 1mm 4mm',
-          },
-        ],
+        label: {
+          whiteSpace: 'nowrap',
+        },
+        icon: {
+          height: '18px',
+          width: '18px',
+          fontSize: '22px',
+          marginLeft: '-8px',
+        },
+        content: {
+          margin: '1mm 4mm 1mm 4mm',
+        },
       };
     }
   }

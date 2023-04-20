@@ -3,7 +3,7 @@ import {
   KeyboardArrowDownRounded,
   KeyboardArrowUpRounded,
 } from '@mui/icons-material';
-import { Box, Stack, Typography, useTheme } from '@mui/material';
+import { alpha, Box, Stack, Typography, useTheme } from '@mui/material';
 
 import { SortType, useSorting } from '../providers/sort-provider';
 
@@ -53,31 +53,26 @@ export function SortButton(props: { type: SortType }) {
       container: [
         {
           border: '1px dashed',
-          color: theme.palette.text.secondary,
+          color: 'text.secondary',
           borderRadius: '20px',
-          backgroundColor: 'background.default',
           '&:hover': {
-            backgroundColor: 'background.paper',
-            color: theme.palette.text.primary,
+            backgroundColor: alpha(theme.palette.text.secondary, 0.15),
+            color: 'text.primary',
           },
           cursor: 'pointer',
         },
         isSelected && {
           border: '1px solid',
-        },
-      ],
-      label: [
-        {
-          whiteSpace: 'nowrap',
-          color: 'text.secondary',
-        },
-        isSelected && {
-          whiteSpace: 'nowrap',
           color: 'text.primary',
         },
       ],
+      label: {
+        whiteSpace: 'nowrap',
+      },
       icon: {
-        color: 'text.primary',
+        height: '18px',
+        width: '18px',
+        fontSize: '22px',
         marginLeft: '-8px',
       },
       content: {

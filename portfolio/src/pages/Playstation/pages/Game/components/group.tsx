@@ -4,7 +4,7 @@ import { TrophyProgressCard } from '../../../components/trophy-progress-card';
 import { TrophyGroup } from '../../../service/types';
 import { TrophyList } from './trophy-list';
 
-export function Group(props: { group: TrophyGroup }) {
+export function Group(props: { group: TrophyGroup; hasGroups?: boolean }) {
   return (
     <>
       <TrophyProgressCard
@@ -13,6 +13,7 @@ export function Group(props: { group: TrophyGroup }) {
         progress={props.group.progress}
         trophyCount={props.group.trophyCount}
         earnedCount={props.group.earnedCount}
+        expanded={!props.hasGroups}
       >
         <TrophyList list={props.group.trophies} />
       </TrophyProgressCard>
