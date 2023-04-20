@@ -37,7 +37,7 @@ export function sortTrophies(trophies: Trophy[], sorting: Sorting): Trophy[] {
       case 'Earned Time':
         const diff = compareEarnedTime(a, b);
         if (diff === undefined) return -compareRarity(a, b);
-        if (diff === 0) return compareGrade(a, b);
+        if (diff === 0) return -compareGrade(a, b);
         return diff;
 
       case 'Rarity':

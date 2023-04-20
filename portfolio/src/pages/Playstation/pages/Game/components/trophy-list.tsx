@@ -45,7 +45,7 @@ export function TrophyList(props: { list: Trophy[] }) {
       },
       buttonRow: {
         padding: '8px 16px',
-        width: 'fit-content',
+        maxWidth: 'fit-content',
         bgcolor: 'background.paper',
         borderRadius: '30mm',
         marginBottom: '16px',

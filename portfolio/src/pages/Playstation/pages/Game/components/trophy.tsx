@@ -21,7 +21,7 @@ export function Trophy(props: { trophy: Trophy }) {
           <Typography sx={sx.description}>
             {hideDetails ? 'Description is hidden.' : props.trophy.description}
           </Typography>
-          <Box sx={sx.stats}>
+          <Stack direction='row' sx={sx.stats}>
             <Box sx={sx.trophyIcon} component='img' src={trophyIcon} />
             <Typography sx={sx.rarity}>{props.trophy.rarity}%</Typography>
             {props.trophy.isEarned && (
@@ -31,7 +31,7 @@ export function Trophy(props: { trophy: Trophy }) {
                 </Typography>
               </>
             )}
-          </Box>
+          </Stack>
         </Stack>
       </Stack>
     </>
@@ -41,37 +41,42 @@ export function Trophy(props: { trophy: Trophy }) {
     return {
       container: {
         width: '100%',
-        overflow: 'hidden',
         bgcolor: 'background.paper',
-        padding: { xs: '8px', sm: '16px' },
         borderRadius: { xs: '8px', sm: '16px' },
+        padding: { xs: '8px', sm: '16px' },
         boxSizing: 'border-box',
       },
       icon: {
         height: height,
         width: height,
+        alignSelf: 'center',
         objectFit: 'contain',
-        borderRadius: '5%',
-        marginRight: '16px',
+        borderRadius: { xs: '8px', sm: '16px' },
         filter: props.trophy.isEarned ? 'none' : 'grayscale(100%)',
         opacity: props.trophy.isEarned ? 1 : 0.1,
       },
       info: {
+        marginLeft: { xs: '8px', sm: '16px' },
         width: '100%',
+        overflow: 'hidden',
       },
       title: {
         fontSize: { xs: '0.9rem', sm: '1.2rem' },
         color: 'text.primary',
+        width: '100%',
         overflow: 'hidden',
         whiteSpace: 'nowrap',
-        TextOverflow: 'ellipsis',
+        textOverflow: 'ellipsis',
       },
       description: {
         fontSize: { xs: '0.7rem', sm: '1rem' },
-        color: 'text.secondary',
-        overflow: 'hidden',
         height: { xs: '2.2rem', sm: '3.4rem' },
         lineHeight: { xs: '1.1rem', sm: '1.7rem' },
+        overflow: 'hidden',
+        color: 'text.secondary',
+      },
+      stats: {
+        // width: '100%',
       },
       trophyIcon: {
         height: { xs: '1.5rem', sm: '2.5rem' },
@@ -79,21 +84,17 @@ export function Trophy(props: { trophy: Trophy }) {
         objectFit: 'contain',
       },
       rarity: {
+        fontSize: { xs: '0.7rem', sm: '1.2rem' },
         alignSelf: 'center',
         flexGrow: 1,
-        fontSize: { xs: '0.7rem', sm: '1.2rem' },
-        color: 'text.secondary',
-        fontWeight: 300,
-      },
-      earnedTime: {
-        alignSelf: 'center',
-        fontSize: { xs: '0.7rem', sm: '1rem' },
         color: 'text.secondary',
         fontWeight: 100,
       },
-      stats: {
-        display: 'flex',
-        flexDirection: 'row',
+      earnedTime: {
+        fontSize: { xs: '0.7rem', sm: '1rem' },
+        alignSelf: 'center',
+        color: 'text.secondary',
+        fontWeight: 100,
       },
     };
   }

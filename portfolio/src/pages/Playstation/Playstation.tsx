@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Box, Stack } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
@@ -10,8 +10,6 @@ import { lightTheme } from 'providers/lightTheme';
 import { PlaystationTrophiesGame } from './pages/Game/TrophiesForGame';
 import { Main } from './pages/Main/Main';
 import { PlaystationTrophies } from './pages/Trophies/Trophies';
-import * as API from './service/api';
-import { Profile } from './service/types';
 
 const playstationDarkTheme = responsiveFontSizes(
   createTheme(darkTheme, {
@@ -40,19 +38,8 @@ const playstationLightTheme = responsiveFontSizes(
 );
 
 export function Playstation() {
-  const [profile, setProfile] = useState<Profile | undefined>();
-
-  useEffect(() => {
-    const getData = async () => {
-      const response = await API.getProfile();
-      if (!response) return;
-      setProfile(response);
-    };
-    getData();
-  }, []);
-
   const tokenExpired = new Date() > new Date('31-5-2023');
-  if (!profile) return <></>;
+
   const sx = getSx();
   return (
     <AppContent

@@ -1,18 +1,17 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 
 import { useApp } from 'providers/app-provider';
 import { useMainTheme } from 'providers/main-theme-provider';
 
 export function AppIcon(props: { name: string; onTap?: () => void }) {
-  const { iconReferences } = useApp();
+  const { iconReferences, isOpenStates } = useApp();
   const { theme } = useMainTheme();
-  const location = useLocation();
   const navigate = useNavigate();
 
   const icon = React.createRef<HTMLImageElement>();
-  const isOpen = location.pathname.startsWith(`/${props.name}`);
+  const isOpen = isOpenStates.get(props.name) ?? false;
   iconReferences.set(props.name, icon);
 
   // want to target the center of the app icon
@@ -46,17 +45,21 @@ export function AppIcon(props: { name: string; onTap?: () => void }) {
     y: target.y - origin.y,
   };
 
+  const onClick = () => {
+    if (props.onTap) {
+      props.onTap();
+      return;
+    }
+    isOpenStates.set(props.name, true);
+    navigate(`/${props.name}`);
+  };
+
   const animation = '300ms ease-in';
   const sx = getSx();
   return (
     <>
       <Box sx={sx.hover}>
-        <Box
-          sx={sx.container}
-          onClick={() =>
-            props.onTap ? props.onTap() : navigate(`/${props.name}`)
-          }
-        >
+        <Box sx={sx.container} onClick={onClick}>
           <Box
             ref={icon}
             sx={sx.icon}
@@ -86,13 +89,14 @@ export function AppIcon(props: { name: string; onTap?: () => void }) {
           transform: 'none',
           opacity: 1,
         },
-        isOpen && {
-          transform: {
-            xs: 'none',
-            sm: `translate(${transform.x}px,${transform.y}px)`,
+        isOpen &&
+          {
+            // transform: {
+            //   xs: 'none',
+            //   sm: `translate(${transform.x}px,${transform.y}px)`,
+            // },
+            // opacity: 0,
           },
-          opacity: 0,
-        },
       ],
       icon: [
         {

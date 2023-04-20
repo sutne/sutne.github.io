@@ -29,14 +29,15 @@ export function TrophyProgressCard(props: {
     );
   };
 
+  const onClick = () => {
+    if (props.expanded) return;
+    setExpanded((prev) => !prev);
+  };
+
   const sx = getSx();
   return (
     <>
-      <Stack
-        sx={sx.container}
-        direction='row'
-        onClick={() => setExpanded((prev) => !prev)}
-      >
+      <Stack sx={sx.container} direction='row' onClick={onClick}>
         <Box sx={sx.image} component='img' src={props.image} />
         {props.platform && (
           <Typography sx={sx.platform}>{props.platform}</Typography>
@@ -69,7 +70,7 @@ export function TrophyProgressCard(props: {
         overflow: 'hidden',
         bgcolor: 'background.paper',
         borderRadius: '16px',
-        cursor: props.children ? 'pointer' : 'default',
+        cursor: props.expanded ? 'default' : 'pointer',
       },
       image: {
         position: 'relative',

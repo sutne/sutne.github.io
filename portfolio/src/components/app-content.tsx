@@ -28,11 +28,8 @@ export function AppContent(props: {
   };
   fillWidth?: boolean;
 }) {
-  const [isOpen, setIsOpen] = React.useState(false);
-  React.useEffect(() => {
-    setIsOpen(true);
-  }, []);
-  const animationMs = 300;
+  const { isOpenStates } = useApp();
+  const animationMs = 0;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -55,12 +52,7 @@ export function AppContent(props: {
   const sx = getSx();
   return (
     <MuiThemeProvider theme={theme}>
-      <AppContentWrapper
-        name={props.name}
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        animationMs={animationMs}
-      >
+      <AppContentWrapper name={props.name} animationMs={animationMs}>
         <Box sx={sx.content}>
           <Stack sx={sx.title_bar} direction='row'>
             <Box
@@ -79,7 +71,7 @@ export function AppContent(props: {
             <IconButton
               sx={sx.title_bar_button}
               onClick={() => {
-                setIsOpen(false);
+                isOpenStates.set(props.name, false);
                 // wait for animation to finish
                 setTimeout(() => {
                   navigate('/');
@@ -148,13 +140,13 @@ export function AppContent(props: {
 
 export function AppContentWrapper(props: {
   name: string;
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   animationMs: number;
   children: JSX.Element;
 }) {
   const navigate = useNavigate();
-  const { iconReferences } = useApp();
+  const { iconReferences, isOpenStates } = useApp();
+
+  const isOpen = isOpenStates.get(props.name) ?? false;
   const icon = iconReferences.get(props.name);
 
   // want to target the center of the app icon
@@ -166,10 +158,10 @@ export function AppContentWrapper(props: {
       x: icon.current.x + icon.current.clientWidth / 2,
       y: icon.current.y + icon.current.clientHeight / 2,
     });
-  }, [icon]);
+  }, [iconReferences, icon]);
 
   React.useEffect(() => {
-    // apps are center, so origin is center of screen
+    // apps are centered, so origin is center of screen
     setOrigin({
       x: document.body.clientWidth / 2,
       y: document.body.clientHeight / 2,
@@ -185,7 +177,8 @@ export function AppContentWrapper(props: {
   const handleClose = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     if (e.target !== e.currentTarget) return;
-    props.setIsOpen(false);
+    // props.setIsOpen(false);
+    isOpenStates.set(props.name, false);
     setTimeout(() => {
       navigate('/');
     }, props.animationMs);
@@ -220,8 +213,8 @@ export function AppContentWrapper(props: {
           width: '0px',
         },
         transition: `background-color ${animation}`,
-        backgroundColor: props.isOpen ? 'rgba(0,0,0,70%)' : 'rgba(0,0,0,0%)',
-        pointerEvents: props.isOpen ? 'auto' : 'none',
+        backgroundColor: isOpen ? 'rgba(0,0,0,70%)' : 'rgba(0,0,0,0%)',
+        pointerEvents: isOpen ? 'auto' : 'none',
       },
       reset: {
         zIndex: 2,
@@ -234,21 +227,21 @@ export function AppContentWrapper(props: {
         padding: '16px',
         boxSizing: 'border-box',
         transition: `transform ${animation}, opacity ${animation}`,
-        opacity: { xs: props.isOpen ? 1 : 0, sm: 1 },
-        transform: {
-          xs: 'none',
-          sm: props.isOpen
-            ? `none`
-            : `translate(${transform.x}px,${transform.y}px) scale(0)`,
-          '&:first-of-type': {
-            '&:after': {
-              content: '""',
-              display: 'block',
-              height: '16px',
-              width: '100%',
-            },
-          },
-        },
+        opacity: { xs: isOpen ? 1 : 0, sm: 1 },
+        // transform: {
+        //   xs: 'none',
+        //   sm: isOpen
+        //     ? `none`
+        //     : `translate(${transform.x}px,${transform.y}px) scale(0)`,
+        //   '&:first-of-type': {
+        //     '&:after': {
+        //       content: '""',
+        //       display: 'block',
+        //       height: '16px',
+        //       width: '100%',
+        //     },
+        //   },
+        // },
       },
     };
   }
