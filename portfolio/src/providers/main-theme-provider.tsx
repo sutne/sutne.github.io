@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Theme,
   ThemeProvider as MuiThemeProvider,
   useMediaQuery,
 } from '@mui/material';
 
-import { darkTheme } from './darkTheme';
-import { lightTheme } from './lightTheme';
+import { useSettings } from 'providers/settings-provider';
+import { darkTheme } from 'themes/darkTheme';
+import { lightTheme } from 'themes/lightTheme';
 
 const MainThemeContext = React.createContext<
   | {
@@ -17,29 +18,43 @@ const MainThemeContext = React.createContext<
   | undefined
 >(undefined);
 
-type props = { children: JSX.Element };
-export function MainThemeProvider({ children }: props) {
+export function MainThemeProvider(props: { children: JSX.Element }) {
   const prefersDarkTheme = useMediaQuery('(prefers-color-scheme: dark)');
-  const [theme, setTheme] = useState(prefersDarkTheme ? darkTheme : lightTheme);
+  const [theme, setTheme] = React.useState(
+    prefersDarkTheme ? darkTheme : lightTheme,
+  );
+
+  const { settings } = useSettings();
+  React.useEffect(() => {
+    if (settings.useDarkTheme !== undefined) {
+      setTheme(settings.useDarkTheme ? darkTheme : lightTheme);
+    } else {
+      setTheme(prefersDarkTheme ? darkTheme : lightTheme);
+    }
+  }, [settings.useDarkTheme]);
+
   const themeIsDark = theme === darkTheme;
 
-  const contextValues = {
-    theme,
-    themeIsDark,
-    swapTheme: () => (themeIsDark ? setTheme(lightTheme) : setTheme(darkTheme)),
+  const swapTheme = () => {
+    const newTheme = themeIsDark ? lightTheme : darkTheme;
+    setTheme(newTheme);
   };
 
   return (
-    <MainThemeContext.Provider value={contextValues}>
-      <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>
+    <MainThemeContext.Provider
+      value={{
+        theme,
+        themeIsDark,
+        swapTheme,
+      }}
+    >
+      <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>
     </MainThemeContext.Provider>
   );
 }
 
 export function useMainTheme() {
   const context = React.useContext(MainThemeContext);
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return { ...context };
+  if (context !== undefined) return { ...context };
+  throw new Error('useTheme must be used within a ThemeProvider');
 }

@@ -2,9 +2,9 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Grid } from '@mui/material';
 
-import { TrophyLevel } from '../../../components/trophy-level';
 import { TrophyWithCount } from '../../../components/trophy-with-count';
 import { Profile, TrophyType } from '../../../service/types';
+import { TrophyLevel } from './trophy-level';
 
 export function TrophyOverview(props: { profile: Profile }) {
   const Trophy = ({ type }: { type: TrophyType }) => {
@@ -17,12 +17,9 @@ export function TrophyOverview(props: { profile: Profile }) {
   };
 
   const navigate = useNavigate();
-
+  const sx = getSx();
   return (
-    <Box
-      sx={{ cursor: 'pointer' }}
-      onClick={() => navigate(`/Playstation/trophies`)}
-    >
+    <Box sx={sx.card} onClick={() => navigate(`/Playstation/trophies`)}>
       <Grid container spacing={2} justifyContent={'center'}>
         <Grid item xs={12} md={4}>
           <TrophyLevel level={props.profile.trophySummary.level} />
@@ -34,4 +31,16 @@ export function TrophyOverview(props: { profile: Profile }) {
       </Grid>
     </Box>
   );
+
+  function getSx() {
+    return {
+      card: {
+        cursor: 'pointer',
+        bgcolor: 'background.paper',
+        borderRadius: '16px',
+        boxShadow: '0 0 8px 0 rgba(0, 0, 0, 0.2)',
+        padding: '24px',
+      },
+    };
+  }
 }

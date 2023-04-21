@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export type SortOrder = 'asc' | 'desc';
 export type SortType = 'Default' | 'Earned Time' | 'Rarity' | 'Grade';
@@ -17,7 +17,7 @@ const SortContext = React.createContext<
 >(undefined);
 
 export function SortProvider(props: { children: JSX.Element }) {
-  const [sorting, setSorting] = useState<Sorting>({
+  const [sorting, setSorting] = React.useState<Sorting>({
     type: 'Default',
     order: 'asc',
   });
@@ -35,8 +35,6 @@ export function SortProvider(props: { children: JSX.Element }) {
 
 export function useSorting() {
   const context = React.useContext(SortContext);
-  if (context === undefined) {
-    throw new Error('useSorting must be used within a SortProvider');
-  }
-  return { ...context };
+  if (context !== undefined) return { ...context };
+  throw new Error('useSorting must be used within a SortProvider');
 }

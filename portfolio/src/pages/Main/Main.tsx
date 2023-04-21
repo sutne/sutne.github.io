@@ -17,24 +17,28 @@ export function Main() {
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <AppDrawer title='Apps'>
-            <AppIcon name='Settings' />
             <AppIcon name='Spotify' />
             <AppIcon name='Playstation' />
             <AppIcon name='GitHub' />
           </AppDrawer>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <AppDrawer title='External'>
-            <AppIcon
-              name='Mail'
-              onTap={() =>
-                (window.location.href = `mailto:sivertutne@gmail.com`)
-              }
-            />
+          <AppDrawer title='Misc'>
+            <AppIcon name='Settings' />
             <AppIcon
               name='Minesweeper'
               onTap={() =>
                 window.open(`https://sutne.github.io/games`, '_blank')
+              }
+            />
+          </AppDrawer>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <AppDrawer title='Contact Me'>
+            <AppIcon
+              name='Mail'
+              onTap={() =>
+                (window.location.href = `mailto:sivertutne@gmail.com`)
               }
             />
           </AppDrawer>

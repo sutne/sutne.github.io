@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Stack } from '@mui/material';
 
@@ -8,11 +8,11 @@ import { Group } from './components/group';
 import { SortProvider } from './providers/sort-provider';
 
 export function PlaystationTrophiesGame() {
-  const [groups, setGroups] = useState<TrophyGroup[]>([]);
+  const [groups, setGroups] = React.useState<TrophyGroup[]>([]);
 
   const params = useParams();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const getData = async () => {
       if (!params.gameId || !params.platform) return;
       const response = await API.getTrophyGroups(

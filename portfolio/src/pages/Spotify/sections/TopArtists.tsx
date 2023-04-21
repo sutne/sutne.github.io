@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { ItemCard } from '../components/item-card';
 import { ItemRow } from '../components/item-row';
@@ -6,10 +6,10 @@ import { SectionTitle } from '../components/typography';
 import * as API from '../service/api';
 import { ArtistType } from '../service/types';
 
-export function TopArtists(): JSX.Element {
-  const [artists, setArtists] = useState<ArtistType[]>([]);
+export function TopArtists() {
+  const [artists, setArtists] = React.useState<ArtistType[]>([]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const getTracks = async () => {
       const response = await API.getTopArtists();
       setArtists(response);

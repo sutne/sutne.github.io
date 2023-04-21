@@ -3,11 +3,7 @@ import { Box } from '@mui/material';
 
 import { useMainTheme } from 'providers/main-theme-provider';
 
-type props = {
-  isOn: boolean;
-  onChange: () => void;
-};
-export function ToggleSwitch({ ...props }: props) {
+export function ToggleSwitch(props: { isOn: boolean; onChange: () => void }) {
   const { themeIsDark } = useMainTheme();
 
   const IOS = getIOSStyle();

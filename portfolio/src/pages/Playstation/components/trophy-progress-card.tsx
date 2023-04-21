@@ -69,15 +69,16 @@ export function TrophyProgressCard(props: {
         position: 'relative',
         overflow: 'hidden',
         bgcolor: 'background.paper',
-        borderRadius: '16px',
+        borderRadius: { xs: '8px', sm: '16px' },
         cursor: props.expanded ? 'default' : 'pointer',
+        boxShadow: '0 0 8px 0 rgba(0, 0, 0, 0.2)',
       },
       image: {
         position: 'relative',
         height: height,
         width: height,
         objectFit: 'contain',
-        borderRadius: '16px',
+        borderRadius: { xs: '8px', sm: '16px' },
         alignSelf: 'center',
       },
       info: {
@@ -103,16 +104,16 @@ export function TrophyProgressCard(props: {
       },
       platform: {
         position: 'absolute',
-        top: '8px',
-        left: '8px',
-        bgcolor: props.platform == 'PS5' ? 'white' : 'black',
-        color: props.platform == 'PS5' ? 'black' : 'white',
+        top: { xs: '4px', sm: '8px' },
+        left: { xs: '4px', sm: '8px' },
+        bgcolor: props.platform === 'PS5' ? 'white' : 'black',
+        color: props.platform === 'PS5' ? 'black' : 'white',
         borderRadius: '8px',
-        padding: '0 8px',
-        fontSize: { xs: '0.5rem', sm: '0.8rem' },
+        padding: { xs: '1px 5px', sm: '0 8px' },
+        fontSize: { xs: '0.4rem', sm: '0.8rem' },
         fontWeight: 400,
         boxShadow:
-          props.platform == 'PS5'
+          props.platform === 'PS5'
             ? '0 1px 6px 2px rgba(0,0,0,0.3)'
             : '0 1px 6px 2px rgba(255,255,255,0.15)',
       },

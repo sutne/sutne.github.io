@@ -7,8 +7,8 @@ export function getTrophyLevelImage(level: number): string {
   if (level < 600) return '500-599.png';
   if (level < 700) return '600-699.png';
   if (level < 800) return '700-799.png';
-  if (level < 900) return '800-899.png';
-  return 'platinum.png';
+  if (level < 999) return '800-998.png';
+  return '999.png';
 }
 
 export function getDateString(date: string | undefined): string {

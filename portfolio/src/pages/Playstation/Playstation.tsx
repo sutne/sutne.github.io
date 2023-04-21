@@ -4,8 +4,8 @@ import { Box, Stack } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 import { AppContent } from 'components/app-content';
-import { darkTheme } from 'providers/darkTheme';
-import { lightTheme } from 'providers/lightTheme';
+import { darkTheme } from 'themes/darkTheme';
+import { lightTheme } from 'themes/lightTheme';
 
 import { PlaystationTrophiesGame } from './pages/Game/TrophiesForGame';
 import { Main } from './pages/Main/Main';

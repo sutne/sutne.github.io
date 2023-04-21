@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { ItemCard } from '../components/item-card';
 import { ItemRow } from '../components/item-row';
@@ -7,12 +7,12 @@ import { useMusicPlayer } from '../providers/music-player';
 import * as API from '../service/api';
 import { TrackType } from '../service/types';
 
-export function TopTracks(): JSX.Element {
-  const [tracks, setTracks] = useState<TrackType[]>([]);
+export function TopTracks() {
+  const [tracks, setTracks] = React.useState<TrackType[]>([]);
 
   const { addSample } = useMusicPlayer();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const getTracks = async () => {
       const response = await API.getTopTracks();
       setTracks(response);

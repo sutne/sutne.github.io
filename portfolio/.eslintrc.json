@@ -20,7 +20,12 @@
   "rules": {
     "semi": ["error", "always"],
     "no-case-declarations": "off",
-    "no-console": "warn",
+    "no-console": [
+      "warn",
+      {
+        "allow": ["error"]
+      }
+    ],
     "no-useless-constructor": "warn",
     "no-useless-return": "error",
     "no-useless-concat": "error",

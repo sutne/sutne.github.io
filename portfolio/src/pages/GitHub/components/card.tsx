@@ -1,12 +1,7 @@
 import React from 'react';
 import { alpha, Box, useTheme } from '@mui/material';
 
-// import { useApp } from 'providers/app-provider';
-
-type props = {
-  name?: string;
-};
-export function RepoCard({ ...props }: props & { children: JSX.Element }) {
+export function RepoCard(props: { name?: string; children: JSX.Element }) {
   const theme = useTheme();
 
   const sx = getSx();

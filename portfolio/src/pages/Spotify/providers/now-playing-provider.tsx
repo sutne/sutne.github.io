@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import * as API from '../service/api';
 import { NowPlayingType } from '../service/types';
@@ -14,38 +14,34 @@ const NowPlayingContext = React.createContext<
   | undefined
 >(undefined);
 
-type props = object;
-export function NowPlayingProvider({
-  ...props
-}: props & { children: JSX.Element }) {
-  const [track, setTrack] = useState<NowPlayingType | undefined>(undefined);
-  const [shouldShow, setShouldShow] = useState(false);
+export function NowPlayingProvider(props: { children: JSX.Element }) {
+  const [track, setTrack] = React.useState<NowPlayingType>();
+  const [shouldShow, setShouldShow] = React.useState(false);
 
   const { addSample } = useMusicPlayer();
 
   const refresh = async () => {
-    const response = await API.getNowPlaying().catch((err) =>
-      console.error(err),
-    );
-    if (track?.href == response?.href) return;
+    const response = await API.getNowPlaying();
+    if (track?.href === response?.href) return;
     setTrack(response ?? undefined);
     if (!response) return;
     addSample(response.sample);
     setShouldShow(true);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     refresh(); // Refresh on mount
   }, []);
 
-  const contextValues = {
-    track,
-    refresh,
-    shouldShow,
-    setShouldShow,
-  };
   return (
-    <NowPlayingContext.Provider value={contextValues}>
+    <NowPlayingContext.Provider
+      value={{
+        track,
+        refresh,
+        shouldShow,
+        setShouldShow,
+      }}
+    >
       {props.children}
     </NowPlayingContext.Provider>
   );
@@ -53,8 +49,6 @@ export function NowPlayingProvider({
 
 export function useNowPlaying() {
   const context = React.useContext(NowPlayingContext);
-  if (context === undefined) {
-    throw new Error('useNowPlaying must be used within a NowPlayingProvider');
-  }
-  return { ...context };
+  if (context !== undefined) return { ...context };
+  throw new Error('useNowPlaying must be used within a NowPlayingProvider');
 }

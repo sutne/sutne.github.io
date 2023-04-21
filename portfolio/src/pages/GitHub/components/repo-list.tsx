@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   KeyboardArrowDownRounded,
   KeyboardArrowUpRounded,
@@ -11,15 +11,15 @@ import { SortOrder, SortOrderSort, sortRepos } from '../util';
 import { Repository } from './repo';
 
 export function RepoList() {
-  const [repos, setRepos] = useState<RepoType[]>([]);
-  const [sortOrder, setSortOrder] = useState<SortOrder>({
+  const [repos, setRepos] = React.useState<RepoType[]>([]);
+  const [sortOrder, setSortOrder] = React.useState<SortOrder>({
     sort: 'Updated',
     order: 'asc',
   });
 
   const theme = useTheme();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const getData = async () => {
       const personalRepos = await API.getRepositories();
       if (!personalRepos) return;
@@ -28,7 +28,7 @@ export function RepoList() {
     getData();
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     setRepos((repos) => sortRepos([...repos], sortOrder));
   }, [sortOrder]);
 
@@ -64,12 +64,12 @@ export function RepoList() {
     order: SortOrderSort;
   };
   function SortButton({ order }: prp) {
-    const isSelected = sortOrder.sort == order;
+    const isSelected = (sortOrder.sort = order);
     const handleClick = () => {
       if (isSelected) {
         setSortOrder({
           sort: order,
-          order: sortOrder.order == 'asc' ? 'desc' : 'asc',
+          order: sortOrder.order === 'asc' ? 'desc' : 'asc',
         });
       } else {
         setSortOrder({
@@ -82,8 +82,8 @@ export function RepoList() {
     const sx = getSx();
 
     const icon = () => {
-      if (sortOrder.sort != order) return <></>;
-      return sortOrder.order == 'asc' ? (
+      if (sortOrder.sort !== order) return <></>;
+      return sortOrder.order === 'asc' ? (
         <KeyboardArrowDownRounded sx={sx.icon} />
       ) : (
         <KeyboardArrowUpRounded sx={sx.icon} />

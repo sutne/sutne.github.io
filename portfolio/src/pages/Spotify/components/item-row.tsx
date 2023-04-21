@@ -1,10 +1,7 @@
 import React from 'react';
 import { Box, Stack, useTheme } from '@mui/material';
 
-type props = {
-  children: JSX.Element[];
-};
-export function ItemRow({ ...props }: props): JSX.Element {
+export function ItemRow(props: { children: JSX.Element[] }) {
   const theme = useTheme();
 
   const style = {

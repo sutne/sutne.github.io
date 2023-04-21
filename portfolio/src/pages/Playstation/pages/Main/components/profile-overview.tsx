@@ -3,7 +3,7 @@ import { Avatar, Stack, Typography } from '@mui/material';
 
 import { Profile } from '../../../service/types';
 
-export function ProfileOverview({ ...props }: { profile: Profile }) {
+export function ProfileOverview(props: { profile: Profile }) {
   const sx = getSx();
   return (
     <Stack

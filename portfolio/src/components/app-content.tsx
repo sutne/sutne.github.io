@@ -12,9 +12,12 @@ import {
 } from '@mui/material';
 
 import { useApp } from 'providers/app-provider';
-import { darkTheme } from 'providers/darkTheme';
-import { lightTheme } from 'providers/lightTheme';
 import { useMainTheme } from 'providers/main-theme-provider';
+import { useSettings } from 'providers/settings-provider';
+import { darkTheme } from 'themes/darkTheme';
+import { lightTheme } from 'themes/lightTheme';
+
+import { ContentAnimationWrapper } from './animated/content-animation-wrapper';
 
 export function AppContent(props: {
   name: string;
@@ -28,31 +31,39 @@ export function AppContent(props: {
   };
   fillWidth?: boolean;
 }) {
-  const { isOpenStates } = useApp();
-  const animationMs = 0;
-
+  const { setIsOpen } = useApp();
+  const { themeIsDark } = useMainTheme();
+  const { settings } = useSettings();
   const navigate = useNavigate();
   const location = useLocation();
-  const { themeIsDark } = useMainTheme();
 
   const themeThatIsDark = props.theme ?? props.darkTheme ?? darkTheme;
   const themeThatIsLight = props.theme ?? props.lightTheme ?? lightTheme;
   const theme = themeIsDark ? themeThatIsDark : themeThatIsLight;
-
   const appBarTheme = props.appBarTheme ?? {
     background: `linear-gradient(180deg, 
       ${alpha(theme.palette.background.paper, 1)} 0%, 
       ${alpha(theme.palette.background.paper, 0.4)} 100%
-    )`,
+      )`,
     textColor: theme.palette.text.primary,
   };
 
-  const isAtRoot = location.pathname == `/${props.name}`;
+  const goBack = () => navigate(-1);
+  const close = () => {
+    setIsOpen(props.name, false);
+    setTimeout(
+      () => {
+        navigate('/');
+      },
+      settings.useAnimations ? settings.animationDuration : 0,
+    );
+  };
 
+  const isAtRoot = location.pathname === `/${props.name}`;
   const sx = getSx();
   return (
     <MuiThemeProvider theme={theme}>
-      <AppContentWrapper name={props.name} animationMs={animationMs}>
+      <ContentAnimationWrapper name={props.name}>
         <Box sx={sx.content}>
           <Stack sx={sx.title_bar} direction='row'>
             <Box
@@ -64,26 +75,17 @@ export function AppContent(props: {
               {props.name}
             </Typography>
             {!isAtRoot && (
-              <IconButton sx={sx.title_bar_button} onClick={() => navigate(-1)}>
+              <IconButton sx={sx.title_bar_button} onClick={goBack}>
                 <KeyboardArrowLeftRounded sx={sx.title_bar_button_icon} />
               </IconButton>
             )}
-            <IconButton
-              sx={sx.title_bar_button}
-              onClick={() => {
-                isOpenStates.set(props.name, false);
-                // wait for animation to finish
-                setTimeout(() => {
-                  navigate('/');
-                }, animationMs);
-              }}
-            >
+            <IconButton sx={sx.title_bar_button} onClick={close}>
               <Minimize sx={sx.title_bar_button_icon} />
             </IconButton>
           </Stack>
           {props.children}
         </Box>
-      </AppContentWrapper>
+      </ContentAnimationWrapper>
     </MuiThemeProvider>
   );
 
@@ -95,7 +97,6 @@ export function AppContent(props: {
         margin: 'auto',
         maxWidth: '100%',
         borderRadius: '16px',
-        overflow: 'hidden',
         bgcolor: theme.palette.background.default,
         color: theme.palette.text.primary,
         boxShadow: '0px 4px 12px rgba(0, 0, 0, 70%)',
@@ -133,115 +134,6 @@ export function AppContent(props: {
       },
       title_bar_button_icon: {
         fontSize: '1.3em',
-      },
-    };
-  }
-}
-
-export function AppContentWrapper(props: {
-  name: string;
-  animationMs: number;
-  children: JSX.Element;
-}) {
-  const navigate = useNavigate();
-  const { iconReferences, isOpenStates } = useApp();
-
-  const isOpen = isOpenStates.get(props.name) ?? false;
-  const icon = iconReferences.get(props.name);
-
-  // want to target the center of the app icon
-  const [origin, setOrigin] = React.useState({ x: 0, y: 0 });
-  const [target, setTarget] = React.useState({ x: 0, y: 0 });
-  React.useEffect(() => {
-    if (!icon?.current) return;
-    setTarget({
-      x: icon.current.x + icon.current.clientWidth / 2,
-      y: icon.current.y + icon.current.clientHeight / 2,
-    });
-  }, [iconReferences, icon]);
-
-  React.useEffect(() => {
-    // apps are centered, so origin is center of screen
-    setOrigin({
-      x: document.body.clientWidth / 2,
-      y: document.body.clientHeight / 2,
-    });
-  }, [document.body.clientWidth, document.body.clientHeight]);
-
-  // translation from origin to target
-  const transform = {
-    x: target.x - origin.x,
-    y: target.y - origin.y,
-  };
-
-  const handleClose = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.preventDefault();
-    if (e.target !== e.currentTarget) return;
-    // props.setIsOpen(false);
-    isOpenStates.set(props.name, false);
-    setTimeout(() => {
-      navigate('/');
-    }, props.animationMs);
-  };
-
-  const animation = `${props.animationMs}ms ease-in`;
-  const sx = getSx();
-  return (
-    <Box sx={sx.background} onClick={(e) => handleClose(e)}>
-      <Box sx={sx.reset} onClick={(e) => handleClose(e)}>
-        <Box sx={sx.container} onClick={(e) => handleClose(e)}>
-          {props.children}
-        </Box>
-      </Box>
-    </Box>
-  );
-
-  function getSx() {
-    return {
-      background: {
-        position: 'fixed',
-        zIndex: 1,
-        top: '0',
-        left: '0',
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        overflowY: 'auto',
-        scrollBar: 'none',
-        '&::-webkit-scrollbar': {
-          width: '0px',
-        },
-        transition: `background-color ${animation}`,
-        backgroundColor: isOpen ? 'rgba(0,0,0,70%)' : 'rgba(0,0,0,0%)',
-        pointerEvents: isOpen ? 'auto' : 'none',
-      },
-      reset: {
-        zIndex: 2,
-        position: 'absolute',
-        width: 'min(1024px, 100%)',
-        height: '100%',
-      },
-      container: {
-        height: '100%',
-        padding: '16px',
-        boxSizing: 'border-box',
-        transition: `transform ${animation}, opacity ${animation}`,
-        opacity: { xs: isOpen ? 1 : 0, sm: 1 },
-        // transform: {
-        //   xs: 'none',
-        //   sm: isOpen
-        //     ? `none`
-        //     : `translate(${transform.x}px,${transform.y}px) scale(0)`,
-        //   '&:first-of-type': {
-        //     '&:after': {
-        //       content: '""',
-        //       display: 'block',
-        //       height: '16px',
-        //       width: '100%',
-        //     },
-        //   },
-        // },
       },
     };
   }

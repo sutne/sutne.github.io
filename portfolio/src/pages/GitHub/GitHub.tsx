@@ -3,8 +3,8 @@ import { Box, Typography } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 import { AppContent } from 'components/app-content';
-import { darkTheme } from 'providers/darkTheme';
-import { lightTheme } from 'providers/lightTheme';
+import { darkTheme } from 'themes/darkTheme';
+import { lightTheme } from 'themes/lightTheme';
 
 import { LanguagesCard } from './components/languages-card';
 import { RepoList } from './components/repo-list';

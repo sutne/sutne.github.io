@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { VolumeOff, VolumeUp } from '@mui/icons-material';
 import { alpha, Box, Collapse, Stack, useTheme } from '@mui/material';
 
@@ -11,8 +11,8 @@ import { TrackProgress } from '../components/track-progress';
 import { SectionTitle } from '../components/typography';
 import { useNowPlaying } from '../providers/now-playing-provider';
 
-export function NowPlaying(): JSX.Element {
-  const [isHovering, setIsHovering] = useState(false);
+export function NowPlaying() {
+  const [isHovering, setIsHovering] = React.useState(false);
 
   const theme = useTheme();
   const { track, shouldShow } = useNowPlaying();

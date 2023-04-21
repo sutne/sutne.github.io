@@ -3,28 +3,26 @@ import { Box, Grid, useTheme } from '@mui/material';
 
 import { LanguageColorMap } from '../service/types';
 
-type props = {
+export function LanguageBar(props: {
   size: number;
   languages: { [key: string]: number };
   height?: number;
   textSize?: number;
-};
-export function LanguageBar({ ...props }: props) {
+}) {
+  const theme = useTheme();
+
   const height = props.height ?? 12;
   const textSize = props.textSize ?? 12;
   const numLangs = Object.keys(props.languages).length;
   const amount = (lang: string) => props.languages[lang];
-
-  const theme = useTheme();
 
   const toPercentage = (lang: string) => {
     const percent = (100 * amount(lang)) / props.size;
     return (Math.round(percent * 100) / 100).toFixed(1);
   };
 
+  if (numLangs === 0) return <></>;
   const sx = getSx();
-
-  if (numLangs == 0) return <></>;
   return (
     <>
       <Box sx={sx.colorBar}>
@@ -51,12 +49,12 @@ export function LanguageBar({ ...props }: props) {
     let amountBefore = 0;
     let index = 0;
     for (const key in props.languages) {
-      if (key == language) break;
+      if (key === language) break;
       index += 1;
       amountBefore += amount(key);
     }
     let border = '';
-    if (index == numLangs - 1) {
+    if (index === numLangs - 1) {
       border = 'none';
     } else if (amount(language) > 0.05 * props.size) {
       border = '2px solid ' + theme.palette.background.paper;
@@ -90,11 +88,7 @@ export function LanguageBar({ ...props }: props) {
     };
   }
 
-  type nameProps = {
-    name: string;
-    percentage: string;
-  };
-  function LanguageName({ ...props }: nameProps) {
+  function LanguageName(props: { name: string; percentage: string }) {
     const sx = getSx();
     return <Box sx={sx.languageName}>{props.name}</Box>;
 

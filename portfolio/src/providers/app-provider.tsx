@@ -2,13 +2,9 @@ import React from 'react';
 
 const AppContext = React.createContext<
   | {
-      iconReferences: Map<string, React.RefObject<HTMLImageElement>>;
-      isOpenStates: Map<string, boolean>;
-      // updateReference: (
-      //   name: string,
-      //   ref: React.RefObject<HTMLImageElement>,
-      // ) => void;
-      // toggleOpenState: (name: string, isOpen: boolean) => void;
+      getIconRef: (name: string) => React.RefObject<HTMLImageElement>;
+      getIsOpen: (name: string) => boolean;
+      setIsOpen: (name: string, isOpen: boolean) => void;
     }
   | undefined
 >(undefined);
@@ -21,29 +17,31 @@ export function AppProvider(props: { children: JSX.Element }) {
     new Map<string, boolean>(),
   );
 
-  // const updateReference = (
-  //   name: string,
-  //   ref: React.RefObject<HTMLImageElement>,
-  // ) => {
-  //   iconReferences.set(name, ref);
-  //   setIconReferences(new Map(iconReferences));
-  // };
+  const getIsOpen = (name: string) => {
+    const isOpen = isOpenStates.get(name);
+    return isOpen ?? false;
+  };
 
-  // const toggleOpenState = (name: string) => {
-  //   const isOpen = isOpenStates.get(name);
-  //   isOpenStates.set(name, !isOpen);
-  //   setIsOpenStates(new Map(isOpenStates));
-  // };
+  const setIsOpen = (name: string, isOpen: boolean) => {
+    setIsOpenStates(new Map(isOpenStates.set(name, isOpen)));
+  };
 
-  const contextValues = {
-    iconReferences,
-    isOpenStates,
-    // updateReference,
-    // toggleOpenState,
+  const getIconRef = (name: string) => {
+    const ref = iconReferences.get(name);
+    if (ref !== undefined) return ref;
+    const newRef = React.createRef<HTMLImageElement>();
+    setIconReferences(new Map(iconReferences.set(name, newRef)));
+    return newRef;
   };
 
   return (
-    <AppContext.Provider value={contextValues}>
+    <AppContext.Provider
+      value={{
+        getIconRef,
+        setIsOpen,
+        getIsOpen,
+      }}
+    >
       {props.children}
     </AppContext.Provider>
   );
@@ -51,8 +49,6 @@ export function AppProvider(props: { children: JSX.Element }) {
 
 export function useApp() {
   const context = React.useContext(AppContext);
-  if (context === undefined) {
-    throw new Error('useApp must be used within a AppProvider');
-  }
-  return { ...context };
+  if (context !== undefined) return { ...context };
+  throw new Error('useApp must be used within a AppProvider');
 }

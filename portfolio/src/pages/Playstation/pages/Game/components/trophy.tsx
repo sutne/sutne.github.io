@@ -45,16 +45,24 @@ export function Trophy(props: { trophy: Trophy }) {
         borderRadius: { xs: '8px', sm: '16px' },
         padding: { xs: '8px', sm: '16px' },
         boxSizing: 'border-box',
+        boxShadow: '0 0 8px 0 rgba(0, 0, 0, 0.2)',
       },
-      icon: {
-        height: height,
-        width: height,
-        alignSelf: 'center',
-        objectFit: 'contain',
-        borderRadius: { xs: '8px', sm: '16px' },
-        filter: props.trophy.isEarned ? 'none' : 'grayscale(100%)',
-        opacity: props.trophy.isEarned ? 1 : 0.1,
-      },
+      icon: [
+        {
+          height: height,
+          width: height,
+          alignSelf: 'center',
+          objectFit: 'contain',
+          borderRadius: { xs: '8px', sm: '16px' },
+          filter: 'drop-shadow(0 3px 6px rgba(0,0,0,50%))',
+          WebkitFilter: 'drop-shadow(0 3px 6px rgba(0,0,0,50%))',
+          opacity: 1,
+        },
+        !props.trophy.isEarned && {
+          filter: 'grayscale(100%)',
+          opacity: 0.1,
+        },
+      ],
       info: {
         marginLeft: { xs: '8px', sm: '16px' },
         width: '100%',
@@ -82,6 +90,8 @@ export function Trophy(props: { trophy: Trophy }) {
         height: { xs: '1.5rem', sm: '2.5rem' },
         width: { xs: '1.5rem', sm: '2.5rem' },
         objectFit: 'contain',
+        WebkitFilter: 'drop-shadow(0 2px 3px #888)',
+        filter: 'drop-shadow(0 2px 3px #888)',
       },
       rarity: {
         fontSize: { xs: '0.7rem', sm: '1.2rem' },

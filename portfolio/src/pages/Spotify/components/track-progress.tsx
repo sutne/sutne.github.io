@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { LinearProgress, Stack, Typography, useTheme } from '@mui/material';
 
 import { useNowPlaying } from '../providers/now-playing-provider';
 import { msToString } from '../util';
 
 export function TrackProgress() {
-  const [elapsed, setElapsed] = useState(0);
+  const [elapsed, setElapsed] = React.useState(0);
 
   const { track, refresh, setShouldShow } = useNowPlaying();
   const theme = useTheme();
@@ -13,7 +13,7 @@ export function TrackProgress() {
   if (!track) return <></>;
 
   let timer: NodeJS.Timer;
-  useEffect(() => {
+  React.useEffect(() => {
     if (!track) return;
     setElapsed(Math.max(track.elapsed - 1000, 0));
 
@@ -24,7 +24,7 @@ export function TrackProgress() {
     return () => clearInterval(timer);
   }, [track]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!track) return;
     const remaining = track.length - elapsed;
     if (remaining > 2000) return;

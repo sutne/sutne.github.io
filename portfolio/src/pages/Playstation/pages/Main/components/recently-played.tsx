@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Grid } from '@mui/material';
 
 import * as API from '../../../service/api';
@@ -6,9 +6,9 @@ import { RecentGame } from '../../../service/types';
 import { GameCard } from './game-card';
 
 export function RecentlyPlayed() {
-  const [gameList, setGameList] = useState<RecentGame[]>([]);
+  const [gameList, setGameList] = React.useState<RecentGame[]>([]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const getData = async () => {
       const response = await API.getRecentGames();
       if (!response) return;

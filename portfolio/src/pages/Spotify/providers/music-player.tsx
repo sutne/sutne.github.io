@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const MusicPlayerContext = React.createContext<
   | {
-      currentSong: HTMLAudioElement | undefined;
+      currentSample: HTMLAudioElement | undefined;
       handlePlayPause: (sample: string) => void;
       addSample: (sample: string) => void;
       isPlaying: (sample: string) => boolean;
@@ -10,12 +10,9 @@ const MusicPlayerContext = React.createContext<
   | undefined
 >(undefined);
 
-type props = { children: JSX.Element };
-export function MusicPlayerProvider({ ...props }: props) {
-  const [currentSample, setCurrentSample] = useState<
-    HTMLAudioElement | undefined
-  >();
-  const [samples, setSamples] = useState<Map<string, HTMLAudioElement>>(
+export function MusicPlayerProvider(props: { children: JSX.Element }) {
+  const [currentSample, setCurrentSample] = React.useState<HTMLAudioElement>();
+  const [samples, setSamples] = React.useState<Map<string, HTMLAudioElement>>(
     new Map(),
   );
 
@@ -60,24 +57,23 @@ export function MusicPlayerProvider({ ...props }: props) {
     return currentSample.src === sample && !currentSample.paused;
   };
 
-  const contextValues = {
-    currentSong: currentSample,
-    handlePlayPause,
-    addSample,
-    isPlaying,
-  };
-
   React.useEffect(() => {
     return () => {
       if (!currentSample) return;
-      console.log('unmounting');
       currentSample.pause();
       setCurrentSample(undefined);
     };
   }, []);
 
   return (
-    <MusicPlayerContext.Provider value={contextValues}>
+    <MusicPlayerContext.Provider
+      value={{
+        currentSample,
+        handlePlayPause,
+        addSample,
+        isPlaying,
+      }}
+    >
       {props.children}
     </MusicPlayerContext.Provider>
   );
@@ -85,8 +81,6 @@ export function MusicPlayerProvider({ ...props }: props) {
 
 export function useMusicPlayer() {
   const context = React.useContext(MusicPlayerContext);
-  if (context === undefined) {
-    throw new Error('useMusicPlayer must be used within a MusicPlayerProvider');
-  }
-  return { ...context };
+  if (context !== undefined) return { ...context };
+  throw new Error('useMusicPlayer must be used within a MusicPlayerProvider');
 }

@@ -3,23 +3,24 @@ import { alpha, Box, Grid } from '@mui/material';
 
 import { useMainTheme } from 'providers/main-theme-provider';
 
-type props = {
+export function AppDrawer(props: {
   title: string;
-  children: JSX.Element[] | JSX.Element;
-};
-export function AppDrawer({ ...props }: props) {
+  children: JSX.Element | JSX.Element[];
+}) {
   const { theme } = useMainTheme();
 
-  if (!Array.isArray(props.children)) props.children = [props.children];
+  const apps = Array.isArray(props.children)
+    ? props.children
+    : [props.children];
 
   const sx = getSx();
   return (
-    <Box sx={sx.card}>
+    <Box sx={sx.background}>
       <Box sx={sx.title}>{props.title}</Box>
-      <Grid sx={sx.drawer} container columnSpacing={1} rowSpacing={2}>
-        {props.children.map((child, index) => (
+      <Grid sx={sx.drawer} container columnSpacing={2} rowSpacing={2}>
+        {apps.map((app, index) => (
           <Grid item key={index}>
-            {React.cloneElement(child, { ...child.props })}
+            {React.cloneElement(app, { ...app.props })}
           </Grid>
         ))}
       </Grid>
@@ -28,20 +29,21 @@ export function AppDrawer({ ...props }: props) {
 
   function getSx() {
     return {
-      card: [
+      background: [
         {
-          backgroundImage: `linear-gradient(-70deg, ${alpha(
-            theme.palette.background.default,
-            0.85,
-          )} 60%, ${alpha(theme.palette.background.default, 0.95)} 100%)`,
           borderRadius: '16px',
           transition: 'all ease-in-out 0.125s',
           boxShadow: '3px 3px 10px 1pt rgba(0,0,0, 30%)',
+          background: `linear-gradient(0deg, 
+            ${alpha(theme.palette.background.default, 0.65)} 60%, 
+            ${alpha(theme.palette.background.default, 0.95)} 100%
+          )`,
+          backdropFilter: 'blur(8px)',
         },
       ],
       drawer: [
         {
-          padding: '24px',
+          padding: { xs: '12px', sm: '24px' },
         },
       ],
       title: [
@@ -50,11 +52,11 @@ export function AppDrawer({ ...props }: props) {
           color: 'text.primary',
           padding: '12px 16px',
           borderRadius: '16px 16px 0px 0px',
-          backgroundImage: `linear-gradient(70deg,  ${alpha(
-            theme.palette.background.paper,
-            0.75,
-          )} 60%, ${alpha(theme.palette.background.paper, 0.95)} 100%)`,
           boxShadow: '0px 2px 4px rgba(0, 0, 0, 20%)',
+          background: `linear-gradient(-80deg, 
+            ${alpha(theme.palette.background.paper, 0.3)} 60%, 
+            ${alpha(theme.palette.background.paper, 0.5)} 100%
+          )`,
         },
       ],
     };

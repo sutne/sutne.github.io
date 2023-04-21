@@ -11,14 +11,14 @@ export function SortButton(props: { type: SortType }) {
   const { sorting, setSorting } = useSorting();
   const theme = useTheme();
 
-  const isSelected = sorting.type == props.type;
+  const isSelected = sorting.type === props.type;
 
   const handleClick = () => {
     if (isSelected) {
       setSorting((prev) => {
         return {
           type: prev.type,
-          order: prev.order == 'asc' ? 'desc' : 'asc',
+          order: prev.order === 'asc' ? 'desc' : 'asc',
         };
       });
     } else {
@@ -31,7 +31,7 @@ export function SortButton(props: { type: SortType }) {
 
   const sx = getSx();
   const Icon = () => {
-    return sorting.order == 'asc' ? (
+    return sorting.order === 'asc' ? (
       <KeyboardArrowDownRounded sx={sx.icon} />
     ) : (
       <KeyboardArrowUpRounded sx={sx.icon} />

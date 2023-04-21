@@ -1,14 +1,16 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 
-import { getTrophyLevelImage } from '../util';
+import { getTrophyLevelImage } from '../../../util';
 
 export function TrophyLevel(props: { level: number }) {
-  const icon = require(`../assets/levels/${getTrophyLevelImage(props.level)}`);
+  const icon = require(`../../../assets/levels/${getTrophyLevelImage(
+    props.level,
+  )}`);
   const sx = getSx();
   return (
     <Box sx={sx.container}>
-      <Box component='img' sx={sx.image} src={icon} />
+      <Box sx={sx.image} component='img' src={icon} />
       <Typography sx={sx.text}>Level {props.level}</Typography>
     </Box>
   );
@@ -24,13 +26,15 @@ export function TrophyLevel(props: { level: number }) {
       image: {
         width: '100%',
         maxWidth: { xs: '80px', sm: '120px' },
+        filter: 'drop-shadow(0 3px 5px rgba(0,0,0,50%))',
+        WebkitFilter: 'drop-shadow(0 3px 5px rgba(0,0,0,50%))',
       },
       text: {
         position: 'relative',
         top: { xs: '0', sm: '-10px' },
         textAlign: 'center',
-        fontWeight: 400,
-        fontSize: { xs: '16px', sm: '22px', md: '32px' },
+        fontWeight: 300,
+        fontSize: { xs: '10px', sm: '18px', md: '24px' },
       },
     };
   }

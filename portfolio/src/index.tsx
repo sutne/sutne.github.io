@@ -10,6 +10,7 @@ import { Settings } from 'pages/Settings/Settings';
 import { Spotify } from 'pages/Spotify/Spotify';
 import { AppProvider } from 'providers/app-provider';
 import { MainThemeProvider, useMainTheme } from 'providers/main-theme-provider';
+import { SettingsProvider } from 'providers/settings-provider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -19,9 +20,11 @@ document.body.style.padding = '0px';
 
 root.render(
   <React.StrictMode>
-    <MainThemeProvider>
-      <Root />
-    </MainThemeProvider>
+    <SettingsProvider>
+      <MainThemeProvider>
+        <Root />
+      </MainThemeProvider>
+    </SettingsProvider>
   </React.StrictMode>,
 );
 
@@ -53,16 +56,27 @@ export function Root() {
     return {
       root: [
         {
+          position: 'fixed',
+          zIndex: 1,
           width: '100%',
           height: '100%',
-          overflow: 'auto',
-          background: `linear-gradient(90deg,  
-            ${themeIsDark ? 'rgb(18,18,18)' : 'rgb(210,210,210)'} 0%, 
-            ${themeIsDark ? 'rgb(24,24,24)' : 'rgb(230,230,235)'} 50%, 
+          background: `linear-gradient(90deg,
+            ${themeIsDark ? 'rgb(18,18,18)' : 'rgb(210,210,210)'} 0%,
+            ${themeIsDark ? 'rgb(24,24,24)' : 'rgb(230,230,235)'} 50%,
             ${themeIsDark ? 'rgb(17,19,24)' : 'rgb(210,210,210)'} 100%)`,
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
+          '&:before': {
+            content: '""',
+            zIndex: -1,
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            height: '100%',
+            width: '100%',
+            background: `url(${require('./assets/background.jpg')})`,
+            filter: themeIsDark ? 'brightness(20%)' : 'brightness(100%)',
+            backgroundPosition: 'top',
+            backgroundSize: 'cover',
+          },
         },
       ],
       content: [

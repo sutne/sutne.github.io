@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Stack, Typography } from '@mui/material';
 
 import * as API from '../service/api';
@@ -7,9 +7,9 @@ import { RepoCard } from './card';
 import { LanguageBar } from './language-bar';
 
 export function LanguagesCard() {
-  const [data, setData] = useState<LanguageStatsType | undefined>();
+  const [data, setData] = React.useState<LanguageStatsType | undefined>();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const getData = async () => {
       const response = await API.getLanguageStats();
       if (!response) return;

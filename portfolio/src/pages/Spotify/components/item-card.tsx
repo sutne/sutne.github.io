@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { alpha, Box, Stack, useTheme } from '@mui/material';
 
 import { Image } from 'components/image';
@@ -7,14 +7,13 @@ import { ItemSubtitle } from './item-subtitle';
 import { ItemTitle } from './item-title';
 import { SampleButton } from './sample-button';
 
-type props = {
+export function ItemCard(props: {
   title: string;
   subtitle: string;
   image: string;
   sample?: string;
-};
-export function ItemCard({ ...props }: props): JSX.Element {
-  const [isHovered, setHovered] = useState(false);
+}) {
+  const [isHovered, setHovered] = React.useState(false);
 
   const theme = useTheme();
 
