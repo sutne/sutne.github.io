@@ -1,12 +1,13 @@
 {
   "files": {
-    "main.js": "/static/js/main.fc632dd6.js",
+    "main.js": "/static/js/main.42447367.js",
     "static/media/me.png": "/static/media/me.9b3e5a51b6b6047c5009.png",
     "static/media/Settings.png": "/static/media/Settings.4ee15c57209d1ba2edb3.png",
-    "static/media/1000.png": "/static/media/1000.47e2c5151a3308ce6578.png",
+    "static/media/background.jpg": "/static/media/background.651fac64aad604c9e910.jpg",
+    "static/media/999.png": "/static/media/999.47e2c5151a3308ce6578.png",
     "static/media/200-299.png": "/static/media/200-299.878ba621a6a72e9e13b8.png",
     "static/media/500-599.png": "/static/media/500-599.3ed2d122134f614ab253.png",
-    "static/media/800-999.png": "/static/media/800-999.55629e2e3d4871da391c.png",
+    "static/media/800-998.png": "/static/media/800-998.55629e2e3d4871da391c.png",
     "static/media/GitHub.png": "/static/media/GitHub.ff2648078e819f6a9666.png",
     "static/media/100-199.png": "/static/media/100-199.2714834bc17a233fb7ab.png",
     "static/media/Spotify.png": "/static/media/Spotify.385940fe0dded418ae1a.png",
@@ -24,9 +25,9 @@
     "static/media/bronze.png": "/static/media/bronze.a9dc50b7add31ebc9e19.png",
     "static/media/hidden.png": "/static/media/hidden.09b9bf2de0e016fcb2b5.png",
     "index.html": "/index.html",
-    "main.fc632dd6.js.map": "/static/js/main.fc632dd6.js.map"
+    "main.42447367.js.map": "/static/js/main.42447367.js.map"
   },
   "entrypoints": [
-    "static/js/main.fc632dd6.js"
+    "static/js/main.42447367.js"
   ]
 }
