@@ -75,10 +75,11 @@ export function ToggleItem(props: {
       tooltipContent: {
         visibility: showTooltip ? 'visible' : 'hidden',
         position: 'absolute',
+        top: '120%',
         zIndex: 1,
-        transform: 'translate(-50%, 5%)',
-        width: '500px',
+        width: 'min(500px, 90vw)',
         padding: '2em',
+        transform: 'translateX(-50%)',
         bgcolor: 'background.default',
         textAlign: 'left',
         borderRadius: '0.5em',

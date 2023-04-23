@@ -1,10 +1,8 @@
 import React from 'react';
 
 export type SortOrder = 'asc' | 'desc';
-export type SortType = 'Default' | 'Earned Time' | 'Rarity' | 'Grade';
-
 export type Sorting = {
-  type: SortType;
+  type: string;
   order: SortOrder;
 };
 
@@ -16,11 +14,11 @@ const SortContext = React.createContext<
     }
 >(undefined);
 
-export function SortProvider(props: { children: JSX.Element }) {
-  const [sorting, setSorting] = React.useState<Sorting>({
-    type: 'Default',
-    order: 'asc',
-  });
+export function SortProvider(props: {
+  defaultSorting: Sorting;
+  children: JSX.Element;
+}) {
+  const [sorting, setSorting] = React.useState<Sorting>(props.defaultSorting);
 
   const contextValues = {
     sorting,

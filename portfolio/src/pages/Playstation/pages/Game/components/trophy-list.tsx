@@ -1,10 +1,11 @@
 import React from 'react';
 import { Box, Stack } from '@mui/material';
 
+import { SortButton } from 'components/sort-button';
+import { useSorting } from 'providers/sort-provider';
+
 import { Trophy } from '../../../service/types';
-import { useSorting } from '../providers/sort-provider';
 import { sortTrophies } from '../util';
-import { SortButton } from './sort-button';
 import { Trophy as TrophyComp } from './trophy';
 
 export function TrophyList(props: { list: Trophy[] }) {

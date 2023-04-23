@@ -2,10 +2,11 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Stack } from '@mui/material';
 
+import { SortProvider } from 'providers/sort-provider';
+
 import * as API from '../../service/api';
 import { TrophyGroup } from '../../service/types';
 import { Group } from './components/group';
-import { SortProvider } from './providers/sort-provider';
 
 export function PlaystationTrophiesGame() {
   const [groups, setGroups] = React.useState<TrophyGroup[]>([]);
@@ -28,7 +29,10 @@ export function PlaystationTrophiesGame() {
   return (
     <Stack spacing={2}>
       {groups.map((group, i) => (
-        <SortProvider key={i}>
+        <SortProvider
+          defaultSorting={{ type: 'Default', order: 'asc' }}
+          key={i}
+        >
           <Group group={group} hasGroups={groups.length > 1} />
         </SortProvider>
       ))}

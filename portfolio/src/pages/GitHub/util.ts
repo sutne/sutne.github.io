@@ -1,3 +1,4 @@
+import { Sorting } from '../../providers/sort-provider';
 import { RepoType } from './service/types';
 
 export function toTimeDiffString(utcString: string) {
@@ -28,17 +29,11 @@ export function toTimeDiffString(utcString: string) {
   return `${monthName} ${year}`;
 }
 
-export type SortOrderOrder = 'asc' | 'desc';
-export type SortOrderSort = 'Updated' | 'Created' | 'Language' | 'Name';
-export type SortOrder = {
-  order: SortOrderOrder;
-  sort: SortOrderSort;
-};
-export function sortRepos(repos: RepoType[], sorting: SortOrder): RepoType[] {
+export function sortRepos(repos: RepoType[], sorting: Sorting): RepoType[] {
   const sorted = repos.sort((a, b) => {
     const langA = Object.keys(a.languages)[0];
     const langB = Object.keys(b.languages)[0];
-    switch (sorting.sort) {
+    switch (sorting.type) {
       case 'Language':
         if (!langA) return 1;
         if (!langB) return -1;

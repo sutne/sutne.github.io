@@ -1,16 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 
 import { useApp } from 'providers/app-provider';
-import { useMainTheme } from 'providers/main-theme-provider';
 
 import { IconAnimationWrapper } from './animated/icon-animation-wrapper';
 
 export function AppIcon(props: { name: string; onTap?: () => void }) {
-  const { theme } = useMainTheme();
   const navigate = useNavigate();
+  const theme = useTheme();
   const { getIconRef, setIsOpen } = useApp();
+
   const iconRef = getIconRef(props.name);
 
   const onClick = () => {

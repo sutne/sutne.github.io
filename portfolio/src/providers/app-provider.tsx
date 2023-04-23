@@ -30,7 +30,7 @@ export function AppProvider(props: { children: JSX.Element }) {
     const ref = iconReferences.get(name);
     if (ref !== undefined) return ref;
     const newRef = React.createRef<HTMLImageElement>();
-    setIconReferences(new Map(iconReferences.set(name, newRef)));
+    setIconReferences(iconReferences.set(name, newRef));
     return newRef;
   };
 

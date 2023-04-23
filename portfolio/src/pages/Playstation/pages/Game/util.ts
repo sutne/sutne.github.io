@@ -1,6 +1,5 @@
 import { Trophy } from 'pages/Playstation/service/types';
-
-import { Sorting } from './providers/sort-provider';
+import { Sorting } from 'providers/sort-provider';
 
 export function sortTrophies(trophies: Trophy[], sorting: Sorting): Trophy[] {
   const typeValues = {

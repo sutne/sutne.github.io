@@ -3,6 +3,7 @@ import { Box, Typography } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 import { AppContent } from 'components/app-content';
+import { SortProvider } from 'providers/sort-provider';
 import { darkTheme } from 'themes/darkTheme';
 import { lightTheme } from 'themes/lightTheme';
 
@@ -72,7 +73,9 @@ export function GitHub() {
         <Typography variant='h3' sx={{ margin: '12mm 0 6mm 0' }}>
           My Repositories
         </Typography>
-        <RepoList />
+        <SortProvider defaultSorting={{ type: 'Updated', order: 'asc' }}>
+          <RepoList />
+        </SortProvider>
       </Box>
     </AppContent>
   );
