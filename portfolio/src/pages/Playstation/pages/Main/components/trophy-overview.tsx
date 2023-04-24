@@ -11,7 +11,11 @@ export function TrophyOverview(props: { profile: Profile }) {
     const count = props.profile.trophySummary.earned[type];
     return (
       <Grid item xs={3} sm={2}>
-        <TrophyWithCount type={type} count={count} />
+        <TrophyWithCount
+          type={type}
+          count={count}
+          fontSize={{ xs: '14px', sm: '18px', md: '24px' }}
+        />
       </Grid>
     );
   };

@@ -7,6 +7,11 @@ export function TrophyLevel(props: { level: number }) {
   const icon = require(`../../../assets/levels/${getTrophyLevelImage(
     props.level,
   )}`);
+
+  const shadow = {
+    xs: 'drop-shadow(0 1px 2px rgba(0,0,0,50%))',
+    sm: 'drop-shadow(0 3px 5px rgba(0,0,0,50%))',
+  };
   const sx = getSx();
   return (
     <Box sx={sx.container}>
@@ -26,15 +31,15 @@ export function TrophyLevel(props: { level: number }) {
       image: {
         width: '100%',
         maxWidth: { xs: '80px', sm: '120px' },
-        filter: 'drop-shadow(0 3px 5px rgba(0,0,0,50%))',
-        WebkitFilter: 'drop-shadow(0 3px 5px rgba(0,0,0,50%))',
+        filter: shadow,
+        WebkitFilter: shadow,
       },
       text: {
         position: 'relative',
         top: { xs: '0', sm: '-10px' },
         textAlign: 'center',
         fontWeight: 300,
-        fontSize: { xs: '10px', sm: '18px', md: '24px' },
+        fontSize: { xs: '14px', sm: '18px', md: '24px' },
       },
     };
   }

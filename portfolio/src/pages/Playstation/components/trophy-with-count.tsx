@@ -8,12 +8,17 @@ export function TrophyWithCount(props: {
   count: number;
   hideZero?: boolean;
   hide?: boolean;
+  fontSize?: any;
 }) {
   const image = require(`../assets/trophies/${props.type}.png`);
   const hide = props.hideZero && props.count === 0;
   const hideText =
     props.hideZero && (props.type === 'platinum' || props.count === 0);
 
+  const shadow = {
+    xs: 'drop-shadow(0 1px 2px rgba(0,0,0,50%))',
+    sm: 'drop-shadow(0 3px 5px rgba(0,0,0,50%))',
+  };
   const sx = getSx();
   return (
     <Box sx={sx.container}>
@@ -37,8 +42,8 @@ export function TrophyWithCount(props: {
           maxWidth: { xs: '80px', sm: '120px' },
         },
         !hide && {
-          WebkitFilter: 'drop-shadow(0 3px 5px rgba(0,0,0,50%))',
-          filter: 'drop-shadow(0 3px 5px rgba(0,0,0,50%))',
+          WebkitFilter: shadow,
+          filter: shadow,
         },
       ],
       text: {
@@ -47,7 +52,7 @@ export function TrophyWithCount(props: {
         top: { xs: '0', sm: '-10px' },
         textAlign: 'center',
         fontWeight: 300,
-        fontSize: { xs: '10px', sm: '18px', md: '24px' },
+        fontSize: props.fontSize ?? { xs: '10px', sm: '18px', md: '24px' },
       },
     };
   }

@@ -9,6 +9,14 @@ export function Trophy(props: { trophy: Trophy }) {
   const trophyType = hideDetails ? 'hidden' : props.trophy.type;
   const trophyIcon = require(`../../../assets/trophies/${trophyType}.png`);
 
+  const iconShadow = {
+    xs: 'drop-shadow(0 1px 2px rgba(0,0,0,50%))',
+    sm: 'drop-shadow(0 3px 6px rgba(0,0,0,50%))',
+  };
+  const trophyShadow = {
+    xs: 'drop-shadow(0 1px 2px rgba(0,0,0,50%))',
+    sm: 'drop-shadow(0 2px 3px rgba(0,0,0,50%))',
+  };
   const sx = getSx();
   return (
     <>
@@ -54,8 +62,8 @@ export function Trophy(props: { trophy: Trophy }) {
           alignSelf: 'center',
           objectFit: 'contain',
           borderRadius: { xs: '8px', sm: '16px' },
-          filter: 'drop-shadow(0 3px 6px rgba(0,0,0,50%))',
-          WebkitFilter: 'drop-shadow(0 3px 6px rgba(0,0,0,50%))',
+          filter: iconShadow,
+          WebkitFilter: iconShadow,
           opacity: 1,
         },
         !props.trophy.isEarned && {
@@ -90,8 +98,8 @@ export function Trophy(props: { trophy: Trophy }) {
         height: { xs: '1.5rem', sm: '2.5rem' },
         width: { xs: '1.5rem', sm: '2.5rem' },
         objectFit: 'contain',
-        WebkitFilter: 'drop-shadow(0 2px 3px #888)',
-        filter: 'drop-shadow(0 2px 3px #888)',
+        WebkitFilter: trophyShadow,
+        filter: trophyShadow,
       },
       rarity: {
         fontSize: { xs: '0.7rem', sm: '1.2rem' },
