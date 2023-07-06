@@ -1,8 +1,9 @@
 import React from 'react';
-import { Stack } from '@mui/material';
+import { CircularProgress, Stack } from '@mui/material';
 
 import * as API from '../../service/api';
 import { TrophyGame } from '../../service/types';
+
 import { TrophyTitle } from './components/TrophyTitle';
 
 export function PlaystationTrophies() {
@@ -17,7 +18,7 @@ export function PlaystationTrophies() {
     getData();
   }, []);
 
-  if (!gameList.length) return <></>;
+  if (!gameList.length) return <CircularProgress />;
 
   return (
     <Stack spacing={2}>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Collapse, Stack, Typography } from '@mui/material';
 
 import { TrophyCount, TrophyType } from '../service/types';
+
 import { ProgressBar } from './progress-bar';
 import { TrophyWithCount } from './trophy-with-count';
 

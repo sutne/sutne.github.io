@@ -1,4 +1,3 @@
-export {};
 import { LanguageStatsType, RepoType } from './types';
 
 const API_URL = 'https://personal-sutne.vercel.app/api/github';

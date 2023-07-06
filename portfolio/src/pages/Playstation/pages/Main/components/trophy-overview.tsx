@@ -4,6 +4,7 @@ import { Box, Grid } from '@mui/material';
 
 import { TrophyWithCount } from '../../../components/trophy-with-count';
 import { Profile, TrophyType } from '../../../service/types';
+
 import { TrophyLevel } from './trophy-level';
 
 export function TrophyOverview(props: { profile: Profile }) {

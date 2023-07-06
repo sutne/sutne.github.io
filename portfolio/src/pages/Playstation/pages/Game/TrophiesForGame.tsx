@@ -1,11 +1,12 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Stack } from '@mui/material';
+import { CircularProgress, Stack } from '@mui/material';
 
 import { SortProvider } from 'providers/sort-provider';
 
 import * as API from '../../service/api';
 import { TrophyGroup } from '../../service/types';
+
 import { Group } from './components/group';
 
 export function PlaystationTrophiesGame() {
@@ -26,6 +27,7 @@ export function PlaystationTrophiesGame() {
     getData();
   }, []);
 
+  if (!groups.length) return <CircularProgress />;
   return (
     <Stack spacing={2}>
       {groups.map((group, i) => (

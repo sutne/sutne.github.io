@@ -13,6 +13,7 @@ import {
 
 import { LanguageColorMap, RepoType } from '../service/types';
 import { toTimeDiffString } from '../util';
+
 import { RepoCard } from './card';
 import { LanguageBar } from './language-bar';
 

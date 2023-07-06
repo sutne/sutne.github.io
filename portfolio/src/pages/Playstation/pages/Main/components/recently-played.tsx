@@ -3,6 +3,7 @@ import { Grid } from '@mui/material';
 
 import * as API from '../../../service/api';
 import { RecentGame } from '../../../service/types';
+
 import { GameCard } from './game-card';
 
 export function RecentlyPlayed() {

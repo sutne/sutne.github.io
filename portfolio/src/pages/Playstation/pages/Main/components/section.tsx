@@ -4,7 +4,6 @@ import { Typography } from '@mui/material';
 export function Section(props: {
   title: string;
   children: JSX.Element | JSX.Element[];
-  padding?: string;
 }) {
   const sx = getSx();
   return (

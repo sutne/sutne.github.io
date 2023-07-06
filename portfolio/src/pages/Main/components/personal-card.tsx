@@ -29,7 +29,7 @@ export function PersonalCard() {
               Sivert Utne
             </Typography>
             <Typography variant='body1' color='text.secondary'>
-              Completing my M.Sc Computer Science Degree at NTNU in Trondheim
+              Consultant at Bouvet ASA
             </Typography>
           </Box>
         </Grid>

@@ -2,7 +2,7 @@ import { Profile, RecentGame, TrophyGame, TrophyGroup } from './types';
 
 const BASE_URL = 'https://personal-sutne.vercel.app/api/playstation';
 
-export async function getProfile(): Promise<Profile> {
+export async function getProfile(): Promise<Profile | undefined> {
   const response = await fetch(`${BASE_URL}/profile`);
   const data = await response.json();
   return data;

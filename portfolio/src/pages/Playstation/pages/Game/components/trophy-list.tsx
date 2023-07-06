@@ -6,6 +6,7 @@ import { useSorting } from 'providers/sort-provider';
 
 import { Trophy } from '../../../service/types';
 import { sortTrophies } from '../util';
+
 import { Trophy as TrophyComp } from './trophy';
 
 export function TrophyList(props: { list: Trophy[] }) {

@@ -55,19 +55,14 @@
           "error",
           {
             "groups": [
-              // Packages `react` related packages come first.
+              // Packages and `react` come first.
               ["^react", "^@\\w"],
               // Internal packages.
               ["^\\w"],
-              // Parent imports. Put `..` last.
-              // Other relative imports. Put same-folder imports and `.` last.
-              [
-                "^\\.\\.(?!/?$)",
-                "^\\.\\./?$",
-                "^\\./(?=.*/)(?!/?$)",
-                "^\\.(?!/?$)",
-                "^\\./?$"
-              ],
+              // Parent imports.
+              ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+              // Same-folder imports.
+              ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
               // Side effect imports.
               ["^\\u0000"]
             ]

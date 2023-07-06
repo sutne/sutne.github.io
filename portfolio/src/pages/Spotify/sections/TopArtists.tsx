@@ -1,4 +1,5 @@
 import React from 'react';
+import { CircularProgress } from '@mui/material';
 
 import { ItemCard } from '../components/item-card';
 import { ItemRow } from '../components/item-row';
@@ -17,7 +18,7 @@ export function TopArtists() {
     getTracks();
   }, []);
 
-  if (!artists) return <></>;
+  if (!artists.length) return <CircularProgress />;
   return (
     <>
       <SectionTitle title='Top Artists' />

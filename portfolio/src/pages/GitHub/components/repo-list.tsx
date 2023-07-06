@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack } from '@mui/material';
+import { CircularProgress, Stack } from '@mui/material';
 
 import { SortButton } from 'components/sort-button';
 import { useSorting } from 'providers/sort-provider';
@@ -7,6 +7,7 @@ import { useSorting } from 'providers/sort-provider';
 import * as API from '../service/api';
 import { RepoType } from '../service/types';
 import { sortRepos } from '../util';
+
 import { Repository } from './repo';
 
 export function RepoList() {
@@ -26,6 +27,7 @@ export function RepoList() {
     setRepos((repos) => sortRepos([...repos], sorting));
   }, [sorting]);
 
+  if (repos.length === 0) return <CircularProgress />;
   return (
     <>
       <Stack

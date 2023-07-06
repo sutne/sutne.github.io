@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Box, Stack } from '@mui/material';
+import { Box } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 import { AppContent } from 'components/app-content';
@@ -38,8 +38,6 @@ const playstationLightTheme = responsiveFontSizes(
 );
 
 export function Playstation() {
-  const tokenExpired = new Date() > new Date('31-5-2023');
-
   const sx = getSx();
   return (
     <AppContent
@@ -49,19 +47,15 @@ export function Playstation() {
       fillWidth
     >
       <Box sx={sx.container}>
-        {tokenExpired ? (
-          <PsnProfilesCard />
-        ) : (
-          <Routes>
-            <Route path='/' element={<Main />} />
-            <Route path='/trophies' element={<PlaystationTrophies />} />
-            <Route
-              path='/trophies/game/:gameId/platform/:platform'
-              element={<PlaystationTrophiesGame />}
-            />
-            <Route path='/*' element={<>404</>} />
-          </Routes>
-        )}
+        <Routes>
+          <Route path='/' element={<Main />} />
+          <Route path='/trophies' element={<PlaystationTrophies />} />
+          <Route
+            path='/trophies/game/:gameId/platform/:platform'
+            element={<PlaystationTrophiesGame />}
+          />
+          <Route path='/*' element={<>404</>} />
+        </Routes>
       </Box>
     </AppContent>
   );
@@ -74,20 +68,4 @@ export function Playstation() {
       },
     };
   }
-}
-
-function PsnProfilesCard() {
-  return (
-    <Stack>
-      <Box
-        style={{
-          minWidth: '500px',
-          maxWidth: '100%',
-          borderRadius: '8px',
-        }}
-        component='img'
-        src='https://card.psnprofiles.com/1/Sutne_.png'
-      />
-    </Stack>
-  );
 }

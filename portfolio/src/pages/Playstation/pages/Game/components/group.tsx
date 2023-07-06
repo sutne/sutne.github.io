@@ -2,6 +2,7 @@ import React from 'react';
 
 import { TrophyProgressCard } from '../../../components/trophy-progress-card';
 import { TrophyGroup } from '../../../service/types';
+
 import { TrophyList } from './trophy-list';
 
 export function Group(props: { group: TrophyGroup; hasGroups?: boolean }) {

@@ -61,14 +61,15 @@ export function Trophy(props: { trophy: Trophy }) {
           width: height,
           alignSelf: 'center',
           objectFit: 'contain',
-          borderRadius: { xs: '8px', sm: '16px' },
+          borderRadius: { xs: '4px', sm: '8px' },
+          filter: 'grayscale(100%)',
+          WebkitFilter: 'grayscale(100%)',
+          opacity: 0.1,
+        },
+        props.trophy.isEarned && {
           filter: iconShadow,
           WebkitFilter: iconShadow,
           opacity: 1,
-        },
-        !props.trophy.isEarned && {
-          filter: 'grayscale(100%)',
-          opacity: 0.1,
         },
       ],
       info: {

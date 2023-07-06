@@ -96,8 +96,8 @@ function AnimationTooltip() {
         between opening/closing.
       </Typography>
       <Typography>
-        When enabled apps will open from their icon onto the screen to emulate
-        how it would appear on a phone.
+        When enabled, apps are animated from their icon onto the screen to
+        emulate how it would appear on a phone.
       </Typography>
       <Typography>
         Setting does not affect animations when data is loaded/unloaded.

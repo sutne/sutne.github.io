@@ -2,6 +2,7 @@ import React from 'react';
 
 import * as API from '../service/api';
 import { NowPlayingType } from '../service/types';
+
 import { useMusicPlayer } from './music-player';
 
 const NowPlayingContext = React.createContext<

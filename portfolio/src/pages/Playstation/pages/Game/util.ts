@@ -29,25 +29,27 @@ export function sortTrophies(trophies: Trophy[], sorting: Sorting): Trophy[] {
 
   const sorted = trophies.sort((a, b) => {
     // negative if a should be before b
+    let diff = undefined;
     switch (sorting.type) {
-      case 'Default':
-        return compareId(a, b);
-
       case 'Earned Time':
-        const diff = compareEarnedTime(a, b);
-        if (diff === undefined) return -compareRarity(a, b);
-        if (diff === 0) return -compareGrade(a, b);
+        diff = compareEarnedTime(a, b);
+        if (diff === undefined) diff = -compareRarity(a, b);
+        if (diff === 0) diff = compareGrade(a, b);
         return diff;
 
       case 'Rarity':
-        const rarityDiff = compareRarity(a, b);
-        if (rarityDiff !== 0) return rarityDiff;
-        return compareGrade(a, b);
+        diff = compareRarity(a, b);
+        if (diff === 0) diff = compareGrade(a, b);
+        return diff;
 
       case 'Grade':
-        const gradeDiff = compareGrade(a, b);
-        if (gradeDiff !== 0) return gradeDiff;
-        return compareId(a, b);
+        diff = compareGrade(a, b);
+        if (diff === 0) diff = compareId(a, b);
+        return diff;
+
+      case 'Default':
+        diff = compareId(a, b);
+        return diff;
 
       default:
         return 0;

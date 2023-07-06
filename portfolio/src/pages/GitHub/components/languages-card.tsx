@@ -1,8 +1,9 @@
 import React from 'react';
-import { Stack, Typography } from '@mui/material';
+import { CircularProgress, Stack, Typography } from '@mui/material';
 
 import * as API from '../service/api';
 import { LanguageStatsType } from '../service/types';
+
 import { RepoCard } from './card';
 import { LanguageBar } from './language-bar';
 
@@ -18,7 +19,7 @@ export function LanguagesCard() {
     getData();
   }, []);
 
-  if (!data) return <></>;
+  if (!data) return <CircularProgress />;
 
   return (
     <RepoCard>

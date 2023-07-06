@@ -1,4 +1,5 @@
 import React from 'react';
+import { CircularProgress } from '@mui/material';
 
 import { ItemCard } from '../components/item-card';
 import { ItemRow } from '../components/item-row';
@@ -25,7 +26,7 @@ export function RecentlyPlayed() {
     getTracks();
   }, [track]); // Refresh when the current track changes
 
-  if (!tracks) return <></>;
+  if (!tracks.length) return <CircularProgress />;
   return (
     <>
       <SectionTitle title='Recently Played' />
