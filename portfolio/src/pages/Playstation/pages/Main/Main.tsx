@@ -17,17 +17,16 @@ export function Main() {
   React.useEffect(() => {
     const getData = async () => {
       const response = await API.getProfile();
-      if (!response || !response.onlineId || !response.avatar) {
+      if (!response || !response.onlineId) {
         setHasError(true);
-        return;
       }
       setProfile(response);
     };
     getData();
   }, []);
 
-  if (!profile) return <CircularProgress />;
   if (hasError) return <PsnProfilesCard />;
+  if (!profile) return <CircularProgress />;
   return (
     <>
       <ProfileOverview profile={profile} />
