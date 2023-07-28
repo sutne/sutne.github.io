@@ -30,20 +30,46 @@ export function Shimmer() {
             ${alpha(theme.palette.text.primary, 0)} 80%
           );`,
           animation: 'shimmering 1.5s infinite',
+          '@keyframes shimmering': {
+            '0%': {
+              opacity: 0,
+              transform: 'translateX(-100%)',
+            },
+            '40%': {
+              opacity: 1,
+            },
+            '100%': {
+              opacity: 0,
+              transform: 'translateX(200%)',
+            },
+          },
         },
-        '@keyframes shimmering': {
-          '0%': {
-            opacity: 0,
-            transform: 'translateX(-100%)',
-          },
-          '40%': {
-            opacity: 1,
-          },
-          '100%': {
-            opacity: 0,
-            transform: 'translateX(200%)',
-          },
-        },
+      },
+    };
+  }
+}
+
+export function ShimmerText(props: { fontSize: string; numLines: number }) {
+  const lines = [];
+
+  const sx = getSx();
+  for (let i = 0; i < props.numLines; i++) {
+    lines.push(
+      <Box
+        sx={{ ...sx.container, width: i + 1 < props.numLines ? '100%' : '70%' }}
+      >
+        <Shimmer />
+      </Box>,
+    );
+  }
+  return <>{lines}</>;
+  function getSx() {
+    return {
+      container: {
+        height: props.fontSize,
+        borderRadius: props.fontSize,
+        marginTop: `calc(${props.fontSize} * 0.5)`,
+        overflow: 'hidden',
       },
     };
   }

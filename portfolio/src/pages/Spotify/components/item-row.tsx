@@ -1,44 +1,53 @@
 import React from 'react';
-import { Box, Stack, useTheme } from '@mui/material';
+import { alpha, Box, Stack, useTheme } from '@mui/material';
 
-export function ItemRow(props: { children: JSX.Element[] }) {
-  const theme = useTheme();
-
-  const style = {
-    overflowX: 'auto',
-    paddingY: '0.5em',
-    '&::-webkit-scrollbar': {
-      height: { xs: '0.4em', sm: '0.8em' },
-      bgcolor: 'rgba(0,0,0,0)',
-    },
-    '&::-webkit-scrollbar-thumb': {
-      bgcolor: 'background.paper',
-      borderRadius: { xs: '0.4em', sm: '0.8em' },
-    },
-  };
-  const container = {
-    position: 'relative',
-    marginRight: '-4mm',
-    '&:after': {
-      content: '""',
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      zIndex: 1,
-      pointerEvents: 'none',
-      width: '100%',
-      height: '95%',
-      backgroundImage: `linear-gradient(to right, 
-        ${theme.palette.background.default}, 
-        rgba(0, 0, 0, 0) 1% 98%, 
-        ${theme.palette.background.default})`,
-    },
-  };
+export function ItemRow(props: { children: JSX.Element[] | JSX.Element }) {
+  const sx = getSx();
   return (
-    <Box sx={container}>
-      <Stack direction='row' spacing={3} sx={style}>
+    <Box sx={sx.container}>
+      <Stack direction='row' spacing={3} sx={sx.row}>
         {props.children}
       </Stack>
     </Box>
   );
+
+  function getSx() {
+    const theme = useTheme();
+    return {
+      container: {
+        overflow: 'visible',
+        position: 'relative',
+        marginRight: '-24px',
+        marginLeft: '-24px',
+        '&:after': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          zIndex: 1,
+          pointerEvents: 'none',
+          width: '100%',
+          height: '95%',
+          backgroundImage: `linear-gradient(to right,
+        ${theme.palette.background.default},
+        rgba(0, 0, 0, 0) 1% 98%,
+        ${theme.palette.background.default})`,
+        },
+      },
+      row: {
+        overflowX: 'auto',
+        paddingX: '24px',
+        paddingY: '0.5em',
+        '&::-webkit-scrollbar': {
+          height: { xs: '0.4em', sm: '0.8em' },
+          borderRadius: { xs: '0.4em', sm: '0.8em' },
+          bgcolor: alpha(theme.palette.background.paper, 0.3),
+        },
+        '&::-webkit-scrollbar-thumb': {
+          bgcolor: 'background.paper',
+          borderRadius: { xs: '0.4em', sm: '0.8em' },
+        },
+      },
+    };
+  }
 }

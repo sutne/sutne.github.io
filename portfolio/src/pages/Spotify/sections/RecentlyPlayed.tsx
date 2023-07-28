@@ -1,5 +1,4 @@
 import React from 'react';
-import { CircularProgress } from '@mui/material';
 
 import { ItemCard } from '../components/item-card';
 import { ItemRow } from '../components/item-row';
@@ -10,6 +9,15 @@ import * as API from '../service/api';
 import { TrackType } from '../service/types';
 
 export function RecentlyPlayed() {
+  const unloaded = new Array<TrackType>(12).fill({
+    title: '',
+    artists: [] as string[],
+    image: '',
+    sample: '',
+    href: '',
+    isExplicit: false,
+    isLocal: false,
+  });
   const [tracks, setTracks] = React.useState<TrackType[]>([]);
 
   const { addSample } = useMusicPlayer();
@@ -17,6 +25,7 @@ export function RecentlyPlayed() {
 
   React.useEffect(() => {
     const getTracks = async () => {
+      setTracks(unloaded);
       const response = await API.getRecentlyPlayed();
       setTracks(response);
       for (const track of response) {
@@ -26,7 +35,6 @@ export function RecentlyPlayed() {
     getTracks();
   }, [track]); // Refresh when the current track changes
 
-  if (!tracks.length) return <CircularProgress />;
   return (
     <>
       <SectionTitle title='Recently Played' />

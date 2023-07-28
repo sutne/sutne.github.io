@@ -64,7 +64,6 @@ export function TrophyProgressCard(props: {
     </>
   );
   function getSx() {
-    const height = { xs: '26mm', sm: '40mm', md: '60mm' };
     return {
       container: {
         position: 'relative',
@@ -76,8 +75,9 @@ export function TrophyProgressCard(props: {
       },
       image: {
         position: 'relative',
-        height: height,
-        width: height,
+        minWidth: { xs: '26mm', sm: '40mm', md: '60mm' },
+        maxWidth: { xs: '26mm', sm: '40mm', md: '60mm' },
+        aspectRatio: 1,
         objectFit: 'contain',
         borderRadius: { xs: '8px', sm: '16px' },
         alignSelf: 'center',

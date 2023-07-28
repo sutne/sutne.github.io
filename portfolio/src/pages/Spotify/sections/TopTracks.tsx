@@ -1,5 +1,4 @@
 import React from 'react';
-import { CircularProgress } from '@mui/material';
 
 import { ItemCard } from '../components/item-card';
 import { ItemRow } from '../components/item-row';
@@ -9,12 +8,22 @@ import * as API from '../service/api';
 import { TrackType } from '../service/types';
 
 export function TopTracks() {
+  const unloaded = new Array<TrackType>(12).fill({
+    title: '',
+    artists: [] as string[],
+    image: '',
+    sample: '',
+    href: '',
+    isExplicit: false,
+    isLocal: false,
+  });
   const [tracks, setTracks] = React.useState<TrackType[]>([]);
 
   const { addSample } = useMusicPlayer();
 
   React.useEffect(() => {
     const getTracks = async () => {
+      setTracks(unloaded);
       const response = await API.getTopTracks();
       setTracks(response);
       for (const track of response) {
@@ -24,7 +33,6 @@ export function TopTracks() {
     getTracks();
   }, []);
 
-  if (!tracks.length) return <CircularProgress />;
   return (
     <>
       <SectionTitle title='Top Tracks' />

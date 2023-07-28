@@ -8,9 +8,9 @@ import { ItemTitle } from './item-title';
 import { SampleButton } from './sample-button';
 
 export function ItemCard(props: {
-  title: string;
-  subtitle: string;
-  image: string;
+  title?: string;
+  subtitle?: string;
+  image?: string;
   sample?: string;
 }) {
   const [isHovered, setHovered] = React.useState(false);

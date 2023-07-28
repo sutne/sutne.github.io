@@ -1,8 +1,16 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 
-export function ItemSubtitle(props: { children: string; sx?: any }) {
+import { ShimmerText } from 'components/animated/shimmer';
+
+export function ItemSubtitle(props: { children?: string; sx?: any }) {
   const sx = getSx();
+  if (!props.children)
+    return (
+      <>
+        <ShimmerText fontSize='0.8em' numLines={2} />
+      </>
+    );
   return <Typography sx={sx}>{props.children}</Typography>;
 
   function getSx() {

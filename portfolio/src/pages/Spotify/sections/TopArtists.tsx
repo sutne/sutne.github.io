@@ -1,5 +1,4 @@
 import React from 'react';
-import { CircularProgress } from '@mui/material';
 
 import { ItemCard } from '../components/item-card';
 import { ItemRow } from '../components/item-row';
@@ -8,17 +7,23 @@ import * as API from '../service/api';
 import { ArtistType } from '../service/types';
 
 export function TopArtists() {
+  const unloaded = new Array<ArtistType>(12).fill({
+    name: '',
+    genres: [] as string[],
+    image: '',
+    href: '',
+  });
   const [artists, setArtists] = React.useState<ArtistType[]>([]);
 
   React.useEffect(() => {
     const getTracks = async () => {
+      setArtists(unloaded);
       const response = await API.getTopArtists();
       setArtists(response);
     };
     getTracks();
   }, []);
 
-  if (!artists.length) return <CircularProgress />;
   return (
     <>
       <SectionTitle title='Top Artists' />
