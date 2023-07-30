@@ -6,8 +6,8 @@ export const darkTheme = createTheme(lightTheme, {
   palette: {
     mode: 'dark',
     background: {
-      default: 'rgb(24,24,28)',
-      paper: 'rgb(60,60,64)',
+      default: 'rgb(64,64,70)',
+      paper: 'rgb(72,72,80)',
     },
     text: {
       primary: 'rgba(255,255,255,80%)',

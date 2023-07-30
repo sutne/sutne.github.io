@@ -8,7 +8,7 @@ import * as API from '../service/api';
 import { TrackType } from '../service/types';
 
 export function TopTracks() {
-  const unloaded = new Array<TrackType>(12).fill({
+  const unloaded = new Array<TrackType>(15).fill({
     title: '',
     artists: [] as string[],
     image: '',
@@ -37,17 +37,15 @@ export function TopTracks() {
     <>
       <SectionTitle title='Top Tracks' />
       <ItemRow>
-        {tracks.map((track: TrackType, i: number) => {
-          return (
-            <ItemCard
-              key={i}
-              image={track.image}
-              sample={track.sample}
-              title={track.title}
-              subtitle={track.artists.join(', ')}
-            />
-          );
-        })}
+        {tracks.map((track, i) => (
+          <ItemCard
+            key={i}
+            image={track.image}
+            sample={track.sample}
+            title={track.title}
+            subtitle={track.artists.join(', ')}
+          />
+        ))}
       </ItemRow>
     </>
   );

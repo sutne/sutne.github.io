@@ -1,11 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
-import { useMainTheme } from 'providers/main-theme-provider';
-
 export function ToggleSwitch(props: { isOn: boolean; onChange: () => void }) {
-  const { themeIsDark } = useMainTheme();
-
   const IOS = getIOSStyle();
   return (
     <Box sx={IOS.container} onClick={props.onChange}>
@@ -33,11 +29,11 @@ export function ToggleSwitch(props: { isOn: boolean; onChange: () => void }) {
           borderRadius: height / 2,
           padding: '1px',
           transition: 'all 500ms',
-          bgcolor: 'grey',
-          boxShadow: 'inset 0 0 5px rgba(0, 0, 0, 1)',
+          bgcolor: 'rgb(164,164,164)',
+          boxShadow: 'inset 0 0 3px rgba(0, 0, 0, 0.5)',
         },
         props.isOn && {
-          bgcolor: themeIsDark ? '#2ECA45' : '#65C466',
+          bgcolor: '#2ECA45',
         },
       ],
       thumb: [
@@ -47,7 +43,10 @@ export function ToggleSwitch(props: { isOn: boolean; onChange: () => void }) {
           bgcolor: 'white',
           borderRadius: (height - 2) / 2,
           transition: 'all 300ms',
-          boxShadow: '0 0 5px 0 rgba(0, 0, 0, 0.5)',
+          boxShadow: `
+            inset 
+            0 -6px 8px rgba(0, 0, 0, 0.1),
+            0    0 3px rgba(0, 0, 0, 0.3)`,
         },
         props.isOn && {
           transform: `translateX(${width - height}px)`,

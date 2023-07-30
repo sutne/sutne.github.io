@@ -7,7 +7,7 @@ import * as API from '../service/api';
 import { ArtistType } from '../service/types';
 
 export function TopArtists() {
-  const unloaded = new Array<ArtistType>(12).fill({
+  const unloaded = new Array<ArtistType>(15).fill({
     name: '',
     genres: [] as string[],
     image: '',
@@ -28,16 +28,14 @@ export function TopArtists() {
     <>
       <SectionTitle title='Top Artists' />
       <ItemRow>
-        {artists.map((artist: ArtistType, i: number) => {
-          return (
-            <ItemCard
-              key={i}
-              image={artist.image}
-              title={artist.name}
-              subtitle={artist.genres.join(', ')}
-            />
-          );
-        })}
+        {artists.map((artist, i) => (
+          <ItemCard
+            key={i}
+            image={artist.image}
+            title={artist.name}
+            subtitle={artist.genres.join(', ')}
+          />
+        ))}
       </ItemRow>
     </>
   );

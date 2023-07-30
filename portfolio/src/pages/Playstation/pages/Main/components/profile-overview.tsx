@@ -21,10 +21,11 @@ export function ProfileOverview(props: { profile: Profile | undefined }) {
     }
     return <Box component='img' sx={sx.avatar} src={props.profile.avatar} />;
   };
+
   const onlineId = () => {
     if (!props.profile) {
       return (
-        <Box width='200px'>
+        <Box width='256px'>
           <ShimmerText fontSize={sx.onlineId.fontSize} width='100%' />
         </Box>
       );
