@@ -77,5 +77,6 @@ export function compare(
   if (!b) return 1;
   const aTime = new Date(a).getTime();
   const bTime = new Date(b).getTime();
-  return aTime - bTime;
+  const diff = aTime - bTime;
+  return diff != 0 ? diff : undefined;
 }
