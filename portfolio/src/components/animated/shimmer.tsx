@@ -29,7 +29,7 @@ export function Shimmer() {
             ${alpha(theme.palette.text.primary, 0.05)} 60%,
             ${alpha(theme.palette.text.primary, 0)} 80%
           );`,
-          animation: 'shimmering 1.5s infinite',
+          animation: 'shimmering 1.2s infinite',
           '@keyframes shimmering': {
             '0%': {
               opacity: 0,
@@ -79,11 +79,7 @@ export function ShimmerText(props: {
   }
 }
 
-export function ShimmerImage(props: {
-  width: string | any;
-  aspectRatio?: number;
-  borderRadius?: string | any;
-}) {
+export function ShimmerImage(props: { width: string | any; sx?: any }) {
   const sx = getSx();
   return (
     <>
@@ -94,14 +90,16 @@ export function ShimmerImage(props: {
   );
   function getSx() {
     return {
-      container: {
-        minWidth: props.width,
-        aspectRatio: props.aspectRatio ?? 1,
-        borderRadius: props.borderRadius ?? '8px',
-        lineHeight: 0,
-        fontSize: 0,
-        overflow: 'hidden',
-      },
+      container: [
+        {
+          minWidth: props.width,
+          aspectRatio: 1,
+          borderRadius: '8px',
+          lineHeight: 0,
+          fontSize: 0,
+          overflow: 'hidden',
+        },
+      ].concat(props.sx ?? []),
     };
   }
 }

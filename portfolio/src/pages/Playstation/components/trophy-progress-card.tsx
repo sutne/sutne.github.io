@@ -44,8 +44,11 @@ export function TrophyProgressCard(props: {
     if (props.image === '') {
       return (
         <ShimmerImage
-          width={sx.image.width}
-          borderRadius={sx.image.borderRadius}
+          width={sx.image.minWidth}
+          sx={{
+            borderRadius: sx.image.borderRadius,
+            boxShadow: sx.image.boxShadow,
+          }}
         />
       );
     }
@@ -101,11 +104,13 @@ export function TrophyProgressCard(props: {
       },
       image: {
         position: 'relative',
-        width: { xs: '26mm', sm: '40mm', md: '225px' },
+        minWidth: { xs: '26mm', sm: '40mm', md: '225px' },
+        maxWidth: { xs: '26mm', sm: '40mm', md: '225px' },
         aspectRatio: 1,
         objectFit: 'contain',
         borderRadius: { xs: '8px', sm: '16px' },
         alignSelf: 'center',
+        boxShadow: '0 0 8px 0 rgba(0, 0, 0, 0.2)',
       },
       info: {
         position: 'relative',

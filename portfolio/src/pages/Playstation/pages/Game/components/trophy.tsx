@@ -45,7 +45,6 @@ export function Trophy(props: { trophy: Trophy }) {
     </>
   );
   function getSx() {
-    const height = { xs: '22mm', sm: '35mm' };
     return {
       container: {
         width: '100%',
@@ -57,14 +56,15 @@ export function Trophy(props: { trophy: Trophy }) {
       },
       icon: [
         {
-          height: height,
-          width: height,
+          minWidth: { xs: '22mm', sm: '35mm' },
+          maxWidth: { xs: '22mm', sm: '35mm' },
+          aspectRatio: 1,
           alignSelf: 'center',
           objectFit: 'contain',
           borderRadius: { xs: '4px', sm: '8px' },
           filter: 'grayscale(100%)',
           WebkitFilter: 'grayscale(100%)',
-          opacity: 0.1,
+          opacity: 0.075,
         },
         props.trophy.isEarned && {
           filter: iconShadow,
@@ -95,13 +95,19 @@ export function Trophy(props: { trophy: Trophy }) {
       stats: {
         // width: '100%',
       },
-      trophyIcon: {
-        height: { xs: '1.5rem', sm: '2.5rem' },
-        width: { xs: '1.5rem', sm: '2.5rem' },
-        objectFit: 'contain',
-        WebkitFilter: trophyShadow,
-        filter: trophyShadow,
-      },
+      trophyIcon: [
+        {
+          height: { xs: '1.5rem', sm: '2.5rem' },
+          width: { xs: '1.5rem', sm: '2.5rem' },
+          objectFit: 'contain',
+          WebkitFilter: trophyShadow,
+          filter: trophyShadow,
+          opacity: 1,
+        },
+        !props.trophy.isEarned && {
+          opacity: 0.2,
+        },
+      ],
       rarity: {
         fontSize: { xs: '0.7rem', sm: '1.2rem' },
         alignSelf: 'center',

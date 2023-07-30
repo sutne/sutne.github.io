@@ -13,7 +13,9 @@ export function ProfileOverview(props: { profile: Profile | undefined }) {
       return (
         <ShimmerImage
           width={sx.avatar.width}
-          borderRadius={sx.avatar.borderRadius}
+          sx={{
+            borderRadius: sx.avatar.borderRadius,
+          }}
         />
       );
     }
