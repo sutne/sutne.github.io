@@ -67,6 +67,7 @@ export function GitHub() {
         )`,
         textColor: githubDarkTheme.palette.text.primary,
       }}
+      fillWidth
     >
       <Box style={{ padding: '24px' }}>
         <LanguagesCard />

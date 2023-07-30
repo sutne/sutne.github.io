@@ -7,9 +7,9 @@ import { Profile, TrophyType } from '../../../service/types';
 
 import { TrophyLevel } from './trophy-level';
 
-export function TrophyOverview(props: { profile: Profile }) {
-  const Trophy = ({ type }: { type: TrophyType }) => {
-    const count = props.profile.trophySummary.earned[type];
+export function TrophyOverview(props: { profile: Profile | undefined }) {
+  const trophy = (type: TrophyType) => {
+    const count = props.profile?.trophySummary.earned[type] ?? 0;
     return (
       <Grid item xs={3} sm={2}>
         <TrophyWithCount
@@ -27,12 +27,14 @@ export function TrophyOverview(props: { profile: Profile }) {
     <Box sx={sx.card} onClick={() => navigate(`/Playstation/trophies`)}>
       <Grid container spacing={2} justifyContent={'center'}>
         <Grid item xs={12} md={4}>
-          <TrophyLevel level={props.profile.trophySummary.level} />
+          <TrophyLevel level={props.profile?.trophySummary.level ?? 1} />
         </Grid>
-        <Trophy type='platinum' />
-        <Trophy type='gold' />
-        <Trophy type='silver' />
-        <Trophy type='bronze' />
+        {[
+          trophy('platinum'),
+          trophy('gold'),
+          trophy('silver'),
+          trophy('bronze'),
+        ]}
       </Grid>
     </Box>
   );

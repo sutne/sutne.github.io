@@ -1,10 +1,35 @@
 import React from 'react';
-import { Avatar, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
+
+import { ShimmerImage, ShimmerText } from 'components/animated/shimmer';
 
 import { Profile } from '../../../service/types';
 
-export function ProfileOverview(props: { profile: Profile }) {
+export function ProfileOverview(props: { profile: Profile | undefined }) {
   const sx = getSx();
+
+  const avatar = () => {
+    if (!props.profile) {
+      return (
+        <ShimmerImage
+          width={sx.avatar.width}
+          borderRadius={sx.avatar.borderRadius}
+        />
+      );
+    }
+    return <Box component='img' sx={sx.avatar} src={props.profile.avatar} />;
+  };
+  const onlineId = () => {
+    if (!props.profile) {
+      return (
+        <Box width='200px'>
+          <ShimmerText fontSize={sx.onlineId.fontSize} width='100%' />
+        </Box>
+      );
+    }
+    return <Typography sx={sx.onlineId}>{props.profile.onlineId}</Typography>;
+  };
+
   return (
     <Stack
       direction={'row'}
@@ -12,8 +37,8 @@ export function ProfileOverview(props: { profile: Profile }) {
       alignItems={'center'}
       justifyContent={'center'}
     >
-      <Avatar sx={sx.avatar} src={props.profile.avatar} />
-      <Typography sx={sx.onlineId}>{props.profile.onlineId}</Typography>
+      {avatar()}
+      {onlineId()}
     </Stack>
   );
 
@@ -21,7 +46,8 @@ export function ProfileOverview(props: { profile: Profile }) {
     return {
       avatar: {
         width: { xs: '80px', sm: '120px' },
-        height: { xs: '80px', sm: '120px' },
+        borderRadius: { xs: '80px', sm: '120px' },
+        aspectRatio: 1,
       },
       onlineId: {
         alignSelf: 'center',

@@ -1,5 +1,4 @@
 import React from 'react';
-import { CircularProgress } from '@mui/material';
 
 import * as API from '../../service/api';
 import { Profile } from '../../service/types';
@@ -19,14 +18,14 @@ export function Main() {
       const response = await API.getProfile();
       if (!response || !response.onlineId) {
         setHasError(true);
+      } else {
+        setProfile(response);
       }
-      setProfile(response);
     };
     getData();
   }, []);
 
   if (hasError) return <PsnProfilesCard />;
-  if (!profile) return <CircularProgress />;
   return (
     <>
       <ProfileOverview profile={profile} />

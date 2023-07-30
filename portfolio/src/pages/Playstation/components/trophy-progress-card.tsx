@@ -1,6 +1,8 @@
 import React from 'react';
 import { Box, Collapse, Stack, Typography } from '@mui/material';
 
+import { ShimmerImage, ShimmerText } from 'components/animated/shimmer';
+
 import { TrophyCount, TrophyType } from '../service/types';
 
 import { ProgressBar } from './progress-bar';
@@ -16,9 +18,10 @@ export function TrophyProgressCard(props: {
   children?: JSX.Element;
   expanded?: boolean;
 }) {
+  const sx = getSx();
   const [expanded, setExpanded] = React.useState(props.expanded ?? false);
 
-  const TrophyCount = ({ type }: { type: TrophyType }) => {
+  const trophyCount = (type: TrophyType) => {
     const count = props.earnedCount[type];
     return (
       <TrophyWithCount
@@ -30,30 +33,53 @@ export function TrophyProgressCard(props: {
     );
   };
 
-  const onClick = () => {
-    if (props.expanded) return;
-    setExpanded((prev) => !prev);
+  const title = () => {
+    if (props.title === '') {
+      return <ShimmerText fontSize={sx.title.fontSize} numLines={1} />;
+    }
+    return <Typography sx={sx.title}>{props.title}</Typography>;
   };
 
-  const sx = getSx();
+  const image = () => {
+    if (props.image === '') {
+      return (
+        <ShimmerImage
+          width={sx.image.width}
+          borderRadius={sx.image.borderRadius}
+        />
+      );
+    }
+    return <Box sx={sx.image} component='img' src={props.image} />;
+  };
+
+  const onClick = () => {
+    if (props.title === '') return;
+    if (props.expanded) return;
+    setExpanded((isExpanded) => !isExpanded);
+  };
+
   return (
     <>
       <Stack sx={sx.container} direction='row' onClick={onClick}>
-        <Box sx={sx.image} component='img' src={props.image} />
+        {image()}
         {props.platform && (
           <Typography sx={sx.platform}>{props.platform}</Typography>
         )}
         <Stack sx={sx.info}>
-          <Typography sx={sx.title}>{props.title}</Typography>
+          {title()}
           <Stack sx={sx.trophyCount} direction='row' spacing={0}>
-            <TrophyCount type='platinum' />
-            <TrophyCount type='gold' />
-            <TrophyCount type='silver' />
-            <TrophyCount type='bronze' />
+            {[
+              trophyCount('platinum'),
+              trophyCount('gold'),
+              trophyCount('silver'),
+              trophyCount('bronze'),
+            ]}
           </Stack>
-          <Box sx={sx.progress}>
-            <ProgressBar progress={props.progress} />
-          </Box>
+          {props.title !== '' && (
+            <Box sx={sx.progress}>
+              <ProgressBar progress={props.progress} />
+            </Box>
+          )}
         </Stack>
       </Stack>
       {props.children && (
@@ -70,13 +96,12 @@ export function TrophyProgressCard(props: {
         overflow: 'hidden',
         bgcolor: 'background.paper',
         borderRadius: { xs: '8px', sm: '16px' },
-        cursor: props.expanded ? 'default' : 'pointer',
+        cursor: props.expanded || props.title === '' ? 'default' : 'pointer',
         boxShadow: '0 0 8px 0 rgba(0, 0, 0, 0.2)',
       },
       image: {
         position: 'relative',
-        minWidth: { xs: '26mm', sm: '40mm', md: '60mm' },
-        maxWidth: { xs: '26mm', sm: '40mm', md: '60mm' },
+        width: { xs: '26mm', sm: '40mm', md: '225px' },
         aspectRatio: 1,
         objectFit: 'contain',
         borderRadius: { xs: '8px', sm: '16px' },

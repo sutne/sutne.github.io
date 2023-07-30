@@ -38,12 +38,6 @@ export function TrophyList(props: { list: Trophy[] }) {
     return {
       trophyList: {
         padding: { md: '0 64px' },
-        '&:after': {
-          content: '""',
-          display: 'block',
-          width: '100%',
-          height: '64px',
-        },
       },
       buttonRow: {
         padding: '8px 16px',

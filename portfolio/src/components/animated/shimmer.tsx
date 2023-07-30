@@ -5,18 +5,18 @@ export function Shimmer() {
   const sx = getSx();
   return (
     <>
-      <Box sx={sx.container} />
+      <Box sx={sx.shimmering} />
     </>
   );
   function getSx() {
     const theme = useTheme();
     return {
-      container: {
+      shimmering: {
         width: '100%',
         height: '100%',
         position: 'relative',
         overflow: 'hidden',
-        backgroundColor: alpha(theme.palette.background.paper, 0.5),
+        backgroundColor: alpha(theme.palette.text.primary, 0.01),
         '&::after': {
           content: '""',
           position: 'absolute',
@@ -49,15 +49,19 @@ export function Shimmer() {
   }
 }
 
-export function ShimmerText(props: { fontSize: string; numLines: number }) {
+export function ShimmerText(props: {
+  fontSize: string | any;
+  numLines?: number;
+  width?: string;
+}) {
   const lines = [];
+  const numLines = props.numLines ?? 1;
 
   const sx = getSx();
-  for (let i = 0; i < props.numLines; i++) {
+  for (let i = 0; i < numLines; i++) {
+    const width = props.width ?? i + 1 < numLines ? '100%' : '70%';
     lines.push(
-      <Box
-        sx={{ ...sx.container, width: i + 1 < props.numLines ? '100%' : '70%' }}
-      >
+      <Box sx={{ ...sx.container, width: width }}>
         <Shimmer />
       </Box>,
     );
@@ -69,6 +73,33 @@ export function ShimmerText(props: { fontSize: string; numLines: number }) {
         height: props.fontSize,
         borderRadius: props.fontSize,
         marginTop: `calc(${props.fontSize} * 0.5)`,
+        overflow: 'hidden',
+      },
+    };
+  }
+}
+
+export function ShimmerImage(props: {
+  width: string | any;
+  aspectRatio?: number;
+  borderRadius?: string | any;
+}) {
+  const sx = getSx();
+  return (
+    <>
+      <Box sx={sx.container}>
+        <Shimmer />
+      </Box>
+    </>
+  );
+  function getSx() {
+    return {
+      container: {
+        minWidth: props.width,
+        aspectRatio: props.aspectRatio ?? 1,
+        borderRadius: props.borderRadius ?? '8px',
+        lineHeight: 0,
+        fontSize: 0,
         overflow: 'hidden',
       },
     };

@@ -7,10 +7,30 @@ import { TrophyGame } from '../../service/types';
 import { TrophyTitle } from './components/TrophyTitle';
 
 export function PlaystationTrophies() {
-  const [gameList, setGameList] = React.useState<TrophyGame[]>([]);
+  const unloaded: TrophyGame[] = new Array(4).fill({
+    id: '',
+    title: '',
+    image: '',
+    platform: '',
+    trophyCount: {
+      platinum: 0,
+      gold: 0,
+      silver: 0,
+      bronze: 0,
+    },
+    earnedCount: {
+      platinum: 0,
+      gold: 0,
+      silver: 0,
+      bronze: 0,
+    },
+    progress: 0,
+  });
+  const [gameList, setGameList] = React.useState<TrophyGame[]>(unloaded);
 
   React.useEffect(() => {
     const getData = async () => {
+      setGameList(unloaded);
       const response = await API.getGameList();
       if (!response) return;
       setGameList(response);
