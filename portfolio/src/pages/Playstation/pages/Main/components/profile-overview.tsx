@@ -25,7 +25,7 @@ export function ProfileOverview(props: { profile: Profile | undefined }) {
   const onlineId = () => {
     if (!props.profile) {
       return (
-        <Box width='256px'>
+        <Box width={{ xs: '96px', sm: '128px', md: '256px' }}>
           <ShimmerText fontSize={sx.onlineId.fontSize} width='100%' />
         </Box>
       );
