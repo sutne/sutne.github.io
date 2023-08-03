@@ -44,6 +44,7 @@ export function Image(props: {
         left: 0,
         objectFit: props.objectFit ?? 'cover',
         width: '100%',
+        height: '100%',
       },
     };
   }
