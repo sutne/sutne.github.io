@@ -63,7 +63,7 @@ export function ShimmerText(props: {
   for (let i = 0; i < numLines; i++) {
     const width = props.width ?? i + 1 < numLines ? '100%' : '70%';
     lines.push(
-      <Box sx={{ ...sx.container, width: width }}>
+      <Box key={i} sx={{ ...sx.container, width: width }}>
         <Shimmer />
       </Box>,
     );
