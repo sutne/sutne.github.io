@@ -16,7 +16,7 @@ export function Main() {
   React.useEffect(() => {
     const getData = async () => {
       const response = await API.getProfile();
-      if (!response || !response.onlineId) {
+      if (!response) {
         setHasError(true);
       } else {
         setProfile(response);
