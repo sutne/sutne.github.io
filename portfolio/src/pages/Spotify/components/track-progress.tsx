@@ -12,7 +12,7 @@ export function TrackProgress() {
 
   if (!track) return <></>;
 
-  let timer: NodeJS.Timer;
+  let timer: NodeJS.Timeout;
   React.useEffect(() => {
     if (!track) return;
     setElapsed(Math.max(track.elapsed - 1000, 0));
