@@ -4,7 +4,7 @@ updates:
     directory: /portfolio/
     schedule:
       interval: monthly
-      time: 15:00
+      time: "15:00"
     allow:
       - dependency-name: "*"
 
