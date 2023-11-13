@@ -4,9 +4,9 @@ updates:
     directory: /portfolio/
     schedule:
       interval: monthly
-    groups:
-      dependencies:
-        patterns:
-          - "*"
+      time: 15:00
+    allow:
+      - dependency-name: "*"
+
     ignore:
       - dependency-name: "typescript"
