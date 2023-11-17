@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Stack, Typography } from '@mui/material';
 
 import type { Trophy } from '../../../service/types';
 import { getDateString } from '../../../util';
 
 export function Trophy(props: { trophy: Trophy }) {
-  const hideDetails = props.trophy.isHidden && !props.trophy.isEarned;
+  const [isHolding, setIsHolding] = React.useState(false);
+  const [overrideHidden, setOverrideHidden] = React.useState(false);
+
+  useEffect(() => {
+    if (!isHolding) {
+      setOverrideHidden(false);
+      return;
+    }
+    const timeout = setTimeout(() => {
+      if(!isHolding) return;
+      setOverrideHidden(true);
+    }, 1000);
+    return () => clearTimeout(timeout);
+  }, [isHolding]);
+  
+  const hideDetails = props.trophy.isHidden && !props.trophy.isEarned && !overrideHidden;
   const trophyType = hideDetails ? 'hidden' : props.trophy.type;
   const trophyIcon = require(`../../../assets/trophies/${trophyType}.png`);
 
@@ -17,11 +32,43 @@ export function Trophy(props: { trophy: Trophy }) {
     xs: 'drop-shadow(0 1px 2px rgba(0,0,0,50%))',
     sm: 'drop-shadow(0 2px 3px rgba(0,0,0,50%))',
   };
+
+  function startHold(e: any){
+    setIsHolding(true);
+    absorbEvent(e);
+  }
+
+  function endHold(e: any) {
+    setIsHolding(false);
+    absorbEvent(e);
+  }
+
+  function absorbEvent(e: any) {
+    e.preventDefault();
+    e.stopPropagation();
+    e.cancelBubble = true;
+  }
+
   const sx = getSx();
   return (
     <>
-      <Stack sx={sx.container} direction='row'>
-        <Box sx={sx.icon} component='img' src={props.trophy.icon} />
+      <Stack
+        sx={sx.container}
+        direction='row'
+        onMouseDown={startHold}
+        onMouseUp={endHold}
+        onTouchStart={startHold}
+        onTouchEnd={endHold}
+        onContextMenu={absorbEvent}
+      >
+        <Box
+          sx={sx.icon}
+          component='img'
+          src={props.trophy.icon}
+          onTouchStart={absorbEvent}
+          onTouchStartCapture={absorbEvent}
+          onTouchMove={absorbEvent}
+        />
         <Stack sx={sx.info}>
           <Typography sx={sx.title}>
             {hideDetails ? 'Hidden' : props.trophy.title}
@@ -53,6 +100,10 @@ export function Trophy(props: { trophy: Trophy }) {
         padding: { xs: '8px', sm: '16px' },
         boxSizing: 'border-box',
         boxShadow: '0 0 8px 0 rgba(0, 0, 0, 0.2)',
+        userSelect: 'none',
+        webkitUserSelect: 'none',
+        touchCallout: 'none',
+        webkitTouchCallout: 'none',
       },
       icon: [
         {
@@ -62,9 +113,13 @@ export function Trophy(props: { trophy: Trophy }) {
           alignSelf: 'center',
           objectFit: 'contain',
           borderRadius: { xs: '4px', sm: '6px' },
-          filter: 'grayscale(100%)',
-          WebkitFilter: 'grayscale(100%)',
+          filter: `grayscale(100%) ${hideDetails ? 'blur(4px)' : ''}`,
+          WebkitFilter: `grayscale(100%) ${hideDetails ? 'blur(4px)' : ''}`,
           opacity: 0.075,
+          userSelect: 'none',
+          webkitUserSelect: 'none',
+          touchCallout: 'none',
+          webkitTouchCallout: 'none',
         },
         props.trophy.isEarned && {
           filter: iconShadow,

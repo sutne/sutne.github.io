@@ -24,6 +24,11 @@ export function sortTrophies(trophies: Trophy[], sorting: Sorting): Trophy[] {
     return parseFloat(a.rarity) - parseFloat(b.rarity);
   };
   const compareGrade = (a: Trophy, b: Trophy) => {
+    const hideA = a.isHidden && !a.isEarned;
+    const hideB = b.isHidden && !b.isEarned;
+    if (hideA && hideB) return 0;
+    if (hideA) return 1;
+    if (hideB) return -1;
     return typeValues[a.type] - typeValues[b.type];
   };
 
