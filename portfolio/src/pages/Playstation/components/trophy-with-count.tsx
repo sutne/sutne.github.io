@@ -39,7 +39,7 @@ export function TrophyWithCount(props: {
       image: [
         {
           width: '100%',
-          maxWidth: { xs: '80px', sm: '120px' },
+          maxWidth: '80px',
         },
         !hide && {
           WebkitFilter: shadow,

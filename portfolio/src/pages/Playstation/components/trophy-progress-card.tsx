@@ -104,8 +104,8 @@ export function TrophyProgressCard(props: {
       },
       image: {
         position: 'relative',
-        minWidth: { xs: '26mm', sm: '40mm', md: '225px' },
-        maxWidth: { xs: '26mm', sm: '40mm', md: '225px' },
+        minWidth: { xs: '26mm', sm: '40mm', md: '50mm' },
+        maxWidth: { xs: '26mm', sm: '40mm', md: '50mm' },
         aspectRatio: 1,
         objectFit: 'contain',
         borderRadius: { xs: '8px', sm: '16px' },

@@ -56,12 +56,12 @@ export function Trophy(props: { trophy: Trophy }) {
       },
       icon: [
         {
-          minWidth: { xs: '22mm', sm: '35mm' },
-          maxWidth: { xs: '22mm', sm: '35mm' },
+          minWidth: { xs: '22mm', sm: '28mm' },
+          maxWidth: { xs: '22mm', sm: '28mm' },
           aspectRatio: 1,
           alignSelf: 'center',
           objectFit: 'contain',
-          borderRadius: { xs: '4px', sm: '8px' },
+          borderRadius: { xs: '4px', sm: '6px' },
           filter: 'grayscale(100%)',
           WebkitFilter: 'grayscale(100%)',
           opacity: 0.075,
@@ -117,7 +117,7 @@ export function Trophy(props: { trophy: Trophy }) {
       },
       earnedTime: {
         fontSize: { xs: '0.7rem', sm: '1rem' },
-        alignSelf: 'center',
+        alignSelf: 'flex-end',
         color: 'text.secondary',
         fontWeight: 100,
       },
