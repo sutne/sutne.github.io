@@ -38,7 +38,7 @@ export function Main() {
             <AppIcon
               name='Mail'
               onTap={() =>
-                (window.location.href = `mailto:sivertutne@gmail.com`)
+                (window.location.href = `mailto:sivert.utne@gmail.com`)
               }
             />
           </AppDrawer>
