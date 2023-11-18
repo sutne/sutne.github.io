@@ -4,6 +4,8 @@ import { Box, Stack, Typography } from '@mui/material';
 import type { Trophy } from '../../../service/types';
 import { getDateString } from '../../../util';
 
+import { TrophyProgressBar } from './trophy-progress-bar';
+
 export function Trophy(props: { trophy: Trophy }) {
   const [isHolding, setIsHolding] = React.useState(false);
   const [overrideHidden, setOverrideHidden] = React.useState(false);
@@ -14,13 +16,14 @@ export function Trophy(props: { trophy: Trophy }) {
       return;
     }
     const timeout = setTimeout(() => {
-      if(!isHolding) return;
+      if (!isHolding) return;
       setOverrideHidden(true);
     }, 1000);
     return () => clearTimeout(timeout);
   }, [isHolding]);
-  
-  const hideDetails = props.trophy.isHidden && !props.trophy.isEarned && !overrideHidden;
+
+  const hideDetails =
+    props.trophy.isHidden && !props.trophy.isEarned && !overrideHidden;
   const trophyType = hideDetails ? 'hidden' : props.trophy.type;
   const trophyIcon = require(`../../../assets/trophies/${trophyType}.png`);
 
@@ -33,7 +36,7 @@ export function Trophy(props: { trophy: Trophy }) {
     sm: 'drop-shadow(0 2px 3px rgba(0,0,0,50%))',
   };
 
-  function startHold(e: any){
+  function startHold(e: any) {
     setIsHolding(true);
     absorbEvent(e);
   }
@@ -84,6 +87,11 @@ export function Trophy(props: { trophy: Trophy }) {
                 <Typography sx={sx.earnedTime}>
                   {getDateString(props.trophy.earnedAt)}
                 </Typography>
+              </>
+            )}
+            {props.trophy.progress && !hideDetails && (
+              <>
+                <TrophyProgressBar progress={props.trophy.progress} />
               </>
             )}
           </Stack>
