@@ -15,11 +15,12 @@ export function TrophyOverview(props: { profile: Profile | undefined }) {
 
   const trophy = (type: TrophyType) => {
     return (
-      <Grid item xs={3} sm={2}>
+      <Grid key={type} item xs={3} sm={2}>
         <TrophyWithCount
           type={type}
           count={props.profile?.trophySummary.earned[type] ?? 0}
           fontSize={{ xs: '14px', sm: '18px', md: '24px' }}
+          maxWidth='120px'
         />
       </Grid>
     );
@@ -34,7 +35,7 @@ export function TrophyOverview(props: { profile: Profile | undefined }) {
   }
   return (
     <Box sx={sx.card} onClick={() => navigate(`/Playstation/trophies`)}>
-      <Grid container spacing={2} justifyContent={'center'}>
+      <Grid container spacing={2} justifyContent='center' alignItems='center'>
         <Grid item xs={12} md={4}>
           <TrophyLevel level={props.profile?.trophySummary.level ?? 1} />
         </Grid>

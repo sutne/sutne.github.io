@@ -25,6 +25,7 @@ export function TrophyProgressCard(props: {
     const count = props.earnedCount[type];
     return (
       <TrophyWithCount
+        key={type}
         type={type}
         count={count}
         hideZero

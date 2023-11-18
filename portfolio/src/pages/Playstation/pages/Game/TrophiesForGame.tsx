@@ -50,10 +50,10 @@ export function PlaystationTrophiesGame() {
 
   return (
     <Stack spacing={2}>
-      {groups.map((group) => (
+      {groups.map((group, i) => (
         <SortProvider
+          key={`${group.name}-${i}`}
           defaultSorting={{ type: 'Default', order: 'asc' }}
-          key={group.name}
         >
           <TrophyProgressCard
             image={group.icon}

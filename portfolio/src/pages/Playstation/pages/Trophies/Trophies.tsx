@@ -43,7 +43,7 @@ export function PlaystationTrophies() {
   return (
     <Stack spacing={2}>
       {gameList.map((game, i) => (
-        <TrophyTitle key={i} game={game} />
+        <TrophyTitle key={`${game.id}-${i}`} game={game} />
       ))}
     </Stack>
   );

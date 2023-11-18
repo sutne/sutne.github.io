@@ -9,6 +9,7 @@ export function TrophyWithCount(props: {
   hideZero?: boolean;
   hide?: boolean;
   fontSize?: any;
+  maxWidth?: string;
 }) {
   const image = require(`../assets/trophies/${props.type}.png`);
   const hide = props.hideZero && props.count === 0;
@@ -39,7 +40,7 @@ export function TrophyWithCount(props: {
       image: [
         {
           width: '100%',
-          maxWidth: '80px',
+          maxWidth: props.maxWidth ?? '80px',
         },
         !hide && {
           WebkitFilter: shadow,
