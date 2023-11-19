@@ -34,6 +34,8 @@ export type TrophyGame = {
   trophyCount: TrophyCount;
   earnedCount: TrophyCount;
   progress: number;
+  firstTrophyEarnedAt?: string;
+  lastTrophyEarnedAt?: string;
 };
 
 export type TrophyGroup = {

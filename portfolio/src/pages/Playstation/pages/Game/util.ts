@@ -1,4 +1,4 @@
-import { Trophy } from 'pages/Playstation/service/types';
+import { Trophy, TrophyGame } from 'pages/Playstation/service/types';
 import { Sorting } from 'providers/sort-provider';
 
 export function sortTrophies(trophies: Trophy[], sorting: Sorting): Trophy[] {
@@ -40,27 +40,74 @@ export function sortTrophies(trophies: Trophy[], sorting: Sorting): Trophy[] {
         diff = compareEarnedTime(a, b);
         if (diff === undefined) diff = -compareRarity(a, b);
         if (diff === 0) diff = compareGrade(a, b);
-        return diff;
+        break;
 
       case 'Rarity':
         diff = compareRarity(a, b);
         if (diff === 0) diff = compareGrade(a, b);
-        return diff;
+        break;
 
       case 'Grade':
         diff = compareGrade(a, b);
         if (diff === 0) diff = compareId(a, b);
-        return diff;
+        break;
 
       case 'Default':
         diff = compareId(a, b);
-        return diff;
+        break;
 
       default:
-        return 0;
+        diff = 0;
+        break;
     }
+    diff = diff ?? 0;
+    return sorting.order === 'desc' ? -diff : diff;
   });
-  if (sorting.order === 'desc') return sorted.reverse();
+  return sorted;
+}
+
+export function sortGames(games: TrophyGame[], sorting: Sorting): TrophyGame[] {
+  const compareLastTrophy = (a: TrophyGame, b: TrophyGame) => {
+    if (!a.lastTrophyEarnedAt && !b.lastTrophyEarnedAt) return undefined;
+    if (!a.lastTrophyEarnedAt) return -1;
+    if (!b.lastTrophyEarnedAt) return 1;
+    return compare(b.lastTrophyEarnedAt, a.lastTrophyEarnedAt);
+  };
+  const compareFirstTrophy = (a: TrophyGame, b: TrophyGame) => {
+    if (!a.firstTrophyEarnedAt && !b.firstTrophyEarnedAt) return undefined;
+    if (!a.firstTrophyEarnedAt) return -1;
+    if (!b.firstTrophyEarnedAt) return 1;
+    return compare(a.firstTrophyEarnedAt, b.firstTrophyEarnedAt);
+  };
+  const compareProgress = (a: TrophyGame, b: TrophyGame) => {
+    return b.progress - a.progress;
+  };
+
+  const sorted = games.sort((a, b) => {
+    // negative if a should be before b
+    let diff = undefined;
+    switch (sorting.type) {
+      case 'Latest Trophy':
+        diff = compareLastTrophy(a, b);
+        break;
+
+      case 'First Trophy':
+        diff = compareFirstTrophy(a, b);
+        if (!diff) diff = compareLastTrophy(b, a);
+        break;
+
+      case 'Progress':
+        diff = compareProgress(a, b);
+        if (diff === 0) diff = compareLastTrophy(a, b);
+        break;
+
+      default:
+        diff = 0;
+        break;
+    }
+    diff = diff ?? 0;
+    return sorting.order === 'desc' ? -diff : diff;
+  });
   return sorted;
 }
 

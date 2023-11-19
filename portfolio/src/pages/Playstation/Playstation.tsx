@@ -7,6 +7,8 @@ import { AppContent } from 'components/app-content';
 import { darkTheme } from 'themes/darkTheme';
 import { lightTheme } from 'themes/lightTheme';
 
+import { SortProvider } from '../../providers/sort-provider';
+
 import { PlaystationTrophiesGame } from './pages/Game/TrophiesForGame';
 import { Main } from './pages/Main/Main';
 import { PlaystationTrophies } from './pages/Trophies/Trophies';
@@ -49,7 +51,16 @@ export function Playstation() {
       <Box sx={sx.container}>
         <Routes>
           <Route path='/' element={<Main />} />
-          <Route path='/trophies' element={<PlaystationTrophies />} />
+          <Route
+            path='/trophies'
+            element={
+              <SortProvider
+                defaultSorting={{ type: 'Latest Trophy', order: 'asc' }}
+              >
+                <PlaystationTrophies />
+              </SortProvider>
+            }
+          />
           <Route
             path='/trophies/game/:gameId/platform/:platform'
             element={<PlaystationTrophiesGame />}
