@@ -80,7 +80,7 @@ export function sortGames(games: TrophyGame[], sorting: Sorting): TrophyGame[] {
     return compare(a.firstTrophyEarnedAt, b.firstTrophyEarnedAt);
   };
   const compareProgress = (a: TrophyGame, b: TrophyGame) => {
-    return b.progress - a.progress;
+    return a.progress - b.progress;
   };
 
   const sorted = games.sort((a, b) => {
