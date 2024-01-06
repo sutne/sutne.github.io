@@ -8,7 +8,7 @@ import { Main } from 'pages/Main/Main';
 import { Playstation } from 'pages/Playstation/Playstation';
 import { Settings } from 'pages/Settings/Settings';
 import { Spotify } from 'pages/Spotify/Spotify';
-import { AppProvider } from 'providers/app-provider';
+import { AppProvider, useApp } from 'providers/app-provider';
 import { MainThemeProvider, useMainTheme } from 'providers/main-theme-provider';
 import { SettingsProvider } from 'providers/settings-provider';
 
@@ -22,7 +22,9 @@ root.render(
   <React.StrictMode>
     <SettingsProvider>
       <MainThemeProvider>
-        <Root />
+        <AppProvider>
+          <Root />
+        </AppProvider>
       </MainThemeProvider>
     </SettingsProvider>
   </React.StrictMode>,
@@ -30,24 +32,23 @@ root.render(
 
 export function Root() {
   const { themeIsDark } = useMainTheme();
+  const { hasOpenApp } = useApp();
 
   const sx = getSx();
   return (
     <Box sx={sx.root}>
       <Box sx={sx.content}>
-        <AppProvider>
-          <HashRouter>
-            <Routes>
-              <Route path='/' element={<Main />}>
-                <Route path='Settings' element={<Settings />} />
-                <Route path='Spotify' element={<Spotify />} />
-                <Route path='GitHub' element={<GitHub />} />
-                <Route path='Playstation/*' element={<Playstation />} />
-              </Route>
-              <Route path='*' element={<>404</>} />
-            </Routes>
-          </HashRouter>
-        </AppProvider>
+        <HashRouter>
+          <Routes>
+            <Route path='/' element={<Main />}>
+              <Route path='Settings' element={<Settings />} />
+              <Route path='Spotify' element={<Spotify />} />
+              <Route path='GitHub' element={<GitHub />} />
+              <Route path='Playstation/*' element={<Playstation />} />
+            </Route>
+            <Route path='*' element={<>404</>} />
+          </Routes>
+        </HashRouter>
       </Box>
     </Box>
   );
@@ -60,7 +61,7 @@ export function Root() {
           zIndex: 1,
           width: '100%',
           height: '100%',
-          overflow: 'auto',
+          overflow: hasOpenApp ? 'hidden' : 'auto',
           background: `linear-gradient(90deg,
             ${themeIsDark ? 'rgb(18,18,18)' : 'rgb(210,210,210)'} 0%,
             ${themeIsDark ? 'rgb(24,24,24)' : 'rgb(230,230,235)'} 50%,
