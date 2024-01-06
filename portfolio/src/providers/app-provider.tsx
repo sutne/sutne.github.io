@@ -5,6 +5,7 @@ const AppContext = React.createContext<
       getIconRef: (name: string) => React.RefObject<HTMLImageElement>;
       getIsOpen: (name: string) => boolean;
       setIsOpen: (name: string, isOpen: boolean) => void;
+      hasOpenApp: boolean;
     }
   | undefined
 >(undefined);
@@ -16,7 +17,7 @@ export function AppProvider(props: { children: JSX.Element }) {
   const [isOpenStates, setIsOpenStates] = React.useState(
     new Map<string, boolean>(),
   );
-
+  
   const getIsOpen = (name: string) => {
     const isOpen = isOpenStates.get(name);
     return isOpen ?? false;
@@ -40,6 +41,7 @@ export function AppProvider(props: { children: JSX.Element }) {
         getIconRef,
         setIsOpen,
         getIsOpen,
+        hasOpenApp: Array.from(isOpenStates.values()).some((isOpen) => isOpen),
       }}
     >
       {props.children}
