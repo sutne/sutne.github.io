@@ -5,7 +5,7 @@ import { SortButton } from '../../../../components/sort-button';
 import { useSorting } from '../../../../providers/sort-provider';
 import * as API from '../../service/api';
 import { TrophyGame } from '../../service/types';
-import { sortGames } from '../Game/util';
+import { sortGames } from '../Game/sortUtils';
 
 import { TrophyTitle } from './components/TrophyTitle';
 

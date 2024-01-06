@@ -5,7 +5,7 @@ import { SortButton } from 'components/sort-button';
 import { useSorting } from 'providers/sort-provider';
 
 import { Trophy } from '../../../service/types';
-import { sortTrophies } from '../util';
+import { sortTrophies } from '../sortUtils';
 
 import { Trophy as TrophyComp } from './trophy';
 
@@ -21,12 +21,14 @@ export function TrophyList(props: { list: Trophy[] }) {
   const sx = getSx();
   return (
     <Box sx={sx.trophyList}>
-      <Stack sx={sx.buttonRow} direction='row' spacing={1}>
-        <SortButton type='Default' />
-        <SortButton type='Rarity' />
-        <SortButton type='Earned Time' />
-        <SortButton type='Grade' />
-      </Stack>
+      {props.list.length > 1 && (
+        <Stack sx={sx.buttonRow} direction='row' spacing={1}>
+          <SortButton type='Default' />
+          <SortButton type='Rarity' />
+          <SortButton type='Earned Time' />
+          <SortButton type='Grade' />
+        </Stack>
+      )}
       <Stack spacing={'4px'} alignItems={'center'}>
         {trophies.map((trophy, i) => (
           <TrophyComp key={i} trophy={trophy} />
@@ -37,7 +39,7 @@ export function TrophyList(props: { list: Trophy[] }) {
   function getSx() {
     return {
       trophyList: {
-        padding: { md: '0 64px' },
+        padding: { md: '0 0 0 64px' },
       },
       buttonRow: {
         padding: '8px 16px',

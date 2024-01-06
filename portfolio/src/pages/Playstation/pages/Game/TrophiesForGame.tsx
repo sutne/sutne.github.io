@@ -6,9 +6,11 @@ import { TrophyProgressCard } from 'pages/Playstation/components/trophy-progress
 import { SortProvider } from 'providers/sort-provider';
 
 import * as API from '../../service/api';
-import { TrophyGroup } from '../../service/types';
+import { Trophy, TrophyGroup } from '../../service/types';
 
+import { GroupButton } from './components/group-button';
 import { TrophyList } from './components/trophy-list';
+import { groupByEarned, groupByType } from './groupUtils';
 
 export function PlaystationTrophiesGame() {
   const unloaded = new Array<TrophyGroup>(1).fill({
@@ -30,6 +32,26 @@ export function PlaystationTrophiesGame() {
     trophies: [],
   });
   const [groups, setGroups] = React.useState<TrophyGroup[]>(unloaded);
+  const [groupBy, setGroupBy] = React.useState<'Default' | 'Earned' | 'Type'>(
+    'Default',
+  );
+
+  const allTrophies = React.useMemo(
+    () =>
+      groups.reduce(
+        (trophies, group) => [...trophies, ...group.trophies],
+        [] as Trophy[],
+      ),
+    [groups],
+  );
+  const earnedGroups = React.useMemo(
+    () => groupByEarned(allTrophies),
+    [allTrophies],
+  );
+  const typeGroups = React.useMemo(
+    () => groupByType(allTrophies),
+    [allTrophies],
+  );
 
   const params = useParams();
 
@@ -48,25 +70,81 @@ export function PlaystationTrophiesGame() {
     getData();
   }, []);
 
+  const displayedGroups =
+    groupBy === 'Default'
+      ? groups
+      : groupBy === 'Earned'
+      ? earnedGroups
+      : typeGroups;
+
   return (
-    <Stack spacing={2}>
-      {groups.map((group, i) => (
-        <SortProvider
-          key={`${group.name}-${i}`}
-          defaultSorting={{ type: 'Default', order: 'asc' }}
-        >
-          <TrophyProgressCard
-            image={group.icon}
-            title={group.name}
-            progress={group.progress}
-            trophyCount={group.trophyCount}
-            earnedCount={group.earnedCount}
-            expanded={groups.length == 1 && group.name !== ''}
+    <>
+      {groupBy !== 'Default' && (
+        <TrophyProgressCard
+          image={groups[0].icon}
+          title={groups[0].name}
+          progress={-1}
+          trophyCount={{
+            platinum: 0,
+            gold: 0,
+            silver: 0,
+            bronze: 0,
+          }}
+          earnedCount={{
+            platinum: 0,
+            gold: 0,
+            silver: 0,
+            bronze: 0,
+          }}
+          expanded={false}
+        />
+      )}
+      <Stack
+        sx={{
+          marginY: '16px',
+          borderRadius: '32px',
+          padding: '12px',
+          backgroundColor: 'background.paper',
+          width: 'fit-content',
+        }}
+        direction='row'
+        spacing={1}
+      >
+        <GroupButton
+          type='Default'
+          isSelected={groupBy === 'Default'}
+          onClick={() => setGroupBy('Default')}
+        />
+        <GroupButton
+          type='Earned'
+          isSelected={groupBy === 'Earned'}
+          onClick={() => setGroupBy('Earned')}
+        />
+        <GroupButton
+          type='Type'
+          isSelected={groupBy === 'Type'}
+          onClick={() => setGroupBy('Type')}
+        />
+      </Stack>
+      <Stack spacing={2}>
+        {displayedGroups.map((group, i) => (
+          <SortProvider
+            key={`${group.name}-${i}`}
+            defaultSorting={{ type: 'Default', order: 'asc' }}
           >
-            <TrophyList list={group.trophies} />
-          </TrophyProgressCard>
-        </SortProvider>
-      ))}
-    </Stack>
+            <TrophyProgressCard
+              image={group.icon}
+              title={group.name}
+              progress={group.progress}
+              trophyCount={group.trophyCount}
+              earnedCount={group.earnedCount}
+              expanded={displayedGroups.length == 1 && group.name !== ''}
+            >
+              <TrophyList list={group.trophies} />
+            </TrophyProgressCard>
+          </SortProvider>
+        ))}
+      </Stack>
+    </>
   );
 }
