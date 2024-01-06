@@ -32,7 +32,7 @@ export function sortTrophies(trophies: Trophy[], sorting: Sorting): Trophy[] {
     return typeValues[a.type] - typeValues[b.type];
   };
 
-  const sorted = trophies.sort((a, b) => {
+  const sorted = [...trophies].sort((a, b) => {
     // negative if a should be before b
     let diff = undefined;
     switch (sorting.type) {
@@ -83,7 +83,7 @@ export function sortGames(games: TrophyGame[], sorting: Sorting): TrophyGame[] {
     return a.progress - b.progress;
   };
 
-  const sorted = games.sort((a, b) => {
+  const sorted = [...games].sort((a, b) => {
     // negative if a should be before b
     let diff = undefined;
     switch (sorting.type) {

@@ -79,7 +79,7 @@ export function TrophyProgressCard(props: {
               trophyCount('bronze'),
             ]}
           </Stack>
-          {props.title !== '' && (
+          {props.title !== '' && props.progress !== -1 && (
             <Box sx={sx.progress}>
               <ProgressBar progress={props.progress} />
             </Box>
@@ -100,7 +100,10 @@ export function TrophyProgressCard(props: {
         overflow: 'hidden',
         bgcolor: 'background.paper',
         borderRadius: { xs: '8px', sm: '16px' },
-        cursor: props.expanded || props.title === '' ? 'default' : 'pointer',
+        cursor:
+          props.expanded || props.title === '' || !props.children
+            ? 'default'
+            : 'pointer',
         boxShadow: '0 0 8px 0 rgba(0, 0, 0, 0.2)',
       },
       image: {
