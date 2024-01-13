@@ -1,12 +1,14 @@
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: /portfolio/
+  - package-ecosystem: "npm"
+    directory: "/portfolio/"
     schedule:
-      interval: monthly
-      time: "15:00"
-    allow:
-      - dependency-name: "*"
+      interval: "monthly"
+    groups:
+      portfolio:
+        update-types:
+          - "minor"
+          - "patch"
 
     ignore:
       - dependency-name: "typescript"
