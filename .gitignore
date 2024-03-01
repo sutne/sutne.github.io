@@ -1,7 +1,5 @@
 .vscode/*
 !.vscode/tasks.json
-
-**/package-lock.json
 **react-app-env.d.ts
 **.env
 **/node_modules
