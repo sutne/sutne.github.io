@@ -10,7 +10,7 @@
       },
       "type": "shell",
       "dependsOn": "Clean",
-      "command": "npm install && npm audit --production",
+      "command": "yarn install",
       "options": {
         "cwd": "${workspaceFolder}/portfolio"
       },
@@ -30,7 +30,7 @@
         "color": "terminal.ansiBlue"
       },
       "type": "shell",
-      "command": "npm start",
+      "command": "yarn start",
       "options": {
         "cwd": "${workspaceFolder}/portfolio"
       },
@@ -50,7 +50,7 @@
         "color": "terminal.ansiGreen"
       },
       "type": "shell",
-      "command": "npm run deploy",
+      "command": "yarn run deploy",
       "options": {
         "cwd": "${workspaceFolder}/portfolio"
       },
