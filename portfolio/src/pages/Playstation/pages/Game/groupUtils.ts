@@ -29,6 +29,7 @@ export function groupByEarned(trophies: Trophy[]): TrophyGroup[] {
   );
 
   const earned: TrophyGroup = {
+    id: 0,
     name: 'Earned',
     icon: require('../../assets/trophies/gold.png'),
     trophyCount: earnedCount,
@@ -37,6 +38,7 @@ export function groupByEarned(trophies: Trophy[]): TrophyGroup[] {
     trophies: earnedTrophies,
   };
   const unearned: TrophyGroup = {
+    id: 1,
     name: 'Unearned',
     icon: require('../../assets/trophies/hidden.png'),
     trophyCount: unearnedCount,
@@ -50,7 +52,8 @@ export function groupByEarned(trophies: Trophy[]): TrophyGroup[] {
 /** Return 1 TrophyGroup for each trophy type */
 export function groupByType(trophies: Trophy[]): TrophyGroup[] {
   const types = ['hidden', 'bronze', 'silver', 'gold', 'platinum'] as const;
-  const trophyGroups: TrophyGroup[] = types.map((type) => ({
+  const trophyGroups: TrophyGroup[] = types.map((type, i) => ({
+    id: i,
     name: type.charAt(0).toUpperCase() + type.slice(1),
     icon: require(`../../assets/trophies/${type}.png`),
     trophyCount: { bronze: 0, silver: 0, gold: 0, platinum: 0 },

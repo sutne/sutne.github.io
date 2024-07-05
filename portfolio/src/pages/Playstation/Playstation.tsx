@@ -62,7 +62,7 @@ export function Playstation() {
             }
           />
           <Route
-            path='/trophies/game/:gameId/platform/:platform'
+            path='/trophies/game/:gameIds/platform/:platforms'
             element={<PlaystationTrophiesGame />}
           />
           <Route path='/*' element={<>404</>} />

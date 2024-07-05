@@ -9,7 +9,11 @@ import { TrophyGame } from '../../../service/types';
 export function TrophyTitle({ game }: { game: TrophyGame }) {
   const navigate = useNavigate();
 
-  const titlePath = `game/${game.id}/platform/${game.platform}`;
+  const titlePath = `game/${game.platform
+    .map((info) => info.id)
+    .join(',')}/platform/${game.platform
+    .map((info) => info.platform)
+    .join(',')}`;
   return (
     <Box onClick={() => navigate(titlePath)}>
       <TrophyProgressCard

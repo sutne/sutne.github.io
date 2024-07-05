@@ -18,19 +18,22 @@ export type TrophyCount = {
   platinum: number;
 };
 
+export type Platform = undefined | 'PS1' | 'PS2' | 'PS3' | 'PS4' | 'PS5';
 export type RecentGame = {
-  id: string;
   title: string;
   image: string;
-  platform: string;
+  platform: Platform;
   lastPlayedAt: string;
 };
 
-export type TrophyGame = {
+export type PlatformInfo = {
   id: string;
+  platform: Platform;
+};
+export type TrophyGame = {
+  platform: PlatformInfo[];
   title: string;
   image: string;
-  platform: string;
   trophyCount: TrophyCount;
   earnedCount: TrophyCount;
   progress: number;
@@ -39,6 +42,7 @@ export type TrophyGame = {
 };
 
 export type TrophyGroup = {
+  id: number;
   name: string;
   icon: string;
   trophyCount: TrophyCount;

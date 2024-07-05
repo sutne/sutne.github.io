@@ -8,10 +8,9 @@ import { RecentGame } from '../../../service/types';
 
 export function RecentlyPlayed() {
   const unloaded = new Array<RecentGame>(12).fill({
-    id: '',
     image: '',
     title: '',
-    platform: '',
+    platform: undefined,
     lastPlayedAt: '',
   });
   const [gameList, setGameList] = React.useState<RecentGame[]>([]);
