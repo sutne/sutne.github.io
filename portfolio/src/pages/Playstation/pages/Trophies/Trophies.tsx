@@ -10,11 +10,10 @@ import { sortGames } from '../Game/sortUtils';
 import { TrophyTitle } from './components/TrophyTitle';
 
 export function PlaystationTrophies() {
-  const unloaded: TrophyGame[] = new Array(4).fill({
-    id: '',
+  const unloaded: TrophyGame[] = new Array<TrophyGame>(4).fill({
+    platform: [{ id: '', platform: undefined }],
     title: '',
     image: '',
-    platform: '',
     trophyCount: {
       platinum: 0,
       gold: 0,
@@ -41,7 +40,7 @@ export function PlaystationTrophies() {
       setGameList(unloaded);
       const response = await API.getGameList();
       if (!response) return;
-      setGameList(response);
+      setGameList(response.filter((g) => g !== null));
     };
     getData();
   }, []);
@@ -58,7 +57,7 @@ export function PlaystationTrophies() {
       </Stack>
       <Stack spacing={2}>
         {gameList.map((game, i) => (
-          <TrophyTitle key={`${game.id}-${i}`} game={game} />
+          <TrophyTitle key={`${game.platform[0].id}-${i}`} game={game} />
         ))}
       </Stack>
     </>

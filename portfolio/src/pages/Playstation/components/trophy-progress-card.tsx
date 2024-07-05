@@ -3,8 +3,9 @@ import { Box, Collapse, Stack, Typography } from '@mui/material';
 
 import { ShimmerImage, ShimmerText } from 'components/animated/shimmer';
 
-import { TrophyCount, TrophyType } from '../service/types';
+import { PlatformInfo, TrophyCount, TrophyType } from '../service/types';
 
+import { PlatformChip } from './platform-chip';
 import { ProgressBar } from './progress-bar';
 import { TrophyWithCount } from './trophy-with-count';
 
@@ -14,7 +15,7 @@ export function TrophyProgressCard(props: {
   progress: number;
   trophyCount: TrophyCount;
   earnedCount: TrophyCount;
-  platform?: string;
+  platform?: PlatformInfo[];
   children?: JSX.Element;
   expanded?: boolean;
 }) {
@@ -67,7 +68,15 @@ export function TrophyProgressCard(props: {
       <Stack sx={sx.container} direction='row' onClick={onClick}>
         {image()}
         {props.platform && (
-          <Typography sx={sx.platform}>{props.platform}</Typography>
+          <Stack
+            sx={sx.platforms}
+            direction='row'
+            gap={{ xs: '4px', m: '6px' }}
+          >
+            {props.platform.map((info) => (
+              <PlatformChip key={info.id} platform={info.platform} />
+            ))}
+          </Stack>
         )}
         <Stack sx={sx.info}>
           {title()}
@@ -116,6 +125,11 @@ export function TrophyProgressCard(props: {
         alignSelf: 'center',
         boxShadow: '0 0 8px 0 rgba(0, 0, 0, 0.2)',
       },
+      platforms: {
+        position: 'absolute',
+        top: { xs: '4px', sm: '8px' },
+        left: { xs: '4px', sm: '8px' },
+      },
       info: {
         position: 'relative',
         margin: '16px',
@@ -136,21 +150,6 @@ export function TrophyProgressCard(props: {
         maxWidth: '50%',
         height: '100%',
         marginBottom: '8px',
-      },
-      platform: {
-        position: 'absolute',
-        top: { xs: '4px', sm: '8px' },
-        left: { xs: '4px', sm: '8px' },
-        bgcolor: props.platform === 'PS5' ? 'white' : 'black',
-        color: props.platform === 'PS5' ? 'black' : 'white',
-        borderRadius: '8px',
-        padding: { xs: '1px 5px', sm: '0 8px' },
-        fontSize: { xs: '0.4rem', sm: '0.8rem' },
-        fontWeight: 400,
-        boxShadow:
-          props.platform === 'PS5'
-            ? '0 1px 6px 2px rgba(0,0,0,0.3)'
-            : '0 1px 6px 2px rgba(255,255,255,0.15)',
       },
       progress: {
         position: 'absolute',

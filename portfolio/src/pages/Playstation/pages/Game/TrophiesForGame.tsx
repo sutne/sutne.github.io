@@ -6,7 +6,7 @@ import { TrophyProgressCard } from 'pages/Playstation/components/trophy-progress
 import { SortProvider } from 'providers/sort-provider';
 
 import * as API from '../../service/api';
-import { Trophy, TrophyGroup } from '../../service/types';
+import { Platform, Trophy, TrophyGroup } from '../../service/types';
 
 import { GroupButton } from './components/group-button';
 import { TrophyList } from './components/trophy-list';
@@ -14,6 +14,7 @@ import { groupByEarned, groupByType } from './groupUtils';
 
 export function PlaystationTrophiesGame() {
   const unloaded = new Array<TrophyGroup>(1).fill({
+    id: 0,
     name: '',
     icon: '',
     trophyCount: {
@@ -57,11 +58,11 @@ export function PlaystationTrophiesGame() {
 
   React.useEffect(() => {
     const getData = async () => {
-      if (!params.gameId || !params.platform) return;
+      if (!params.gameIds || !params.platforms) return;
       setGroups(unloaded);
       const response = await API.getTrophyGroups(
-        params.gameId,
-        params.platform,
+        params.gameIds.split(','),
+        params.platforms.split(',') as Platform[],
       );
       setGroups([]);
       if (!response) return;

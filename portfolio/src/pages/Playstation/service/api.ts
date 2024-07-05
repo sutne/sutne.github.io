@@ -1,4 +1,11 @@
-import { Profile, RecentGame, TrophyGame, TrophyGroup } from './types';
+import {
+  Platform,
+  PlatformInfo,
+  Profile,
+  RecentGame,
+  TrophyGame,
+  TrophyGroup,
+} from './types';
 
 const BASE_URL = 'https://personal-sutne.vercel.app/api/playstation';
 
@@ -23,19 +30,18 @@ export async function getGameList(): Promise<TrophyGame[]> {
   return data;
 }
 
-// export async function getTrophies(): Promise<TrophyGame[]> {
-//   const response = await fetch(`${BASE_URL}/trophies`);
-//   const data = await response.json();
-//   return data;
-// }
-
 export async function getTrophyGroups(
-  gameId: string,
-  platform: string,
+  gameIds: string[],
+  platforms: Platform[],
 ): Promise<TrophyGroup[]> {
-  const response = await fetch(
-    `${BASE_URL}/trophies?game=${gameId}&platform=${platform}`,
-  );
+  const platformInfo: PlatformInfo[] = gameIds.map((id, i) => ({
+    id: id,
+    platform: platforms[i],
+  }));
+  const query = platformInfo
+    .map((info) => `id=${info.id}&platform=${info.platform}`)
+    .join('&');
+  const response = await fetch(`${BASE_URL}/trophies?${query}`);
   if (!response.ok) return [];
   const data = await response.json();
   return data;
