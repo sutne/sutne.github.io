@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import { alpha, Box, Stack, Typography, useTheme } from '@mui/material';
 
 import type { Trophy } from '../../../service/types';
 import { getDateString } from '../../../util';
@@ -7,6 +7,7 @@ import { getDateString } from '../../../util';
 import { TrophyProgressBar } from './trophy-progress-bar';
 
 export function Trophy(props: { trophy: Trophy }) {
+  const theme = useTheme();
   const [isHolding, setIsHolding] = React.useState(false);
   const [overrideHidden, setOverrideHidden] = React.useState(false);
 
@@ -103,7 +104,10 @@ export function Trophy(props: { trophy: Trophy }) {
     return {
       container: {
         width: '100%',
-        bgcolor: 'background.paper',
+        background: `linear-gradient(7deg,
+          ${theme.palette.background.paper} 30%,
+          ${alpha(theme.palette.background.paper, 0.3)} 100%
+        )`,
         borderRadius: { xs: '8px', sm: '16px' },
         padding: { xs: '8px', sm: '16px' },
         boxSizing: 'border-box',
@@ -115,8 +119,8 @@ export function Trophy(props: { trophy: Trophy }) {
       },
       icon: [
         {
-          minWidth: { xs: '22mm', sm: '28mm' },
-          maxWidth: { xs: '22mm', sm: '28mm' },
+          minWidth: { xs: '22mm', sm: '32mm' },
+          maxWidth: { xs: '22mm', sm: '32mm' },
           aspectRatio: 1,
           alignSelf: 'center',
           objectFit: 'contain',
