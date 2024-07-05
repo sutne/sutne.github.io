@@ -1,5 +1,12 @@
 import React from 'react';
-import { Box, Collapse, Stack, Typography } from '@mui/material';
+import {
+  alpha,
+  Box,
+  Collapse,
+  Stack,
+  Typography,
+  useTheme,
+} from '@mui/material';
 
 import { ShimmerImage, ShimmerText } from 'components/animated/shimmer';
 
@@ -19,6 +26,7 @@ export function TrophyProgressCard(props: {
   children?: JSX.Element;
   expanded?: boolean;
 }) {
+  const theme = useTheme();
   const sx = getSx();
   const [expanded, setExpanded] = React.useState(props.expanded ?? false);
 
@@ -107,7 +115,10 @@ export function TrophyProgressCard(props: {
       container: {
         position: 'relative',
         overflow: 'hidden',
-        bgcolor: 'background.paper',
+        background: `linear-gradient(7deg,
+          ${theme.palette.background.paper} 50%,
+          ${alpha(theme.palette.background.paper, 0.3)} 100%
+        )`,
         borderRadius: { xs: '8px', sm: '16px' },
         cursor:
           props.expanded || props.title === '' || !props.children
