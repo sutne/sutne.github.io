@@ -30,7 +30,7 @@
         "color": "terminal.ansiBlue"
       },
       "type": "shell",
-      "command": "yarn start",
+      "command": "yarn install && yarn start",
       "options": {
         "cwd": "${workspaceFolder}/portfolio"
       },
