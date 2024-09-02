@@ -54,6 +54,7 @@ export function PlaystationTrophies() {
         <SortButton type='Latest Trophy' />
         <SortButton type='First Trophy' />
         <SortButton type='Progress' />
+        <SortButton type='Title' />
       </Stack>
       <Stack spacing={2}>
         {gameList.map((game, i) => (
