@@ -82,6 +82,9 @@ export function sortGames(games: TrophyGame[], sorting: Sorting): TrophyGame[] {
   const compareProgress = (a: TrophyGame, b: TrophyGame) => {
     return a.progress - b.progress;
   };
+  const compareTitle = (a: TrophyGame, b: TrophyGame) => {
+    return a.title.localeCompare(b.title);
+  };
 
   const sorted = [...games].sort((a, b) => {
     // negative if a should be before b
@@ -99,6 +102,10 @@ export function sortGames(games: TrophyGame[], sorting: Sorting): TrophyGame[] {
       case 'Progress':
         diff = compareProgress(a, b);
         if (diff === 0) diff = compareLastTrophy(a, b);
+        break;
+
+      case 'Title':
+        diff = compareTitle(a, b);
         break;
 
       default:
