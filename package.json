@@ -38,7 +38,7 @@
     ]
   },
   "homepage": "https://sutne.github.io/",
-  "name": "portfolio",
+  "name": "sutne.github.io",
   "private": true,
   "scripts": {
     "build": "react-scripts build",
