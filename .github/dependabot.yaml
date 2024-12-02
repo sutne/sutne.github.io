@@ -4,12 +4,5 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
-    groups:
-      all:
-        update-types:
-          - "major"
-          - "minor"
-          - "patch"
-
     ignore:
       - dependency-name: "typescript"
