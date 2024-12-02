@@ -11,9 +11,6 @@
       "type": "shell",
       "dependsOn": "Clean",
       "command": "yarn install",
-      "options": {
-        "cwd": "${workspaceFolder}/portfolio"
-      },
       "presentation": {
         "panel": "dedicated",
         "reveal": "always",
@@ -31,9 +28,6 @@
       },
       "type": "shell",
       "command": "yarn install && yarn start",
-      "options": {
-        "cwd": "${workspaceFolder}/portfolio"
-      },
       "presentation": {
         "panel": "dedicated",
         "reveal": "always",
@@ -51,9 +45,6 @@
       },
       "type": "shell",
       "command": "yarn run deploy",
-      "options": {
-        "cwd": "${workspaceFolder}/portfolio"
-      },
       "presentation": {
         "panel": "dedicated",
         "reveal": "always",
@@ -71,9 +62,6 @@
       },
       "type": "shell",
       "command": "rm -rf node_modules build",
-      "options": {
-        "cwd": "${workspaceFolder}/portfolio"
-      },
       "presentation": {
         "panel": "dedicated",
         "reveal": "always",

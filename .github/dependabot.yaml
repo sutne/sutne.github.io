@@ -1,12 +1,13 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
-    directory: "/portfolio/"
+    directory: "/"
     schedule:
       interval: "monthly"
     groups:
-      portfolio:
+      all:
         update-types:
+          - "major"
           - "minor"
           - "patch"
 
