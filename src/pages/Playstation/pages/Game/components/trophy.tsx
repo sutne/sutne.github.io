@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react';
-import { alpha, Box, Stack, Typography, useTheme } from '@mui/material';
-
+import { Box, Stack, Typography, alpha, useTheme } from '@mui/material';
+import { useEffect, useState } from 'react';
 import type { Trophy } from '../../../service/types';
 import { getDateString } from '../../../util';
-
 import { TrophyProgressBar } from './trophy-progress-bar';
 
-export function Trophy(props: { trophy: Trophy }) {
+export function TrophyCard(props: { trophy: Trophy }) {
   const theme = useTheme();
-  const [isHolding, setIsHolding] = React.useState(false);
-  const [overrideHidden, setOverrideHidden] = React.useState(false);
+  const [isHolding, setIsHolding] = useState(false);
+  const [overrideHidden, setOverrideHidden] = useState(false);
 
   useEffect(() => {
     if (!isHolding) {
@@ -84,16 +82,12 @@ export function Trophy(props: { trophy: Trophy }) {
             <Box sx={sx.trophyIcon} component='img' src={trophyIcon} />
             <Typography sx={sx.rarity}>{props.trophy.rarity}%</Typography>
             {props.trophy.isEarned && (
-              <>
-                <Typography sx={sx.earnedTime}>
-                  {getDateString(props.trophy.earnedAt)}
-                </Typography>
-              </>
+              <Typography sx={sx.earnedTime}>
+                {getDateString(props.trophy.earnedAt)}
+              </Typography>
             )}
             {props.trophy.progress && !hideDetails && (
-              <>
-                <TrophyProgressBar progress={props.trophy.progress} />
-              </>
+              <TrophyProgressBar progress={props.trophy.progress} />
             )}
           </Stack>
         </Stack>

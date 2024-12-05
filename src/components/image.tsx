@@ -1,6 +1,4 @@
-import React from 'react';
 import { Box } from '@mui/material';
-
 import { Shimmer } from './animated/shimmer';
 
 export function Image(props: {
@@ -16,7 +14,7 @@ export function Image(props: {
       <Box sx={{ aspectRatio: 1 }}>
         <Shimmer />
       </Box>
-      {props.src && props.src != '' && (
+      {props.src && props.src !== '' && (
         <>
           <Box sx={sx.image} component='img' src={props.src} />
           {props.children}

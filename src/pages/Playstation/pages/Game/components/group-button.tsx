@@ -1,5 +1,4 @@
-import React from 'react';
-import { alpha, Box, Stack, Typography, useTheme } from '@mui/material';
+import { Box, Stack, Typography, alpha, useTheme } from '@mui/material';
 
 export function GroupButton(props: {
   type: string;

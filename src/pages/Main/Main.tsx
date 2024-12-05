@@ -1,9 +1,6 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
 import { Grid } from '@mui/material';
-
 import { AppIcon } from 'components/app-icon';
-
+import { Outlet } from 'react-router-dom';
 import { AppDrawer } from './components/app-drawer';
 import { PersonalCard } from './components/personal-card';
 
@@ -28,7 +25,7 @@ export function Main() {
             <AppIcon
               name='Minesweeper'
               onTap={() =>
-                window.open(`https://sutne.github.io/games`, '_blank')
+                window.open('https://sutne.github.io/games', '_blank')
               }
             />
           </AppDrawer>
@@ -37,9 +34,9 @@ export function Main() {
           <AppDrawer title='Contact Me'>
             <AppIcon
               name='Mail'
-              onTap={() =>
-                (window.location.href = `mailto:sivert.utne@gmail.com`)
-              }
+              onTap={() => {
+                window.location.href = 'mailto:sivert.utne@gmail.com';
+              }}
             />
           </AppDrawer>
         </Grid>

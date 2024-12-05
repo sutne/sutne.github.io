@@ -1,9 +1,7 @@
-import React from 'react';
 import { VolumeOff, VolumeUp } from '@mui/icons-material';
-import { alpha, Box, Collapse, Stack, useTheme } from '@mui/material';
-
+import { Box, Collapse, Stack, alpha, useTheme } from '@mui/material';
 import { Image } from 'components/image';
-
+import { useState } from 'react';
 import { ItemSubtitle } from '../components/item-subtitle';
 import { ItemTitle } from '../components/item-title';
 import { SampleButton } from '../components/sample-button';
@@ -12,7 +10,7 @@ import { SectionTitle } from '../components/typography';
 import { useNowPlaying } from '../providers/now-playing-provider';
 
 export function NowPlaying() {
-  const [isHovering, setIsHovering] = React.useState(false);
+  const [isHovering, setIsHovering] = useState(false);
 
   const theme = useTheme();
   const { track, shouldShow } = useNowPlaying();

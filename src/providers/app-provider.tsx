@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 
 const AppContext = React.createContext<
   | {
@@ -11,13 +11,11 @@ const AppContext = React.createContext<
 >(undefined);
 
 export function AppProvider(props: { children: JSX.Element }) {
-  const [iconReferences, setIconReferences] = React.useState(
+  const [iconReferences, setIconReferences] = useState(
     new Map<string, React.RefObject<HTMLImageElement>>(),
   );
-  const [isOpenStates, setIsOpenStates] = React.useState(
-    new Map<string, boolean>(),
-  );
-  
+  const [isOpenStates, setIsOpenStates] = useState(new Map<string, boolean>());
+
   const getIsOpen = (name: string) => {
     const isOpen = isOpenStates.get(name);
     return isOpen ?? false;
@@ -50,7 +48,7 @@ export function AppProvider(props: { children: JSX.Element }) {
 }
 
 export function useApp() {
-  const context = React.useContext(AppContext);
+  const context = useContext(AppContext);
   if (context !== undefined) return { ...context };
   throw new Error('useApp must be used within a AppProvider');
 }

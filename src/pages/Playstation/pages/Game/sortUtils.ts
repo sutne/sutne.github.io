@@ -1,5 +1,5 @@
-import { Trophy, TrophyGame } from 'pages/Playstation/service/types';
-import { Sorting } from 'providers/sort-provider';
+import type { Trophy, TrophyGame } from 'pages/Playstation/service/types';
+import type { Sorting } from 'providers/sort-provider';
 
 export function sortTrophies(trophies: Trophy[], sorting: Sorting): Trophy[] {
   const typeValues = {
@@ -21,7 +21,7 @@ export function sortTrophies(trophies: Trophy[], sorting: Sorting): Trophy[] {
   const compareRarity = (a: Trophy, b: Trophy) => {
     if (!a?.rarity) return -1;
     if (!b?.rarity) return 1;
-    return parseFloat(a.rarity) - parseFloat(b.rarity);
+    return Number.parseFloat(a.rarity) - Number.parseFloat(b.rarity);
   };
   const compareGrade = (a: Trophy, b: Trophy) => {
     const hideA = a.isHidden && !a.isEarned;
@@ -137,5 +137,5 @@ export function compare(
   const aTime = new Date(a).getTime();
   const bTime = new Date(b).getTime();
   const diff = aTime - bTime;
-  return diff != 0 ? diff : undefined;
+  return diff !== 0 ? diff : undefined;
 }

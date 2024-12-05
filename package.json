@@ -1,15 +1,13 @@
 {
-  "browserslist": {
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ],
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ]
+  "version": "0.1.0",
+  "name": "sutne.github.io",
+  "homepage": "https://sutne.github.io/",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "fix": "biome check --write --unsafe",
+    "lint": "biome ci --diagnostic-level=error && tsc --noEmit"
   },
   "dependencies": {
     "@emotion/react": "^11.13.5",
@@ -22,29 +20,21 @@
     "universal-cookie": "^7.2.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@biomejs/biome": "^1.9.4",
     "@types/node": "^22.10.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@types/react-router-dom": "^5.3.3",
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "eslint-config-google": "^0.14.0",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
     "react-scripts": "^5.0.1",
     "typescript": "^4.9.5"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
+  "browserslist": {
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
     ]
-  },
-  "homepage": "https://sutne.github.io/",
-  "name": "sutne.github.io",
-  "private": true,
-  "scripts": {
-    "build": "react-scripts build",
-    "deploy": "gh-pages -d build",
-    "predeploy": "npm run build",
-    "start": "react-scripts start"
-  },
-  "version": "0.1.0"
+  }
 }

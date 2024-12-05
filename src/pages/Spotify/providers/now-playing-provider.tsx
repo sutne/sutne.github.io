@@ -1,8 +1,6 @@
-import React from 'react';
-
+import React, { useContext, useEffect, useState } from 'react';
 import * as API from '../service/api';
-import { NowPlayingType } from '../service/types';
-
+import type { NowPlayingType } from '../service/types';
 import { useMusicPlayer } from './music-player';
 
 const NowPlayingContext = React.createContext<
@@ -16,8 +14,8 @@ const NowPlayingContext = React.createContext<
 >(undefined);
 
 export function NowPlayingProvider(props: { children: JSX.Element }) {
-  const [track, setTrack] = React.useState<NowPlayingType>();
-  const [shouldShow, setShouldShow] = React.useState(false);
+  const [track, setTrack] = useState<NowPlayingType>();
+  const [shouldShow, setShouldShow] = useState(false);
 
   const { addSample } = useMusicPlayer();
 
@@ -30,7 +28,7 @@ export function NowPlayingProvider(props: { children: JSX.Element }) {
     setShouldShow(true);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     refresh(); // Refresh on mount
   }, []);
 
@@ -49,7 +47,7 @@ export function NowPlayingProvider(props: { children: JSX.Element }) {
 }
 
 export function useNowPlaying() {
-  const context = React.useContext(NowPlayingContext);
+  const context = useContext(NowPlayingContext);
   if (context !== undefined) return { ...context };
   throw new Error('useNowPlaying must be used within a NowPlayingProvider');
 }

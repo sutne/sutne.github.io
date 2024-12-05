@@ -1,4 +1,4 @@
-import { ArtistType, NowPlayingType, TrackType as TrackType } from './types';
+import type { ArtistType, NowPlayingType, TrackType } from './types';
 
 const API_URL = 'https://personal-sutne.vercel.app/api/spotify';
 

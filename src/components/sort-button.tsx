@@ -1,7 +1,5 @@
-import React from 'react';
 import { KeyboardArrowDownRounded } from '@mui/icons-material';
-import { alpha, Box, Stack, Typography, useTheme } from '@mui/material';
-
+import { Box, Stack, Typography, alpha, useTheme } from '@mui/material';
 import { useSorting } from 'providers/sort-provider';
 
 export function SortButton(props: { type: string }) {

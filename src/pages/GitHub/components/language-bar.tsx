@@ -1,6 +1,4 @@
-import React from 'react';
 import { Box, Grid, useTheme } from '@mui/material';
-
 import { LanguageColorMap } from '../service/types';
 
 export function LanguageBar(props: {
@@ -26,14 +24,14 @@ export function LanguageBar(props: {
   return (
     <>
       <Box sx={sx.colorBar}>
-        {Object.keys(props.languages).map((language, i) => {
-          return <Box key={i} sx={getBarSx(language)} />;
+        {Object.keys(props.languages).map((language) => {
+          return <Box key={language} sx={getBarSx(language)} />;
         })}
       </Box>
       <Grid container rowSpacing={1} columnSpacing={2}>
-        {Object.keys(props.languages).map((language, i) => {
+        {Object.keys(props.languages).map((language) => {
           return (
-            <Grid item key={i}>
+            <Grid item key={language}>
               <LanguageName
                 name={language}
                 percentage={toPercentage(language)}
@@ -57,9 +55,9 @@ export function LanguageBar(props: {
     if (index === numLangs - 1) {
       border = 'none';
     } else if (amount(language) > 0.05 * props.size) {
-      border = '2px solid ' + theme.palette.background.paper;
+      border = `2px solid ${theme.palette.background.paper}`;
     } else if (amount(language) > 0.01 * props.size) {
-      border = '1px solid ' + theme.palette.background.paper;
+      border = `1px solid ${theme.palette.background.paper}`;
     } else {
       border = 'none';
     }

@@ -1,8 +1,6 @@
-import React from 'react';
-import { alpha, Box, Stack, useTheme } from '@mui/material';
-
+import { Box, Stack, alpha, useTheme } from '@mui/material';
 import { Image } from 'components/image';
-
+import { useState } from 'react';
 import { ItemSubtitle } from './item-subtitle';
 import { ItemTitle } from './item-title';
 import { SampleButton } from './sample-button';
@@ -13,7 +11,7 @@ export function ItemCard(props: {
   image?: string;
   sample?: string;
 }) {
-  const [isHovered, setHovered] = React.useState(false);
+  const [isHovered, setHovered] = useState(false);
 
   const theme = useTheme();
 

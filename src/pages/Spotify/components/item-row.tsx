@@ -1,5 +1,4 @@
-import React from 'react';
-import { alpha, Box, Stack, useTheme } from '@mui/material';
+import { Box, Stack, alpha, useTheme } from '@mui/material';
 
 export function ItemRow(props: { children: JSX.Element[] | JSX.Element }) {
   const sx = getSx();

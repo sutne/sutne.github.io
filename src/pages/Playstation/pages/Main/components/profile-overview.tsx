@@ -1,9 +1,6 @@
-import React from 'react';
 import { Box, Stack, Typography } from '@mui/material';
-
 import { ShimmerImage, ShimmerText } from 'components/animated/shimmer';
-
-import { Profile } from '../../../service/types';
+import type { Profile } from '../../../service/types';
 
 export function ProfileOverview(props: { profile: Profile | undefined }) {
   const sx = getSx();

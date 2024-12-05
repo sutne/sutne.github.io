@@ -1,10 +1,7 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
-
 import { TrophyProgressCard } from 'pages/Playstation/components/trophy-progress-card';
-
-import { TrophyGame } from '../../../service/types';
+import { useNavigate } from 'react-router-dom';
+import type { TrophyGame } from '../../../service/types';
 
 export function TrophyTitle({ game }: { game: TrophyGame }) {
   const navigate = useNavigate();

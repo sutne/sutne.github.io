@@ -1,5 +1,4 @@
-import React from 'react';
-import { alpha, Box, useTheme } from '@mui/material';
+import { Box, alpha, useTheme } from '@mui/material';
 
 export function Shimmer(props: { sx?: any }) {
   const sx = getSx();
@@ -52,7 +51,7 @@ export function Shimmer(props: { sx?: any }) {
 }
 
 export function ShimmerText(props: {
-  fontSize: string | any;
+  fontSize: string | number | object;
   numLines?: number;
   width?: string;
 }) {
@@ -61,7 +60,7 @@ export function ShimmerText(props: {
 
   const sx = getSx();
   for (let i = 0; i < numLines; i++) {
-    const width = props.width ?? i + 1 < numLines ? '100%' : '70%';
+    const width = (props.width ?? i + 1 < numLines) ? '100%' : '70%';
     lines.push(
       <Box key={i} sx={{ ...sx.container, width: width }}>
         <Shimmer />
@@ -81,7 +80,10 @@ export function ShimmerText(props: {
   }
 }
 
-export function ShimmerImage(props: { width: string | any; sx?: any }) {
+export function ShimmerImage(props: {
+  width: string | number | object;
+  sx?: any;
+}) {
   const sx = getSx();
   return (
     <>

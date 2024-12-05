@@ -1,14 +1,10 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
-
 import { AppContent } from 'components/app-content';
+import { Route, Routes } from 'react-router-dom';
 import { darkTheme } from 'themes/darkTheme';
 import { lightTheme } from 'themes/lightTheme';
-
 import { SortProvider } from '../../providers/sort-provider';
-
 import { PlaystationTrophiesGame } from './pages/Game/TrophiesForGame';
 import { Main } from './pages/Main/Main';
 import { PlaystationTrophies } from './pages/Trophies/Trophies';

@@ -1,20 +1,17 @@
-import React from 'react';
 import { CircularProgress, Stack } from '@mui/material';
-
 import { SortButton } from 'components/sort-button';
 import { useSorting } from 'providers/sort-provider';
-
+import { useEffect, useState } from 'react';
 import * as API from '../service/api';
-import { RepoType } from '../service/types';
+import type { RepoType } from '../service/types';
 import { sortRepos } from '../util';
-
 import { Repository } from './repo';
 
 export function RepoList() {
-  const [repos, setRepos] = React.useState<RepoType[]>([]);
+  const [repos, setRepos] = useState<RepoType[]>([]);
   const { sorting } = useSorting();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const getData = async () => {
       const personalRepos = await API.getRepositories();
       if (!personalRepos) return;
@@ -23,7 +20,7 @@ export function RepoList() {
     getData();
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setRepos((repos) => sortRepos([...repos], sorting));
   }, [sorting]);
 
@@ -49,8 +46,8 @@ export function RepoList() {
         <SortButton type='Language' />
       </Stack>
       <Stack direction='column' spacing={1}>
-        {repos.map((repo, i) => (
-          <Repository key={i} repo={repo} />
+        {repos.map((repo) => (
+          <Repository key={repo.href} repo={repo} />
         ))}
       </Stack>
     </>

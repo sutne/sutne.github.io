@@ -1,20 +1,17 @@
-import React from 'react';
 import { Box, Stack } from '@mui/material';
-
 import { SortButton } from 'components/sort-button';
 import { useSorting } from 'providers/sort-provider';
-
-import { Trophy } from '../../../service/types';
+import { useEffect, useState } from 'react';
+import type { Trophy } from '../../../service/types';
 import { sortTrophies } from '../sortUtils';
-
-import { Trophy as TrophyComp } from './trophy';
+import { TrophyCard } from './trophy';
 
 export function TrophyList(props: { list: Trophy[] }) {
-  const [trophies, setTrophies] = React.useState(props.list);
+  const [trophies, setTrophies] = useState(props.list);
 
   const { sorting } = useSorting();
 
-  React.useEffect(() => {
+  useEffect(() => {
     setTrophies(sortTrophies([...props.list], sorting));
   }, [sorting]);
 
@@ -30,8 +27,8 @@ export function TrophyList(props: { list: Trophy[] }) {
         </Stack>
       )}
       <Stack spacing={'4px'} alignItems={'center'}>
-        {trophies.map((trophy, i) => (
-          <TrophyComp key={i} trophy={trophy} />
+        {trophies.map((trophy) => (
+          <TrophyCard key={trophy.id} trophy={trophy} />
         ))}
       </Stack>
     </Box>

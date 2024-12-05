@@ -1,12 +1,10 @@
-import React from 'react';
 import { Box, Typography } from '@mui/material';
-
 import { getTrophyLevelImage } from '../../../util';
 
 export function TrophyLevel(props: { level: number }) {
-  const icon = require(`../../../assets/levels/${getTrophyLevelImage(
-    props.level,
-  )}`);
+  const icon = require(
+    `../../../assets/levels/${getTrophyLevelImage(props.level)}`,
+  );
 
   const shadow = {
     xs: 'drop-shadow(0 1px 2px rgba(0,0,0,50%))',
