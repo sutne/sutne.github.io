@@ -4,6 +4,6 @@ export function msToString(millis: number) {
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
-export function isString(value: any): value is string {
+export function isString(value: unknown): value is string {
   return typeof value === 'string' || value instanceof String;
 }

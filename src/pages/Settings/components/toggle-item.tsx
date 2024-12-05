@@ -1,7 +1,6 @@
-import React from 'react';
 import { QuestionMarkRounded } from '@mui/icons-material';
-import { alpha, Box, Stack, Typography, useTheme } from '@mui/material';
-
+import { Box, Stack, Typography, alpha, useTheme } from '@mui/material';
+import { useState } from 'react';
 import { ToggleSwitch } from './toggle-switch';
 
 export function ToggleItem(props: {
@@ -10,7 +9,7 @@ export function ToggleItem(props: {
   onChange: () => void;
   tooltip?: JSX.Element;
 }) {
-  const [showTooltip, setShowTooltip] = React.useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   const theme = useTheme();
 

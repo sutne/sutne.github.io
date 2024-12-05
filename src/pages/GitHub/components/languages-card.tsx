@@ -1,16 +1,14 @@
-import React from 'react';
 import { CircularProgress, Stack, Typography } from '@mui/material';
-
+import { useEffect, useState } from 'react';
 import * as API from '../service/api';
-import { LanguageStatsType } from '../service/types';
-
+import type { LanguageStatsType } from '../service/types';
 import { RepoCard } from './card';
 import { LanguageBar } from './language-bar';
 
 export function LanguagesCard() {
-  const [data, setData] = React.useState<LanguageStatsType | undefined>();
+  const [data, setData] = useState<LanguageStatsType | undefined>();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const getData = async () => {
       const response = await API.getLanguageStats();
       if (!response) return;

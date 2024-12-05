@@ -1,8 +1,6 @@
-import React from 'react';
 import { Pause, PlayArrow } from '@mui/icons-material';
-import { IconButton, SvgIconTypeMap, useTheme } from '@mui/material';
-import { OverridableComponent } from '@mui/material/OverridableComponent';
-
+import { IconButton, type SvgIconTypeMap, useTheme } from '@mui/material';
+import type { OverridableComponent } from '@mui/material/OverridableComponent';
 import { useMusicPlayer } from '../providers/music-player';
 
 type MuiIcon = OverridableComponent<SvgIconTypeMap<object, 'svg'>> & {
@@ -19,8 +17,8 @@ export function SampleButton(props: {
 
   const showButton = props.show || isPlaying(props.sample);
   const Icon = isPlaying(props.sample)
-    ? props.pauseIcon ?? Pause
-    : props.playIcon ?? PlayArrow;
+    ? (props.pauseIcon ?? Pause)
+    : (props.playIcon ?? PlayArrow);
 
   const sx = getSx();
   return (

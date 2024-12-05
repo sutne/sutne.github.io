@@ -1,6 +1,4 @@
-import React from 'react';
 import { Typography } from '@mui/material';
-
 import { ShimmerText } from 'components/animated/shimmer';
 
 export function ItemTitle(props: { children?: string; sx?: any }) {

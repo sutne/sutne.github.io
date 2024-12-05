@@ -1,8 +1,6 @@
-import React from 'react';
-
+import { useEffect, useState } from 'react';
 import * as API from '../../service/api';
-import { Profile } from '../../service/types';
-
+import type { Profile } from '../../service/types';
 import { ProfileOverview } from './components/profile-overview';
 import { PsnProfilesCard } from './components/psn-profiles-card';
 import { RecentlyPlayed } from './components/recently-played';
@@ -10,10 +8,10 @@ import { Section } from './components/section';
 import { TrophyOverview } from './components/trophy-overview';
 
 export function Main() {
-  const [profile, setProfile] = React.useState<Profile | undefined>();
-  const [hasError, setHasError] = React.useState(false);
+  const [profile, setProfile] = useState<Profile | undefined>();
+  const [hasError, setHasError] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const getData = async () => {
       const response = await API.getProfile();
       if (!response) {

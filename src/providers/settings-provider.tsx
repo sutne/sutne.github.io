@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { useContext, useState } from 'react';
 import {
   deleteAllCookies,
   getCookies,
@@ -29,7 +28,7 @@ const SettingsContext = React.createContext<
 >(undefined);
 
 export function SettingsProvider(props: { children: JSX.Element }) {
-  const [settings, setSettings] = React.useState<Settings>(
+  const [settings, setSettings] = useState<Settings>(
     getCookies('settings', defaultSettings),
   );
 
@@ -58,7 +57,7 @@ export function SettingsProvider(props: { children: JSX.Element }) {
 }
 
 export function useSettings() {
-  const context = React.useContext(SettingsContext);
+  const context = useContext(SettingsContext);
   if (context !== undefined) return { ...context };
   throw new Error('useCookies must be used within a CookieProvider');
 }

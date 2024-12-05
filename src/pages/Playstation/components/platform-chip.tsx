@@ -1,7 +1,5 @@
-import React from 'react';
 import { Typography } from '@mui/material';
-
-import { Platform } from '../service/types';
+import type { Platform } from '../service/types';
 
 export function PlatformChip(props: { platform: Platform }) {
   if (!props.platform) return <></>;

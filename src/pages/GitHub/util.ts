@@ -1,6 +1,5 @@
-import { Sorting } from '../../providers/sort-provider';
-
-import { RepoType } from './service/types';
+import type { Sorting } from '../../providers/sort-provider';
+import type { RepoType } from './service/types';
 
 export function toTimeDiffString(utcString: string) {
   const date = new Date(utcString);

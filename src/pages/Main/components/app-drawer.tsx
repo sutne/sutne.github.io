@@ -1,7 +1,6 @@
-import React from 'react';
-import { alpha, Box, Grid } from '@mui/material';
-
+import { Box, Grid, alpha } from '@mui/material';
 import { useMainTheme } from 'providers/main-theme-provider';
+import React from 'react';
 
 export function AppDrawer(props: {
   title: string;
@@ -18,8 +17,9 @@ export function AppDrawer(props: {
     <Box sx={sx.background}>
       <Box sx={sx.title}>{props.title}</Box>
       <Grid sx={sx.drawer} container columnSpacing={2} rowSpacing={2}>
-        {apps.map((app, index) => (
-          <Grid item key={index}>
+        {apps.map((app, i) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: no better alternative
+          <Grid item key={i}>
             {React.cloneElement(app, { ...app.props })}
           </Grid>
         ))}

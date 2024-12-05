@@ -1,6 +1,4 @@
-import React from 'react';
 import { Box, Typography } from '@mui/material';
-
 import type { TrophyType } from '../service/types';
 
 export function TrophyWithCount(props: {
@@ -8,7 +6,7 @@ export function TrophyWithCount(props: {
   count: number;
   hideZero?: boolean;
   hide?: boolean;
-  fontSize?: any;
+  fontSize?: string | number | object;
   maxWidth?: string;
 }) {
   const image = require(`../assets/trophies/${props.type}.png`);

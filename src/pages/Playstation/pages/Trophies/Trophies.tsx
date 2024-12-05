@@ -1,12 +1,10 @@
-import React from 'react';
 import { CircularProgress, Stack } from '@mui/material';
-
+import { useEffect, useState } from 'react';
 import { SortButton } from '../../../../components/sort-button';
 import { useSorting } from '../../../../providers/sort-provider';
 import * as API from '../../service/api';
-import { TrophyGame } from '../../service/types';
+import type { TrophyGame } from '../../service/types';
 import { sortGames } from '../Game/sortUtils';
-
 import { TrophyTitle } from './components/TrophyTitle';
 
 export function PlaystationTrophies() {
@@ -28,14 +26,14 @@ export function PlaystationTrophies() {
     },
     progress: 0,
   });
-  const [gameList, setGameList] = React.useState<TrophyGame[]>(unloaded);
+  const [gameList, setGameList] = useState<TrophyGame[]>(unloaded);
 
   const { sorting } = useSorting();
-  React.useEffect(() => {
+  useEffect(() => {
     setGameList((prev) => sortGames([...prev], sorting));
   }, [sorting]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const getData = async () => {
       setGameList(unloaded);
       const response = await API.getGameList();
@@ -58,7 +56,8 @@ export function PlaystationTrophies() {
       </Stack>
       <Stack spacing={2}>
         {gameList.map((game, i) => (
-          <TrophyTitle key={`${game.platform[0].id}-${i}`} game={game} />
+          // biome-ignore lint/suspicious/noArrayIndexKey: required to replace "shimmer"/empty ones
+          <TrophyTitle key={i} game={game} />
         ))}
       </Stack>
     </>

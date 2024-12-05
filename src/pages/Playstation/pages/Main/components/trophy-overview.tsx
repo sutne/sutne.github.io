@@ -1,12 +1,8 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Box, Grid } from '@mui/material';
-
 import { Shimmer } from 'components/animated/shimmer';
-
+import { useNavigate } from 'react-router-dom';
 import { TrophyWithCount } from '../../../components/trophy-with-count';
-import { Profile, TrophyType } from '../../../service/types';
-
+import type { Profile, TrophyType } from '../../../service/types';
 import { TrophyLevel } from './trophy-level';
 
 export function TrophyOverview(props: { profile: Profile | undefined }) {
@@ -34,7 +30,7 @@ export function TrophyOverview(props: { profile: Profile | undefined }) {
     );
   }
   return (
-    <Box sx={sx.card} onClick={() => navigate(`/Playstation/trophies`)}>
+    <Box sx={sx.card} onClick={() => navigate('/Playstation/trophies')}>
       <Grid container spacing={2} justifyContent='center' alignItems='center'>
         <Grid item xs={12} md={4}>
           <TrophyLevel level={props.profile?.trophySummary.level ?? 1} />

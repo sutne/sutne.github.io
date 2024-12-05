@@ -1,22 +1,19 @@
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { KeyboardArrowLeftRounded, Minimize } from '@mui/icons-material';
 import {
-  alpha,
   Box,
   IconButton,
-  Stack,
-  Theme,
   ThemeProvider as MuiThemeProvider,
+  Stack,
+  type Theme,
   Typography,
+  alpha,
 } from '@mui/material';
-
 import { useApp } from 'providers/app-provider';
 import { useMainTheme } from 'providers/main-theme-provider';
 import { useSettings } from 'providers/settings-provider';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { darkTheme } from 'themes/darkTheme';
 import { lightTheme } from 'themes/lightTheme';
-
 import { ContentAnimationWrapper } from './animated/content-animation-wrapper';
 
 export function AppContent(props: {

@@ -1,5 +1,4 @@
-import React from 'react';
-import { alpha, Box, Typography, useTheme } from '@mui/material';
+import { Box, Typography, alpha, useTheme } from '@mui/material';
 
 export function ProgressBar({ progress }: { progress: number }) {
   const theme = useTheme();

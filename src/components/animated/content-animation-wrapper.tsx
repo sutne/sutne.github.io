@@ -1,10 +1,9 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
-
 import { useApp } from 'providers/app-provider';
 import { useSettings } from 'providers/settings-provider';
-
+import type React from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getImageCenter, getScreenCenter } from './util';
 
 /**
@@ -27,17 +26,17 @@ export function ContentAnimationWrapper(props: {
     : '0ms';
 
   // needed to animate on mount
-  const [isMounted, setIsMounted] = React.useState(false);
-  React.useEffect(() => {
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
     setIsMounted(true);
     // if page is loaded directly from url, instead of clicking on app icon
     setIsOpen(props.name, true);
   }, []);
 
-  const [origin, setOrigin] = React.useState(getScreenCenter());
-  const [target, setTarget] = React.useState(getImageCenter(iconRef));
+  const [origin, setOrigin] = useState(getScreenCenter());
+  const [target, setTarget] = useState(getImageCenter(iconRef));
 
-  React.useEffect(() => {
+  useEffect(() => {
     setOrigin(getScreenCenter());
     setTarget(getImageCenter(iconRef));
   }, [iconRef, window.innerWidth, window.innerHeight]);

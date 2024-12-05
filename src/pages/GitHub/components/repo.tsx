@@ -1,19 +1,17 @@
-import React from 'react';
 import { LinkRounded } from '@mui/icons-material';
 import {
-  alpha,
   Box,
   Collapse,
   Grid,
   Stack,
   Typography,
+  alpha,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-
-import { LanguageColorMap, RepoType } from '../service/types';
+import { useState } from 'react';
+import { LanguageColorMap, type RepoType } from '../service/types';
 import { toTimeDiffString } from '../util';
-
 import { RepoCard } from './card';
 import { LanguageBar } from './language-bar';
 
@@ -21,7 +19,7 @@ type props = {
   repo: RepoType;
 };
 export function Repository({ repo }: props) {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const theme = useTheme();
 
@@ -69,8 +67,8 @@ export function Repository({ repo }: props) {
               </Stack>
             </Stack>
             <Grid sx={sx.topics} container spacing={1}>
-              {repo.topics.map((topic, i) => (
-                <Grid item key={i}>
+              {repo.topics.map((topic) => (
+                <Grid item key={topic}>
                   <Typography sx={sx.topic}>{topic}</Typography>
                 </Grid>
               ))}

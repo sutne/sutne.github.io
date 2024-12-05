@@ -1,13 +1,10 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
 import { Stack } from '@mui/material';
-
 import { TrophyProgressCard } from 'pages/Playstation/components/trophy-progress-card';
 import { SortProvider } from 'providers/sort-provider';
-
+import { useEffect, useMemo, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import * as API from '../../service/api';
-import { Platform, Trophy, TrophyGroup } from '../../service/types';
-
+import type { Platform, Trophy, TrophyGroup } from '../../service/types';
 import { GroupButton } from './components/group-button';
 import { TrophyList } from './components/trophy-list';
 import { groupByEarned, groupByType } from './groupUtils';
@@ -32,31 +29,25 @@ export function PlaystationTrophiesGame() {
     progress: 0,
     trophies: [],
   });
-  const [groups, setGroups] = React.useState<TrophyGroup[]>(unloaded);
-  const [groupBy, setGroupBy] = React.useState<'Default' | 'Earned' | 'Type'>(
+  const [groups, setGroups] = useState<TrophyGroup[]>(unloaded);
+  const [groupBy, setGroupBy] = useState<'Default' | 'Earned' | 'Type'>(
     'Default',
   );
 
-  const allTrophies = React.useMemo(
+  const allTrophies: Trophy[] = useMemo(
     () =>
       groups.reduce(
-        (trophies, group) => [...trophies, ...group.trophies],
+        (trophies, group) => trophies.concat(group.trophies),
         [] as Trophy[],
       ),
     [groups],
   );
-  const earnedGroups = React.useMemo(
-    () => groupByEarned(allTrophies),
-    [allTrophies],
-  );
-  const typeGroups = React.useMemo(
-    () => groupByType(allTrophies),
-    [allTrophies],
-  );
+  const earnedGroups = useMemo(() => groupByEarned(allTrophies), [allTrophies]);
+  const typeGroups = useMemo(() => groupByType(allTrophies), [allTrophies]);
 
   const params = useParams();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const getData = async () => {
       if (!params.gameIds || !params.platforms) return;
       setGroups(unloaded);
@@ -75,8 +66,8 @@ export function PlaystationTrophiesGame() {
     groupBy === 'Default'
       ? groups
       : groupBy === 'Earned'
-      ? earnedGroups
-      : typeGroups;
+        ? earnedGroups
+        : typeGroups;
 
   return (
     <>
@@ -139,7 +130,7 @@ export function PlaystationTrophiesGame() {
               progress={group.progress}
               trophyCount={group.trophyCount}
               earnedCount={group.earnedCount}
-              expanded={displayedGroups.length == 1 && group.name !== ''}
+              expanded={displayedGroups.length === 1 && group.name !== ''}
             >
               <TrophyList list={group.trophies} />
             </TrophyProgressCard>

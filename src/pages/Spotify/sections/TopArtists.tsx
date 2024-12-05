@@ -1,10 +1,9 @@
-import React from 'react';
-
+import { useEffect, useState } from 'react';
 import { ItemCard } from '../components/item-card';
 import { ItemRow } from '../components/item-row';
 import { SectionTitle } from '../components/typography';
 import * as API from '../service/api';
-import { ArtistType } from '../service/types';
+import type { ArtistType } from '../service/types';
 
 export function TopArtists() {
   const unloaded = new Array<ArtistType>(15).fill({
@@ -13,9 +12,9 @@ export function TopArtists() {
     image: '',
     href: '',
   });
-  const [artists, setArtists] = React.useState<ArtistType[]>([]);
+  const [artists, setArtists] = useState<ArtistType[]>([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const getTracks = async () => {
       setArtists(unloaded);
       const response = await API.getTopArtists();
@@ -30,6 +29,7 @@ export function TopArtists() {
       <ItemRow>
         {artists.map((artist, i) => (
           <ItemCard
+            // biome-ignore lint/suspicious/noArrayIndexKey: required to replace "shimmer"/empty ones
             key={i}
             image={artist.image}
             title={artist.name}

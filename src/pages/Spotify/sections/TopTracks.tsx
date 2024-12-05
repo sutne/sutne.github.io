@@ -1,11 +1,10 @@
-import React from 'react';
-
+import { useEffect, useState } from 'react';
 import { ItemCard } from '../components/item-card';
 import { ItemRow } from '../components/item-row';
 import { SectionTitle } from '../components/typography';
 import { useMusicPlayer } from '../providers/music-player';
 import * as API from '../service/api';
-import { TrackType } from '../service/types';
+import type { TrackType } from '../service/types';
 
 export function TopTracks() {
   const unloaded = new Array<TrackType>(15).fill({
@@ -17,11 +16,11 @@ export function TopTracks() {
     isExplicit: false,
     isLocal: false,
   });
-  const [tracks, setTracks] = React.useState<TrackType[]>([]);
+  const [tracks, setTracks] = useState<TrackType[]>([]);
 
   const { addSample } = useMusicPlayer();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const getTracks = async () => {
       setTracks(unloaded);
       const response = await API.getTopTracks();
@@ -39,6 +38,7 @@ export function TopTracks() {
       <ItemRow>
         {tracks.map((track, i) => (
           <ItemCard
+            // biome-ignore lint/suspicious/noArrayIndexKey: required to replace "shimmer"/empty ones
             key={i}
             image={track.image}
             sample={track.sample}

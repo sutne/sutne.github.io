@@ -1,9 +1,6 @@
-import React from 'react';
 import { Box } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
-
 import { AppContent } from 'components/app-content';
-
 import { MusicPlayerProvider } from './providers/music-player';
 import { NowPlayingProvider } from './providers/now-playing-provider';
 import { NowPlaying } from './sections/NowPlaying';

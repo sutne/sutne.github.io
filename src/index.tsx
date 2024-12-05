@@ -1,8 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Box } from '@mui/material';
-
 import { GitHub } from 'pages/GitHub/GitHub';
 import { Main } from 'pages/Main/Main';
 import { Playstation } from 'pages/Playstation/Playstation';
@@ -11,6 +7,9 @@ import { Spotify } from 'pages/Spotify/Spotify';
 import { AppProvider, useApp } from 'providers/app-provider';
 import { MainThemeProvider, useMainTheme } from 'providers/main-theme-provider';
 import { SettingsProvider } from 'providers/settings-provider';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

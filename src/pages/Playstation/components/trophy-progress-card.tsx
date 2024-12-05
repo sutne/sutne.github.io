@@ -1,17 +1,14 @@
-import React from 'react';
 import {
-  alpha,
   Box,
   Collapse,
   Stack,
   Typography,
+  alpha,
   useTheme,
 } from '@mui/material';
-
 import { ShimmerImage, ShimmerText } from 'components/animated/shimmer';
-
-import { PlatformInfo, TrophyCount, TrophyType } from '../service/types';
-
+import { useState } from 'react';
+import type { PlatformInfo, TrophyCount, TrophyType } from '../service/types';
 import { PlatformChip } from './platform-chip';
 import { ProgressBar } from './progress-bar';
 import { TrophyWithCount } from './trophy-with-count';
@@ -28,7 +25,7 @@ export function TrophyProgressCard(props: {
 }) {
   const theme = useTheme();
   const sx = getSx();
-  const [expanded, setExpanded] = React.useState(props.expanded ?? false);
+  const [expanded, setExpanded] = useState(props.expanded ?? false);
 
   const trophyCount = (type: TrophyType) => {
     const count = props.earnedCount[type];

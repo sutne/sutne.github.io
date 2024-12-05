@@ -1,9 +1,6 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
-
 import { useApp } from 'providers/app-provider';
-
+import { useNavigate } from 'react-router-dom';
 import { IconAnimationWrapper } from './animated/icon-animation-wrapper';
 
 export function AppIcon(props: { name: string; onTap?: () => void }) {

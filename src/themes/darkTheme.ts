@@ -1,5 +1,4 @@
 import { createTheme } from '@mui/material';
-
 import { lightTheme } from './lightTheme';
 
 export const darkTheme = createTheme(lightTheme, {

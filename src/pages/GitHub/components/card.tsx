@@ -1,5 +1,4 @@
-import React from 'react';
-import { alpha, Box, useTheme } from '@mui/material';
+import { Box, alpha, useTheme } from '@mui/material';
 
 export function RepoCard(props: { name?: string; children: JSX.Element }) {
   const theme = useTheme();

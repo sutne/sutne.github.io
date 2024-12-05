@@ -1,10 +1,7 @@
-import React from 'react';
 import { Divider, Stack, Typography, useTheme } from '@mui/material';
-
 import { AppContent } from 'components/app-content';
 import { useMainTheme } from 'providers/main-theme-provider';
 import { useSettings } from 'providers/settings-provider';
-
 import { ToggleItem } from './components/toggle-item';
 
 export function Settings() {

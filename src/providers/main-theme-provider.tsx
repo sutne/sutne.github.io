@@ -1,11 +1,10 @@
-import React from 'react';
 import {
-  Theme,
   ThemeProvider as MuiThemeProvider,
+  type Theme,
   useMediaQuery,
 } from '@mui/material';
-
 import { useSettings } from 'providers/settings-provider';
+import React, { useContext, useEffect, useState } from 'react';
 import { darkTheme } from 'themes/darkTheme';
 import { lightTheme } from 'themes/lightTheme';
 
@@ -20,18 +19,16 @@ const MainThemeContext = React.createContext<
 
 export function MainThemeProvider(props: { children: JSX.Element }) {
   const prefersDarkTheme = useMediaQuery('(prefers-color-scheme: dark)');
-  const [theme, setTheme] = React.useState(
-    prefersDarkTheme ? darkTheme : lightTheme,
-  );
+  const [theme, setTheme] = useState(prefersDarkTheme ? darkTheme : lightTheme);
 
   const { settings } = useSettings();
-  React.useEffect(() => {
+  useEffect(() => {
     if (settings.useDarkTheme !== undefined) {
       setTheme(settings.useDarkTheme ? darkTheme : lightTheme);
     } else {
       setTheme(prefersDarkTheme ? darkTheme : lightTheme);
     }
-  }, [settings.useDarkTheme]);
+  }, [settings.useDarkTheme, prefersDarkTheme]);
 
   const themeIsDark = theme === darkTheme;
 
@@ -54,7 +51,7 @@ export function MainThemeProvider(props: { children: JSX.Element }) {
 }
 
 export function useMainTheme() {
-  const context = React.useContext(MainThemeContext);
+  const context = useContext(MainThemeContext);
   if (context !== undefined) return { ...context };
   throw new Error('useTheme must be used within a ThemeProvider');
 }

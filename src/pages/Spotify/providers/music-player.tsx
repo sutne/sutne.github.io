@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 const MusicPlayerContext = React.createContext<
   | {
@@ -11,8 +11,8 @@ const MusicPlayerContext = React.createContext<
 >(undefined);
 
 export function MusicPlayerProvider(props: { children: JSX.Element }) {
-  const [currentSample, setCurrentSample] = React.useState<HTMLAudioElement>();
-  const [samples, setSamples] = React.useState<Map<string, HTMLAudioElement>>(
+  const [currentSample, setCurrentSample] = useState<HTMLAudioElement>();
+  const [samples, setSamples] = useState<Map<string, HTMLAudioElement>>(
     new Map(),
   );
 
@@ -57,7 +57,7 @@ export function MusicPlayerProvider(props: { children: JSX.Element }) {
     return currentSample.src === sample && !currentSample.paused;
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     return () => {
       if (!currentSample) return;
       currentSample.pause();
@@ -80,7 +80,7 @@ export function MusicPlayerProvider(props: { children: JSX.Element }) {
 }
 
 export function useMusicPlayer() {
-  const context = React.useContext(MusicPlayerContext);
+  const context = useContext(MusicPlayerContext);
   if (context !== undefined) return { ...context };
   throw new Error('useMusicPlayer must be used within a MusicPlayerProvider');
 }

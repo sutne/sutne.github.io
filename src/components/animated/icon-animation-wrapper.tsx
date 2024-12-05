@@ -1,9 +1,7 @@
-import React from 'react';
 import { Box } from '@mui/material';
-
 import { useApp } from 'providers/app-provider';
 import { useSettings } from 'providers/settings-provider';
-
+import { useEffect, useState } from 'react';
 import { getCoordinates, getScreenCenter, getSize } from './util';
 
 /**
@@ -24,13 +22,13 @@ export function IconAnimationWrapper(props: {
   const isOpen = getIsOpen(props.name);
 
   // want to target the center of the app icon
-  const [origin, setOrigin] = React.useState(getCoordinates(iconRef));
-  const [target, setTarget] = React.useState({
+  const [origin, setOrigin] = useState(getCoordinates(iconRef));
+  const [target, setTarget] = useState({
     x: getScreenCenter().x - getSize(iconRef).x / 2,
     y: getSize(iconRef).y / 2,
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     setOrigin(getCoordinates(iconRef));
     setTarget({
       x: getScreenCenter().x - getSize(iconRef).x / 2,
