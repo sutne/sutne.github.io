@@ -3,5 +3,5 @@
 .vscode/*
 !.vscode/tasks.json
 node_modules
-build
+dist
 react-app-env.d.ts

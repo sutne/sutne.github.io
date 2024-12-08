@@ -24,7 +24,10 @@ export function TrophyCard(props: { trophy: Trophy }) {
   const hideDetails =
     props.trophy.isHidden && !props.trophy.isEarned && !overrideHidden;
   const trophyType = hideDetails ? 'hidden' : props.trophy.type;
-  const trophyIcon = require(`../../../assets/trophies/${trophyType}.png`);
+  const trophyIcon = new URL(
+    `../../../assets/trophies/${trophyType}.png`,
+    import.meta.url,
+  ).href;
 
   const iconShadow = {
     xs: 'drop-shadow(0 1px 2px rgba(0,0,0,50%))',

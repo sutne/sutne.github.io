@@ -9,7 +9,8 @@ export function TrophyWithCount(props: {
   fontSize?: string | number | object;
   maxWidth?: string;
 }) {
-  const image = require(`../assets/trophies/${props.type}.png`);
+  const image = new URL(`../assets/trophies/${props.type}.png`, import.meta.url)
+    .href;
   const hide = props.hideZero && props.count === 0;
   const hideText =
     props.hideZero && (props.type === 'platinum' || props.count === 0);
