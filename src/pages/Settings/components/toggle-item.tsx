@@ -1,6 +1,6 @@
 import { QuestionMarkRounded } from '@mui/icons-material';
 import { Box, Stack, Typography, alpha, useTheme } from '@mui/material';
-import { useState } from 'react';
+import { type JSX, useState } from 'react';
 import { ToggleSwitch } from './toggle-switch';
 
 export function ToggleItem(props: {

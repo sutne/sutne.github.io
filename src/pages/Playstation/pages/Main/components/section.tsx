@@ -1,4 +1,5 @@
 import { Typography } from '@mui/material';
+import type { JSX } from 'react';
 
 export function Section(props: {
   title: string;

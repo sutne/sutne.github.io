@@ -1,4 +1,5 @@
 import { Box, Stack, alpha, useTheme } from '@mui/material';
+import type { JSX } from 'react';
 
 export function ItemRow(props: { children: JSX.Element[] | JSX.Element }) {
   const sx = getSx();

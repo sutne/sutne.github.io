@@ -1,6 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import {
+  type JSX,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
-const MusicPlayerContext = React.createContext<
+const MusicPlayerContext = createContext<
   | {
       currentSample: HTMLAudioElement | undefined;
       handlePlayPause: (sample: string) => void;

@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { createContext, type JSX, useContext, useState } from 'react';
 
-const AppContext = React.createContext<
+const AppContext = createContext<
   | {
-      getIconRef: (name: string) => React.RefObject<HTMLImageElement>;
+      getIconRef: (name: string) => React.RefObject<HTMLImageElement | null>;
       getIsOpen: (name: string) => boolean;
       setIsOpen: (name: string, isOpen: boolean) => void;
       hasOpenApp: boolean;
@@ -12,7 +12,7 @@ const AppContext = React.createContext<
 
 export function AppProvider(props: { children: JSX.Element }) {
   const [iconReferences, setIconReferences] = useState(
-    new Map<string, React.RefObject<HTMLImageElement>>(),
+    new Map<string, React.RefObject<HTMLImageElement | null>>(),
   );
   const [isOpenStates, setIsOpenStates] = useState(new Map<string, boolean>());
 

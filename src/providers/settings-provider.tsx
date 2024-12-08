@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { type JSX, createContext, useContext, useState } from 'react';
 import {
   deleteAllCookies,
   getCookies,
@@ -19,7 +19,7 @@ const defaultSettings: Settings = {
   animationDuration: 400, // future setting of adjusting, not just turning on/off
 };
 
-const SettingsContext = React.createContext<
+const SettingsContext = createContext<
   | undefined
   | {
       settings: Settings;

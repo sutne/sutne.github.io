@@ -1,9 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
+import type React from 'react';
+import {
+  type JSX,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import * as API from '../service/api';
 import type { NowPlayingType } from '../service/types';
 import { useMusicPlayer } from './music-player';
 
-const NowPlayingContext = React.createContext<
+const NowPlayingContext = createContext<
   | {
       track: NowPlayingType | undefined;
       shouldShow: boolean;
