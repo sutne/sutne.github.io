@@ -7,8 +7,8 @@
   "scripts": {
     "start": "vite --open",
     "build": "tsc -b && vite build",
-    "fix": "biome check --write --unsafe",
-    "lint": "biome ci --diagnostic-level=error && tsc --noEmit"
+    "fix": "biome check --write --unsafe --diagnostic-level=error",
+    "lint": "biome ci --diagnostic-level=error && tsc --noEmit && tsc -b"
   },
   "dependencies": {
     "@emotion/react": "^11.13.5",

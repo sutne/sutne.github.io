@@ -5,7 +5,7 @@ export function getScreenCenter(): { x: number; y: number } {
   };
 }
 
-export function getCoordinates(ref: React.RefObject<HTMLImageElement>): {
+export function getCoordinates(ref: React.RefObject<HTMLImageElement | null>): {
   x: number;
   y: number;
 } {
@@ -16,7 +16,7 @@ export function getCoordinates(ref: React.RefObject<HTMLImageElement>): {
   };
 }
 
-export function getSize(ref: React.RefObject<HTMLImageElement>): {
+export function getSize(ref: React.RefObject<HTMLImageElement | null>): {
   x: number;
   y: number;
 } {
@@ -27,7 +27,7 @@ export function getSize(ref: React.RefObject<HTMLImageElement>): {
   };
 }
 
-export function getImageCenter(ref: React.RefObject<HTMLImageElement>): {
+export function getImageCenter(ref: React.RefObject<HTMLImageElement | null>): {
   x: number;
   y: number;
 } {

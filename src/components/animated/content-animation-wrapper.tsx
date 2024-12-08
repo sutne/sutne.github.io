@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { useApp } from 'providers/app-provider';
 import { useSettings } from 'providers/settings-provider';
 import type React from 'react';
-import { useEffect, useState } from 'react';
+import { type JSX, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getImageCenter, getScreenCenter } from './util';
 

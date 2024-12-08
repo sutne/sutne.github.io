@@ -11,6 +11,7 @@ import {
 import { useApp } from 'providers/app-provider';
 import { useMainTheme } from 'providers/main-theme-provider';
 import { useSettings } from 'providers/settings-provider';
+import type { JSX } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { darkTheme } from 'themes/darkTheme';
 import { lightTheme } from 'themes/lightTheme';

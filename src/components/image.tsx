@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import type { JSX } from 'react';
 import { Shimmer } from './animated/shimmer';
 
 export function Image(props: {

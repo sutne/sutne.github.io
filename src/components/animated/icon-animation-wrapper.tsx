@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { useApp } from 'providers/app-provider';
 import { useSettings } from 'providers/settings-provider';
-import { useEffect, useState } from 'react';
+import { type JSX, useEffect, useState } from 'react';
 import { getCoordinates, getScreenCenter, getSize } from './util';
 
 /**

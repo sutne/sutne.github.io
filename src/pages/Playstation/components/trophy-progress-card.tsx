@@ -7,7 +7,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { ShimmerImage, ShimmerText } from 'components/animated/shimmer';
-import { useState } from 'react';
+import { type JSX, useState } from 'react';
 import type { PlatformInfo, TrophyCount, TrophyType } from '../service/types';
 import { PlatformChip } from './platform-chip';
 import { ProgressBar } from './progress-bar';

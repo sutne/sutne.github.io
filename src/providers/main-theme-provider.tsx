@@ -4,11 +4,17 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { useSettings } from 'providers/settings-provider';
-import React, { useContext, useEffect, useState } from 'react';
+import {
+  type JSX,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { darkTheme } from 'themes/darkTheme';
 import { lightTheme } from 'themes/lightTheme';
 
-const MainThemeContext = React.createContext<
+const MainThemeContext = createContext<
   | {
       theme: Theme;
       themeIsDark: boolean;

@@ -4,4 +4,3 @@
 !.vscode/tasks.json
 node_modules
 dist
-react-app-env.d.ts
