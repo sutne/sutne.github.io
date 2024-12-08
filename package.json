@@ -1,11 +1,12 @@
 {
-  "version": "0.1.0",
   "name": "sutne.github.io",
   "homepage": "https://sutne.github.io/",
+  "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "vite --open",
+    "build": "tsc -b && vite build",
     "fix": "biome check --write --unsafe",
     "lint": "biome ci --diagnostic-level=error && tsc --noEmit"
   },
@@ -20,21 +21,14 @@
     "universal-cookie": "^7.2.2"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@biomejs/biome": "^1.9.4",
     "@types/node": "^22.10.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@types/react-router-dom": "^5.3.3",
-    "react-scripts": "^5.0.1",
-    "typescript": "^4.9.5"
-  },
-  "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.2",
+    "globals": "^15.12.0",
+    "vite": "^6.0.3"
   }
 }

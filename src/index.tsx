@@ -73,7 +73,7 @@ export function Root() {
             left: 0,
             height: '100%',
             width: '100%',
-            background: `url(${require('./assets/background.jpg')})`,
+            background: `url(${new URL('assets/background.jpg', import.meta.url).href})`,
             filter: themeIsDark ? 'brightness(20%)' : 'brightness(100%)',
             backgroundPosition: 'top',
             backgroundSize: 'cover',

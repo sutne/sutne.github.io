@@ -27,7 +27,9 @@ export function AppIcon(props: { name: string; onTap?: () => void }) {
           ref={iconRef}
           sx={sx.icon}
           component='img'
-          src={require(`assets/apps/${props.name}.png`)}
+          src={
+            new URL(`/src/assets/apps/${props.name}.png`, import.meta.url).href
+          }
         />
         <Box sx={sx.name}>{props.name}</Box>
       </Box>

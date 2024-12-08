@@ -66,7 +66,10 @@ export function AppContent(props: {
             <Box
               sx={sx.title_icon}
               component='img'
-              src={require(`assets/apps/${props.name}.png`)}
+              src={
+                new URL(`/src/assets/apps/${props.name}.png`, import.meta.url)
+                  .href
+              }
             />
             <Typography sx={sx.title_name} alignSelf='center'>
               {props.name}

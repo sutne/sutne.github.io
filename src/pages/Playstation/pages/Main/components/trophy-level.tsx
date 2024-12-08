@@ -2,9 +2,10 @@ import { Box, Typography } from '@mui/material';
 import { getTrophyLevelImage } from '../../../util';
 
 export function TrophyLevel(props: { level: number }) {
-  const icon = require(
+  const icon = new URL(
     `../../../assets/levels/${getTrophyLevelImage(props.level)}`,
-  );
+    import.meta.url,
+  ).href;
 
   const shadow = {
     xs: 'drop-shadow(0 1px 2px rgba(0,0,0,50%))',

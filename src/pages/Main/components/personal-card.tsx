@@ -11,7 +11,7 @@ export function PersonalCard() {
       <Grid container spacing={2} alignItems='center' textAlign='center'>
         <Grid item xs={12} sm={4} md={4}>
           <Image
-            src={require('assets/me.png')}
+            src={new URL('assets/me.png', import.meta.url).href}
             size='192px'
             sx={{
               borderRadius: '100%',
