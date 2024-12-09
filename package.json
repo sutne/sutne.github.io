@@ -6,13 +6,11 @@
   "type": "module",
   "scripts": {
     "start": "vite --open",
-    "build": "tsc -b && vite build",
     "fix": "biome check --write --unsafe --diagnostic-level=error",
-    "lint": "biome ci --diagnostic-level=error && tsc --noEmit && tsc -b"
+    "lint": "biome ci --diagnostic-level=error && tsc --noEmit && tsc -b",
+    "build": "tsc -b && vite build"
   },
   "dependencies": {
-    "@emotion/react": "^11.13.5",
-    "@emotion/styled": "^11.13.5",
     "@mui/icons-material": "^6.1.10",
     "@mui/material": "^6.1.10",
     "react": "^19.0.0",
@@ -28,7 +26,6 @@
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^4.3.4",
     "typescript": "^5.7.2",
-    "globals": "^15.12.0",
     "vite": "^6.0.3"
   }
 }
