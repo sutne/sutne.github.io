@@ -26,7 +26,7 @@ export function TopTracks() {
       const response = await API.getTopTracks();
       setTracks(response);
       for (const track of response) {
-        addSample(track.sample);
+        if (track?.sample) addSample(track.sample);
       }
     };
     getTracks();

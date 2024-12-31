@@ -31,12 +31,18 @@ export function NowPlaying() {
             >
               <Box sx={sx.image}>
                 <Image src={track.image} size='60mm'>
-                  <SampleButton
-                    sample={track.sample}
-                    show={isHovering}
-                    playIcon={VolumeOff}
-                    pauseIcon={VolumeUp}
-                  />
+                  {track.sample ? (
+                    <>
+                      <SampleButton
+                        sample={track.sample}
+                        show={isHovering}
+                        playIcon={VolumeOff}
+                        pauseIcon={VolumeUp}
+                      />
+                    </>
+                  ) : (
+                    <></>
+                  )}
                 </Image>
               </Box>
               <Stack sx={sx.container} direction='column'>
