@@ -28,7 +28,7 @@ export function RecentlyPlayed() {
       const response = await API.getRecentlyPlayed();
       setTracks(response);
       for (const track of response) {
-        addSample(track.sample);
+        if (track?.sample) addSample(track.sample);
       }
     };
     getTracks();

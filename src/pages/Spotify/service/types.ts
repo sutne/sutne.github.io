@@ -2,7 +2,7 @@ export type TrackType = {
   title: string;
   artists: string[];
   image: string;
-  sample: string;
+  sample?: string;
   href: string;
   isExplicit: boolean;
   isLocal: boolean;

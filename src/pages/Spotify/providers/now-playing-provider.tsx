@@ -29,10 +29,13 @@ export function NowPlayingProvider(props: { children: JSX.Element }) {
   const refresh = async () => {
     const response = await API.getNowPlaying();
     if (track?.href === response?.href) return;
-    setTrack(response ?? undefined);
-    if (!response) return;
-    addSample(response.sample);
-    setShouldShow(true);
+    setTrack(response);
+    if (response) {
+      if (response.sample) addSample(response.sample);
+      setShouldShow(true);
+    } else {
+      setShouldShow(false);
+    }
   };
 
   useEffect(() => {
