@@ -104,15 +104,15 @@ export function AppContent(props: {
       },
       title_bar: {
         padding: '12px',
-        borderRadius: '16px 16px 0 0',
+        borderRadius: `${12 + 12}px ${12 + 12}px 0 0`,
         background: appBarTheme.background,
         color: appBarTheme.textColor,
         boxShadow: '0px 3px 3px rgba(0,0,0,40%)',
       },
       title_icon: {
-        width: '3em',
-        height: '3em',
-        borderRadius: '25%',
+        width: '48px',
+        height: '48px',
+        borderRadius: '12px',
         boxShadow: '0px 2px 5px rgba(0, 0, 0, 30%)',
       },
       title_name: {
