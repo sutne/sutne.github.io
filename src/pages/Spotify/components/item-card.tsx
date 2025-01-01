@@ -23,7 +23,7 @@ export function ItemCard(props: {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <Image src={props.image}>
+      <Image sx={sx.image} src={props.image}>
         {props.sample ? (
           <SampleButton sample={props.sample} show={isHovered} />
         ) : (
@@ -44,8 +44,8 @@ export function ItemCard(props: {
           position: 'relative',
           minWidth: '36mm',
           textAlign: 'left',
-          borderRadius: '8px',
-          padding: '12px 12px 8px 12px',
+          borderRadius: `${4 + 10}px`,
+          padding: '10px 10px 4px 10px',
           transition: 'all 0.125s ease',
           bgcolor: alpha(theme.palette.background.paper, 0.3),
           '&:hover': {
@@ -53,6 +53,9 @@ export function ItemCard(props: {
           },
         },
       ],
+      image: {
+        borderRadius: '4px',
+      },
       info: [
         {
           marginTop: '8px',
