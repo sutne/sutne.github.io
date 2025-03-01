@@ -15,8 +15,11 @@ export function NowPlaying() {
   const theme = useTheme();
   const { track, shouldShow } = useNowPlaying();
 
-  const sx = getSx();
+  const onClickTitle = !track?.href
+    ? undefined
+    : () => window.open(track.href, '_blank');
 
+  const sx = getSx();
   return (
     <Collapse in={shouldShow} timeout={2000}>
       <Box>
@@ -47,7 +50,9 @@ export function NowPlaying() {
               </Box>
               <Stack sx={sx.container} direction='column'>
                 <Box sx={sx.content}>
-                  <ItemTitle sx={sx.title}>{track.title}</ItemTitle>
+                  <ItemTitle sx={sx.title} onClick={onClickTitle}>
+                    {track.title}
+                  </ItemTitle>
                   <ItemSubtitle sx={sx.artists}>
                     {track.artists.join(', ')}
                   </ItemSubtitle>

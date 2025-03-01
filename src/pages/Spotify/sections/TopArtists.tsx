@@ -34,6 +34,7 @@ export function TopArtists() {
                 image={artist.image}
                 title={artist.name}
                 subtitle={artist.genres.join(', ')}
+                href={artist.href}
               />
             ))}
       </ItemRow>
