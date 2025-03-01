@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, alpha, useTheme } from '@mui/material';
 import { Shimmer } from 'components/animated/shimmer';
 import { useNavigate } from 'react-router-dom';
 import { TrophyWithCount } from '../../../components/trophy-with-count';
@@ -6,6 +6,7 @@ import type { Profile, TrophyType } from '../../../service/types';
 import { TrophyLevel } from './trophy-level';
 
 export function TrophyOverview(props: { profile: Profile | undefined }) {
+  const theme = useTheme();
   const navigate = useNavigate();
   const sx = getSx();
 
@@ -49,7 +50,10 @@ export function TrophyOverview(props: { profile: Profile | undefined }) {
     return {
       card: {
         cursor: 'pointer',
-        bgcolor: 'background.paper',
+        background: `linear-gradient(0deg,
+                  ${theme.palette.background.paper} 0%,
+                  ${alpha(theme.palette.background.paper, 0.4)} 100%
+                )`,
         borderRadius: '16px',
         boxShadow: '0 0 8px 0 rgba(0, 0, 0, 0.2)',
         padding: '24px',

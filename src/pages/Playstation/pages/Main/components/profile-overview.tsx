@@ -36,6 +36,7 @@ export function ProfileOverview(props: { profile: Profile | undefined }) {
       spacing={3}
       alignItems={'center'}
       justifyContent={'center'}
+      marginBottom='-32px'
     >
       {avatar()}
       {onlineId()}
@@ -45,7 +46,7 @@ export function ProfileOverview(props: { profile: Profile | undefined }) {
   function getSx() {
     return {
       avatar: {
-        width: { xs: '80px', sm: '120px' },
+        width: { xs: '60px', sm: '100px' },
         borderRadius: { xs: '80px', sm: '120px' },
         aspectRatio: 1,
       },
