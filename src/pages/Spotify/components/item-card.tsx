@@ -10,9 +10,13 @@ export function ItemCard(props: {
   title: string;
   subtitle: string;
   image: string;
+  href?: string;
   sample?: string;
 }) {
   const [isHovered, setHovered] = useState(false);
+  const onClickTitle = !props.href
+    ? undefined
+    : () => window.open(props.href, '_blank');
 
   const sx = getSx();
   return (
@@ -30,7 +34,7 @@ export function ItemCard(props: {
         )}
       </Image>
       <Box sx={sx.info}>
-        <ItemTitle>{props.title}</ItemTitle>
+        <ItemTitle onClick={onClickTitle}>{props.title}</ItemTitle>
         <ItemSubtitle>{props.subtitle}</ItemSubtitle>
       </Box>
     </Stack>

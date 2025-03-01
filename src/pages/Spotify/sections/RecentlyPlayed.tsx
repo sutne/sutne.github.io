@@ -40,9 +40,10 @@ export function RecentlyPlayed() {
               <ItemCard
                 key={track.href}
                 image={track.image}
-                sample={track.sample}
                 title={track.title}
                 subtitle={track.artists.join(', ')}
+                href={track.href}
+                sample={track.sample}
               />
             ))}
       </ItemRow>
