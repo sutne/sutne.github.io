@@ -112,9 +112,9 @@ export function TrophyProgressCard(props: {
       container: {
         position: 'relative',
         overflow: 'hidden',
-        background: `linear-gradient(7deg,
-          ${theme.palette.background.paper} 50%,
-          ${alpha(theme.palette.background.paper, 0.3)} 100%
+        background: `linear-gradient(10deg,
+          ${theme.palette.background.paper} 30%,
+          ${alpha(theme.palette.background.paper, 0.4)} 100%
         )`,
         borderRadius: { xs: '8px', sm: '16px' },
         cursor:

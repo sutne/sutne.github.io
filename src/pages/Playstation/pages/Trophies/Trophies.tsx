@@ -54,7 +54,7 @@ export function PlaystationTrophies() {
         <SortButton type='Progress' />
         <SortButton type='Title' />
       </Stack>
-      <Stack spacing={2}>
+      <Stack spacing={{ xs: '20px', md: '30px' }}>
         {gameList.map((game, i) => (
           // biome-ignore lint/suspicious/noArrayIndexKey: required to replace "shimmer"/empty ones
           <TrophyTitle key={i} game={game} />

@@ -19,7 +19,7 @@ const playstationDarkTheme = responsiveFontSizes(
       },
       background: {
         default: 'rgb(5,6,12)',
-        paper: 'rgb(12,14,19)',
+        paper: 'rgb(24, 27, 36)',
       },
       text: {
         primary: 'rgba(255,255,255,90%)',
