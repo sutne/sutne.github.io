@@ -2,7 +2,7 @@ import { LinkRounded } from '@mui/icons-material';
 import {
   Box,
   Collapse,
-  Grid,
+  Grid2 as Grid,
   Stack,
   Typography,
   alpha,
@@ -68,7 +68,7 @@ export function Repository({ repo }: props) {
             </Stack>
             <Grid sx={sx.topics} container spacing={1}>
               {repo.topics.map((topic) => (
-                <Grid item key={topic}>
+                <Grid key={topic}>
                   <Typography sx={sx.topic}>{topic}</Typography>
                 </Grid>
               ))}

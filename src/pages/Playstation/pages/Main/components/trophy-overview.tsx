@@ -1,4 +1,4 @@
-import { Box, Grid, alpha, useTheme } from '@mui/material';
+import { Box, Grid2 as Grid, alpha, useTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Shimmer } from '../../../../../components/animated/shimmer';
 import {
@@ -14,7 +14,7 @@ export function TrophyOverview(props: { profile: Profile }) {
 
   const trophy = (type: TrophyType) => {
     return (
-      <Grid key={type} item xs={3} sm={2}>
+      <Grid key={type} size={{ xs: 3, sm: 2 }}>
         <TrophyWithCount
           type={type}
           count={props.profile?.trophySummary.earned[type] ?? 0}
@@ -28,7 +28,7 @@ export function TrophyOverview(props: { profile: Profile }) {
   return (
     <Box sx={sx.card} onClick={() => navigate('/Playstation/trophies')}>
       <Grid container spacing={2} justifyContent='center' alignItems='center'>
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <TrophyLevel level={props.profile?.trophySummary.level ?? 1} />
         </Grid>
         {[
@@ -47,7 +47,7 @@ export function TrophyOverviewShimmer() {
 
   const trophy = (type: TrophyType) => {
     return (
-      <Grid key={type} item xs={3} sm={2}>
+      <Grid key={type} size={{ xs: 3, sm: 2 }}>
         <TrophyWithCountShimmer
           type={type}
           fontSize={{ xs: '14px', sm: '18px', md: '24px' }}
@@ -59,7 +59,7 @@ export function TrophyOverviewShimmer() {
   return (
     <Box sx={{ ...sx.card, cursor: 'default' }}>
       <Grid container spacing={2} justifyContent='center' alignItems='center'>
-        <Grid item xs={12} md={4} sx={{ opacity: 0 }}>
+        <Grid size={{ xs: 12, md: 4 }} sx={{ opacity: 0 }}>
           <TrophyLevel level={0} />
         </Grid>
         {[

@@ -1,4 +1,4 @@
-import { Box, Grid, useTheme } from '@mui/material';
+import { Box, Grid2 as Grid, useTheme } from '@mui/material';
 import { LanguageColorMap } from '../service/types';
 
 export function LanguageBar(props: {
@@ -31,7 +31,7 @@ export function LanguageBar(props: {
       <Grid container rowSpacing={1} columnSpacing={2}>
         {Object.keys(props.languages).map((language) => {
           return (
-            <Grid item key={language}>
+            <Grid key={language}>
               <LanguageName
                 name={language}
                 percentage={toPercentage(language)}

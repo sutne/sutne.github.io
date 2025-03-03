@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, alpha } from '@mui/material';
+import { Box, Grid2 as Grid, Typography, alpha } from '@mui/material';
 import { Image } from 'components/image';
 import { useMainTheme } from 'providers/main-theme-provider';
 
@@ -8,8 +8,15 @@ export function PersonalCard() {
   const sx = getSx();
   return (
     <Box sx={sx.card}>
-      <Grid container spacing={2} alignItems='center' textAlign='center'>
-        <Grid item xs={12} sm={4} md={4}>
+      <Grid
+        container
+        size={12}
+        spacing={2}
+        alignItems='center'
+        justifyContent={'center'}
+        textAlign='center'
+      >
+        <Grid size={{ xs: 12, sm: 4, md: 4 }}>
           <Image
             src={new URL('assets/me.png', import.meta.url).href}
             size='192px'
@@ -20,7 +27,7 @@ export function PersonalCard() {
             }}
           />
         </Grid>
-        <Grid item xs={12} sm={8} md={8} alignContent={'center'}>
+        <Grid size={{ xs: 12, sm: 8, md: 8 }} alignContent={'center'}>
           <Box style={{ padding: '16px' }}>
             <Typography variant='h4' color='text.primary' marginBottom='3mm'>
               Sivert Utne
