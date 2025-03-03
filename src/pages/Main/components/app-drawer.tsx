@@ -1,4 +1,4 @@
-import { Box, Grid, alpha } from '@mui/material';
+import { Box, Grid2 as Grid, alpha } from '@mui/material';
 import { useMainTheme } from 'providers/main-theme-provider';
 import { type JSX, cloneElement } from 'react';
 
@@ -19,9 +19,7 @@ export function AppDrawer(props: {
       <Grid sx={sx.drawer} container columnSpacing={2} rowSpacing={2}>
         {apps.map((app, i) => (
           // biome-ignore lint/suspicious/noArrayIndexKey: no better alternative
-          <Grid item key={i}>
-            {cloneElement(app, { ...app.props })}
-          </Grid>
+          <Grid key={i}>{cloneElement(app, { ...app.props })}</Grid>
         ))}
       </Grid>
     </Box>

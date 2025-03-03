@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid2 as Grid } from '@mui/material';
 import { AppIcon } from 'components/app-icon';
 import { Outlet } from 'react-router-dom';
 import { AppDrawer } from './components/app-drawer';
@@ -9,17 +9,17 @@ export function Main() {
     <>
       <Outlet />
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={12}>
+        <Grid size={{ xs: 12, sm: 12, md: 12 }}>
           <PersonalCard />
         </Grid>
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
           <AppDrawer title='Apps'>
             <AppIcon name='Spotify' />
             <AppIcon name='Playstation' />
             <AppIcon name='GitHub' />
           </AppDrawer>
         </Grid>
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
           <AppDrawer title='Misc'>
             <AppIcon name='Settings' />
             <AppIcon
@@ -30,7 +30,7 @@ export function Main() {
             />
           </AppDrawer>
         </Grid>
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
           <AppDrawer title='Contact Me'>
             <AppIcon
               name='Mail'

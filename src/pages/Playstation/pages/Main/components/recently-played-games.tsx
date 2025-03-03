@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid2 as Grid } from '@mui/material';
 import { Image } from 'components/image';
 import type { RecentGame } from '../../../service/types';
 
@@ -27,7 +27,7 @@ export function RecentlyPlayedGamesShimmer() {
 
 function GridImage(props: { src?: string }) {
   return (
-    <Grid item xs={6} sm={4} md={3}>
+    <Grid size={{ xs: 6, sm: 4, md: 3 }}>
       <Image src={props.src} sx={{ borderRadius: '7%' }} />
     </Grid>
   );
