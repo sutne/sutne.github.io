@@ -10,8 +10,8 @@ import { ShimmerImage, ShimmerText } from 'components/animated/shimmer';
 import { type JSX, useState } from 'react';
 import type { PlatformInfo, TrophyCount, TrophyType } from '../service/types';
 import { PlatformChip } from './platform-chip';
-import { ProgressBar } from './progress-bar';
-import { TrophyWithCount } from './trophy-with-count';
+import { ProgressBar, ProgressBarShimmer } from './progress-bar';
+import { TrophyWithCount, TrophyWithCountShimmer } from './trophy-with-count';
 
 export function TrophyProgressCard(props: {
   image: string;
@@ -102,6 +102,15 @@ export function TrophyProgressCardShimmer() {
         />
         <Stack sx={sx.info}>
           <ShimmerText fontSize={sx.title.fontSize} numLines={1} />
+          <Stack sx={sx.trophyCount} direction='row' spacing={0}>
+            <TrophyWithCountShimmer type={'platinum'} />
+            <TrophyWithCountShimmer type={'gold'} />
+            <TrophyWithCountShimmer type={'silver'} />
+            <TrophyWithCountShimmer type={'bronze'} />
+          </Stack>
+          <Box sx={sx.progress}>
+            <ProgressBarShimmer />
+          </Box>
         </Stack>
       </Stack>
     </>

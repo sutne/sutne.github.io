@@ -25,20 +25,6 @@ export function Main() {
 
   useEffect(() => {
     const getData = async () => {
-      setIsLoadingRecentGames(true);
-      const response = await API.getRecentGames();
-      if (!response) {
-        setHasError(true);
-      } else {
-        setRecentGames(response);
-      }
-      setIsLoadingRecentGames(false);
-    };
-    getData();
-  }, []);
-
-  useEffect(() => {
-    const getData = async () => {
       setIsLoadingProfile(true);
       const response = await API.getProfile();
       if (!response) {
@@ -47,6 +33,20 @@ export function Main() {
         setProfile(response);
       }
       setIsLoadingProfile(false);
+    };
+    getData();
+  }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      setIsLoadingRecentGames(true);
+      const response = await API.getRecentGames();
+      if (!response) {
+        setHasError(true);
+      } else {
+        setRecentGames(response);
+      }
+      setIsLoadingRecentGames(false);
     };
     getData();
   }, []);
