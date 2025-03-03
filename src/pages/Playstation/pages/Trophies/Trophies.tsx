@@ -1,49 +1,32 @@
-import { CircularProgress, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { SortButton } from '../../../../components/sort-button';
 import { useSorting } from '../../../../providers/sort-provider';
 import * as API from '../../service/api';
 import type { TrophyGame } from '../../service/types';
 import { sortGames } from '../Game/sortUtils';
-import { TrophyTitle } from './components/TrophyTitle';
+import { TrophyTitle, TrophyTitleShimmer } from './components/TrophyTitle';
 
 export function PlaystationTrophies() {
-  const unloaded: TrophyGame[] = new Array<TrophyGame>(4).fill({
-    platform: [{ id: '', platform: undefined }],
-    title: '',
-    image: '',
-    trophyCount: {
-      platinum: 0,
-      gold: 0,
-      silver: 0,
-      bronze: 0,
-    },
-    earnedCount: {
-      platinum: 0,
-      gold: 0,
-      silver: 0,
-      bronze: 0,
-    },
-    progress: 0,
-  });
-  const [gameList, setGameList] = useState<TrophyGame[]>(unloaded);
+  const [gameList, setGameList] = useState<TrophyGame[] | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { sorting } = useSorting();
   useEffect(() => {
-    setGameList((prev) => sortGames([...prev], sorting));
+    setGameList((prev) => {
+      return !prev ? prev : sortGames([...prev], sorting);
+    });
   }, [sorting]);
 
   useEffect(() => {
     const getData = async () => {
-      setGameList(unloaded);
+      setIsLoading(true);
       const response = await API.getGameList();
-      if (!response) return;
-      setGameList(response.filter((g) => g !== null));
+      setGameList(response);
+      setIsLoading(false);
     };
     getData();
   }, []);
-
-  if (!gameList.length) return <CircularProgress />;
 
   const sx = getSx();
   return (
@@ -55,10 +38,20 @@ export function PlaystationTrophies() {
         <SortButton type='Title' />
       </Stack>
       <Stack spacing={{ xs: '20px', md: '30px' }}>
-        {gameList.map((game, i) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: required to replace "shimmer"/empty ones
-          <TrophyTitle key={i} game={game} />
-        ))}
+        {isLoading ? (
+          Array(5)
+            .fill(null)
+            .map((_, i) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: no other value to use
+              <TrophyTitleShimmer key={i} />
+            ))
+        ) : !gameList ? (
+          <></>
+        ) : (
+          gameList.map((game) => (
+            <TrophyTitle key={game.title + game.platform} game={game} />
+          ))
+        )}
       </Stack>
     </>
   );

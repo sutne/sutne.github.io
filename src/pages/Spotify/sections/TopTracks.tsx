@@ -8,17 +8,19 @@ import type { TrackType } from '../service/types';
 
 export function TopTracks() {
   const [tracks, setTracks] = useState<TrackType[] | undefined>(undefined);
-  const isLoading = !tracks;
+  const [isLoading, setIsLoading] = useState(true);
 
   const { addSample } = useMusicPlayer();
 
   useEffect(() => {
     const getTracks = async () => {
+      setIsLoading(true);
       const response = await API.getTopTracks();
       setTracks(response);
       for (const track of response) {
         if (track?.sample) addSample(track.sample);
       }
+      setIsLoading(false);
     };
     getTracks();
   }, []);
@@ -27,23 +29,27 @@ export function TopTracks() {
     <>
       <SectionTitle title='Top Tracks' />
       <ItemRow>
-        {isLoading
-          ? Array(15)
-              .fill(null)
-              .map((_, i) => (
-                // biome-ignore lint/suspicious/noArrayIndexKey: no other value to use
-                <ItemCardShimmer key={i} />
-              ))
-          : tracks.map((track) => (
-              <ItemCard
-                key={track.href}
-                image={track.image}
-                title={track.title}
-                subtitle={track.artists.join(', ')}
-                href={track.href}
-                sample={track.sample}
-              />
-            ))}
+        {isLoading ? (
+          Array(15)
+            .fill(null)
+            .map((_, i) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: no other value to use
+              <ItemCardShimmer key={i} />
+            ))
+        ) : !tracks ? (
+          <></>
+        ) : (
+          tracks.map((track) => (
+            <ItemCard
+              key={track.href}
+              image={track.image}
+              title={track.title}
+              subtitle={track.artists.join(', ')}
+              href={track.href}
+              sample={track.sample}
+            />
+          ))
+        )}
       </ItemRow>
     </>
   );

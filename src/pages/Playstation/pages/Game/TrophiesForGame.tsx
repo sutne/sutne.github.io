@@ -1,5 +1,8 @@
 import { Stack } from '@mui/material';
-import { TrophyProgressCard } from 'pages/Playstation/components/trophy-progress-card';
+import {
+  TrophyProgressCard,
+  TrophyProgressCardShimmer,
+} from 'pages/Playstation/components/trophy-progress-card';
 import { SortProvider } from 'providers/sort-provider';
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -10,57 +13,39 @@ import { TrophyList } from './components/trophy-list';
 import { groupByEarned, groupByType } from './groupUtils';
 
 export function PlaystationTrophiesGame() {
-  const unloaded = new Array<TrophyGroup>(1).fill({
-    id: 0,
-    name: '',
-    icon: '',
-    trophyCount: {
-      platinum: 0,
-      gold: 0,
-      silver: 0,
-      bronze: 0,
-    },
-    earnedCount: {
-      platinum: 0,
-      gold: 0,
-      silver: 0,
-      bronze: 0,
-    },
-    progress: 0,
-    trophies: [],
-  });
-  const [groups, setGroups] = useState<TrophyGroup[]>(unloaded);
+  const params = useParams();
+
+  const [groups, setGroups] = useState<TrophyGroup[] | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const getData = async () => {
+      if (!params.gameIds || !params.platforms) return;
+      setIsLoading(true);
+      const response = await API.getTrophyGroups(
+        params.gameIds.split(','),
+        params.platforms.split(',') as Platform[],
+      );
+      setGroups(response);
+      setIsLoading(false);
+    };
+    getData();
+  }, [params.gameIds, params.platforms]);
+
   const [groupBy, setGroupBy] = useState<'Default' | 'Earned' | 'Type'>(
     'Default',
   );
 
   const allTrophies: Trophy[] = useMemo(
     () =>
-      groups.reduce(
+      groups?.reduce(
         (trophies, group) => trophies.concat(group.trophies),
         [] as Trophy[],
-      ),
+      ) ?? [],
     [groups],
   );
   const earnedGroups = useMemo(() => groupByEarned(allTrophies), [allTrophies]);
   const typeGroups = useMemo(() => groupByType(allTrophies), [allTrophies]);
-
-  const params = useParams();
-
-  useEffect(() => {
-    const getData = async () => {
-      if (!params.gameIds || !params.platforms) return;
-      setGroups(unloaded);
-      const response = await API.getTrophyGroups(
-        params.gameIds.split(','),
-        params.platforms.split(',') as Platform[],
-      );
-      setGroups([]);
-      if (!response) return;
-      setGroups(response);
-    };
-    getData();
-  }, []);
 
   const displayedGroups =
     groupBy === 'Default'
@@ -71,26 +56,31 @@ export function PlaystationTrophiesGame() {
 
   return (
     <>
-      {groupBy !== 'Default' && (
-        <TrophyProgressCard
-          image={groups[0].icon}
-          title={groups[0].name}
-          progress={-1}
-          trophyCount={{
-            platinum: 0,
-            gold: 0,
-            silver: 0,
-            bronze: 0,
-          }}
-          earnedCount={{
-            platinum: 0,
-            gold: 0,
-            silver: 0,
-            bronze: 0,
-          }}
-          expanded={false}
-        />
-      )}
+      {groupBy !== 'Default' &&
+        (isLoading ? (
+          <TrophyProgressCardShimmer />
+        ) : !groups ? (
+          <></>
+        ) : (
+          <TrophyProgressCard
+            image={groups[0].icon}
+            title={groups[0].name}
+            progress={-1}
+            trophyCount={{
+              platinum: 0,
+              gold: 0,
+              silver: 0,
+              bronze: 0,
+            }}
+            earnedCount={{
+              platinum: 0,
+              gold: 0,
+              silver: 0,
+              bronze: 0,
+            }}
+            expanded={false}
+          />
+        ))}
       <Stack
         sx={{
           marginY: '16px',
@@ -119,23 +109,34 @@ export function PlaystationTrophiesGame() {
         />
       </Stack>
       <Stack spacing={2}>
-        {displayedGroups.map((group, i) => (
-          <SortProvider
-            key={`${group.name}-${i}`}
-            defaultSorting={{ type: 'Default', order: 'asc' }}
-          >
-            <TrophyProgressCard
-              image={group.icon}
-              title={group.name}
-              progress={group.progress}
-              trophyCount={group.trophyCount}
-              earnedCount={group.earnedCount}
-              expanded={displayedGroups.length === 1 && group.name !== ''}
+        {isLoading ? (
+          Array(1)
+            .fill(null)
+            .map((_, i) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: no other value to use
+              <TrophyProgressCardShimmer key={i} />
+            ))
+        ) : !displayedGroups ? (
+          <></>
+        ) : (
+          displayedGroups.map((group, i) => (
+            <SortProvider
+              key={`${group.name}-${i}`}
+              defaultSorting={{ type: 'Default', order: 'asc' }}
             >
-              <TrophyList list={group.trophies} />
-            </TrophyProgressCard>
-          </SortProvider>
-        ))}
+              <TrophyProgressCard
+                image={group.icon}
+                title={group.name}
+                progress={group.progress}
+                trophyCount={group.trophyCount}
+                earnedCount={group.earnedCount}
+                expanded={displayedGroups.length === 1 && group.name !== ''}
+              >
+                <TrophyList list={group.trophies} />
+              </TrophyProgressCard>
+            </SortProvider>
+          ))
+        )}
       </Stack>
     </>
   );
