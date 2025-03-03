@@ -1,7 +1,7 @@
 import { Box, Stack, Typography, alpha, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
 import type { Trophy } from '../../../service/types';
-import { getDateString } from '../../../util';
+import { getDateString, trophyColors } from '../../../util';
 import { TrophyProgressBar } from './trophy-progress-bar';
 
 export function TrophyCard(props: { trophy: Trophy }) {
@@ -56,7 +56,7 @@ export function TrophyCard(props: { trophy: Trophy }) {
 
   const sx = getSx();
   return (
-    <>
+    <Box sx={sx.wrapper}>
       <Stack
         sx={sx.container}
         direction='row'
@@ -95,24 +95,34 @@ export function TrophyCard(props: { trophy: Trophy }) {
           </Stack>
         </Stack>
       </Stack>
-    </>
+    </Box>
   );
   function getSx() {
     return {
-      container: {
+      wrapper: {
+        overflow: 'hidden',
         width: '100%',
-        background: `linear-gradient(7deg,
-          ${theme.palette.background.paper} 30%,
-          ${alpha(theme.palette.background.paper, 0.3)} 100%
-        )`,
+        background: !props.trophy.isEarned
+          ? 'transparent'
+          : `linear-gradient(13deg,
+                transparent 75%,
+                ${alpha(trophyColors[props.trophy.type], 0.2)} 90%,
+                ${alpha(trophyColors[props.trophy.type], 0.5)} 100%
+            )`,
         borderRadius: { xs: '8px', sm: '16px' },
-        padding: { xs: '8px', sm: '16px' },
         boxSizing: 'border-box',
         boxShadow: '0 0 8px 0 rgba(0, 0, 0, 0.2)',
         userSelect: 'none',
         webkitUserSelect: 'none',
         touchCallout: 'none',
         webkitTouchCallout: 'none',
+      },
+      container: {
+        padding: { xs: '8px', sm: '16px' },
+        background: `linear-gradient(7deg,
+          ${theme.palette.background.paper} 30%,
+          ${alpha(theme.palette.background.paper, 0.3)} 100%
+        )`,
       },
       icon: [
         {

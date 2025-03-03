@@ -24,3 +24,10 @@ export function getDateString(date: string | undefined): string {
     minutes < 10 ? '0' : ''
   }${minutes}`;
 }
+
+export const trophyColors = {
+  bronze: 'rgb(138, 85, 77)',
+  silver: 'rgb(134, 137, 139)',
+  gold: 'rgb(181, 143, 75)',
+  platinum: 'rgb(29, 73, 153)',
+} as const;
