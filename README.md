@@ -2,7 +2,7 @@
 
 # [sutne.github.io](https://sutne.github.io)
 
-[![deployment][on-push-main-action-badge]][on-push-main-action]
+[![on-push-main-action-status][on-push-main-action-badge]][on-push-main-action]
 
 </div>
 

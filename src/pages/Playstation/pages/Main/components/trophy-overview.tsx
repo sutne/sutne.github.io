@@ -5,8 +5,7 @@ import { TrophyWithCount } from '../../../components/trophy-with-count';
 import type { Profile, TrophyType } from '../../../service/types';
 import { TrophyLevel } from './trophy-level';
 
-export function TrophyOverview(props: { profile: Profile | undefined }) {
-  const theme = useTheme();
+export function TrophyOverview(props: { profile: Profile }) {
   const navigate = useNavigate();
   const sx = getSx();
 
@@ -23,13 +22,6 @@ export function TrophyOverview(props: { profile: Profile | undefined }) {
     );
   };
 
-  if (!props.profile) {
-    return (
-      <Box sx={{ ...sx.card, padding: 0, height: '212px' }}>
-        <Shimmer sx={{ backgroundColor: 'background.paper' }} />
-      </Box>
-    );
-  }
   return (
     <Box sx={sx.card} onClick={() => navigate('/Playstation/trophies')}>
       <Grid container spacing={2} justifyContent='center' alignItems='center'>
@@ -45,21 +37,31 @@ export function TrophyOverview(props: { profile: Profile | undefined }) {
       </Grid>
     </Box>
   );
+}
 
-  function getSx() {
-    return {
-      card: {
-        cursor: 'pointer',
-        background: `linear-gradient(0deg,
-                  ${theme.palette.background.paper} 0%,
-                  ${alpha(theme.palette.background.paper, 0.4)} 100%
-                )`,
-        borderRadius: '16px',
-        boxShadow: '0 0 8px 0 rgba(0, 0, 0, 0.2)',
-        padding: '24px',
-        overflow: 'hidden',
-        minHeight: '164px',
-      },
-    };
-  }
+export function TrophyOverviewShimmer() {
+  const sx = getSx();
+  return (
+    <Box sx={{ ...sx.card, padding: 0, height: '212px', cursor: 'default' }}>
+      <Shimmer />
+    </Box>
+  );
+}
+
+function getSx() {
+  const theme = useTheme();
+  return {
+    card: {
+      cursor: 'pointer',
+      background: `linear-gradient(0deg,
+                ${theme.palette.background.paper} 0%,
+                ${alpha(theme.palette.background.paper, 0.4)} 100%
+              )`,
+      borderRadius: '16px',
+      boxShadow: '0 0 8px 0 rgba(0, 0, 0, 0.2)',
+      padding: '24px',
+      overflow: 'hidden',
+      minHeight: '164px',
+    },
+  };
 }
