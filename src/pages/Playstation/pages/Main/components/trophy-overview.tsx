@@ -1,7 +1,10 @@
 import { Box, Grid, alpha, useTheme } from '@mui/material';
-import { Shimmer } from 'components/animated/shimmer';
 import { useNavigate } from 'react-router-dom';
-import { TrophyWithCount } from '../../../components/trophy-with-count';
+import { Shimmer } from '../../../../../components/animated/shimmer';
+import {
+  TrophyWithCount,
+  TrophyWithCountShimmer,
+} from '../../../components/trophy-with-count';
 import type { Profile, TrophyType } from '../../../service/types';
 import { TrophyLevel } from './trophy-level';
 
@@ -41,9 +44,40 @@ export function TrophyOverview(props: { profile: Profile }) {
 
 export function TrophyOverviewShimmer() {
   const sx = getSx();
+
+  const trophy = (type: TrophyType) => {
+    return (
+      <Grid key={type} item xs={3} sm={2}>
+        <TrophyWithCountShimmer
+          type={type}
+          fontSize={{ xs: '14px', sm: '18px', md: '24px' }}
+          maxWidth='120px'
+        />
+      </Grid>
+    );
+  };
   return (
-    <Box sx={{ ...sx.card, padding: 0, height: '212px', cursor: 'default' }}>
-      <Shimmer />
+    <Box sx={{ ...sx.card, cursor: 'default' }}>
+      <Grid container spacing={2} justifyContent='center' alignItems='center'>
+        <Grid item xs={12} md={4} sx={{ opacity: 0 }}>
+          <TrophyLevel level={0} />
+        </Grid>
+        {[
+          trophy('platinum'),
+          trophy('gold'),
+          trophy('silver'),
+          trophy('bronze'),
+        ]}
+      </Grid>
+      <Shimmer
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+        }}
+      />
     </Box>
   );
 }
@@ -52,6 +86,7 @@ function getSx() {
   const theme = useTheme();
   return {
     card: {
+      position: 'relative',
       cursor: 'pointer',
       background: `linear-gradient(0deg,
                 ${theme.palette.background.paper} 0%,
