@@ -48,26 +48,21 @@ export function Playstation() {
       <Box sx={sx.container}>
         <Routes>
           <Route path='/' element={<Main />} />
-          <Route
-            path='/trophies'
-            element={
-              <SortProvider
-                defaultSorting={{ type: 'Latest Trophy', order: 'asc' }}
-              >
-                <PlaystationTrophies />
-              </SortProvider>
-            }
-          />
-          <Route
-            path='/trophies/game/:gameIds/platform/:platforms'
-            element={<PlaystationTrophiesGame />}
-          />
-          <Route
-            path='/trophies/game/:gameIds/platform/:platforms/trophy/:trophyId'
-            element={<SingleTrophy />}
-          />
-          <Route path='/*' element={<>404</>} />
         </Routes>
+        <SortProvider defaultSorting={{ type: 'Latest Trophy', order: 'asc' }}>
+          <Routes>
+            <Route path='/trophies' element={<PlaystationTrophies />} />
+            <Route
+              path='/trophies/game/:gameIds/platform/:platforms'
+              element={<PlaystationTrophiesGame />}
+            />
+            <Route
+              path='/trophies/game/:gameIds/platform/:platforms/trophy/:trophyId'
+              element={<SingleTrophy />}
+            />
+            <Route path='/*' element={<>404</>} />
+          </Routes>
+        </SortProvider>
       </Box>
     </AppContent>
   );

@@ -22,7 +22,7 @@ export function PlaystationTrophies() {
     const getData = async () => {
       setIsLoading(true);
       const response = await API.getGameList();
-      setGameList(response);
+      setGameList(sortGames(response, sorting));
       setIsLoading(false);
     };
     getData();
