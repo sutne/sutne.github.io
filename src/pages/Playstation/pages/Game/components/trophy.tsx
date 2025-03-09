@@ -56,7 +56,7 @@ export function TrophyCard(props: { trophy: Trophy }) {
   }
 
   // to prevent scrolling on phone to interfere with regular "taps"/"holding"
-  function handleScroll(e: any) {
+  function handleScroll() {
     setIsHolding(false);
   }
 
