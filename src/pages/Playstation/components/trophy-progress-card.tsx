@@ -101,12 +101,12 @@ export function TrophyProgressCardShimmer() {
           }}
         />
         <Stack sx={sx.info}>
-          <ShimmerText fontSize={sx.title.fontSize} numLines={1} />
+          <ShimmerText width='40%' fontSize={sx.title.fontSize} />
           <Stack sx={sx.trophyCount} direction='row' spacing={0}>
-            <TrophyWithCountShimmer type={'platinum'} />
-            <TrophyWithCountShimmer type={'gold'} />
-            <TrophyWithCountShimmer type={'silver'} />
-            <TrophyWithCountShimmer type={'bronze'} />
+            <TrophyWithCountShimmer type='platinum' />
+            <TrophyWithCountShimmer type='gold' />
+            <TrophyWithCountShimmer type='silver' />
+            <TrophyWithCountShimmer type='bronze' />
           </Stack>
           <Box sx={sx.progress}>
             <ProgressBarShimmer />
@@ -134,7 +134,7 @@ function getSx(isInteractable: boolean) {
     image: {
       position: 'relative',
       width: { xs: '32mm', sm: '40mm', md: '52mm' },
-      aspectRatio: 1,
+      height: { xs: '32mm', sm: '40mm', md: '52mm' },
       objectFit: 'contain',
       borderRadius: { xs: '8px', sm: '16px' },
       alignSelf: 'center',
@@ -147,7 +147,7 @@ function getSx(isInteractable: boolean) {
     },
     info: {
       position: 'relative',
-      margin: '16px',
+      margin: { xs: '8px', md: '16px' },
       width: '100%',
       overflow: 'hidden',
     },
@@ -162,7 +162,7 @@ function getSx(isInteractable: boolean) {
     },
     trophyCount: {
       alignSelf: 'flex-end',
-      maxWidth: '50%',
+      maxWidth: '75%',
       height: '100%',
       marginBottom: '8px',
     },
