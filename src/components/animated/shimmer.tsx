@@ -1,4 +1,4 @@
-import { Box, alpha, useTheme } from '@mui/material';
+import { Box, Typography, alpha, useTheme } from '@mui/material';
 
 export function Shimmer(props: { sx?: any }) {
   const sx = getSx();
@@ -50,31 +50,53 @@ export function Shimmer(props: { sx?: any }) {
   }
 }
 
-export function ShimmerText(props: {
-  fontSize: string | number | object;
-  numLines?: number;
-  width?: string;
-}) {
+export function ShimmerText(
+  props: {
+    fontSize: string | number | object;
+  } & (
+    | {
+        numLines?: number;
+        width?: never;
+      }
+    | {
+        numLines?: never;
+        width?: string;
+      }
+  ),
+) {
   const lines = [];
   const numLines = props.numLines ?? 1;
 
   const sx = getSx();
   for (let i = 0; i < numLines; i++) {
-    const width = (props.width ?? i + 1 < numLines) ? '100%' : '70%';
+    const width = props.width ?? (i + 1 < numLines ? '100%' : '70%');
     lines.push(
-      <Box key={i} sx={{ ...sx.container, width: width }}>
-        <Shimmer />
+      <Box key={i} sx={{ ...sx.lineContainer, width: width }}>
+        <Shimmer sx={sx.shimmer} />
+        {/* empty text to get correct relative line height */}
+        <Typography sx={sx.text}> </Typography>
       </Box>,
     );
   }
   return <>{lines}</>;
   function getSx() {
     return {
-      container: {
-        height: props.fontSize,
-        borderRadius: props.fontSize,
-        marginTop: `calc(${props.fontSize} * 0.5)`,
+      lineContainer: {
+        position: 'relative',
         overflow: 'hidden',
+        fontSize: props.fontSize,
+      },
+      shimmer: {
+        position: 'absolute',
+        bottom: 'calc(1em * 0.13)',
+        left: 0,
+        borderRadius: '1em',
+        height: '1em',
+        width: '100%',
+      },
+      text: {
+        whiteSpace: 'pre',
+        fontSize: props.fontSize,
       },
     };
   }
@@ -97,7 +119,9 @@ export function ShimmerImage(props: {
       container: [
         {
           minWidth: props.width,
+          maxWidth: props.width,
           aspectRatio: 1,
+          alignSelf: 'center',
           borderRadius: '8px',
           lineHeight: 0,
           fontSize: 0,

@@ -47,7 +47,7 @@ export function ItemCardShimmer() {
     <Stack sx={sx.container} direction='column'>
       <Image sx={sx.image} src={undefined} />
       <Box sx={sx.info}>
-        <ShimmerText fontSize='1.1em' numLines={1} />
+        <ShimmerText fontSize='1.1em' />
         <ShimmerText fontSize='0.8em' numLines={2} />
       </Box>
     </Stack>
