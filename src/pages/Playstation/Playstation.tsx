@@ -9,6 +9,8 @@ import { PlaystationTrophiesGame } from './pages/Game/TrophiesForGame';
 import { Main } from './pages/Main/Main';
 import { SingleTrophy } from './pages/SingleTrophy/single-trophy';
 import { PlaystationTrophies } from './pages/Trophies/Trophies';
+import { SingleGameTrophiesProvider } from './providers/game-trophy-provider';
+import { TrophiesProvider } from './providers/trophy-provider';
 
 const playstationDarkTheme = responsiveFontSizes(
   createTheme(darkTheme, {
@@ -48,21 +50,39 @@ export function Playstation() {
       <Box sx={sx.container}>
         <Routes>
           <Route path='/' element={<Main />} />
+          <Route
+            path='/trophies/*'
+            element={
+              <SortProvider
+                defaultSorting={{ type: 'Latest Trophy', order: 'asc' }}
+              >
+                <TrophiesProvider>
+                  <Routes>
+                    <Route path='/' element={<PlaystationTrophies />} />
+                    <Route
+                      path='/game/:gameIds/platform/:platforms/*'
+                      element={
+                        <SingleGameTrophiesProvider>
+                          <Routes>
+                            <Route
+                              path='/'
+                              element={<PlaystationTrophiesGame />}
+                            />
+                            <Route
+                              path='/trophy/:trophyId'
+                              element={<SingleTrophy />}
+                            />
+                          </Routes>
+                        </SingleGameTrophiesProvider>
+                      }
+                    />
+                  </Routes>
+                </TrophiesProvider>
+              </SortProvider>
+            }
+          />
+          <Route path='/*' element={<>404</>} />
         </Routes>
-        <SortProvider defaultSorting={{ type: 'Latest Trophy', order: 'asc' }}>
-          <Routes>
-            <Route path='/trophies' element={<PlaystationTrophies />} />
-            <Route
-              path='/trophies/game/:gameIds/platform/:platforms'
-              element={<PlaystationTrophiesGame />}
-            />
-            <Route
-              path='/trophies/game/:gameIds/platform/:platforms/trophy/:trophyId'
-              element={<SingleTrophy />}
-            />
-            <Route path='/*' element={<>404</>} />
-          </Routes>
-        </SortProvider>
       </Box>
     </AppContent>
   );

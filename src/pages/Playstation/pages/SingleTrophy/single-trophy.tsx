@@ -6,19 +6,14 @@ import {
   alpha,
   capitalize,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   ShimmerImage,
   ShimmerText,
 } from '../../../../components/animated/shimmer';
-import * as API from '../../service/api';
-import type {
-  Platform,
-  Trophy,
-  TrophyGroup,
-  TrophyType,
-} from '../../service/types';
+import { useSingleGameTrophies } from '../../providers/game-trophy-provider';
+import type { Trophy, TrophyType } from '../../service/types';
 import { getDateString, trophyColors } from '../../util';
 import { TrophyProgressBar } from '../Game/components/trophy-progress-bar';
 import { RarityPyramid } from './components/rarity-pyramid';
@@ -26,11 +21,12 @@ import { getRarityDescription } from './util';
 
 export function SingleTrophy() {
   const params = useParams();
-
-  const [trophy, setTrophy] = useState<Trophy | undefined>(undefined);
-  const [group, setGroup] = useState<TrophyGroup | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState(true);
+  const { isLoading, getTrophyDetails } = useSingleGameTrophies();
+  const details = getTrophyDetails(Number(params.trophyId));
   const [overrideHidden, setOverrideHidden] = useState(false);
+
+  const trophy = details?.trophy;
+  const group = details?.group;
 
   const hideDetails = Boolean(
     trophy?.isHidden && !trophy?.isEarned && !overrideHidden,
@@ -40,29 +36,6 @@ export function SingleTrophy() {
     `../../assets/trophies/${trophyType}.png`,
     import.meta.url,
   ).href;
-
-  useEffect(() => {
-    const getData = async () => {
-      if (!params.gameIds || !params.platforms || !params.trophyId) return;
-      setIsLoading(true);
-      const response = await API.getTrophyGroups(
-        params.gameIds.split(','),
-        params.platforms.split(',') as Platform[],
-      );
-      const allTrophies = response?.reduce(
-        (trophies, group) => trophies.concat(group.trophies),
-        [] as Trophy[],
-      );
-      setTrophy(allTrophies?.find((t) => t.id === Number(params.trophyId)));
-      setGroup(
-        response.find((group) =>
-          group.trophies.find((t) => t.id === Number(params.trophyId)),
-        ),
-      );
-      setIsLoading(false);
-    };
-    getData();
-  }, [params.gameIds, params.platforms]);
 
   function absorbEvent(e: any) {
     e.preventDefault();

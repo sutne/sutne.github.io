@@ -1,32 +1,10 @@
 import { Stack } from '@mui/material';
-import { useEffect, useState } from 'react';
 import { SortButton } from '../../../../components/sort-button';
-import { useSorting } from '../../../../providers/sort-provider';
-import * as API from '../../service/api';
-import type { TrophyGame } from '../../service/types';
-import { sortGames } from '../Game/sortUtils';
+import { useTrophies } from '../../providers/trophy-provider';
 import { TrophyTitle, TrophyTitleShimmer } from './components/TrophyTitle';
 
 export function PlaystationTrophies() {
-  const [gameList, setGameList] = useState<TrophyGame[] | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const { sorting } = useSorting();
-  useEffect(() => {
-    setGameList((prev) => {
-      return !prev ? prev : sortGames([...prev], sorting);
-    });
-  }, [sorting]);
-
-  useEffect(() => {
-    const getData = async () => {
-      setIsLoading(true);
-      const response = await API.getGameList();
-      setGameList(sortGames(response, sorting));
-      setIsLoading(false);
-    };
-    getData();
-  }, []);
+  const { isLoading, gameList } = useTrophies();
 
   const sx = getSx();
   return (
