@@ -9,7 +9,7 @@ import type { TrophyGame } from '../../../service/types';
 export function TrophyTitle({ game }: { game: TrophyGame }) {
   const navigate = useNavigate();
 
-  const titlePath = `game/${game.platform
+  const titlePath = `/Playstation/trophies/game/${game.platform
     .map((info) => info.id)
     .join(',')}/platform/${game.platform
     .map((info) => info.platform)

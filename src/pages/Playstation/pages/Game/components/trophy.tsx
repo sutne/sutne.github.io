@@ -1,10 +1,13 @@
 import { Box, Stack, Typography, alpha, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import type { Trophy } from '../../../service/types';
 import { getDateString, trophyColors } from '../../../util';
 import { TrophyProgressBar } from './trophy-progress-bar';
 
 export function TrophyCard(props: { trophy: Trophy }) {
+  const params = useParams();
+  const navigate = useNavigate();
   const theme = useTheme();
   const [isHolding, setIsHolding] = useState(false);
   const [overrideHidden, setOverrideHidden] = useState(false);
@@ -15,8 +18,9 @@ export function TrophyCard(props: { trophy: Trophy }) {
       return;
     }
     const timeout = setTimeout(() => {
-      if (!isHolding) return;
-      setOverrideHidden(true);
+      if (isHolding) {
+        setOverrideHidden(true);
+      }
     }, 1000);
     return () => clearTimeout(timeout);
   }, [isHolding]);
@@ -44,14 +48,28 @@ export function TrophyCard(props: { trophy: Trophy }) {
   }
 
   function endHold(e: any) {
+    if (!overrideHidden && isHolding) {
+      onClick();
+    }
     setIsHolding(false);
     absorbEvent(e);
+  }
+
+  // to prevent scrolling on phone to interfere with regular "taps"/"holding"
+  function handleScroll(e: any) {
+    setIsHolding(false);
   }
 
   function absorbEvent(e: any) {
     e.preventDefault();
     e.stopPropagation();
     e.cancelBubble = true;
+  }
+
+  function onClick() {
+    navigate(
+      `/Playstation/trophies/game/${params.gameIds}/platform/${params.platforms}/trophy/${props.trophy.id}`,
+    );
   }
 
   const sx = getSx();
@@ -64,6 +82,7 @@ export function TrophyCard(props: { trophy: Trophy }) {
         onMouseUp={endHold}
         onTouchStart={startHold}
         onTouchEnd={endHold}
+        onTouchMove={handleScroll}
         onContextMenu={absorbEvent}
       >
         <Box
@@ -81,16 +100,17 @@ export function TrophyCard(props: { trophy: Trophy }) {
           <Typography sx={sx.description}>
             {hideDetails ? 'Description is hidden.' : props.trophy.description}
           </Typography>
-          <Stack direction='row' sx={sx.stats}>
+          <Stack direction='row' alignItems='end'>
             <Box sx={sx.trophyIcon} component='img' src={trophyIcon} />
             <Typography sx={sx.rarity}>{props.trophy.rarity}%</Typography>
-            {props.trophy.isEarned && (
+            {props.trophy.isEarned ? (
               <Typography sx={sx.earnedTime}>
                 {getDateString(props.trophy.earnedAt)}
               </Typography>
-            )}
-            {props.trophy.progress && !hideDetails && (
+            ) : props.trophy.progress && !hideDetails ? (
               <TrophyProgressBar progress={props.trophy.progress} />
+            ) : (
+              <></>
             )}
           </Stack>
         </Stack>
@@ -100,6 +120,7 @@ export function TrophyCard(props: { trophy: Trophy }) {
   function getSx() {
     return {
       wrapper: {
+        cursor: 'pointer',
         overflow: 'hidden',
         width: '100%',
         background: !props.trophy.isEarned
@@ -118,7 +139,7 @@ export function TrophyCard(props: { trophy: Trophy }) {
         webkitTouchCallout: 'none',
       },
       container: {
-        padding: { xs: '8px', sm: '16px' },
+        padding: { xs: '6px 10px 6px 6px', sm: '14px 16px 14px 14px' },
         background: `linear-gradient(7deg,
           ${theme.palette.background.paper} 30%,
           ${alpha(theme.palette.background.paper, 0.3)} 100%
@@ -126,8 +147,7 @@ export function TrophyCard(props: { trophy: Trophy }) {
       },
       icon: [
         {
-          minWidth: { xs: '22mm', sm: '32mm' },
-          maxWidth: { xs: '22mm', sm: '32mm' },
+          width: { xs: '22mm', sm: '32mm' },
           aspectRatio: 1,
           alignSelf: 'center',
           objectFit: 'contain',
@@ -166,9 +186,6 @@ export function TrophyCard(props: { trophy: Trophy }) {
         overflow: 'hidden',
         color: 'text.secondary',
       },
-      stats: {
-        // width: '100%',
-      },
       trophyIcon: [
         {
           height: { xs: '1.5rem', sm: '2.5rem' },
@@ -185,9 +202,10 @@ export function TrophyCard(props: { trophy: Trophy }) {
       rarity: {
         fontSize: { xs: '0.7rem', sm: '1.2rem' },
         alignSelf: 'center',
-        flexGrow: 1,
         color: 'text.secondary',
+        flexGrow: 1,
         fontWeight: 100,
+        marginRight: '64px',
       },
       earnedTime: {
         fontSize: { xs: '0.7rem', sm: '1rem' },

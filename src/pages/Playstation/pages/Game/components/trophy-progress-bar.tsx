@@ -22,7 +22,6 @@ export function TrophyProgressBar({
     return {
       container: {
         width: '100%',
-        marginLeft: '64px',
       },
       percentage: {
         fontSize: { xs: '0.6rem', sm: '1rem' },
