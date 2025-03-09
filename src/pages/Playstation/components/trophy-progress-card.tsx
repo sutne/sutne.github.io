@@ -94,7 +94,7 @@ export function TrophyProgressCardShimmer() {
     <>
       <Stack sx={sx.container} direction='row'>
         <ShimmerImage
-          width={sx.image.minWidth}
+          width={sx.image.width}
           sx={{
             borderRadius: sx.image.borderRadius,
             boxShadow: sx.image.boxShadow,
@@ -133,8 +133,7 @@ function getSx(isInteractable: boolean) {
     },
     image: {
       position: 'relative',
-      minWidth: { xs: '32mm', sm: '40mm', md: '52mm' },
-      maxWidth: { xs: '32mm', sm: '40mm', md: '52mm' },
+      width: { xs: '32mm', sm: '40mm', md: '52mm' },
       aspectRatio: 1,
       objectFit: 'contain',
       borderRadius: { xs: '8px', sm: '16px' },

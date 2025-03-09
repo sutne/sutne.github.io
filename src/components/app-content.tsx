@@ -101,6 +101,7 @@ export function AppContent(props: {
         bgcolor: theme.palette.background.default,
         color: theme.palette.text.primary,
         boxShadow: '0px 4px 12px rgba(0, 0, 0, 70%)',
+        overflow: 'hidden',
       },
       title_bar: {
         padding: '12px',

@@ -7,6 +7,7 @@ import { lightTheme } from 'themes/lightTheme';
 import { SortProvider } from '../../providers/sort-provider';
 import { PlaystationTrophiesGame } from './pages/Game/TrophiesForGame';
 import { Main } from './pages/Main/Main';
+import { SingleTrophy } from './pages/SingleTrophy/single-trophy';
 import { PlaystationTrophies } from './pages/Trophies/Trophies';
 
 const playstationDarkTheme = responsiveFontSizes(
@@ -60,6 +61,10 @@ export function Playstation() {
           <Route
             path='/trophies/game/:gameIds/platform/:platforms'
             element={<PlaystationTrophiesGame />}
+          />
+          <Route
+            path='/trophies/game/:gameIds/platform/:platforms/trophy/:trophyId'
+            element={<SingleTrophy />}
           />
           <Route path='/*' element={<>404</>} />
         </Routes>
