@@ -7,6 +7,7 @@ import {
   useState,
 } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSessionState } from '../hooks/useSessionState';
 import { groupByEarned, groupByType } from '../pages/Game/groupUtils';
 import * as API from '../service/api';
 import type { Platform, Trophy, TrophyGroup } from '../service/types';
@@ -52,7 +53,10 @@ export function SingleGameTrophiesProvider(props: { children: JSX.Element }) {
     getData();
   }, [params.gameIds, params.platforms]);
 
-  const [groupBy, setGroupBy] = useState<TrophyGameGroupBy>('Default');
+  const [groupBy, setGroupBy] = useSessionState<TrophyGameGroupBy>(
+    'groupBy',
+    'Default',
+  );
 
   const allTrophies: Trophy[] = useMemo(
     () =>
