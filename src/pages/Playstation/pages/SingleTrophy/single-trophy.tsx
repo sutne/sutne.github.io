@@ -152,6 +152,7 @@ export function SingleTrophyShimmer() {
           <ShimmerText numLines={1} fontSize={sx.title.fontSize} />
         </Stack>
       </Stack>
+
       <Stack direction='row' spacing={2} alignItems='end'>
         <Stack width='50%' alignItems='center'>
           <ShimmerImage width={sx.trophyIcon[0].width} />

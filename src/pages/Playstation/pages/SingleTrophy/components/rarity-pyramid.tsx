@@ -31,12 +31,6 @@ export function RarityPyramid(props: {
   const sx = getSx();
   return <Box sx={sx.pyramid} />;
   function getSx() {
-    const fadePercentage = Math.min(
-      10,
-      earnedHeightPercentage > 90
-        ? 100 - earnedHeightPercentage
-        : 0.1 * earnedHeightPercentage,
-    );
     return {
       pyramid: {
         margin: `${width * 0.01}px ${width * 0.1}px ${width * 0.2}px ${width * 0.1}px`,
@@ -53,10 +47,7 @@ export function RarityPyramid(props: {
           bottom: `${100 - earnedHeightPercentage}%`,
           width: '100%',
           height: '100%',
-          background: `linear-gradient(to bottom,
-            ${theme.palette.text.primary} ${100 - fadePercentage}%,
-            transparent ${101}%
-          )`,
+          background: theme.palette.text.primary,
         },
       },
     };
