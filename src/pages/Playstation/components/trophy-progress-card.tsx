@@ -21,11 +21,10 @@ export function TrophyProgressCard(props: {
   earnedCount: TrophyCount;
   platform?: PlatformInfo[];
   children?: JSX.Element;
-  expanded?: boolean;
+  alwaysExpanded?: boolean;
 }) {
-  const [expanded, setExpanded] = useState(props.expanded ?? false);
-  const isInteractable =
-    !props.expanded && props.title !== '' && Boolean(props.children);
+  const [expanded, setExpanded] = useState(props.alwaysExpanded ?? false);
+  const isInteractable = !props.alwaysExpanded && Boolean(props.children);
 
   const trophyCount = (type: TrophyType) => {
     const count = props.earnedCount[type];
@@ -34,15 +33,14 @@ export function TrophyProgressCard(props: {
         key={type}
         type={type}
         count={count}
-        hideZero
+        hideTextForZero
         hide={props.trophyCount[type] === 0}
       />
     );
   };
 
   const onClick = () => {
-    if (props.title === '') return;
-    if (props.expanded) return;
+    if (!isInteractable) return;
     setExpanded((isExpanded) => !isExpanded);
   };
 
