@@ -7,7 +7,8 @@ import {
   useTheme,
 } from '@mui/material';
 import { ShimmerImage, ShimmerText } from 'components/animated/shimmer';
-import { type JSX, useState } from 'react';
+import type { JSX } from 'react';
+import { useSessionState } from '../hooks/useSessionState';
 import type { PlatformInfo, TrophyCount, TrophyType } from '../service/types';
 import { PlatformChip } from './platform-chip';
 import { ProgressBar, ProgressBarShimmer } from './progress-bar';
@@ -22,8 +23,13 @@ export function TrophyProgressCard(props: {
   platform?: PlatformInfo[];
   children?: JSX.Element;
   alwaysExpanded?: boolean;
+  preserveState?: boolean;
 }) {
-  const [expanded, setExpanded] = useState(props.alwaysExpanded ?? false);
+  const [expanded, setExpanded] = useSessionState(
+    props.title,
+    props.alwaysExpanded ?? false,
+    props.alwaysExpanded ? false : (props.preserveState ?? false),
+  );
   const isInteractable = !props.alwaysExpanded && Boolean(props.children);
 
   const trophyCount = (type: TrophyType) => {

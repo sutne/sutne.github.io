@@ -79,6 +79,7 @@ export function PlaystationTrophiesGame() {
                 trophyCount={group.trophyCount}
                 earnedCount={group.earnedCount}
                 alwaysExpanded={groups.length === 1 && group.name !== ''}
+                preserveState={true}
               >
                 <TrophyList list={group.trophies} />
               </TrophyProgressCard>
