@@ -33,7 +33,7 @@ export function TrophyWithCountShimmer(props: {
     <Box sx={sx.container}>
       <Box sx={sx.image} component='img' src={image} />
       <Box sx={{ position: sx.text.position, top: sx.text.top }}>
-        <ShimmerText fontSize={sx.text.fontSize} />
+        <ShimmerText fontSize={sx.text.fontSize} width='16px' />
       </Box>
     </Box>
   );

@@ -151,10 +151,11 @@ function getSx(isInteractable: boolean) {
     },
     title: {
       fontSize: { xs: '0.7rem', sm: '1.1rem', md: '1.5rem' },
-      height: '100%',
       color: 'text.primary',
       width: '100%',
       overflow: 'hidden',
+      paddingBottom: '1em', // hack to show y-overflow (to not clip "g", "p" etc.)
+      marginBottom: '-1em', // while hiding x-overflow (to get ellipsis)
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
     },
