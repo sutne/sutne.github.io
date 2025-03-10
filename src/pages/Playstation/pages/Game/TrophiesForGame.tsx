@@ -26,7 +26,7 @@ export function PlaystationTrophiesGame() {
             progress={gameAsGroup.progress}
             trophyCount={gameAsGroup.trophyCount}
             earnedCount={gameAsGroup.earnedCount}
-            expanded={false}
+            alwaysExpanded={false}
           />
         ))}
       <Stack
@@ -78,7 +78,7 @@ export function PlaystationTrophiesGame() {
                 progress={group.progress}
                 trophyCount={group.trophyCount}
                 earnedCount={group.earnedCount}
-                expanded={groups.length === 1 && group.name !== ''}
+                alwaysExpanded={groups.length === 1 && group.name !== ''}
               >
                 <TrophyList list={group.trophies} />
               </TrophyProgressCard>

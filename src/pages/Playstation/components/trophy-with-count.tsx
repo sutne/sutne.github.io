@@ -5,7 +5,7 @@ import type { TrophyType } from '../service/types';
 export function TrophyWithCount(props: {
   type: TrophyType;
   count: number;
-  hideZero?: boolean;
+  hideTextForZero?: boolean;
   hide?: boolean;
   fontSize?: string | number | object;
   maxWidth?: string;
@@ -28,7 +28,7 @@ export function TrophyWithCountShimmer(props: {
 }) {
   const image = new URL(`../assets/trophies/${props.type}.png`, import.meta.url)
     .href;
-  const sx = getSx({ ...props, count: 0, hideZero: true });
+  const sx = getSx({ ...props, count: 0, hideTextForZero: true });
   return (
     <Box sx={sx.container}>
       <Box sx={sx.image} component='img' src={image} />
@@ -42,21 +42,21 @@ export function TrophyWithCountShimmer(props: {
 function getSx(props: {
   type: TrophyType;
   count: number;
-  hideZero?: boolean;
+  hideTextForZero?: boolean;
   hide?: boolean;
   fontSize?: string | number | object;
   maxWidth?: string;
 }) {
-  const hide = props.hideZero && props.count === 0;
+  const opaque = props.hideTextForZero && props.count === 0;
   const hideText =
-    props.hideZero && (props.type === 'platinum' || props.count === 0);
+    props.hideTextForZero && (props.type === 'platinum' || props.count === 0);
   const shadow = {
     xs: 'drop-shadow(0 1px 2px rgba(0,0,0,50%))',
     sm: 'drop-shadow(0 3px 5px rgba(0,0,0,50%))',
   };
   return {
     container: {
-      opacity: props.hide ? 0 : hide ? 0.2 : 1,
+      opacity: props.hide ? 0 : opaque ? 0.2 : 1,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -67,7 +67,7 @@ function getSx(props: {
         width: '100%',
         maxWidth: props.maxWidth ?? '80px',
       },
-      !hide && {
+      !opaque && {
         WebkitFilter: shadow,
         filter: shadow,
       },
