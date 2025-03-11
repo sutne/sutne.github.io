@@ -125,10 +125,10 @@ export function TrophyCard(props: { trophy: Trophy }) {
         width: '100%',
         background: !props.trophy.isEarned
           ? 'transparent'
-          : `linear-gradient(13deg,
-                transparent 75%,
-                ${alpha(trophyColors[props.trophy.type], 0.2)} 90%,
-                ${alpha(trophyColors[props.trophy.type], 0.5)} 100%
+          : `radial-gradient(ellipse at 40% 80%, 
+                transparent 65%, 
+                ${alpha(trophyColors[props.trophy.type], 0.2)} 87%, 
+                ${alpha(trophyColors[props.trophy.type], 0.45)} 100%
             )`,
         borderRadius: { xs: '8px', sm: '16px' },
         boxSizing: 'border-box',
