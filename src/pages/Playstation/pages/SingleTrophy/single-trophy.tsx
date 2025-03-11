@@ -199,13 +199,13 @@ function getSx(
       margin: { xs: '-8px', sm: '-24px' },
       padding: {
         xs: '16px 12px 8px 12px',
-        md: '16px 32px 22px 32px',
+        sm: '16px 32px 22px 32px',
       },
       background: !trophy?.isEarned
         ? 'transparent'
-        : `linear-gradient(160deg,
-              transparent 75%,
-              ${alpha(trophyColors[trophy?.type], 0.2)} 90%,
+        : `radial-gradient(ellipse at 10% 20%, 
+              transparent 60%, 
+              ${alpha(trophyColors[trophy?.type], 0.2)} 85%, 
               ${alpha(trophyColors[trophy?.type], 0.5)} 100%
           )`,
     },
