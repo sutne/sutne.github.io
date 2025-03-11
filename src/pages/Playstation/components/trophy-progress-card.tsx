@@ -24,13 +24,16 @@ export function TrophyProgressCard(props: {
   children?: JSX.Element;
   alwaysExpanded?: boolean;
   preserveState?: boolean;
+  onClick?: () => void;
 }) {
   const [expanded, setExpanded] = useSessionState(
     props.title,
     props.alwaysExpanded ?? false,
     props.alwaysExpanded ? false : (props.preserveState ?? false),
   );
-  const isInteractable = !props.alwaysExpanded && Boolean(props.children);
+  const isInteractable =
+    Boolean(props.onClick) ||
+    (!props.alwaysExpanded && Boolean(props.children));
 
   const trophyCount = (type: TrophyType) => {
     const count = props.earnedCount[type];
@@ -45,15 +48,19 @@ export function TrophyProgressCard(props: {
     );
   };
 
-  const onClick = () => {
+  const handleClick = () => {
     if (!isInteractable) return;
+    if (props.onClick) {
+      props.onClick();
+      return;
+    }
     setExpanded((isExpanded) => !isExpanded);
   };
 
   const sx = getSx(isInteractable);
   return (
     <>
-      <Stack sx={sx.container} direction='row' onClick={onClick}>
+      <Stack sx={sx.container} direction='row' onClick={handleClick}>
         <Box sx={sx.image} component='img' src={props.image} />
         {props.platform && (
           <Stack

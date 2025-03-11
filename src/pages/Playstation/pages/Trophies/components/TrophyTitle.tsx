@@ -1,4 +1,3 @@
-import { Box } from '@mui/material';
 import {
   TrophyProgressCard,
   TrophyProgressCardShimmer,
@@ -15,16 +14,15 @@ export function TrophyTitle({ game }: { game: TrophyGame }) {
     .map((info) => info.platform)
     .join(',')}`;
   return (
-    <Box onClick={() => navigate(titlePath)}>
-      <TrophyProgressCard
-        image={game.image}
-        title={game.title}
-        progress={game.progress}
-        trophyCount={game.trophyCount}
-        earnedCount={game.earnedCount}
-        platform={game.platform}
-      />
-    </Box>
+    <TrophyProgressCard
+      image={game.image}
+      title={game.title}
+      progress={game.progress}
+      trophyCount={game.trophyCount}
+      earnedCount={game.earnedCount}
+      platform={game.platform}
+      onClick={() => navigate(titlePath)}
+    />
   );
 }
 
