@@ -82,6 +82,11 @@ export function SingleTrophy() {
 
       <Stack direction='row' spacing={2} alignItems='end'>
         <Stack width='50%' alignItems='center'>
+          <Box sx={sx.trophyIcon} component='img' src={trophyIcon} />
+          <Typography sx={sx.text}>{capitalize(trophyType ?? '')}</Typography>
+          <Typography sx={sx.label}>Grade</Typography>
+        </Stack>
+        <Stack width='50%' alignItems='center'>
           {trophy.rarity && (
             <>
               <RarityPyramid
@@ -95,17 +100,13 @@ export function SingleTrophy() {
             </>
           )}
         </Stack>
-        <Stack width='50%' alignItems='center'>
-          <Box sx={sx.trophyIcon} component='img' src={trophyIcon} />
-          <Typography sx={sx.text}>{capitalize(trophyType ?? '')}</Typography>
-          <Typography sx={sx.label}>Grade</Typography>
-        </Stack>
       </Stack>
 
       <Stack
         direction={{ xs: 'column', sm: 'row' }}
         spacing={2}
         alignItems='end'
+        paddingTop='12px'
       >
         <Stack width={{ xs: '100%', sm: '50%' }} alignItems='start'>
           <Typography sx={sx.label}>Description</Typography>
@@ -154,15 +155,15 @@ export function SingleTrophyShimmer() {
       </Stack>
 
       <Stack direction='row' spacing={2} alignItems='end'>
-        <Stack width='50%' alignItems='center'>
-          <ShimmerImage width={sx.trophyIcon[0].width} />
-          <ShimmerText numLines={1} fontSize={sx.text.fontSize} />
-          <Typography sx={sx.label}>Rarity</Typography>
-        </Stack>
-        <Stack width='50%' alignItems='center'>
+        <Stack width='50%' alignItems='start'>
           <ShimmerImage width={sx.trophyIcon[0].width} />
           <ShimmerText numLines={1} fontSize={sx.text.fontSize} />
           <Typography sx={sx.label}>Grade</Typography>
+        </Stack>
+        <Stack width='50%' alignItems='end'>
+          <ShimmerImage width={sx.trophyIcon[0].width} />
+          <ShimmerText numLines={1} fontSize={sx.text.fontSize} />
+          <Typography sx={sx.label}>Rarity</Typography>
         </Stack>
       </Stack>
 
@@ -195,10 +196,10 @@ function getSx(
   };
   return {
     wrapper: {
-      margin: '0px -24px -24px -24px',
+      margin: { xs: '-8px', sm: '-24px' },
       padding: {
-        xs: '0 32px 28px 32px',
-        md: '0 32px 28px 32px',
+        xs: '16px 12px 8px 12px',
+        md: '16px 32px 22px 32px',
       },
       background: !trophy?.isEarned
         ? 'transparent'
