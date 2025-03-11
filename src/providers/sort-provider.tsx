@@ -1,5 +1,6 @@
 import type React from 'react';
-import { type JSX, createContext, useContext, useState } from 'react';
+import { type JSX, createContext, useContext } from 'react';
+import { useSessionState } from '../pages/Playstation/hooks/useSessionState';
 
 export type SortOrder = 'asc' | 'desc';
 export type Sorting = {
@@ -18,8 +19,12 @@ const SortContext = createContext<
 export function SortProvider(props: {
   defaultSorting: Sorting;
   children: JSX.Element;
+  storageKey: string;
 }) {
-  const [sorting, setSorting] = useState<Sorting>(props.defaultSorting);
+  const [sorting, setSorting] = useSessionState<Sorting>(
+    props.storageKey,
+    props.defaultSorting,
+  );
 
   const contextValues = {
     sorting,

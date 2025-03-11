@@ -71,7 +71,10 @@ export function GitHub() {
         <Typography variant='h3' sx={{ margin: '12mm 0 6mm 0' }}>
           My Repositories
         </Typography>
-        <SortProvider defaultSorting={{ type: 'Updated', order: 'asc' }}>
+        <SortProvider
+          storageKey='github-repo-sorting'
+          defaultSorting={{ type: 'Updated', order: 'asc' }}
+        >
           <RepoList />
         </SortProvider>
       </Box>

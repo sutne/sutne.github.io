@@ -54,6 +54,7 @@ export function Playstation() {
             path='/trophies/*'
             element={
               <SortProvider
+                storageKey='playstation-game-sorting'
                 defaultSorting={{ type: 'Latest Trophy', order: 'asc' }}
               >
                 <TrophiesProvider>

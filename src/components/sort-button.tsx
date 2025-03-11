@@ -1,6 +1,6 @@
 import { KeyboardArrowDownRounded } from '@mui/icons-material';
 import { Box, Stack, Typography, alpha, useTheme } from '@mui/material';
-import { useSorting } from 'providers/sort-provider';
+import { type Sorting, useSorting } from 'providers/sort-provider';
 
 export function SortButton(props: { type: string }) {
   const { sorting, setSorting } = useSorting();
@@ -10,19 +10,11 @@ export function SortButton(props: { type: string }) {
   const isAscending = sorting.order === 'asc';
 
   const handleClick = () => {
-    if (isSelected) {
-      setSorting((prev) => {
-        return {
-          type: prev.type,
-          order: prev.order === 'asc' ? 'desc' : 'asc',
-        };
-      });
-    } else {
-      setSorting({
-        type: props.type,
-        order: 'asc',
-      });
-    }
+    const newSorting: Sorting = {
+      type: props.type,
+      order: isSelected && sorting.order === 'asc' ? 'desc' : 'asc',
+    };
+    setSorting(newSorting);
   };
 
   const sx = getSx();
