@@ -27,7 +27,7 @@ export function groupByEarned(trophies: Trophy[]): TrophyGroup[] {
 
   const earned: TrophyGroup = {
     id: 0,
-    name: 'Earned',
+    name: 'Earned Trophies',
     icon: new URL('../../assets/trophies/gold.png', import.meta.url).href,
     trophyCount: earnedCount,
     earnedCount: earnedCount,
@@ -36,7 +36,7 @@ export function groupByEarned(trophies: Trophy[]): TrophyGroup[] {
   };
   const unearned: TrophyGroup = {
     id: 1,
-    name: 'Unearned',
+    name: 'Unearned Trophies',
     icon: new URL('../../assets/trophies/hidden.png', import.meta.url).href,
     trophyCount: unearnedCount,
     earnedCount: unearnedCount,
