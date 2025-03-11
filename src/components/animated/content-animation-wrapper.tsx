@@ -2,8 +2,9 @@ import { Box } from '@mui/material';
 import { useApp } from 'providers/app-provider';
 import { useSettings } from 'providers/settings-provider';
 import type React from 'react';
-import { type JSX, useEffect, useState } from 'react';
+import { type JSX, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUrlScrollPosition } from '../hooks/useUrlScrollPosition';
 import { getImageCenter, getScreenCenter } from './util';
 
 /**
@@ -20,6 +21,9 @@ export function ContentAnimationWrapper(props: {
 
   const isOpen = getIsOpen(props.name);
   const iconRef = getIconRef(props.name);
+
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  useUrlScrollPosition(scrollRef);
 
   const animation = settings.useAnimations
     ? `${settings.animationDuration}ms ease-in`
@@ -62,7 +66,7 @@ export function ContentAnimationWrapper(props: {
   if (!iconRef.current) return <></>;
   const sx = getSx();
   return (
-    <Box sx={sx.background} onClick={(e) => handleClose(e)}>
+    <Box sx={sx.background} ref={scrollRef} onClick={(e) => handleClose(e)}>
       <Box sx={sx.reset} onClick={(e) => handleClose(e)}>
         <Box sx={sx.container} onClick={(e) => handleClose(e)}>
           {props.children}
