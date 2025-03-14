@@ -7,12 +7,30 @@ import {
   useTheme,
 } from '@mui/material';
 import { ShimmerImage, ShimmerText } from 'components/animated/shimmer';
-import type { JSX } from 'react';
-import { useSessionState } from '../hooks/useSessionState';
+import { type JSX, useState } from 'react';
+import { useSessionState } from '../hooks/useStorageState';
 import type { PlatformInfo, TrophyCount, TrophyType } from '../service/types';
 import { PlatformChip } from './platform-chip';
 import { ProgressBar, ProgressBarShimmer } from './progress-bar';
 import { TrophyWithCount, TrophyWithCountShimmer } from './trophy-with-count';
+
+function useExpansionState(
+  key: string,
+  preserveState: boolean,
+  alwaysExpanded: boolean,
+) {
+  if (alwaysExpanded) {
+    return [true, () => {}] as const;
+  }
+  if (preserveState) {
+    const formattedKey = key
+      .toLowerCase()
+      .replace(/[^\w]+/g, '-')
+      .replace(/^-|-$/g, '');
+    return useSessionState(`expand-${formattedKey}`, false);
+  }
+  return useState(false);
+}
 
 export function TrophyProgressCard(props: {
   image: string;
@@ -26,14 +44,13 @@ export function TrophyProgressCard(props: {
   preserveState?: boolean;
   onClick?: () => void;
 }) {
-  const [expanded, setExpanded] = useSessionState(
+  const canExpand = Boolean(props.children) && !props.alwaysExpanded;
+  const isInteractable = Boolean(props.onClick) || canExpand;
+  const [expanded, setExpanded] = useExpansionState(
     props.title,
+    Boolean(canExpand && props.preserveState),
     props.alwaysExpanded ?? false,
-    props.alwaysExpanded ? false : (props.preserveState ?? false),
   );
-  const isInteractable =
-    Boolean(props.onClick) ||
-    (!props.alwaysExpanded && Boolean(props.children));
 
   const trophyCount = (type: TrophyType) => {
     const count = props.earnedCount[type];

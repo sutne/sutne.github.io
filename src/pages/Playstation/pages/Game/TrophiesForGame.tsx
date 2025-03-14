@@ -9,8 +9,14 @@ import { GroupButton } from './components/group-button';
 import { TrophyList } from './components/trophy-list';
 
 export function PlaystationTrophiesGame() {
-  const { groups, isLoading, gameAsGroup, groupBy, setGroupBy } =
-    useSingleGameTrophies();
+  const {
+    isLoading,
+    groups,
+    storedGroupCount,
+    gameAsGroup,
+    groupBy,
+    setGroupBy,
+  } = useSingleGameTrophies();
 
   return (
     <>
@@ -26,7 +32,6 @@ export function PlaystationTrophiesGame() {
             progress={gameAsGroup.progress}
             trophyCount={gameAsGroup.trophyCount}
             earnedCount={gameAsGroup.earnedCount}
-            alwaysExpanded={false}
           />
         ))}
       <Stack
@@ -58,7 +63,7 @@ export function PlaystationTrophiesGame() {
       </Stack>
       <Stack spacing={2}>
         {isLoading ? (
-          Array(1)
+          Array(storedGroupCount)
             .fill(null)
             .map((_, i) => (
               // biome-ignore lint/suspicious/noArrayIndexKey: no other value to use
@@ -79,8 +84,8 @@ export function PlaystationTrophiesGame() {
                 progress={group.progress}
                 trophyCount={group.trophyCount}
                 earnedCount={group.earnedCount}
-                alwaysExpanded={groups.length === 1 && group.name !== ''}
-                preserveState={true}
+                alwaysExpanded={groups.length === 1}
+                preserveState
               >
                 <TrophyList list={group.trophies} />
               </TrophyProgressCard>

@@ -4,7 +4,7 @@ import { useTrophies } from '../../providers/trophy-provider';
 import { TrophyTitle, TrophyTitleShimmer } from './components/TrophyTitle';
 
 export function PlaystationTrophies() {
-  const { isLoading, gameList } = useTrophies();
+  const { isLoading, gameList, storedGameCount } = useTrophies();
 
   const sx = getSx();
   return (
@@ -17,7 +17,7 @@ export function PlaystationTrophies() {
       </Stack>
       <Stack spacing={{ xs: '20px', md: '30px' }}>
         {isLoading ? (
-          Array(5)
+          Array(storedGameCount)
             .fill(null)
             .map((_, i) => (
               // biome-ignore lint/suspicious/noArrayIndexKey: no other value to use
