@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSessionState } from '../hooks/useSessionState';
+import { useLocalState, useSessionState } from '../hooks/useStorageState';
 import { groupByEarned, groupByType } from '../pages/Game/groupUtils';
 import * as API from '../service/api';
 import type { Platform, Trophy, TrophyGroup } from '../service/types';
@@ -21,9 +21,10 @@ export type TrophyGameGroupBy = 'Default' | 'Earned' | 'Type';
 
 const SingleGameTrophiesContext = createContext<
   | {
-      groups: TrophyGroup[] | undefined;
-      gameAsGroup: TrophyGroup | undefined;
       isLoading: boolean;
+      groups: TrophyGroup[] | undefined;
+      storedGroupCount: number;
+      gameAsGroup: TrophyGroup | undefined;
       groupBy: TrophyGameGroupBy;
       setGroupBy: React.Dispatch<React.SetStateAction<TrophyGameGroupBy>>;
       getTrophyDetails: (
@@ -39,6 +40,9 @@ export function SingleGameTrophiesProvider(props: { children: JSX.Element }) {
   const [groups, setGroups] = useState<TrophyGroup[] | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
 
+  const storageKey = `group-count-${params.gameIds}-${params.platforms}`;
+  const [storedGroupCount, setStoredGroupCount] = useLocalState(storageKey, 1);
+
   useEffect(() => {
     const getData = async () => {
       if (!params.gameIds || !params.platforms) return;
@@ -48,13 +52,14 @@ export function SingleGameTrophiesProvider(props: { children: JSX.Element }) {
         params.platforms.split(',') as Platform[],
       );
       setGroups(response);
+      setStoredGroupCount(response?.length);
       setIsLoading(false);
     };
     getData();
-  }, [params.gameIds, params.platforms]);
+  }, [params.gameIds, params.platforms, setStoredGroupCount]);
 
   const [groupBy, setGroupBy] = useSessionState<TrophyGameGroupBy>(
-    'groupBy',
+    'group-trophies-by',
     'Default',
   );
 
@@ -69,12 +74,16 @@ export function SingleGameTrophiesProvider(props: { children: JSX.Element }) {
   const earnedGroups = useMemo(() => groupByEarned(allTrophies), [allTrophies]);
   const typeGroups = useMemo(() => groupByType(allTrophies), [allTrophies]);
 
-  const displayedGroups =
-    groupBy === 'Default'
-      ? groups
-      : groupBy === 'Earned'
-        ? earnedGroups
-        : typeGroups;
+  const getDisplayedGroups = () => {
+    switch (groupBy) {
+      case 'Earned':
+        return earnedGroups;
+      case 'Type':
+        return typeGroups;
+      default:
+        return groups;
+    }
+  };
 
   function getTrophyDetails(trophyId: number) {
     const group = groups?.find((group) =>
@@ -107,7 +116,8 @@ export function SingleGameTrophiesProvider(props: { children: JSX.Element }) {
     <SingleGameTrophiesContext.Provider
       value={{
         isLoading,
-        groups: displayedGroups,
+        groups: getDisplayedGroups(),
+        storedGroupCount,
         gameAsGroup,
         groupBy,
         setGroupBy,

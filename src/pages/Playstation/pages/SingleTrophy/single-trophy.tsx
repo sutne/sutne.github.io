@@ -215,7 +215,7 @@ function getSx(
         aspectRatio: 1,
         alignSelf: 'center',
         objectFit: 'contain',
-        borderRadius: { xs: '4px', md: '6px' },
+        borderRadius: '4%',
         filter: {
           xs: `grayscale(100%) ${hideDetails ? 'blur(8px)' : ''}`,
           sm: `grayscale(100%) ${hideDetails ? 'blur(12px)' : ''}`,
