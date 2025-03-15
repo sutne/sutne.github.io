@@ -9,6 +9,7 @@ import {
 import { ShimmerImage, ShimmerText } from 'components/animated/shimmer';
 import { type JSX, useState } from 'react';
 import { useSessionState } from '../hooks/useStorageState';
+import { unearnedTrophyGroupTitle } from '../pages/Game/groupUtils';
 import type { PlatformInfo, TrophyCount, TrophyType } from '../service/types';
 import { PlatformChip } from './platform-chip';
 import { ProgressBar, ProgressBarShimmer } from './progress-bar';
@@ -92,7 +93,14 @@ export function TrophyProgressCard(props: {
         )}
         <Stack sx={sx.info}>
           <Typography sx={sx.title}>{props.title}</Typography>
-          <Stack sx={sx.trophyCount} direction='row' spacing={0}>
+          <Stack
+            sx={{
+              ...sx.trophyCount,
+              opacity: props.title === unearnedTrophyGroupTitle ? 0.2 : 1,
+            }}
+            direction='row'
+            spacing={0}
+          >
             {[
               trophyCount('platinum'),
               trophyCount('gold'),

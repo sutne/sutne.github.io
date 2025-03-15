@@ -5,6 +5,8 @@ import type {
   TrophyType,
 } from '../../service/types';
 
+export const earnedTrophyGroupTitle = 'Earned Trophies';
+export const unearnedTrophyGroupTitle = 'Unearned Trophies';
 /** Return 1 TrophyGroup for earned trophies, and 1 group for unearned trophies */
 export function groupByEarned(trophies: Trophy[]): TrophyGroup[] {
   const earnedTrophies = trophies.filter((trophy) => trophy.isEarned);
@@ -27,7 +29,7 @@ export function groupByEarned(trophies: Trophy[]): TrophyGroup[] {
 
   const earned: TrophyGroup = {
     id: 0,
-    name: 'Earned Trophies',
+    name: earnedTrophyGroupTitle,
     icon: new URL('../../assets/trophies/gold.png', import.meta.url).href,
     trophyCount: earnedCount,
     earnedCount: earnedCount,
@@ -36,7 +38,7 @@ export function groupByEarned(trophies: Trophy[]): TrophyGroup[] {
   };
   const unearned: TrophyGroup = {
     id: 1,
-    name: 'Unearned Trophies',
+    name: unearnedTrophyGroupTitle,
     icon: new URL('../../assets/trophies/hidden.png', import.meta.url).href,
     trophyCount: unearnedCount,
     earnedCount: unearnedCount,
