@@ -15,9 +15,9 @@ import {
 import { useSingleGameTrophies } from '../../providers/game-trophy-provider';
 import type { Trophy, TrophyType } from '../../service/types';
 import { getDateString, trophyColors } from '../../util';
+import { getRarityDescription } from '../../util';
 import { TrophyProgressBar } from '../Game/components/trophy-progress-bar';
 import { RarityPyramid } from './components/rarity-pyramid';
-import { getRarityDescription } from './util';
 
 export function SingleTrophy() {
   const params = useParams();
