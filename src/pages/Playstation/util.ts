@@ -31,3 +31,16 @@ export const trophyColors = {
   gold: 'rgb(181, 143, 75)',
   platinum: 'rgb(29, 73, 153)',
 } as const;
+
+export function getRarityDescription(rarity: string) {
+  const value = Number(rarity);
+  if (Number.isNaN(value) && value < 0) return 'Unknown';
+  if (value === 0) return 'Unobtainable';
+  if (value < 1) return 'Ultra Rare';
+  if (value < 5) return 'Very Rare';
+  if (value < 15) return 'Rare';
+  if (value < 30) return 'Uncommon';
+  if (value < 50) return 'Common';
+  if (value < 85) return 'Very Common';
+  return 'Universal';
+}
