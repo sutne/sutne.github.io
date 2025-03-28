@@ -53,6 +53,7 @@ export function Shimmer(props: { sx?: any }) {
 export function ShimmerText(
   props: {
     fontSize: string | number | object;
+    inline?: boolean;
   } & (
     | {
         numLines?: number;
@@ -72,9 +73,9 @@ export function ShimmerText(
     const width = props.width ?? (i + 1 < numLines ? '100%' : '70%');
     lines.push(
       <Box key={i} sx={{ ...sx.lineContainer, width: width }}>
-        <Shimmer sx={sx.shimmer} />
         {/* empty text to get correct relative line height */}
         <Typography sx={sx.text}> </Typography>
+        <Shimmer sx={sx.shimmer} />
       </Box>,
     );
   }
@@ -85,13 +86,15 @@ export function ShimmerText(
         position: 'relative',
         overflow: 'hidden',
         fontSize: props.fontSize,
+        display: props.inline ? 'inline-block' : 'block',
+        verticalAlign: 'bottom',
       },
       shimmer: {
         position: 'absolute',
         bottom: 'calc(1em * 0.13)',
         left: 0,
         borderRadius: '1em',
-        height: '1em',
+        height: '1.1em',
         width: '100%',
       },
       text: {
