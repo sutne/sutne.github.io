@@ -7,18 +7,17 @@ on:
   pull_request:
 
 jobs:
-  build-and-deploy:
+  lint-and-format:
     runs-on: ubuntu-latest
-    name: Lint & Format
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Install Node
+      - name: Setup Node
         uses: actions/setup-node@v4
 
       - name: Install Dependencies
         run: npm ci
 
-      - name: Check linting and formatting
+      - name: Lint & Format
         run: npm run lint

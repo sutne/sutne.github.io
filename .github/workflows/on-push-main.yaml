@@ -8,12 +8,11 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    name: Build & Deploy
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Install Node
+      - name: Setup Node
         uses: actions/setup-node@v4
 
       - name: Install Dependencies
@@ -22,10 +21,11 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy
-        uses: s0/git-publish-subdir-action@develop
+      - name: Publish to GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v4.1.0
+        with:
+          build_dir: dist/
         env:
-          REPO: self
-          BRANCH: gh-pages
-          FOLDER: dist
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
+  
