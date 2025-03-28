@@ -3,6 +3,7 @@ import type {
   PlatformInfo,
   Profile,
   RecentGame,
+  Trophy,
   TrophyGame,
   TrophyGroup,
 } from './types';
@@ -25,6 +26,13 @@ export async function getRecentGames(): Promise<RecentGame[]> {
 
 export async function getGameList(): Promise<TrophyGame[]> {
   const response = await fetch(`${BASE_URL}/trophies`);
+  if (!response.ok) return [];
+  const data = await response.json();
+  return data;
+}
+
+export async function getAllTrophies(): Promise<Trophy[]> {
+  const response = await fetch(`${BASE_URL}/all-trophies`);
   if (!response.ok) return [];
   const data = await response.json();
   return data;
