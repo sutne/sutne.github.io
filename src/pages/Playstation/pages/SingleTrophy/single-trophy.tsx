@@ -211,7 +211,7 @@ function getSx(
     },
     icon: [
       {
-        maxWidth: { xs: '70mm', sm: '110mm', md: '130mm' },
+        maxWidth: { xs: '70mm', sm: '90mm', md: '100mm' },
         aspectRatio: 1,
         alignSelf: 'center',
         objectFit: 'contain',
