@@ -31,7 +31,7 @@ const spotifyTheme = responsiveFontSizes(
 
 export function Spotify() {
   return (
-    <AppContent name='Spotify' theme={spotifyTheme}>
+    <AppContent name='Spotify' theme={spotifyTheme} hideOverflow>
       <Box style={{ padding: '24px' }}>
         <MusicPlayerProvider>
           {/* Remove margin from top header, regardless of which is on top */}

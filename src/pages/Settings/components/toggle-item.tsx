@@ -8,6 +8,7 @@ export function ToggleItem(props: {
   isToggled: boolean;
   onChange: () => void;
   tooltip?: JSX.Element;
+  disabled?: boolean;
 }) {
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -33,6 +34,7 @@ export function ToggleItem(props: {
       )}
       <ToggleSwitch
         isOn={props.isToggled}
+        disabled={props.disabled}
         onChange={() => {
           setShowTooltip(false);
           props.onChange();

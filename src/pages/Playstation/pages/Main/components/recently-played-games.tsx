@@ -1,5 +1,7 @@
 import { Grid2 as Grid } from '@mui/material';
-import { Image } from 'components/image';
+import { ShimmerImage } from '../../../../../components/animated/shimmer';
+import { Image } from '../../../../../components/image';
+import { Shine3D } from '../../../../../components/shine-3d';
 import type { RecentGame } from '../../../service/types';
 
 export function RecentlyPlayedGames(props: { recentGames: RecentGame[] }) {
@@ -19,16 +21,20 @@ export function RecentlyPlayedGamesShimmer() {
         .fill(null)
         .map((_, i) => (
           // biome-ignore lint/suspicious/noArrayIndexKey: required to replace "shimmer"/empty ones
-          <GridImage key={i} />
+          <Grid key={i} size={{ xs: 6, sm: 4, md: 3 }}>
+            <ShimmerImage width='100%' sx={{ borderRadius: '7%' }} />
+          </Grid>
         ))}
     </Grid>
   );
 }
 
-function GridImage(props: { src?: string }) {
+function GridImage(props: { src: string }) {
   return (
     <Grid size={{ xs: 6, sm: 4, md: 3 }}>
-      <Image src={props.src} sx={{ borderRadius: '7%' }} />
+      <Shine3D sx={{ borderRadius: '7%' }}>
+        <Image src={props.src} sx={{ borderRadius: '7%' }} />
+      </Shine3D>
     </Grid>
   );
 }
