@@ -1,37 +1,39 @@
 import type { Trophy, TrophyGame } from 'pages/Playstation/service/types';
 import type { Sorting } from 'providers/sort-provider';
 
-export function sortTrophies(trophies: Trophy[], sorting: Sorting): Trophy[] {
+export function compareId(a: Trophy, b: Trophy) {
+  return a.id - b.id;
+}
+
+export function compareEarnedTime(a: Trophy, b: Trophy) {
+  if (!a.isEarned && !b.isEarned) return undefined;
+  if (!a.isEarned) return 1;
+  if (!b.isEarned) return -1;
+  return compare(a.earnedAt, b.earnedAt);
+}
+
+export function compareRarity(a: Trophy, b: Trophy) {
+  if (!a?.rarity) return -1;
+  if (!b?.rarity) return 1;
+  return Number.parseFloat(a.rarity) - Number.parseFloat(b.rarity);
+}
+
+export function compareGrade(a: Trophy, b: Trophy) {
   const typeValues = {
     platinum: 0,
     gold: 1,
     silver: 2,
     bronze: 3,
   };
+  const hideA = a.isHidden && !a.isEarned;
+  const hideB = b.isHidden && !b.isEarned;
+  if (hideA && hideB) return 0;
+  if (hideA) return 1;
+  if (hideB) return -1;
+  return typeValues[a.type] - typeValues[b.type];
+}
 
-  const compareId = (a: Trophy, b: Trophy) => {
-    return a.id - b.id;
-  };
-  const compareEarnedTime = (a: Trophy, b: Trophy) => {
-    if (!a.isEarned && !b.isEarned) return undefined;
-    if (!a.isEarned) return 1;
-    if (!b.isEarned) return -1;
-    return compare(a.earnedAt, b.earnedAt);
-  };
-  const compareRarity = (a: Trophy, b: Trophy) => {
-    if (!a?.rarity) return -1;
-    if (!b?.rarity) return 1;
-    return Number.parseFloat(a.rarity) - Number.parseFloat(b.rarity);
-  };
-  const compareGrade = (a: Trophy, b: Trophy) => {
-    const hideA = a.isHidden && !a.isEarned;
-    const hideB = b.isHidden && !b.isEarned;
-    if (hideA && hideB) return 0;
-    if (hideA) return 1;
-    if (hideB) return -1;
-    return typeValues[a.type] - typeValues[b.type];
-  };
-
+export function sortTrophies(trophies: Trophy[], sorting: Sorting): Trophy[] {
   const sorted = [...trophies].sort((a, b) => {
     // negative if a should be before b
     let diff = undefined;

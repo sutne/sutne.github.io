@@ -1,5 +1,6 @@
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { SortButton } from '../../../../components/sort-button';
+import { TabBar } from '../../TabBar';
 import { useTrophies } from '../../providers/trophy-provider';
 import { TrophyTitle, TrophyTitleShimmer } from './components/TrophyTitle';
 
@@ -9,6 +10,10 @@ export function PlaystationTrophies() {
   const sx = getSx();
   return (
     <>
+      <TabBar />
+      <Typography variant='h2' sx={{ marginBottom: '16px' }}>
+        Game Overview
+      </Typography>
       <Stack sx={sx.buttonRow} direction='row' spacing={1}>
         <SortButton type='Latest Trophy' />
         <SortButton type='First Trophy' />
@@ -39,7 +44,7 @@ export function PlaystationTrophies() {
         padding: { md: '0 64px' },
       },
       buttonRow: {
-        padding: '8px 16px',
+        padding: '8px',
         maxWidth: 'fit-content',
         bgcolor: 'background.paper',
         borderRadius: '30mm',

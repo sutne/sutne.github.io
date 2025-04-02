@@ -1,9 +1,9 @@
 import type {
+  CompleteTrophy,
   Platform,
   PlatformInfo,
   Profile,
   RecentGame,
-  Trophy,
   TrophyGame,
   TrophyGroup,
 } from './types';
@@ -31,7 +31,7 @@ export async function getGameList(): Promise<TrophyGame[]> {
   return data;
 }
 
-export async function getAllTrophies(): Promise<Trophy[]> {
+export async function getAllTrophies(): Promise<CompleteTrophy[]> {
   const response = await fetch(`${BASE_URL}/all-trophies`);
   if (!response.ok) return [];
   const data = await response.json();

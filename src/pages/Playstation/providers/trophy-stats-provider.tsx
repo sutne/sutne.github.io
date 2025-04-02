@@ -6,13 +6,13 @@ import {
   useState,
 } from 'react';
 import * as API from '../service/api';
-import type { Trophy } from '../service/types';
+import type { CompleteTrophy } from '../service/types';
 
 const TrophyStatsContext = createContext<
   | {
       isLoading: boolean;
-      earnedTrophies: Trophy[] | undefined;
-      unearnedTrophies: Trophy[] | undefined;
+      earnedTrophies: CompleteTrophy[] | undefined;
+      unearnedTrophies: CompleteTrophy[] | undefined;
       earnedTimestamps: (Date | undefined)[] | undefined;
     }
   | undefined
@@ -20,7 +20,7 @@ const TrophyStatsContext = createContext<
 
 export function TrophyStatsProvider(props: { children: JSX.Element }) {
   const [isLoading, setIsLoading] = useState(true);
-  const [allTrophies, setAllTrophies] = useState<Trophy[] | undefined>(
+  const [allTrophies, setAllTrophies] = useState<CompleteTrophy[] | undefined>(
     undefined,
   );
 

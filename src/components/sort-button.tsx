@@ -58,7 +58,7 @@ export function SortButton(props: { type: string }) {
         transform: isAscending ? 'rotate(0deg)' : 'rotate(180deg)',
       },
       content: {
-        margin: '1mm 4mm 1mm 4mm',
+        padding: '1mm 4mm 1mm 4mm',
       },
     };
   }

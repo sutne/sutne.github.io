@@ -160,12 +160,12 @@ export function SingleTrophyShimmer() {
       </Stack>
 
       <Stack direction='row' spacing={2} alignItems='end'>
-        <Stack width='50%' alignItems='start'>
+        <Stack width='50%' alignItems='center'>
           <ShimmerImage width={sx.trophyIcon[0].width} />
           <ShimmerText numLines={1} fontSize={sx.text.fontSize} />
           <Typography sx={sx.label}>Grade</Typography>
         </Stack>
-        <Stack width='50%' alignItems='end'>
+        <Stack width='50%' alignItems='center'>
           <ShimmerImage width={sx.trophyIcon[0].width} />
           <ShimmerText numLines={1} fontSize={sx.text.fontSize} />
           <Typography sx={sx.label}>Rarity</Typography>
@@ -218,7 +218,6 @@ function getSx(
       maxWidth: { xs: '70mm', sm: '90mm', md: '100mm' },
       aspectRatio: 1,
       borderRadius: '4%',
-      overflow: 'hidden',
       alignSelf: 'center',
     },
     icon: [
@@ -226,6 +225,7 @@ function getSx(
         width: '100%',
         height: '100%',
         objectFit: 'contain',
+        borderRadius: 'inherit',
         filter: {
           xs: `grayscale(100%) ${hideDetails ? 'blur(8px)' : ''}`,
           sm: `grayscale(100%) ${hideDetails ? 'blur(12px)' : ''}`,
