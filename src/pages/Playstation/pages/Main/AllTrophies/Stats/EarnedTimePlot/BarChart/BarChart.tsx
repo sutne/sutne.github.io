@@ -64,13 +64,16 @@ export function BarChart(props: { sections: Section[]; sx?: SxProps }) {
     const dt = prevFrameTime ? performance.now() - prevFrameTime : 0;
     elapsed += dt;
     prevFrameTime = performance.now();
+    const animationPoint = Math.min(1, elapsed / animationDuration);
 
     painter.clear();
     painter.drawBorder();
-    painter.drawSections(props.sections.map((section) => section.label));
-    painter.drawTicks();
+    painter.drawSections(
+      props.sections.map((section) => section.label),
+      animationPoint * 2,
+    );
+    painter.drawTicks(animationPoint * 4);
 
-    const animationPoint = Math.min(1, elapsed / animationDuration);
     for (let i = 0; i < barCount; i++) {
       const sectionIndex = Math.floor(i / sectionBarCount);
       const barIndex = i % sectionBarCount;

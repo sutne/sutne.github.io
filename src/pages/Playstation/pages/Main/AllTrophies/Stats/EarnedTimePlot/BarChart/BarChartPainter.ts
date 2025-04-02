@@ -107,11 +107,12 @@ export class BarChartPainter {
     );
   }
 
-  drawSections(sections: string[]) {
+  drawSections(sections: string[], percent: number) {
     this.ctx.strokeStyle = this.style.color.line;
     this.ctx.lineWidth = this.dividerWidth;
     const sectionCount = sections.length;
     for (let section = 0; section < sectionCount; section++) {
+      if (section / sectionCount > percent) break;
       const sectionWidth = this.chartWidth / sectionCount;
       const x = this.chartArea.bottomLeft.x + (section + 1) * sectionWidth;
       const start = { x: x, y: 0 };
@@ -130,7 +131,7 @@ export class BarChartPainter {
     }
   }
 
-  drawTicks() {
+  drawTicks(percent: number) {
     const tickGap = Math.ceil(this.data.highestValue / 15 / 5) * 5; // max 15 ticks, round to nearest 5
     if (tickGap <= 0) return;
 
@@ -138,6 +139,7 @@ export class BarChartPainter {
     this.ctx.lineWidth = this.dividerWidth;
     const singleValueHeight = this.chartHeight / this.data.highestValue;
     for (let i = 0; i <= this.data.highestValue; i += tickGap) {
+      if (i / this.data.highestValue > percent) break;
       const y = this.chartArea.bottomLeft.y + i * singleValueHeight;
       const start = { x: this.tickAreaWidth - this.tickLineExtention, y: y };
       const end = { x: this.width, y: y };

@@ -1,7 +1,7 @@
 import { Box, Stack, Typography, alpha, useTheme } from '@mui/material';
 import { useMemo, useState } from 'react';
-import { Shimmer } from '../../../../../components/animated/shimmer';
-import { GroupButton } from '../../Game/components/group-button';
+import { Shimmer } from '../../../../../../../components/animated/shimmer';
+import { GroupButton } from '../../../../Game/components/group-button';
 import { BarChart, type Section } from './BarChart/BarChart';
 import {
   toAllTimeSections,

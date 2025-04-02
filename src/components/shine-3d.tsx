@@ -80,12 +80,12 @@ export function Shine3D(props: {
             transition: '0ms',
             zIndex: 1,
             transform: `
-            perspective(${perspective}px)
-            scale(${scale}%)
-            rotateX(${xRotation}deg) 
-            rotateY(${yRotation}deg)
-            translate(${xTranslation}px, ${yTranslation}px)
-          `,
+              perspective(${perspective}px)
+              scale(${scale}%)
+              rotateX(${xRotation}deg) 
+              rotateY(${yRotation}deg)
+              translate(${xTranslation}px, ${yTranslation}px)
+            `,
           },
           '&:after': [
             {
@@ -96,9 +96,9 @@ export function Shine3D(props: {
               top: 0,
               left: 0,
               background: `radial-gradient(ellipse at ${xShineOffset}% ${yShineOffset}%,
-              rgba(255,255,255,0.2) 5%,
-              transparent 60%
-            )`,
+                rgba(255,255,255,0.2) 5%,
+                transparent 60%
+              )`,
               pointerEvents: 'none',
             },
             props.maskImage && {

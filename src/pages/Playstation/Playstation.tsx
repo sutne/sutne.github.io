@@ -6,10 +6,12 @@ import { darkTheme } from 'themes/darkTheme';
 import { lightTheme } from 'themes/lightTheme';
 import { SortProvider } from '../../providers/sort-provider';
 import { PlaystationTrophiesGame } from './pages/Game/TrophiesForGame';
+import { TrophyAdvisor } from './pages/Main/AllTrophies/Advisor/TrophyAdvisor';
+import { TrophyLog } from './pages/Main/AllTrophies/Log/TrophyLog';
+import { PlaystationTrophyStats } from './pages/Main/AllTrophies/Stats/TrophyStats';
 import { Main } from './pages/Main/Main';
 import { SingleTrophy } from './pages/SingleTrophy/single-trophy';
 import { PlaystationTrophies } from './pages/Trophies/Trophies';
-import { PlaystationTrophyStats } from './pages/TrophyStats/TrophyStats';
 import { SingleGameTrophiesProvider } from './providers/game-trophy-provider';
 import { TrophiesProvider } from './providers/trophy-provider';
 import { TrophyStatsProvider } from './providers/trophy-stats-provider';
@@ -64,10 +66,6 @@ export function Playstation() {
                     <Routes>
                       <Route path='/' element={<PlaystationTrophies />} />
                       <Route
-                        path='/stats'
-                        element={<PlaystationTrophyStats />}
-                      />
-                      <Route
                         path='/game/:gameIds/platform/:platforms/*'
                         element={
                           <SingleGameTrophiesProvider>
@@ -80,17 +78,24 @@ export function Playstation() {
                                 path='/trophy/:trophyId'
                                 element={<SingleTrophy />}
                               />
+                              <Route path='/*' element={<>404</>} />
                             </Routes>
                           </SingleGameTrophiesProvider>
                         }
                       />
+                      <Route
+                        path='/stats'
+                        element={<PlaystationTrophyStats />}
+                      />
+                      <Route path='/log' element={<TrophyLog />} />
+                      <Route path='/advisor' element={<TrophyAdvisor />} />
+                      <Route path='/*' element={<>404</>} />
                     </Routes>
                   </TrophyStatsProvider>
                 </TrophiesProvider>
               </SortProvider>
             }
           />
-
           <Route path='/*' element={<>404</>} />
         </Routes>
       </Box>
