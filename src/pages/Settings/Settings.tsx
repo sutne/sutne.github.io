@@ -2,11 +2,13 @@ import { Divider, Stack, Typography, useTheme } from '@mui/material';
 import { AppContent } from 'components/app-content';
 import { useMainTheme } from 'providers/main-theme-provider';
 import { useSettings } from 'providers/settings-provider';
+import { usePhoneAccelerometer } from '../../providers/phone-accelerometer-provider';
 import { ToggleItem } from './components/toggle-item';
 
 export function Settings() {
   const { themeIsDark } = useMainTheme();
   const { settings, updateSettings } = useSettings();
+  const phoneOrientation = usePhoneAccelerometer();
 
   const sx = getSx();
   return (
@@ -44,6 +46,15 @@ export function Settings() {
             })
           }
         />
+        {phoneOrientation.requiresAccess && (
+          <ToggleItem
+            name='Access to Accelerometer'
+            disabled={phoneOrientation.hasAccess}
+            tooltip={<AccelerometerTooltip />}
+            isToggled={phoneOrientation.hasAccess}
+            onChange={() => phoneOrientation.requestAccess()}
+          />
+        )}
       </Stack>
     </AppContent>
   );
@@ -98,6 +109,21 @@ function AnimationTooltip() {
       </Typography>
       <Typography>
         Setting does not affect animations when data is loaded/unloaded.
+      </Typography>
+    </>
+  );
+}
+
+function AccelerometerTooltip() {
+  return (
+    <>
+      <Typography>
+        Some devices (iOS) require extra permissions in order to retreive
+        accelerometer information.
+      </Typography>
+      <Typography>
+        These data er used in the Playstation app for shiny 3D effects, these
+        can be seen using the cursor on a computer instead.
       </Typography>
     </>
   );

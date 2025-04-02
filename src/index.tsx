@@ -10,6 +10,7 @@ import { SettingsProvider } from 'providers/settings-provider';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { HashRouter, Route, Routes } from 'react-router-dom';
+import { PhoneAccelerometerProvider } from './providers/phone-accelerometer-provider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -19,13 +20,15 @@ document.body.style.padding = '0px';
 
 root.render(
   <React.StrictMode>
-    <SettingsProvider>
-      <MainThemeProvider>
-        <AppProvider>
-          <Root />
-        </AppProvider>
-      </MainThemeProvider>
-    </SettingsProvider>
+    <PhoneAccelerometerProvider>
+      <SettingsProvider>
+        <MainThemeProvider>
+          <AppProvider>
+            <Root />
+          </AppProvider>
+        </MainThemeProvider>
+      </SettingsProvider>
+    </PhoneAccelerometerProvider>
   </React.StrictMode>,
 );
 

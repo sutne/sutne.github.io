@@ -28,6 +28,7 @@ export function AppContent(props: {
     textColor: string;
   };
   fillWidth?: boolean;
+  hideOverflow?: boolean;
 }) {
   const { setIsOpen } = useApp();
   const { themeIsDark } = useMainTheme();
@@ -101,7 +102,7 @@ export function AppContent(props: {
         bgcolor: theme.palette.background.default,
         color: theme.palette.text.primary,
         boxShadow: '0px 4px 12px rgba(0, 0, 0, 70%)',
-        overflow: 'hidden',
+        overflow: props.hideOverflow ? 'hidden' : 'visible',
       },
       title_bar: {
         padding: '12px',

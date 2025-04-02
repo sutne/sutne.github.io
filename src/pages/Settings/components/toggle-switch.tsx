@@ -1,9 +1,17 @@
 import { Box } from '@mui/material';
 
-export function ToggleSwitch(props: { isOn: boolean; onChange: () => void }) {
+export function ToggleSwitch(props: {
+  isOn: boolean;
+  onChange: () => void;
+  disabled?: boolean;
+}) {
   const IOS = getIOSStyle();
   return (
-    <Box sx={IOS.container} onClick={props.onChange}>
+    <Box
+      sx={IOS.container}
+      onClick={props.onChange}
+      aria-disabled={props.disabled}
+    >
       <Box sx={IOS.background}>
         <Box sx={IOS.thumb} />
       </Box>

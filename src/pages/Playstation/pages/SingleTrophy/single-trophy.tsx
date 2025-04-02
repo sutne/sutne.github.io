@@ -12,6 +12,7 @@ import {
   ShimmerImage,
   ShimmerText,
 } from '../../../../components/animated/shimmer';
+import { Shine3D } from '../../../../components/shine-3d';
 import { useSingleGameTrophies } from '../../providers/game-trophy-provider';
 import type { Trophy, TrophyType } from '../../service/types';
 import { getDateString, trophyColors } from '../../util';
@@ -49,16 +50,18 @@ export function SingleTrophy() {
   if (!group) return <>Something went wrong loading this trophy</>;
   return (
     <Stack sx={sx.wrapper} direction='column' spacing={1}>
-      <Box
-        sx={sx.icon}
-        component='img'
-        src={trophy.icon}
-        onMouseDown={absorbEvent}
-        onTouchStart={absorbEvent}
-        onTouchStartCapture={absorbEvent}
-        onTouchMove={absorbEvent}
-        onContextMenu={absorbEvent}
-      />
+      <Shine3D disable={!trophy.isEarned} sx={sx.iconContainer}>
+        <Box
+          sx={sx.icon}
+          component='img'
+          src={trophy.icon}
+          onMouseDown={absorbEvent}
+          onTouchStart={absorbEvent}
+          onTouchStartCapture={absorbEvent}
+          onTouchMove={absorbEvent}
+          onContextMenu={absorbEvent}
+        />
+      </Shine3D>
 
       <Stack
         direction='row'
@@ -140,7 +143,9 @@ export function SingleTrophyShimmer() {
   const sx = getSx(undefined, false, undefined);
   return (
     <Stack sx={sx.wrapper} direction='column' spacing={1}>
-      <ShimmerImage width={sx.icon[0].maxWidth} />
+      <Box sx={sx.iconContainer}>
+        <ShimmerImage width={sx.iconContainer.maxWidth} />
+      </Box>
       <Stack
         direction='row'
         spacing={2}
@@ -209,13 +214,18 @@ function getSx(
               ${alpha(trophyColors[trophy?.type], 0.5)} 100%
           )`,
     },
+    iconContainer: {
+      maxWidth: { xs: '70mm', sm: '90mm', md: '100mm' },
+      aspectRatio: 1,
+      borderRadius: '4%',
+      overflow: 'hidden',
+      alignSelf: 'center',
+    },
     icon: [
       {
-        maxWidth: { xs: '70mm', sm: '90mm', md: '100mm' },
-        aspectRatio: 1,
-        alignSelf: 'center',
+        width: '100%',
+        height: '100%',
         objectFit: 'contain',
-        borderRadius: '4%',
         filter: {
           xs: `grayscale(100%) ${hideDetails ? 'blur(8px)' : ''}`,
           sm: `grayscale(100%) ${hideDetails ? 'blur(12px)' : ''}`,
