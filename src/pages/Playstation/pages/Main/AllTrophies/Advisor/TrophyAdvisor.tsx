@@ -1,14 +1,28 @@
 import { Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { TabBar } from '../../../../TabBar';
+import { useSessionState } from '../../../../hooks/useStorageState';
 import { useTrophyStats } from '../../../../providers/trophy-stats-provider';
 import { CompleteTrophyCard } from '../../../Game/components/complete-trophy';
+import { Paginator } from '../../components/paginator';
 
 export function TrophyAdvisor() {
   const navigate = useNavigate();
   const { isLoading, unearnedTrophies } = useTrophyStats();
 
-  const trophies = [...(unearnedTrophies ?? [])].slice(0, 10);
+  const [pageIndex, setPageIndex] = useSessionState(
+    'trophy-advisor-page-index',
+    0,
+  );
+  const maxPageElementCount = 20;
+  const pageCount = Math.ceil(
+    (unearnedTrophies?.length ?? 0) / maxPageElementCount,
+  );
+
+  const trophies = [...(unearnedTrophies ?? [])].slice(
+    pageIndex * maxPageElementCount,
+    pageIndex * maxPageElementCount + maxPageElementCount,
+  );
 
   if (isLoading) return <>Loading unearned trophies</>;
   return (
@@ -33,6 +47,11 @@ export function TrophyAdvisor() {
           />
         ))}
       </Stack>
+      <Paginator
+        pageCount={pageCount}
+        currentPageIndex={pageIndex}
+        onChange={setPageIndex}
+      />
     </>
   );
 }
