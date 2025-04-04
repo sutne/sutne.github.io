@@ -1,14 +1,25 @@
 import { Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { TabBar } from '../../../../TabBar';
+import { useSessionState } from '../../../../hooks/useStorageState';
 import { useTrophyStats } from '../../../../providers/trophy-stats-provider';
 import { CompleteTrophyCard } from '../../../Game/components/complete-trophy';
+import { Paginator } from '../../components/paginator';
 
 export function TrophyLog() {
   const navigate = useNavigate();
   const { isLoading, earnedTrophies } = useTrophyStats();
 
-  const trophies = [...(earnedTrophies ?? [])].slice(0, 10);
+  const [pageIndex, setPageIndex] = useSessionState('trophy-log-page-index', 0);
+  const maxPageElementCount = 20;
+  const pageCount = Math.ceil(
+    (earnedTrophies?.length ?? 0) / maxPageElementCount,
+  );
+
+  const trophies = [...(earnedTrophies ?? [])].slice(
+    pageIndex * maxPageElementCount,
+    pageIndex * maxPageElementCount + maxPageElementCount,
+  );
 
   if (isLoading) return <>Loading earned trophies...</>;
   return (
@@ -33,6 +44,11 @@ export function TrophyLog() {
           />
         ))}
       </Stack>
+      <Paginator
+        pageCount={pageCount}
+        currentPageIndex={pageIndex}
+        onChange={setPageIndex}
+      />
     </>
   );
 }
