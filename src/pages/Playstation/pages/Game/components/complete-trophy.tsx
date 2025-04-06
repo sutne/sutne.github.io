@@ -70,7 +70,7 @@ export function CompleteTrophyCard(props: {
         onTouchMove={handleScroll}
         onContextMenu={absorbEvent}
       >
-        <Stack direction='row' sx={sx.icons} spacing={{ xs: '4px', sm: '8px' }}>
+        <Stack direction='row' sx={sx.icons}>
           <Box
             sx={sx.gameImage}
             component='img'
@@ -79,6 +79,12 @@ export function CompleteTrophyCard(props: {
             onTouchStartCapture={absorbEvent}
             onTouchMove={absorbEvent}
           />
+          <Box sx={sx.platform}>
+            <PlatformChip
+              platform={props.trophy.game.platform}
+              sx={{ fontSize: { xs: '4px', sm: '6px' } }}
+            />
+          </Box>
           <Box
             sx={sx.trophyImage}
             component='img'
@@ -87,9 +93,6 @@ export function CompleteTrophyCard(props: {
             onTouchStartCapture={absorbEvent}
             onTouchMove={absorbEvent}
           />
-          <Box sx={sx.platform}>
-            <PlatformChip platform={props.trophy.game.platform} />
-          </Box>
         </Stack>
         <Stack direction='row' sx={sx.dataContainer}>
           <Stack sx={sx.info}>
@@ -164,18 +167,6 @@ export function CompleteTrophyCard(props: {
       icons: {
         position: 'relative',
       },
-      platform: {
-        position: 'absolute',
-        bottom: -2,
-        left: -14,
-        transform: 'scale(0.6)',
-      },
-      dataContainer: {
-        overflow: 'hidden',
-        position: 'relative',
-        padding: { xs: '2px 4px 2px 10px', sm: '2px 6px 2px 12px' },
-        flexGrow: 1,
-      },
       gameImage: {
         width: { xs: '18mm', sm: '28mm' },
         aspectRatio: 1,
@@ -187,8 +178,14 @@ export function CompleteTrophyCard(props: {
         touchCallout: 'none',
         webkitTouchCallout: 'none',
       },
+      platform: {
+        position: 'absolute',
+        bottom: { xs: '2px', sm: '4px' },
+        left: { xs: '2px', sm: '4px' },
+      },
       trophyImage: [
         {
+          marginLeft: { xs: '4px', sm: '8px' },
           width: { xs: '18mm', sm: '28mm' },
           aspectRatio: 1,
           alignSelf: 'center',
@@ -208,6 +205,12 @@ export function CompleteTrophyCard(props: {
           opacity: 1,
         },
       ],
+      dataContainer: {
+        overflow: 'hidden',
+        position: 'relative',
+        padding: { xs: '2px 4px 2px 10px', sm: '2px 6px 2px 12px' },
+        flexGrow: 1,
+      },
       info: {
         flexGrow: 1,
         overflow: 'hidden',
