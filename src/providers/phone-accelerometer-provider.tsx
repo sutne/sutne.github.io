@@ -1,3 +1,4 @@
+import { useMediaQuery, useTheme } from '@mui/material';
 import {
   type JSX,
   createContext,
@@ -26,14 +27,16 @@ const PhoneAccelerometerContext = createContext<
 >(undefined);
 
 export function PhoneAccelerometerProvider(props: { children: JSX.Element }) {
-  const [alpha, setAlpha] = useState(0);
-  const [beta, setBeta] = useState(0);
-  const [gamma, setGamma] = useState(0);
-
+  const theme = useTheme();
+  const isPhone = useMediaQuery(theme.breakpoints.only('xs'));
   const requiresAccess =
     // @ts-ignore
     typeof DeviceOrientationEvent.requestPermission === 'function';
-  const [hasAccess, setHasAccess] = useState(false);
+  const [hasAccess, setHasAccess] = useState(isPhone && !requiresAccess);
+
+  const [alpha, setAlpha] = useState(0);
+  const [beta, setBeta] = useState(0);
+  const [gamma, setGamma] = useState(0);
 
   function requestAccess() {
     // @ts-ignore
@@ -59,7 +62,7 @@ export function PhoneAccelerometerProvider(props: { children: JSX.Element }) {
   return (
     <PhoneAccelerometerContext.Provider
       value={{
-        isPhone: hasAccess,
+        isPhone,
         alpha,
         beta,
         gamma,
