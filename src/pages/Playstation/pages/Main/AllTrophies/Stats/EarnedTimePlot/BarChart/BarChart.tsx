@@ -1,4 +1,10 @@
-import { Box, type SxProps, alpha, useTheme } from '@mui/material';
+import {
+  Box,
+  type SxProps,
+  alpha,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { BarChartPainter } from './BarChartPainter';
 
 export type Bar = {
@@ -30,6 +36,7 @@ export function BarChart(props: { sections: Section[]; sx?: SxProps }) {
     }
   }
 
+  const isPhone = useMediaQuery(theme.breakpoints.only('xs'));
   function initializeCanvas(canvas: HTMLCanvasElement) {
     if (!canvas) return;
     const painter = new BarChartPainter(
@@ -39,7 +46,7 @@ export function BarChart(props: { sections: Section[]; sx?: SxProps }) {
         highestValue,
       },
       {
-        fontSize: 18,
+        fontSize: isPhone ? 10 : 18,
         color: {
           line: alpha(theme.palette.text.primary, 0.1),
           barFill: 'rgb(19, 105, 227)',
