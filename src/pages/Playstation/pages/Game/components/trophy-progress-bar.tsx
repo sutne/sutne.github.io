@@ -26,6 +26,7 @@ export function TrophyProgressBar({
       percentage: {
         fontSize: { xs: '0.6rem', sm: '1rem' },
         textAlign: 'right',
+        marginRight: { xs: '0.1rem', sm: '0.2rem' },
       },
       bar: {
         position: 'relative',

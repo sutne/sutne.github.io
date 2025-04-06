@@ -68,24 +68,25 @@ export function CompleteTrophyCard(props: {
         onTouchEnd={endHold}
         onTouchMove={handleScroll}
         onContextMenu={absorbEvent}
-        spacing={{ xs: '8px', sm: '16px' }}
       >
-        <Box
-          sx={sx.gameImage}
-          component='img'
-          src={props.trophy.group.icon}
-          onTouchStart={absorbEvent}
-          onTouchStartCapture={absorbEvent}
-          onTouchMove={absorbEvent}
-        />
-        <Box
-          sx={sx.trophyImage}
-          component='img'
-          src={props.trophy.icon}
-          onTouchStart={absorbEvent}
-          onTouchStartCapture={absorbEvent}
-          onTouchMove={absorbEvent}
-        />
+        <Stack direction='row' spacing={{ xs: '4px', sm: '8px' }}>
+          <Box
+            sx={sx.gameImage}
+            component='img'
+            src={props.trophy.group.icon}
+            onTouchStart={absorbEvent}
+            onTouchStartCapture={absorbEvent}
+            onTouchMove={absorbEvent}
+          />
+          <Box
+            sx={sx.trophyImage}
+            component='img'
+            src={props.trophy.icon}
+            onTouchStart={absorbEvent}
+            onTouchStartCapture={absorbEvent}
+            onTouchMove={absorbEvent}
+          />
+        </Stack>
         <Stack direction='row' sx={sx.dataContainer}>
           <Stack sx={sx.info}>
             <Typography sx={sx.gameName}>{props.trophy.game.name}</Typography>
@@ -108,14 +109,7 @@ export function CompleteTrophyCard(props: {
                 {getDateString(props.trophy.earnedAt)}
               </Typography>
             ) : props.trophy.progress && !hideDetails ? (
-              <Box
-                sx={{
-                  position: 'absolute',
-                  bottom: 0,
-                  right: 0,
-                  width: '100%',
-                }}
-              >
+              <Box sx={sx.progressContainer}>
                 <TrophyProgressBar progress={props.trophy.progress} />
               </Box>
             ) : (
@@ -145,7 +139,7 @@ export function CompleteTrophyCard(props: {
           ${theme.palette.background.paper} 30%,
           ${alpha(theme.palette.background.paper, 0.3)} 100%
         )`,
-        borderRadius: { xs: '8px', sm: '16px' },
+        borderRadius: { xs: '6px', sm: '12px' },
         boxSizing: 'border-box',
         boxShadow: '0 0 8px 0 rgba(0, 0, 0, 0.2)',
         userSelect: 'none',
@@ -154,7 +148,7 @@ export function CompleteTrophyCard(props: {
         webkitTouchCallout: 'none',
       },
       container: {
-        padding: { xs: '6px 10px 6px 6px', sm: '14px 16px 14px 14px' },
+        padding: { xs: '4px', sm: '8px' },
         background: !props.trophy.isEarned
           ? 'transparent'
           : `radial-gradient(ellipse at 0% 0%, 
@@ -166,6 +160,7 @@ export function CompleteTrophyCard(props: {
       dataContainer: {
         overflow: 'hidden',
         position: 'relative',
+        padding: { xs: '2px 4px 2px 10px', sm: '2px 6px 2px 12px' },
         flexGrow: 1,
       },
       gameImage: {
@@ -260,6 +255,12 @@ export function CompleteTrophyCard(props: {
         whiteSpace: 'nowrap',
         color: 'text.secondary',
         fontWeight: 100,
+      },
+      progressContainer: {
+        position: 'absolute',
+        bottom: 4,
+        right: 4,
+        width: 'calc(100% - 12px)',
       },
     };
   }
