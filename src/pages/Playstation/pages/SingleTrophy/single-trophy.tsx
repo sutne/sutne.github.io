@@ -44,7 +44,7 @@ export function SingleTrophy() {
     e.cancelBubble = true;
   }
 
-  const sx = getSx(trophy, hideDetails, trophyType);
+  const sx = getSx(trophy, trophyType);
   if (isLoading) return <SingleTrophyShimmer />;
   if (!trophy) return <>Something went wrong loading this trophy</>;
   if (!group) return <>Something went wrong loading this trophy</>;
@@ -140,7 +140,7 @@ export function SingleTrophy() {
 }
 
 export function SingleTrophyShimmer() {
-  const sx = getSx(undefined, false, undefined);
+  const sx = getSx(undefined, undefined);
   return (
     <Stack sx={sx.wrapper} direction='column' spacing={1}>
       <Box sx={sx.iconContainer}>
@@ -188,7 +188,6 @@ export function SingleTrophyShimmer() {
 
 function getSx(
   trophy: Trophy | undefined,
-  hideDetails: boolean,
   trophyType: TrophyType | 'hidden' | undefined,
 ) {
   const iconShadow = {
@@ -223,18 +222,17 @@ function getSx(
     icon: [
       {
         width: '100%',
-        height: '100%',
         objectFit: 'contain',
         borderRadius: 'inherit',
         filter: {
-          xs: `grayscale(100%) ${hideDetails ? 'blur(8px)' : ''}`,
-          sm: `grayscale(100%) ${hideDetails ? 'blur(12px)' : ''}`,
-          md: `grayscale(100%) ${hideDetails ? 'blur(16px)' : ''}`,
+          xs: 'grayscale(100%) blur(8px)',
+          sm: 'grayscale(100%) blur(12px)',
+          md: 'grayscale(100%) blur(16px)',
         },
         WebkitFilter: {
-          xs: `grayscale(100%) ${hideDetails ? 'blur(8px)' : ''}`,
-          sm: `grayscale(100%) ${hideDetails ? 'blur(12px)' : ''}`,
-          md: `grayscale(100%) ${hideDetails ? 'blur(16px)' : ''}`,
+          xs: 'grayscale(100%) blur(8px)',
+          sm: 'grayscale(100%) blur(12px)',
+          md: 'grayscale(100%) blur(16px)',
         },
         opacity: 0.075,
       },
