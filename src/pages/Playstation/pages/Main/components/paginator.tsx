@@ -1,6 +1,4 @@
 import {
-  ChevronLeft,
-  ChevronRight,
   KeyboardDoubleArrowLeft,
   KeyboardDoubleArrowRight,
 } from '@mui/icons-material';
@@ -33,6 +31,30 @@ function PaginatorRow(props: {
   const count = props.pageCount;
   const max = count - 1;
 
+  const Page = ({ index }: { index: number }) => {
+    return (
+      <PageBox onClick={() => props.onChange(index)} isCurrent={curr === index}>
+        {index + 1}
+      </PageBox>
+    );
+  };
+
+  const FastRewind = () => {
+    return (
+      <PageBox onClick={() => props.onChange(curr - 5)}>
+        <KeyboardDoubleArrowLeft fontSize='medium' />
+      </PageBox>
+    );
+  };
+
+  const FastForward = () => {
+    return (
+      <PageBox onClick={() => props.onChange(curr + 5)}>
+        <KeyboardDoubleArrowRight fontSize='medium' />
+      </PageBox>
+    );
+  };
+
   const sx = getSx();
   return (
     <Stack
@@ -42,99 +64,37 @@ function PaginatorRow(props: {
       sx={sx.bar}
     >
       {count <= 7 ? (
-        Array(count)
-          .fill(null)
-          .map((_, i) => i)
-          .map((pageIndex) => (
-            <PageBox
-              key={pageIndex}
-              onClick={() => props.onChange(pageIndex)}
-              isCurrent={curr === pageIndex}
-            >
-              {pageIndex + 1}
-            </PageBox>
-          ))
+        interval(0, max).map((page) => <Page key={page} index={page} />)
+      ) : curr < 4 ? (
+        <>
+          {interval(0, 4).map((page) => (
+            <Page key={page} index={page} />
+          ))}
+          <FastForward />
+          <Page index={max} />
+        </>
+      ) : curr < max - 3 ? (
+        <>
+          <Page index={min} />
+          <FastRewind />
+          {interval(curr - 1, curr + 1).map((page) => (
+            <Page key={page} index={page} />
+          ))}
+          <FastForward />
+          <Page index={max} />
+        </>
       ) : (
         <>
-          {/* First page */}
-          <PageBox onClick={() => props.onChange(min)} isCurrent={curr === min}>
-            1
-          </PageBox>
-
-          {/* Second Page, or fast forwards down */}
-          {curr <= 3 ? (
-            <PageBox onClick={() => props.onChange(1)} isCurrent={curr === 1}>
-              2
-            </PageBox>
-          ) : (
-            <PageBox onClick={() => props.onChange(Math.max(0, curr - 5))}>
-              <KeyboardDoubleArrowLeft />
-            </PageBox>
-          )}
-
-          {/* Third Page, or move down */}
-          {curr <= 3 ? (
-            <PageBox onClick={() => props.onChange(2)} isCurrent={curr === 2}>
-              3
-            </PageBox>
-          ) : (
-            <PageBox onClick={() => props.onChange(curr - 1)}>
-              <ChevronLeft />
-            </PageBox>
-          )}
-
-          {/* Fourth Page or Fourth Last Page or Current Page */}
-          {curr <= 3 ? (
-            <PageBox onClick={() => props.onChange(3)} isCurrent={curr === 3}>
-              4
-            </PageBox>
-          ) : curr >= max - 3 ? (
-            <PageBox
-              onClick={() => props.onChange(max - 3)}
-              isCurrent={curr === max - 3}
-            >
-              {max - 3 + 1}
-            </PageBox>
-          ) : (
-            <PageBox isCurrent={true}>{curr + 1}</PageBox>
-          )}
-
-          {/* Third Last Page, or move up */}
-          {curr >= max - 3 ? (
-            <PageBox
-              onClick={() => props.onChange(max - 2)}
-              isCurrent={curr === max - 2}
-            >
-              {max - 2 + 1}
-            </PageBox>
-          ) : (
-            <PageBox onClick={() => props.onChange(curr + 1)}>
-              <ChevronRight />
-            </PageBox>
-          )}
-
-          {/* Second Last Page, or fast-forward up */}
-          {curr >= max - 3 ? (
-            <PageBox
-              onClick={() => props.onChange(max - 1)}
-              isCurrent={curr === max - 1}
-            >
-              {max - 1 + 1}
-            </PageBox>
-          ) : (
-            <PageBox onClick={() => props.onChange(Math.min(max, curr + 5))}>
-              <KeyboardDoubleArrowRight />
-            </PageBox>
-          )}
-
-          {/* Last Page */}
-          <PageBox onClick={() => props.onChange(max)} isCurrent={curr === max}>
-            {max + 1}
-          </PageBox>
+          <Page index={min} />
+          <FastRewind />
+          {interval(max - 4, max).map((page) => (
+            <Page key={page} index={page} />
+          ))}
         </>
       )}
     </Stack>
   );
+
   function getSx() {
     return {
       bar: {
@@ -144,6 +104,13 @@ function PaginatorRow(props: {
       },
     };
   }
+}
+
+/** inclusive, ex `start=4` `end=7` => `[4,5,6,7]` */
+function interval(start: number, end: number) {
+  return Array(1 + end - start)
+    .fill(null)
+    .map((_, i) => start + i);
 }
 
 function PageBox(props: {
@@ -160,17 +127,18 @@ function PageBox(props: {
   function getSx() {
     return {
       box: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         height: '1.5rem',
         minWidth: '1.5rem',
         padding: '0 0.5rem',
-        cursor: 'pointer',
+        fontSize: { xs: '14px', sm: '20px' },
+        fontFamily: 'monospace',
         color: props.isCurrent ? 'text.primary' : 'text.secondary',
         fontWeight: props.isCurrent ? 900 : 400,
-        fontSize: { xs: '12px', sm: '18px' },
-        fontFamily: 'monospace',
-        textDecoration: props.isCurrent ? 'underline' : 'none',
-        textAlign: 'center',
-        verticalAlign: 'center',
+        userSelect: 'none',
+        cursor: 'pointer',
         '&:hover': {
           color: 'text.primary',
         },
