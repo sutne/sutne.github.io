@@ -2,7 +2,7 @@ import {
   KeyboardDoubleArrowLeft,
   KeyboardDoubleArrowRight,
 } from '@mui/icons-material';
-import { Box, Stack } from '@mui/material';
+import { Box, Stack, alpha, useTheme } from '@mui/material';
 
 export function Paginator(props: {
   pageCount: number;
@@ -57,50 +57,63 @@ function PaginatorRow(props: {
 
   const sx = getSx();
   return (
-    <Stack
-      direction='row'
-      justifyContent='center'
-      alignItems='center'
-      sx={sx.bar}
-    >
-      {count <= 7 ? (
-        interval(0, max).map((page) => <Page key={page} index={page} />)
-      ) : curr < 4 ? (
-        <>
-          {interval(0, 4).map((page) => (
-            <Page key={page} index={page} />
-          ))}
-          <FastForward />
-          <Page index={max} />
-        </>
-      ) : curr < max - 3 ? (
-        <>
-          <Page index={min} />
-          <FastRewind />
-          {interval(curr - 1, curr + 1).map((page) => (
-            <Page key={page} index={page} />
-          ))}
-          <FastForward />
-          <Page index={max} />
-        </>
-      ) : (
-        <>
-          <Page index={min} />
-          <FastRewind />
-          {interval(max - 4, max).map((page) => (
-            <Page key={page} index={page} />
-          ))}
-        </>
-      )}
-    </Stack>
+    <Box sx={sx.wrapper}>
+      <Stack
+        direction='row'
+        justifyContent='center'
+        alignItems='center'
+        sx={sx.bar}
+      >
+        {count <= 7 ? (
+          interval(0, max).map((page) => <Page key={page} index={page} />)
+        ) : curr < 4 ? (
+          <>
+            {interval(0, 4).map((page) => (
+              <Page key={page} index={page} />
+            ))}
+            <FastForward />
+            <Page index={max} />
+          </>
+        ) : curr < max - 3 ? (
+          <>
+            <Page index={min} />
+            <FastRewind />
+            {interval(curr - 1, curr + 1).map((page) => (
+              <Page key={page} index={page} />
+            ))}
+            <FastForward />
+            <Page index={max} />
+          </>
+        ) : (
+          <>
+            <Page index={min} />
+            <FastRewind />
+            {interval(max - 4, max).map((page) => (
+              <Page key={page} index={page} />
+            ))}
+          </>
+        )}
+      </Stack>
+    </Box>
   );
 
   function getSx() {
+    const theme = useTheme();
     return {
-      bar: {
+      wrapper: {
+        margin: '8px 0',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         maxWidth: '100%',
-        paddingTop: `${props.position === 'top' ? '0px' : '12px'}`,
-        paddingBottom: `${props.position === 'bottom' ? '12px' : '12px'}`,
+        overflow: 'auto',
+      },
+      bar: {
+        padding: '8px 12px',
+        background: alpha(theme.palette.background.paper, 0.5),
+        border: '1px solid',
+        borderColor: 'background.paper',
+        borderRadius: '32px',
       },
     };
   }
@@ -133,7 +146,7 @@ function PageBox(props: {
         height: '1.5rem',
         minWidth: '1.5rem',
         padding: '0 0.5rem',
-        fontSize: { xs: '14px', sm: '20px' },
+        fontSize: { xs: '14px', sm: '18px' },
         fontFamily: 'monospace',
         color: props.isCurrent ? 'text.primary' : 'text.secondary',
         fontWeight: props.isCurrent ? 900 : 400,
