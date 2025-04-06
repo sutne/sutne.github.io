@@ -1,5 +1,6 @@
 import { Box, Stack, Typography, alpha, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { PlatformChip } from '../../../components/platform-chip';
 import type { CompleteTrophy } from '../../../service/types';
 import { getDateString, trophyColors } from '../../../util';
 import { TrophyProgressBar } from './trophy-progress-bar';
@@ -69,7 +70,7 @@ export function CompleteTrophyCard(props: {
         onTouchMove={handleScroll}
         onContextMenu={absorbEvent}
       >
-        <Stack direction='row' spacing={{ xs: '4px', sm: '8px' }}>
+        <Stack direction='row' sx={sx.icons} spacing={{ xs: '4px', sm: '8px' }}>
           <Box
             sx={sx.gameImage}
             component='img'
@@ -86,6 +87,9 @@ export function CompleteTrophyCard(props: {
             onTouchStartCapture={absorbEvent}
             onTouchMove={absorbEvent}
           />
+          <Box sx={sx.platform}>
+            <PlatformChip platform={props.trophy.game.platform} />
+          </Box>
         </Stack>
         <Stack direction='row' sx={sx.dataContainer}>
           <Stack sx={sx.info}>
@@ -156,6 +160,15 @@ export function CompleteTrophyCard(props: {
                 ${alpha(trophyColors[props.trophy.type], 0.15)} 90%, 
                 ${alpha(trophyColors[props.trophy.type], 0.3)} 100%
             )`,
+      },
+      icons: {
+        position: 'relative',
+      },
+      platform: {
+        position: 'absolute',
+        bottom: -2,
+        left: -14,
+        transform: 'scale(0.6)',
       },
       dataContainer: {
         overflow: 'hidden',
