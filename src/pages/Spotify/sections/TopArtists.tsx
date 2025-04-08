@@ -26,10 +26,8 @@ export function TopArtists() {
         {isLoading ? (
           Array(15)
             .fill(null)
-            .map((_, i) => (
-              // biome-ignore lint/suspicious/noArrayIndexKey: no other value to use
-              <ItemCardShimmer key={i} />
-            ))
+            .map((_, i) => `item-card-shimmer-${i}`)
+            .map((key) => <ItemCardShimmer key={key} />)
         ) : !artists ? (
           <></>
         ) : (

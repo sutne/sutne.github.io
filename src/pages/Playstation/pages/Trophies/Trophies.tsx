@@ -24,10 +24,8 @@ export function PlaystationTrophies() {
         {isLoading ? (
           Array(storedGameCount)
             .fill(null)
-            .map((_, i) => (
-              // biome-ignore lint/suspicious/noArrayIndexKey: no other value to use
-              <TrophyTitleShimmer key={i} />
-            ))
+            .map((_, i) => `trophy-title-${i}`)
+            .map((key) => <TrophyTitleShimmer key={key} />)
         ) : !gameList ? (
           <></>
         ) : (

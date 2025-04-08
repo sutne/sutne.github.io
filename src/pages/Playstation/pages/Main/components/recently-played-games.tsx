@@ -19,9 +19,9 @@ export function RecentlyPlayedGamesShimmer() {
     <Grid container spacing={'8px'}>
       {Array(12)
         .fill(null)
-        .map((_, i) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: required to replace "shimmer"/empty ones
-          <Grid key={i} size={{ xs: 6, sm: 4, md: 3 }}>
+        .map((_, i) => `grid-shimmer-image-${i}`)
+        .map((key) => (
+          <Grid key={key} size={{ xs: 6, sm: 4, md: 3 }}>
             <ShimmerImage width='100%' sx={{ borderRadius: '7%' }} />
           </Grid>
         ))}

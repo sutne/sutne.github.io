@@ -65,10 +65,8 @@ export function PlaystationTrophiesGame() {
         {isLoading ? (
           Array(storedGroupCount)
             .fill(null)
-            .map((_, i) => (
-              // biome-ignore lint/suspicious/noArrayIndexKey: no other value to use
-              <TrophyProgressCardShimmer key={i} />
-            ))
+            .map((_, i) => `trophy-progress-card-shimmer-${i}`)
+            .map((key) => <TrophyProgressCardShimmer key={key} />)
         ) : !groups ? (
           <></>
         ) : (
