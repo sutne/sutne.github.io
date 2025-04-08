@@ -96,8 +96,9 @@ export function Shine3D(props: {
               top: 0,
               left: 0,
               background: `radial-gradient(ellipse at ${xShineOffset}% ${yShineOffset}%,
-                rgba(255,255,255,0.2) 5%,
-                transparent 60%
+                rgba(255,255,255,0.3) 0%,
+                rgba(255,255,255,0.2) 15%,
+                transparent 50%
               )`,
               pointerEvents: 'none',
             },

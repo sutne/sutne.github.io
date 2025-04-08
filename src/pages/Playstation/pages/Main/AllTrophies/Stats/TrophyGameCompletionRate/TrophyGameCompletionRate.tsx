@@ -4,9 +4,8 @@ import { useTrophies } from '../../../../../providers/trophy-provider';
 import { useTrophyStats } from '../../../../../providers/trophy-stats-provider';
 
 export function TrophyGameCompletion() {
-  const { isLoading, gameList } = useTrophies();
-  const { isLoading: isLoadingUnearnedTrophies, unearnedTrophies } =
-    useTrophyStats();
+  const { isLoading: isLoadingGames, gameList } = useTrophies();
+  const { isLoading: isLoadingTrophies, unearnedTrophies } = useTrophyStats();
 
   const gameCount = gameList?.length ?? 0;
   const completedGameCount = !gameList
@@ -19,21 +18,25 @@ export function TrophyGameCompletion() {
 
   return (
     <Stack direction='row' justifyContent='space-evenly' spacing={2}>
-      <Detail label='Games Played' value={gameCount} isLoading={isLoading} />
+      <Detail
+        label='Games Played'
+        value={gameCount}
+        isLoading={isLoadingGames}
+      />
       <Detail
         label='Games Completed'
         value={completedGameCount}
-        isLoading={isLoading}
+        isLoading={isLoadingGames}
       />
       <Detail
-        label='Total Completion'
+        label='Average Game Completion'
         value={`${completionPercentage.toFixed(1)}%`}
-        isLoading={isLoading}
+        isLoading={isLoadingGames}
       />
       <Detail
         label='Unearned Trophies'
         value={unearnedTrophyCount}
-        isLoading={isLoadingUnearnedTrophies}
+        isLoading={isLoadingTrophies}
       />
     </Stack>
   );
