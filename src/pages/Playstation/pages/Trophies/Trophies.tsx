@@ -1,11 +1,15 @@
 import { Stack, Typography } from '@mui/material';
 import { SortButton } from '../../../../components/sort-button';
+import { useSorting } from '../../../../providers/sort-provider';
 import { TabBar } from '../../TabBar';
 import { useTrophies } from '../../providers/trophy-provider';
+import { sortGames } from '../Game/sortUtils';
 import { TrophyTitle, TrophyTitleShimmer } from './components/TrophyTitle';
 
 export function PlaystationTrophies() {
   const { isLoading, gameList, storedGameCount } = useTrophies();
+  const { sorting } = useSorting();
+  const sortedGames = sortGames([...(gameList ?? [])], sorting);
 
   const sx = getSx();
   return (
@@ -26,10 +30,10 @@ export function PlaystationTrophies() {
             .fill(null)
             .map((_, i) => `trophy-title-${i}`)
             .map((key) => <TrophyTitleShimmer key={key} />)
-        ) : !gameList ? (
+        ) : !sortedGames ? (
           <></>
         ) : (
-          gameList.map((game) => (
+          sortedGames.map((game) => (
             <TrophyTitle key={game.title + game.platform} game={game} />
           ))
         )}

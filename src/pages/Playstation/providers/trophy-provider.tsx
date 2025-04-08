@@ -5,10 +5,8 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useSorting } from '../../../providers/sort-provider';
+import * as API from '../../Playstation/service/api';
 import { useLocalState } from '../hooks/useStorageState';
-import { sortGames } from '../pages/Game/sortUtils';
-import * as API from '../service/api';
 import type { TrophyGame } from '../service/types';
 
 const TrophiesContext = createContext<
@@ -25,23 +23,17 @@ export function TrophiesProvider(props: { children: JSX.Element }) {
   const [isLoading, setIsLoading] = useState(true);
   const [storedGameCount, setStoredGameCount] = useLocalState('game-count', 5);
 
-  const { sorting } = useSorting();
-
   useEffect(() => {
     if (gameList?.length) return;
     const getData = async () => {
       setIsLoading(true);
       const response = await API.getGameList();
-      setGameList(sortGames(response, sorting));
+      setGameList(response);
       setStoredGameCount(response?.length);
       setIsLoading(false);
     };
     getData();
-  }, [gameList, sorting, setStoredGameCount]);
-
-  useEffect(() => {
-    setGameList((prev) => (!prev ? undefined : sortGames([...prev], sorting)));
-  }, [sorting]);
+  }, [gameList, setStoredGameCount]);
 
   return (
     <TrophiesContext.Provider

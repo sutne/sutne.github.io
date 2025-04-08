@@ -57,43 +57,48 @@ export function Playstation() {
           <Route
             path='/trophies/*'
             element={
-              <SortProvider
-                storageKey='playstation-game-sorting'
-                defaultSorting={{ type: 'Latest Trophy', order: 'asc' }}
-              >
-                <TrophiesProvider>
-                  <TrophyStatsProvider>
-                    <Routes>
-                      <Route path='/' element={<PlaystationTrophies />} />
-                      <Route
-                        path='/game/:gameIds/platform/:platforms/*'
-                        element={
-                          <SingleGameTrophiesProvider>
-                            <Routes>
-                              <Route
-                                path='/'
-                                element={<PlaystationTrophiesGame />}
-                              />
-                              <Route
-                                path='/trophy/:trophyId'
-                                element={<SingleTrophy />}
-                              />
-                              <Route path='/*' element={<>404</>} />
-                            </Routes>
-                          </SingleGameTrophiesProvider>
-                        }
-                      />
-                      <Route
-                        path='/stats'
-                        element={<PlaystationTrophyStats />}
-                      />
-                      <Route path='/log' element={<TrophyLog />} />
-                      <Route path='/advisor' element={<TrophyAdvisor />} />
-                      <Route path='/*' element={<>404</>} />
-                    </Routes>
-                  </TrophyStatsProvider>
-                </TrophiesProvider>
-              </SortProvider>
+              <TrophiesProvider>
+                <TrophyStatsProvider>
+                  <Routes>
+                    <Route
+                      path='/'
+                      element={
+                        <SortProvider
+                          storageKey='playstation-game-sorting'
+                          defaultSorting={{
+                            type: 'Latest Trophy',
+                            order: 'asc',
+                          }}
+                        >
+                          <PlaystationTrophies />
+                        </SortProvider>
+                      }
+                    />
+                    <Route
+                      path='/game/:gameIds/platform/:platforms/*'
+                      element={
+                        <SingleGameTrophiesProvider>
+                          <Routes>
+                            <Route
+                              path='/'
+                              element={<PlaystationTrophiesGame />}
+                            />
+                            <Route
+                              path='/trophy/:trophyId'
+                              element={<SingleTrophy />}
+                            />
+                            <Route path='/*' element={<>404</>} />
+                          </Routes>
+                        </SingleGameTrophiesProvider>
+                      }
+                    />
+                    <Route path='/stats' element={<PlaystationTrophyStats />} />
+                    <Route path='/log' element={<TrophyLog />} />
+                    <Route path='/advisor' element={<TrophyAdvisor />} />
+                    <Route path='/*' element={<>404</>} />
+                  </Routes>
+                </TrophyStatsProvider>
+              </TrophiesProvider>
             }
           />
           <Route path='/*' element={<>404</>} />
