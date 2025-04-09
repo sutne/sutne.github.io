@@ -91,10 +91,7 @@ export function CompleteTrophyCard(props: {
             onTouchMove={absorbEvent}
           />
           <Box sx={sx.platform}>
-            <PlatformChip
-              platform={props.trophy.game.platform}
-              sx={{ fontSize: { xs: '4px', sm: '6px' } }}
-            />
+            <PlatformChip platform={props.trophy.game.platform} />
           </Box>
           <Box
             sx={sx.trophyImage as SxProps}
@@ -230,6 +227,7 @@ function getSx(trophy?: CompleteTrophy) {
       position: 'absolute',
       bottom: { xs: '2px', sm: '4px' },
       left: { xs: '2px', sm: '4px' },
+      fontSize: { xs: '0.4rem', sm: '0.6rem' },
     },
     trophyImage: [
       {

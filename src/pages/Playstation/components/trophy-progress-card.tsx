@@ -178,8 +178,9 @@ function getSx(isInteractable: boolean) {
     },
     platforms: {
       position: 'absolute',
-      top: { xs: '4px', sm: '8px' },
-      left: { xs: '4px', sm: '8px' },
+      bottom: { xs: '5px', sm: '8px' },
+      left: { xs: '5px', sm: '8px' },
+      fontSize: { xs: '0.5rem', sm: '0.8rem' },
     },
     info: {
       position: 'relative',

@@ -80,13 +80,16 @@ export function SingleTrophy() {
             Show Spoilers
           </Button>
         )}
-        <Stack direction='row' spacing={2}>
+        <Stack direction='row' spacing={{ xs: 1, sm: 2 }}>
           {[...trophies]
             .sort((a, b) => a.game.platform.localeCompare(b.game.platform))
             .map((t) => (
               <Box
                 key={t.game.id}
-                sx={sx.platform}
+                sx={{
+                  ...sx.platform,
+                  opacity: t.game.id === trophy.game.id ? 1 : 0.5,
+                }}
                 onMouseOver={() => setTrophy(t)}
                 onClick={() => setTrophy(t)}
               >
@@ -272,7 +275,7 @@ function getSx(
     },
     platform: {
       cursor: 'pointer',
-      fontSize: { xs: '0.5rem', sm: '1.3rem' },
+      fontSize: { xs: '0.7rem', sm: '1.3rem' },
     },
     button: {
       bgcolor: 'background.paper',
