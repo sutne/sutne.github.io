@@ -14,6 +14,10 @@ const TrophyStatsContext = createContext<
       earnedTrophies: CompleteTrophy[] | undefined;
       unearnedTrophies: CompleteTrophy[] | undefined;
       earnedTimestamps: (Date | undefined)[] | undefined;
+      getTrophy: (
+        gameId: string,
+        trophyId: number,
+      ) => CompleteTrophy | undefined;
     }
   | undefined
 >(undefined);
@@ -35,6 +39,19 @@ export function TrophyStatsProvider(props: { children: JSX.Element }) {
     getData();
   }, [allTrophies]);
 
+  function getTrophy(
+    gameId: string,
+    trophyId: number,
+  ): CompleteTrophy | undefined {
+    if (isLoading || !allTrophies) return undefined;
+    for (const trophy of allTrophies) {
+      if (trophy.id !== trophyId) continue;
+      if (trophy.game.id !== gameId) continue;
+      return trophy;
+    }
+    return undefined;
+  }
+
   const earnedTrophies = allTrophies?.filter((t) => t.isEarned);
   const unearnedTrophies = allTrophies?.filter((t) => !t.isEarned);
   const earnedTimestamps = earnedTrophies?.map((t) =>
@@ -47,6 +64,7 @@ export function TrophyStatsProvider(props: { children: JSX.Element }) {
         earnedTrophies,
         unearnedTrophies,
         earnedTimestamps,
+        getTrophy,
       }}
     >
       {props.children}

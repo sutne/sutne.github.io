@@ -7,32 +7,32 @@ import {
   capitalize,
 } from '@mui/material';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
 import {
   ShimmerImage,
   ShimmerText,
 } from '../../../../components/animated/shimmer';
 import { Shine3D } from '../../../../components/shine-3d';
-import { useSingleGameTrophies } from '../../providers/game-trophy-provider';
+import { PlatformChip } from '../../components/platform-chip';
+import { useTrophyStats } from '../../providers/trophy-stats-provider';
 import type { Trophy, TrophyType } from '../../service/types';
 import { getDateString, trophyColors } from '../../util';
 import { getRarityDescription } from '../../util';
 import { TrophyProgressBar } from '../Game/components/trophy-progress-bar';
 import { RarityPyramid } from './components/rarity-pyramid';
+import { useTrophiesFromUrl } from './hooks/useTrophiesFromUrl';
 
 export function SingleTrophy() {
-  const params = useParams();
-  const { isLoading, getTrophyDetails } = useSingleGameTrophies();
-  const details = getTrophyDetails(Number(params.trophyId));
-  const [overrideHidden, setOverrideHidden] = useState(false);
+  const { isLoading } = useTrophyStats();
+  if (isLoading) return <SingleTrophyShimmer />;
 
-  const trophy = details?.trophy;
-  const group = details?.group;
+  const [overrideHidden, setOverrideHidden] = useState(false);
+  const trophies = useTrophiesFromUrl();
+  const [trophy, setTrophy] = useState(trophies[0]);
 
   const hideDetails = Boolean(
-    trophy?.isHidden && !trophy?.isEarned && !overrideHidden,
+    trophy.isHidden && !trophy.isEarned && !overrideHidden,
   );
-  const trophyType = hideDetails ? 'hidden' : trophy?.type;
+  const trophyType = hideDetails ? 'hidden' : trophy.type;
   const trophyIcon = new URL(
     `../../assets/trophies/${trophyType}.png`,
     import.meta.url,
@@ -45,9 +45,7 @@ export function SingleTrophy() {
   }
 
   const sx = getSx(trophy, trophyType);
-  if (isLoading) return <SingleTrophyShimmer />;
-  if (!trophy) return <>Something went wrong loading this trophy</>;
-  if (!group) return <>Something went wrong loading this trophy</>;
+
   return (
     <Stack sx={sx.wrapper} direction='column' spacing={1}>
       <Shine3D disable={!trophy.isEarned} sx={sx.iconContainer}>
@@ -69,18 +67,33 @@ export function SingleTrophy() {
         justifyContent='center'
         alignItems='center'
       >
-        <Box sx={sx.groupIcon} component='img' src={group?.icon} />
+        <Box sx={sx.groupIcon} component='img' src={trophy.group.icon} />
         <Stack sx={{ flexGrow: 1 }}>
-          <Typography sx={sx.groupTitle}>{group.name}</Typography>
+          <Typography sx={sx.groupTitle}>{trophy.group.name}</Typography>
           <Typography sx={sx.title}>
             {hideDetails ? 'Hidden' : trophy.title}
           </Typography>
         </Stack>
-        {trophy?.isHidden && !trophy?.isEarned && !overrideHidden && (
+
+        {trophy.isHidden && !trophy.isEarned && !overrideHidden && (
           <Button sx={sx.button} onClick={() => setOverrideHidden(true)}>
             Show Spoilers
           </Button>
         )}
+        <Stack direction='row' spacing={2}>
+          {[...trophies]
+            .sort((a, b) => a.game.platform.localeCompare(b.game.platform))
+            .map((t) => (
+              <Box
+                key={t.game.id}
+                sx={sx.platform}
+                onMouseOver={() => setTrophy(t)}
+                onClick={() => setTrophy(t)}
+              >
+                <PlatformChip platform={t.game.platform} />
+              </Box>
+            ))}
+        </Stack>
       </Stack>
 
       <Stack direction='row' spacing={2} alignItems='end'>
@@ -209,8 +222,8 @@ function getSx(
         ? 'transparent'
         : `radial-gradient(ellipse at 10% 20%, 
               transparent 60%, 
-              ${alpha(trophyColors[trophy?.type], 0.2)} 85%, 
-              ${alpha(trophyColors[trophy?.type], 0.5)} 100%
+              ${alpha(trophyColors[trophy.type], 0.2)} 85%, 
+              ${alpha(trophyColors[trophy.type], 0.5)} 100%
           )`,
     },
     iconContainer: {
@@ -257,11 +270,15 @@ function getSx(
       fontWeight: 700,
       color: 'text.primary',
     },
+    platform: {
+      cursor: 'pointer',
+      fontSize: { xs: '0.5rem', sm: '1.3rem' },
+    },
     button: {
       bgcolor: 'background.paper',
       borderRadius: '32px',
       padding: '6px 16px',
-      fontSize: { xs: '0.7rem', md: '0.9rem' },
+      fontSize: { xs: '0.8rem', md: '1rem' },
       color: 'text.primary',
       textTransform: 'none',
     },
