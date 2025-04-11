@@ -1,6 +1,6 @@
 import type React from 'react';
 import { type JSX, createContext, useContext } from 'react';
-import { useSessionState } from '../pages/Playstation/hooks/useStorageState';
+import { useSessionState } from '../hooks/useStorageState';
 
 export type SortOrder = 'asc' | 'desc';
 export type Sorting = {

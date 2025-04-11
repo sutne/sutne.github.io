@@ -5,16 +5,16 @@ import { Route, Routes } from 'react-router-dom';
 import { darkTheme } from 'themes/darkTheme';
 import { lightTheme } from 'themes/lightTheme';
 import { SortProvider } from '../../providers/sort-provider';
-import { PlaystationTrophiesGame } from './pages/Game/TrophiesForGame';
-import { TrophyAdvisor } from './pages/Main/AllTrophies/Advisor/TrophyAdvisor';
-import { TrophyLog } from './pages/Main/AllTrophies/Log/TrophyLog';
-import { PlaystationTrophyStats } from './pages/Main/AllTrophies/Stats/TrophyStats';
-import { Main } from './pages/Main/Main';
-import { SingleTrophy } from './pages/SingleTrophy/single-trophy';
-import { PlaystationTrophies } from './pages/Trophies/Trophies';
-import { SingleGameTrophiesProvider } from './providers/game-trophy-provider';
-import { TrophiesProvider } from './providers/trophy-provider';
-import { TrophyStatsProvider } from './providers/trophy-stats-provider';
+import { PlaystationTrophiesGame } from './Main/Game/PlaystationTrophiesGame';
+import { Main } from './Main/Main';
+import { TrophyAdvisor } from './Main/Main/AllTrophies/TrophyAdvisor/TrophyAdvisor';
+import { TrophyLog } from './Main/Main/AllTrophies/TrophyLog/TrophyLog';
+import { PlaystationTrophyStats } from './Main/Main/AllTrophies/TrophyStats/TrophyStats';
+import { SingleTrophy } from './Main/SingleTrophy/SingeTrophy';
+import { PlaystationTrophies } from './Main/Trophies/Trophies';
+import { SingleGameTrophiesProvider } from './contexts/SingleGameTrophies';
+import { TrophiesProvider } from './contexts/Trophies';
+import { TrophyStatsProvider } from './contexts/TrophyStats';
 
 const playstationDarkTheme = responsiveFontSizes(
   createTheme(darkTheme, {
@@ -25,7 +25,7 @@ const playstationDarkTheme = responsiveFontSizes(
         dark: 'rgba(30,215,96,20%)',
       },
       background: {
-        default: 'rgb(5,6,12)',
+        default: 'rgb(5, 6, 12)',
         paper: 'rgb(24, 27, 36)',
       },
       text: {
