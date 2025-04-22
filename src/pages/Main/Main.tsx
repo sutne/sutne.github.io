@@ -1,4 +1,4 @@
-import { Grid2 as Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { AppIcon } from 'components/app-icon';
 import { Outlet } from 'react-router-dom';
 import { AppDrawer } from './components/app-drawer';

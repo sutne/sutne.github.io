@@ -1,4 +1,4 @@
-import { Grid2 as Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { ShimmerImage } from '../../../../../components/animated/shimmer';
 import { Image } from '../../../../../components/image';
 import { Shine3D } from '../../../../../components/shine-3d';
