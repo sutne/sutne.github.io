@@ -58,6 +58,6 @@ export function MainThemeProvider(props: { children: JSX.Element }) {
 
 export function useMainTheme() {
   const context = useContext(MainThemeContext);
-  if (context !== undefined) return { ...context };
+  if (context !== undefined) return context;
   throw new Error('useTheme must be used within a ThemeProvider');
 }

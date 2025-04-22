@@ -58,6 +58,6 @@ export function NowPlayingProvider(props: { children: JSX.Element }) {
 
 export function useNowPlaying() {
   const context = useContext(NowPlayingContext);
-  if (context !== undefined) return { ...context };
+  if (context !== undefined) return context;
   throw new Error('useNowPlaying must be used within a NowPlayingProvider');
 }

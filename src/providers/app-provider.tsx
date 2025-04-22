@@ -49,6 +49,6 @@ export function AppProvider(props: { children: JSX.Element }) {
 
 export function useApp() {
   const context = useContext(AppContext);
-  if (context !== undefined) return { ...context };
+  if (context !== undefined) return context;
   throw new Error('useApp must be used within a AppProvider');
 }

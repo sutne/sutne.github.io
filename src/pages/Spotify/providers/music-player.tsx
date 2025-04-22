@@ -87,6 +87,6 @@ export function MusicPlayerProvider(props: { children: JSX.Element }) {
 
 export function useMusicPlayer() {
   const context = useContext(MusicPlayerContext);
-  if (context !== undefined) return { ...context };
+  if (context !== undefined) return context;
   throw new Error('useMusicPlayer must be used within a MusicPlayerProvider');
 }

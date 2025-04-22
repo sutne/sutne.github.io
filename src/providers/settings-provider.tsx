@@ -58,6 +58,6 @@ export function SettingsProvider(props: { children: JSX.Element }) {
 
 export function useSettings() {
   const context = useContext(SettingsContext);
-  if (context !== undefined) return { ...context };
+  if (context !== undefined) return context;
   throw new Error('useCookies must be used within a CookieProvider');
 }
