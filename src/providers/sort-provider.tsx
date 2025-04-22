@@ -1,6 +1,6 @@
 import type React from 'react';
 import { type JSX, createContext, useContext } from 'react';
-import { useSessionState } from '../pages/Playstation/hooks/useStorageState';
+import { useSessionState } from '../hooks/useStorageState';
 
 export type SortOrder = 'asc' | 'desc';
 export type Sorting = {
@@ -9,11 +9,11 @@ export type Sorting = {
 };
 
 const SortContext = createContext<
-  | undefined
   | {
       sorting: Sorting;
       setSorting: React.Dispatch<React.SetStateAction<Sorting>>;
     }
+  | undefined
 >(undefined);
 
 export function SortProvider(props: {
@@ -39,6 +39,6 @@ export function SortProvider(props: {
 
 export function useSorting() {
   const context = useContext(SortContext);
-  if (context !== undefined) return { ...context };
+  if (context !== undefined) return context;
   throw new Error('useSorting must be used within a SortProvider');
 }
