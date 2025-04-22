@@ -1,4 +1,4 @@
-import { Box, Grid2 as Grid, useTheme } from '@mui/material';
+import { Box, Grid, useTheme } from '@mui/material';
 import { LanguageColorMap } from '../service/types';
 
 export function LanguageBar(props: {

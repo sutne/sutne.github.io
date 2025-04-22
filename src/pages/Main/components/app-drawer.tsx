@@ -1,4 +1,4 @@
-import { Box, Grid2 as Grid, alpha } from '@mui/material';
+import { Box, Grid, alpha } from '@mui/material';
 import { useMainTheme } from 'providers/main-theme-provider';
 import { type JSX, cloneElement } from 'react';
 

@@ -275,7 +275,7 @@ function getSx(
     },
     platform: {
       cursor: 'pointer',
-      fontSize: { xs: '0.7rem', sm: '1.3rem' },
+      fontSize: { xs: '0.7rem', sm: '1rem' },
     },
     button: {
       bgcolor: 'background.paper',

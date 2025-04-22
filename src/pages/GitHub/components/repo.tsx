@@ -2,7 +2,7 @@ import { LinkRounded } from '@mui/icons-material';
 import {
   Box,
   Collapse,
-  Grid2 as Grid,
+  Grid,
   Stack,
   Typography,
   alpha,

@@ -1,4 +1,4 @@
-import { Box, Grid2 as Grid, Typography, alpha } from '@mui/material';
+import { Box, Grid, Typography, alpha } from '@mui/material';
 import { Image } from 'components/image';
 import { useMainTheme } from 'providers/main-theme-provider';
 
