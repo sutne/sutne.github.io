@@ -30,7 +30,7 @@ export function groupByEarned(trophies: Trophy[]): TrophyGroup[] {
   const earned: TrophyGroup = {
     id: 0,
     name: earnedTrophyGroupTitle,
-    icon: new URL('../../assets/trophies/gold.png', import.meta.url).href,
+    icon: new URL('../assets/trophies/gold.png', import.meta.url).href,
     trophyCount: earnedCount,
     earnedCount: earnedCount,
     progress: -1,
@@ -39,7 +39,7 @@ export function groupByEarned(trophies: Trophy[]): TrophyGroup[] {
   const unearned: TrophyGroup = {
     id: 1,
     name: unearnedTrophyGroupTitle,
-    icon: new URL('../../assets/trophies/hidden.png', import.meta.url).href,
+    icon: new URL('../assets/trophies/hidden.png', import.meta.url).href,
     trophyCount: unearnedCount,
     earnedCount: unearnedCount,
     progress: -1,
@@ -54,7 +54,7 @@ export function groupByType(trophies: Trophy[]): TrophyGroup[] {
   const trophyGroups: TrophyGroup[] = types.map((type, i) => ({
     id: i,
     name: type.charAt(0).toUpperCase() + type.slice(1),
-    icon: new URL(`../../assets/trophies/${type}.png`, import.meta.url).href,
+    icon: new URL(`../assets/trophies/${type}.png`, import.meta.url).href,
     trophyCount: { bronze: 0, silver: 0, gold: 0, platinum: 0 },
     earnedCount: { bronze: 0, silver: 0, gold: 0, platinum: 0 },
     progress: -1,
