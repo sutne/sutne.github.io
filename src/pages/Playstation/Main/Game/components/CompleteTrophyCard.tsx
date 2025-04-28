@@ -102,7 +102,7 @@ export function CompleteTrophyCard(props: {
             onTouchMove={absorbEvent}
           />
         </Stack>
-        <Stack direction='row' sx={sx.dataContainer}>
+        <Stack direction='row' spacing={1} sx={sx.dataContainer}>
           <Stack sx={sx.info}>
             <Typography sx={sx.gameName}>{props.trophy.game.name}</Typography>
             <Typography sx={sx.title}>
