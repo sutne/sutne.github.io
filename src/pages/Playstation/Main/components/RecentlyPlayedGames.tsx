@@ -32,7 +32,7 @@ export function RecentlyPlayedGamesShimmer() {
 function GridImage(props: { src: string }) {
   return (
     <Grid size={{ xs: 6, sm: 4, md: 3 }}>
-      <Shine3D sx={{ borderRadius: '7%' }}>
+      <Shine3D sx={{ borderRadius: '7%' }} bordered>
         <Image src={props.src} sx={{ borderRadius: '7%' }} />
       </Shine3D>
     </Grid>

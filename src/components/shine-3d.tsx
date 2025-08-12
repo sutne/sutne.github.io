@@ -6,10 +6,12 @@ export function Shine3D(props: {
   disable?: boolean;
   sx?: SxProps;
   children: React.ReactNode;
+  bordered?: boolean;
   // masking is blocked by CORS for external images, such as for playstation trophy icons
   // which is where i wanted to use this as they are partilly transparent
   maskImage?: never;
 }) {
+  // Mouse is values from -1 to 1 where 0 is at center of the content.
   const [mouse, setMouse] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const { isPhone, beta, gamma } = usePhoneAccelerometer();
 
@@ -40,8 +42,12 @@ export function Shine3D(props: {
   const maxRotation = 7; // deg
   const xRotation = (isPhone ? 0 : mouse.y) * maxRotation;
   const yRotation = (isPhone ? 0 : mouse.x) * maxRotation;
-  const xShineOffset = 50 + -2 * (isPhone ? gyroX : mouse.x) * 50; // %
+  const xShineOffset = 25 + -2 * (isPhone ? gyroX : mouse.x) * 50; // %
   const yShineOffset = -75 + 4 * (isPhone ? gyroY : mouse.y) * 50; // %
+  const borderSize = 4; // px
+  const xBorderOffset = (isPhone ? gyroX : mouse.x) * borderSize;
+  const yBorderOffset =
+    Math.max(-1, -0.75 + 1.5 * (isPhone ? gyroY : mouse.y)) * borderSize;
   const maxTranslation = 6; // px
   const xTranslation = (isPhone ? 0 : mouse.x) * -maxTranslation;
   const yTranslation = (isPhone ? 0 : mouse.y) * maxTranslation;
@@ -101,6 +107,13 @@ export function Shine3D(props: {
                 transparent 50%
               )`,
               pointerEvents: 'none',
+              borderRadius: 'inherit',
+            },
+            props.bordered && {
+              boxShadow: `
+                inset ${xBorderOffset}px ${-yBorderOffset}px 4px 0 rgba(253, 253, 253, 0.23),
+                inset ${-xBorderOffset}px ${yBorderOffset}px 4px 0 rgba(0,0,0,0.4)
+               `,
             },
             props.maskImage && {
               maskImage: `url(${props.maskImage})`,
