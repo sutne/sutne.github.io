@@ -3,6 +3,7 @@ import {
   KeyboardDoubleArrowRight,
 } from '@mui/icons-material';
 import { Box, Stack, alpha, useTheme } from '@mui/material';
+import { useRef } from 'react';
 
 export function Paginator(props: {
   pageCount: number;
@@ -11,12 +12,37 @@ export function Paginator(props: {
   children: React.ReactNode;
 }) {
   if (props.pageCount <= 1) return <>{props.children}</>;
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  const onChangeTopWrapper = async (newPageIndex: number) => {
+    props.onChange(newPageIndex);
+    if (newPageIndex === props.pageCount - 1) {
+      ref.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+  };
+
+  const onChangeBottomWrapper = (newPageIndex: number) => {
+    props.onChange(newPageIndex);
+    if (newPageIndex < props.pageCount - 1) {
+      ref.current?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      ref.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+  };
+
   return (
-    <>
-      <PaginatorRow {...props} position='top' />
+    <div ref={ref}>
+      <PaginatorRow
+        position='top'
+        {...{ ...props, onChange: onChangeTopWrapper }}
+      />
       {props.children}
-      <PaginatorRow {...props} position='bottom' />
-    </>
+      <PaginatorRow
+        position='bottom'
+        {...{ ...props, onChange: onChangeBottomWrapper }}
+      />
+    </div>
   );
 }
 
