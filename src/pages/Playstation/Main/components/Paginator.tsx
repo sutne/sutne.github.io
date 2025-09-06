@@ -11,9 +11,8 @@ export function Paginator(props: {
   onChange: (newPageIndex: number) => void;
   children: React.ReactNode;
 }) {
-  if (props.pageCount <= 1) return <>{props.children}</>;
-
   const ref = useRef<HTMLDivElement>(null);
+  if (props.pageCount <= 1) return <>{props.children}</>;
 
   const onChangeTopWrapper = async (newPageIndex: number) => {
     props.onChange(newPageIndex);
@@ -52,6 +51,8 @@ function PaginatorRow(props: {
   onChange: (newPageIndex: number) => void;
   position: 'top' | 'bottom';
 }) {
+  const theme = useTheme();
+
   const min = 0;
   const curr = props.currentPageIndex;
   const count = props.pageCount;
@@ -124,7 +125,6 @@ function PaginatorRow(props: {
   );
 
   function getSx() {
-    const theme = useTheme();
     return {
       wrapper: {
         margin: '8px 0',

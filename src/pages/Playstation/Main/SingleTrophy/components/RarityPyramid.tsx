@@ -55,10 +55,11 @@ export function RarityPyramid(props: {
 }
 
 function getWidth(pixelWidth: number | PartialBreakpoints): number {
-  if (typeof pixelWidth === 'number') return pixelWidth;
   const theme = useTheme();
+  if (typeof pixelWidth === 'number') return pixelWidth;
   let breakpointWidth = 0;
   for (const [breakpoint, width] of Object.entries(pixelWidth)) {
+    // biome-ignore lint/correctness/useHookAtTopLevel: not actually conditional hook
     const match = useMediaQuery(theme.breakpoints.up(breakpoint as Breakpoint));
     if (match) breakpointWidth = width;
   }

@@ -20,17 +20,19 @@ function useExpansionState(
   preserveState: boolean,
   alwaysExpanded: boolean,
 ) {
+  const regularState = useState(false);
+  const formattedKey = key
+    .toLowerCase()
+    .replace(/[^\w]+/g, '-')
+    .replace(/^-|-$/g, '');
+  const sessionState = useSessionState(`expand-${formattedKey}`, false);
   if (alwaysExpanded) {
     return [true, () => {}] as const;
   }
   if (preserveState) {
-    const formattedKey = key
-      .toLowerCase()
-      .replace(/[^\w]+/g, '-')
-      .replace(/^-|-$/g, '');
-    return useSessionState(`expand-${formattedKey}`, false);
+    return sessionState;
   }
-  return useState(false);
+  return regularState;
 }
 
 export function TrophyProgressCard(props: {
