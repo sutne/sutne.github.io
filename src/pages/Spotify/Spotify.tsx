@@ -37,10 +37,8 @@ export function Spotify() {
           {/* Remove margin from top header, regardless of which is on top */}
           <Box marginTop='-2em'>
             <NowPlayingProvider>
-              <>
-                <NowPlaying />
-                <RecentlyPlayed />
-              </>
+              <NowPlaying />
+              <RecentlyPlayed />
             </NowPlayingProvider>
             <TopTracks />
             <TopArtists />

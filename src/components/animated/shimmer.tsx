@@ -1,14 +1,10 @@
 import { alpha, Box, Typography, useTheme } from '@mui/material';
 
 export function Shimmer(props: { sx?: any }) {
+  const theme = useTheme();
   const sx = getSx();
-  return (
-    <>
-      <Box sx={sx.shimmering} />
-    </>
-  );
+  return <Box sx={sx.shimmering} />;
   function getSx() {
-    const theme = useTheme();
     return {
       shimmering: [
         {
@@ -111,11 +107,9 @@ export function ShimmerImage(props: {
 }) {
   const sx = getSx();
   return (
-    <>
-      <Box sx={sx.container}>
-        <Shimmer />
-      </Box>
-    </>
+    <Box sx={sx.container}>
+      <Shimmer />
+    </Box>
   );
   function getSx() {
     return {

@@ -127,29 +127,27 @@ export function TrophyProgressCard(props: {
 export function TrophyProgressCardShimmer() {
   const sx = getSx(false);
   return (
-    <>
-      <Stack sx={sx.container} direction='row'>
-        <ShimmerImage
-          width={sx.image.width}
-          sx={{
-            borderRadius: sx.image.borderRadius,
-            boxShadow: sx.image.boxShadow,
-          }}
-        />
-        <Stack sx={sx.info}>
-          <ShimmerText width='40%' fontSize={sx.title.fontSize} />
-          <Stack sx={sx.trophyCount} direction='row' spacing={0}>
-            <TrophyWithCountShimmer type='platinum' />
-            <TrophyWithCountShimmer type='gold' />
-            <TrophyWithCountShimmer type='silver' />
-            <TrophyWithCountShimmer type='bronze' />
-          </Stack>
-          <Box sx={sx.progress}>
-            <ProgressBarShimmer />
-          </Box>
+    <Stack sx={sx.container} direction='row'>
+      <ShimmerImage
+        width={sx.image.width}
+        sx={{
+          borderRadius: sx.image.borderRadius,
+          boxShadow: sx.image.boxShadow,
+        }}
+      />
+      <Stack sx={sx.info}>
+        <ShimmerText width='40%' fontSize={sx.title.fontSize} />
+        <Stack sx={sx.trophyCount} direction='row' spacing={0}>
+          <TrophyWithCountShimmer type='platinum' />
+          <TrophyWithCountShimmer type='gold' />
+          <TrophyWithCountShimmer type='silver' />
+          <TrophyWithCountShimmer type='bronze' />
         </Stack>
+        <Box sx={sx.progress}>
+          <ProgressBarShimmer />
+        </Box>
       </Stack>
-    </>
+    </Stack>
   );
 }
 
