@@ -35,6 +35,7 @@ export function LanguageBar(props: {
               <LanguageName
                 name={language}
                 percentage={toPercentage(language)}
+                textSize={textSize}
               />
             </Grid>
           );
@@ -85,37 +86,41 @@ export function LanguageBar(props: {
       },
     };
   }
+}
 
-  function LanguageName(props: { name: string; percentage: string }) {
-    const sx = getSx();
-    return <Box sx={sx.languageName}>{props.name}</Box>;
+function LanguageName(props: {
+  name: string;
+  percentage: string;
+  textSize: number;
+}) {
+  const sx = getSx();
+  return <Box sx={sx.languageName}>{props.name}</Box>;
 
-    function getSx() {
-      return {
-        languageName: {
-          whiteSpace: 'nowrap',
-          alignSelf: 'center',
-          color: 'text.secondary',
-          fontSize: textSize,
-          fontWeight: 600,
-          '&:before': {
-            content: '""',
-            position: 'relative',
-            top: '1px',
-            display: 'inline-block',
-            height: textSize,
-            width: textSize,
-            borderRadius: textSize / 2,
-            marginRight: '3px',
-            backgroundColor: LanguageColorMap[props.name],
-          },
-          '&:after': {
-            content: `"${props.percentage}%"`,
-            marginLeft: '5px',
-            fontWeight: 300,
-          },
+  function getSx() {
+    return {
+      languageName: {
+        whiteSpace: 'nowrap',
+        alignSelf: 'center',
+        color: 'text.secondary',
+        fontSize: props.textSize,
+        fontWeight: 600,
+        '&:before': {
+          content: '""',
+          position: 'relative',
+          top: '1px',
+          display: 'inline-block',
+          height: props.textSize,
+          width: props.textSize,
+          borderRadius: props.textSize / 2,
+          marginRight: '3px',
+          backgroundColor: LanguageColorMap[props.name],
         },
-      };
-    }
+        '&:after': {
+          content: `"${props.percentage}%"`,
+          marginLeft: '5px',
+          fontWeight: 300,
+        },
+      },
+    };
   }
 }
