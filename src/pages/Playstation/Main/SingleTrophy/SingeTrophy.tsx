@@ -1,10 +1,10 @@
 import {
+  alpha,
   Box,
   Button,
+  capitalize,
   Stack,
   Typography,
-  alpha,
-  capitalize,
 } from '@mui/material';
 import { useState } from 'react';
 import {
@@ -15,8 +15,11 @@ import { Shine3D } from '../../../../components/shine-3d';
 import { PlatformChip } from '../../components/PlatformChip';
 import { useTrophies } from '../../contexts/Trophies';
 import type { Trophy, TrophyType } from '../../service/types';
-import { getDateString, trophyColors } from '../../util/util';
-import { getRarityDescription } from '../../util/util';
+import {
+  getDateString,
+  getRarityDescription,
+  trophyColors,
+} from '../../util/util';
 import { TrophyProgressBar } from '../Game/components/TrophyProgressBar';
 import { RarityPyramid } from './components/RarityPyramid';
 import { useTrophiesFromUrl } from './hooks/useTrophiesFromUrl';

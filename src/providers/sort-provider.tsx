@@ -1,5 +1,5 @@
 import type React from 'react';
-import { type JSX, createContext, useContext } from 'react';
+import { createContext, type JSX, useContext } from 'react';
 import { useSessionState } from '../hooks/useStorageState';
 
 export type SortOrder = 'asc' | 'desc';

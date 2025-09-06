@@ -1,4 +1,4 @@
-import { type JSX, createContext, useContext, useState } from 'react';
+import { createContext, type JSX, useContext, useState } from 'react';
 import {
   deleteAllCookies,
   getCookies,

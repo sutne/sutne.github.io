@@ -5,8 +5,8 @@ import {
 } from '@mui/material';
 import { useSettings } from 'providers/settings-provider';
 import {
-  type JSX,
   createContext,
+  type JSX,
   useContext,
   useEffect,
   useState,

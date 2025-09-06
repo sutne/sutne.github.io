@@ -2,11 +2,11 @@ import { Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useSessionState } from '../../../../../hooks/useStorageState';
 import type { CompleteTrophy } from '../../../service/types';
+import { Paginator } from '../../components/Paginator';
 import {
   CompleteTrophyCard,
   CompleteTrophyCardShimmer,
 } from '../../Game/components/CompleteTrophyCard';
-import { Paginator } from '../../components/Paginator';
 
 export function CompleteTrophyList(props: {
   storageKey: string;

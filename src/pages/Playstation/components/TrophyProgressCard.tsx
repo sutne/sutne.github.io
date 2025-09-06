@@ -1,9 +1,9 @@
 import {
+  alpha,
   Box,
   Collapse,
   Stack,
   Typography,
-  alpha,
   useTheme,
 } from '@mui/material';
 import { ShimmerImage, ShimmerText } from 'components/animated/shimmer';
