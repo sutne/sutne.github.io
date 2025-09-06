@@ -1,10 +1,6 @@
 import { Typography } from '@mui/material';
-import type { JSX } from 'react';
 
-export function Section(props: {
-  title: string;
-  children: JSX.Element | JSX.Element[];
-}) {
+export function Section(props: { title: string; children: React.ReactNode }) {
   const sx = getSx();
   return (
     <>

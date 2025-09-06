@@ -1,11 +1,4 @@
-import {
-  createContext,
-  type JSX,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useLocalState, useSessionState } from '../../../hooks/useStorageState';
 import * as API from '../service/api';
@@ -34,7 +27,9 @@ const SingleGameTrophiesContext = createContext<
   | undefined
 >(undefined);
 
-export function SingleGameTrophiesProvider(props: { children: JSX.Element }) {
+export function SingleGameTrophiesProvider(props: {
+  children: React.ReactNode;
+}) {
   const params = useParams();
 
   const [groups, setGroups] = useState<TrophyGroup[] | undefined>(undefined);

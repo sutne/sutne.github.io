@@ -1,11 +1,5 @@
 import type React from 'react';
-import {
-  createContext,
-  type JSX,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import * as API from '../service/api';
 import type { NowPlayingType } from '../service/types';
 import { useMusicPlayer } from './music-player';
@@ -20,7 +14,7 @@ const NowPlayingContext = createContext<
   | undefined
 >(undefined);
 
-export function NowPlayingProvider(props: { children: JSX.Element }) {
+export function NowPlayingProvider(props: { children: React.ReactNode }) {
   const [track, setTrack] = useState<NowPlayingType>();
   const [shouldShow, setShouldShow] = useState(false);
 

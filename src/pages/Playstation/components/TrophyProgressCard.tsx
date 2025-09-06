@@ -7,7 +7,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { ShimmerImage, ShimmerText } from 'components/animated/shimmer';
-import { type JSX, useState } from 'react';
+import { useState } from 'react';
 import { useSessionState } from '../../../hooks/useStorageState';
 import type { PlatformInfo, TrophyCount, TrophyType } from '../service/types';
 import { unearnedTrophyGroupTitle } from '../util/grouping';
@@ -40,7 +40,7 @@ export function TrophyProgressCard(props: {
   trophyCount: TrophyCount;
   earnedCount: TrophyCount;
   platform?: PlatformInfo[];
-  children?: JSX.Element;
+  children?: React.ReactNode;
   alwaysExpanded?: boolean;
   preserveState?: boolean;
   onClick?: () => void;

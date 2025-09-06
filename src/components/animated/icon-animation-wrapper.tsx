@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { useApp } from 'providers/app-provider';
 import { useSettings } from 'providers/settings-provider';
-import { type JSX, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getCoordinates, getScreenCenter, getSize } from './util';
 
 /**
@@ -9,7 +9,7 @@ import { getCoordinates, getScreenCenter, getSize } from './util';
  */
 export function IconAnimationWrapper(props: {
   name: string;
-  children: JSX.Element;
+  children: React.ReactNode;
 }) {
   const { getIconRef, getIsOpen } = useApp();
   const { settings } = useSettings();

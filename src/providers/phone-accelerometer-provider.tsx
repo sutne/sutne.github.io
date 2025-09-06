@@ -1,11 +1,5 @@
 import { useMediaQuery, useTheme } from '@mui/material';
-import {
-  createContext,
-  type JSX,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const PhoneAccelerometerContext = createContext<
   | {
@@ -26,7 +20,9 @@ const PhoneAccelerometerContext = createContext<
   | undefined
 >(undefined);
 
-export function PhoneAccelerometerProvider(props: { children: JSX.Element }) {
+export function PhoneAccelerometerProvider(props: {
+  children: React.ReactNode;
+}) {
   const theme = useTheme();
   const isPhone = useMediaQuery(theme.breakpoints.only('xs'));
   const requiresAccess =

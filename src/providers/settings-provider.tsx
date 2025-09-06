@@ -1,4 +1,4 @@
-import { createContext, type JSX, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import {
   deleteAllCookies,
   getCookies,
@@ -27,7 +27,7 @@ const SettingsContext = createContext<
     }
 >(undefined);
 
-export function SettingsProvider(props: { children: JSX.Element }) {
+export function SettingsProvider(props: { children: React.ReactNode }) {
   const [settings, setSettings] = useState<Settings>(
     getCookies('settings', defaultSettings),
   );

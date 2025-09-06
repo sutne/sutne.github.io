@@ -1,7 +1,6 @@
 import { alpha, Box, Stack, useTheme } from '@mui/material';
-import type { JSX } from 'react';
 
-export function ItemRow(props: { children: JSX.Element[] | JSX.Element }) {
+export function ItemRow(props: { children: React.ReactNode }) {
   const sx = getSx();
   return (
     <Box sx={sx.container}>
