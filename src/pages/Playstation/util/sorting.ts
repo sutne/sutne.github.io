@@ -36,7 +36,7 @@ export function compareGrade(a: Trophy, b: Trophy) {
 export function sortTrophies(trophies: Trophy[], sorting: Sorting): Trophy[] {
   const sorted = [...trophies].sort((a, b) => {
     // negative if a should be before b
-    let diff;
+    let diff: number | undefined;
     switch (sorting.type) {
       case 'Earned Time':
         diff = compareEarnedTime(a, b);
@@ -90,7 +90,7 @@ export function sortGames(games: TrophyGame[], sorting: Sorting): TrophyGame[] {
 
   const sorted = [...games].sort((a, b) => {
     // negative if a should be before b
-    let diff;
+    let diff: number | undefined;
     switch (sorting.type) {
       case 'Latest Trophy':
         diff = compareLastTrophy(a, b);
