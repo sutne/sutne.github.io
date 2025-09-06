@@ -35,14 +35,12 @@ export function NowPlaying() {
               <Box sx={sx.image}>
                 <Image src={track.image} size='60mm'>
                   {track.sample ? (
-                    <>
-                      <SampleButton
-                        sample={track.sample}
-                        show={isHovering}
-                        playIcon={VolumeOff}
-                        pauseIcon={VolumeUp}
-                      />
-                    </>
+                    <SampleButton
+                      sample={track.sample}
+                      show={isHovering}
+                      playIcon={VolumeOff}
+                      pauseIcon={VolumeUp}
+                    />
                   ) : (
                     <></>
                   )}

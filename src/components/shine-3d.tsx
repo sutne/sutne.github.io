@@ -54,19 +54,17 @@ export function Shine3D(props: {
 
   const sx = getSx();
   return (
-    <>
-      <Box
-        sx={[
-          ...sx.container,
-          ...(Array.isArray(props.sx) ? props.sx : [props.sx]),
-        ]}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        onContextMenu={(e) => e.stopPropagation()}
-      >
-        {props.children}
-      </Box>
-    </>
+    <Box
+      sx={[
+        ...sx.container,
+        ...(Array.isArray(props.sx) ? props.sx : [props.sx]),
+      ]}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onContextMenu={(e) => e.stopPropagation()}
+    >
+      {props.children}
+    </Box>
   );
 
   function getSx() {

@@ -34,48 +34,46 @@ export function Repository({ repo }: props) {
   return (
     <Box sx={sx.wrapper} onClick={() => setExpanded((prev) => !prev)}>
       <RepoCard>
-        <>
-          <Box sx={sx.titleRow}>
-            <Box sx={sx.owner} component='img' src={repo.owner.image} />
-            <Box sx={sx.nameBox}>
-              <Typography sx={sx.name}>{repo.name}</Typography>
-              {repo.isArchived && (
-                <Typography sx={sx.archived}>
-                  {isPhone ? 'A' : 'Archived'}
-                </Typography>
-              )}
-            </Box>
-            <Box sx={sx.dominantLanguage}>{dominantLanguage}</Box>
-            <Box
-              sx={sx.private}
-              onClick={() => (repo.isPrivate ? null : open(repo.href))}
-            >
-              {repo.isPrivate ? <></> : <LinkRounded sx={sx.link_icon} />}
-              {repo.isPrivate ? 'Private' : 'Public'}
-            </Box>
+        <Box sx={sx.titleRow}>
+          <Box sx={sx.owner} component='img' src={repo.owner.image} />
+          <Box sx={sx.nameBox}>
+            <Typography sx={sx.name}>{repo.name}</Typography>
+            {repo.isArchived && (
+              <Typography sx={sx.archived}>
+                {isPhone ? 'A' : 'Archived'}
+              </Typography>
+            )}
           </Box>
-          <Collapse in={expanded} timeout={200}>
-            <Stack sx={sx.info} direction={{ xs: 'column', sm: 'row' }}>
-              <Typography sx={sx.description}>{repo.description}</Typography>
-              <Stack sx={sx.metadata}>
-                <Typography sx={sx.timestamp}>
-                  Created {toTimeDiffString(repo.createdAt)}
-                </Typography>
-                <Typography sx={sx.timestamp}>
-                  Updated {toTimeDiffString(repo.updatedAt)}
-                </Typography>
-              </Stack>
+          <Box sx={sx.dominantLanguage}>{dominantLanguage}</Box>
+          <Box
+            sx={sx.private}
+            onClick={() => (repo.isPrivate ? null : open(repo.href))}
+          >
+            {repo.isPrivate ? <></> : <LinkRounded sx={sx.link_icon} />}
+            {repo.isPrivate ? 'Private' : 'Public'}
+          </Box>
+        </Box>
+        <Collapse in={expanded} timeout={200}>
+          <Stack sx={sx.info} direction={{ xs: 'column', sm: 'row' }}>
+            <Typography sx={sx.description}>{repo.description}</Typography>
+            <Stack sx={sx.metadata}>
+              <Typography sx={sx.timestamp}>
+                Created {toTimeDiffString(repo.createdAt)}
+              </Typography>
+              <Typography sx={sx.timestamp}>
+                Updated {toTimeDiffString(repo.updatedAt)}
+              </Typography>
             </Stack>
-            <Grid sx={sx.topics} container spacing={1}>
-              {repo.topics.map((topic) => (
-                <Grid key={topic}>
-                  <Typography sx={sx.topic}>{topic}</Typography>
-                </Grid>
-              ))}
-            </Grid>
-            <LanguageBar size={repo.size} languages={repo.languages} />
-          </Collapse>
-        </>
+          </Stack>
+          <Grid sx={sx.topics} container spacing={1}>
+            {repo.topics.map((topic) => (
+              <Grid key={topic}>
+                <Typography sx={sx.topic}>{topic}</Typography>
+              </Grid>
+            ))}
+          </Grid>
+          <LanguageBar size={repo.size} languages={repo.languages} />
+        </Collapse>
       </RepoCard>
     </Box>
   );
