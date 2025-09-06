@@ -58,30 +58,6 @@ function PaginatorRow(props: {
   const count = props.pageCount;
   const max = count - 1;
 
-  const Page = ({ index }: { index: number }) => {
-    return (
-      <PageBox onClick={() => props.onChange(index)} isCurrent={curr === index}>
-        {index + 1}
-      </PageBox>
-    );
-  };
-
-  const FastRewind = () => {
-    return (
-      <PageBox onClick={() => props.onChange(curr - 5)}>
-        <KeyboardDoubleArrowLeft fontSize='medium' />
-      </PageBox>
-    );
-  };
-
-  const FastForward = () => {
-    return (
-      <PageBox onClick={() => props.onChange(curr + 5)}>
-        <KeyboardDoubleArrowRight fontSize='medium' />
-      </PageBox>
-    );
-  };
-
   const sx = getSx();
   return (
     <Box sx={sx.wrapper}>
@@ -92,31 +68,53 @@ function PaginatorRow(props: {
         sx={sx.bar}
       >
         {count <= 7 ? (
-          interval(0, max).map((page) => <Page key={page} index={page} />)
+          interval(0, max).map((page) => (
+            <Page
+              key={page}
+              index={page}
+              curr={curr}
+              onChange={props.onChange}
+            />
+          ))
         ) : curr < 4 ? (
           <>
             {interval(0, 4).map((page) => (
-              <Page key={page} index={page} />
+              <Page
+                key={page}
+                index={page}
+                curr={curr}
+                onChange={props.onChange}
+              />
             ))}
-            <FastForward />
-            <Page index={max} />
+            <FastForward curr={curr} onChange={props.onChange} />
+            <Page index={max} curr={curr} onChange={props.onChange} />
           </>
         ) : curr < max - 3 ? (
           <>
-            <Page index={min} />
-            <FastRewind />
+            <Page index={min} curr={curr} onChange={props.onChange} />
+            <FastRewind curr={curr} onChange={props.onChange} />
             {interval(curr - 1, curr + 1).map((page) => (
-              <Page key={page} index={page} />
+              <Page
+                key={page}
+                index={page}
+                curr={curr}
+                onChange={props.onChange}
+              />
             ))}
-            <FastForward />
-            <Page index={max} />
+            <FastForward curr={curr} onChange={props.onChange} />
+            <Page index={max} curr={curr} onChange={props.onChange} />
           </>
         ) : (
           <>
-            <Page index={min} />
-            <FastRewind />
+            <Page index={min} curr={curr} onChange={props.onChange} />
+            <FastRewind curr={curr} onChange={props.onChange} />
             {interval(max - 4, max).map((page) => (
-              <Page key={page} index={page} />
+              <Page
+                key={page}
+                index={page}
+                curr={curr}
+                onChange={props.onChange}
+              />
             ))}
           </>
         )}
@@ -150,6 +148,43 @@ function interval(start: number, end: number) {
   return Array(1 + end - start)
     .fill(null)
     .map((_, i) => start + i);
+}
+
+function Page(props: {
+  index: number;
+  curr: number;
+  onChange: (newPageIndex: number) => void;
+}) {
+  return (
+    <PageBox
+      onClick={() => props.onChange(props.index)}
+      isCurrent={props.curr === props.index}
+    >
+      {props.index + 1}
+    </PageBox>
+  );
+}
+
+function FastRewind(props: {
+  curr: number;
+  onChange: (newPageIndex: number) => void;
+}) {
+  return (
+    <PageBox onClick={() => props.onChange(props.curr - 5)}>
+      <KeyboardDoubleArrowLeft fontSize='medium' />
+    </PageBox>
+  );
+}
+
+function FastForward(props: {
+  curr: number;
+  onChange: (newPageIndex: number) => void;
+}) {
+  return (
+    <PageBox onClick={() => props.onChange(props.curr + 5)}>
+      <KeyboardDoubleArrowRight fontSize='medium' />
+    </PageBox>
+  );
 }
 
 function PageBox(props: {
