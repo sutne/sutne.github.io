@@ -5,6 +5,9 @@ import { Route, Routes } from 'react-router-dom';
 import { darkTheme } from 'themes/darkTheme';
 import { lightTheme } from 'themes/lightTheme';
 import { SortProvider } from '../../providers/sort-provider';
+import { SingleGameTrophiesProvider } from './contexts/SingleGameTrophies';
+import { TrophiesProvider } from './contexts/Trophies';
+import { TrophyGamesProvider } from './contexts/TrophyGames';
 import { TrophyAdvisor } from './Main/AllTrophies/TrophyAdvisor/TrophyAdvisor';
 import { TrophyLog } from './Main/AllTrophies/TrophyLog/TrophyLog';
 import { PlaystationTrophyStats } from './Main/AllTrophies/TrophyStats/TrophyStats';
@@ -12,9 +15,6 @@ import { PlaystationTrophiesGame } from './Main/Game/PlaystationTrophiesGame';
 import { Main } from './Main/Main';
 import { SingleTrophy } from './Main/SingleTrophy/SingeTrophy';
 import { PlaystationTrophies } from './Main/Trophies/Trophies';
-import { SingleGameTrophiesProvider } from './contexts/SingleGameTrophies';
-import { TrophiesProvider } from './contexts/Trophies';
-import { TrophyGamesProvider } from './contexts/TrophyGames';
 
 const playstationDarkTheme = responsiveFontSizes(
   createTheme(darkTheme, {

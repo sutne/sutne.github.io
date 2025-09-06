@@ -1,4 +1,4 @@
-import { Box, Grid, alpha, useTheme } from '@mui/material';
+import { alpha, Box, Grid, useTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import { Shimmer } from '../../../../components/animated/shimmer';

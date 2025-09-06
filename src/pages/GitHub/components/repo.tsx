@@ -1,11 +1,11 @@
 import { LinkRounded } from '@mui/icons-material';
 import {
+  alpha,
   Box,
   Collapse,
   Grid,
   Stack,
   Typography,
-  alpha,
   useMediaQuery,
   useTheme,
 } from '@mui/material';

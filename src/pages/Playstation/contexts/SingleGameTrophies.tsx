@@ -1,6 +1,6 @@
 import {
-  type JSX,
   createContext,
+  type JSX,
   useContext,
   useEffect,
   useMemo,

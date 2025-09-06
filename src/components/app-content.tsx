@@ -1,12 +1,12 @@
 import { KeyboardArrowLeftRounded, Minimize } from '@mui/icons-material';
 import {
+  alpha,
   Box,
   IconButton,
   ThemeProvider as MuiThemeProvider,
   Stack,
   type Theme,
   Typography,
-  alpha,
 } from '@mui/material';
 import { useApp } from 'providers/app-provider';
 import { useMainTheme } from 'providers/main-theme-provider';

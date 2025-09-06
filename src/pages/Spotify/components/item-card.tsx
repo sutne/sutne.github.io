@@ -1,4 +1,4 @@
-import { Box, Stack, alpha, useTheme } from '@mui/material';
+import { alpha, Box, Stack, useTheme } from '@mui/material';
 import { Image } from 'components/image';
 import { useState } from 'react';
 import { ShimmerText } from '../../../components/animated/shimmer';

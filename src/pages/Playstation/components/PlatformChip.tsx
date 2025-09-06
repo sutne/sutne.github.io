@@ -1,9 +1,7 @@
 import { Typography } from '@mui/material';
 import type { Platform } from '../service/types';
 
-export function PlatformChip(props: {
-  platform: Platform;
-}) {
+export function PlatformChip(props: { platform: Platform }) {
   const sx = getSx();
   return <Typography sx={sx.platform}>{props.platform}</Typography>;
   function getSx() {

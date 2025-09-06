@@ -1,5 +1,5 @@
 import { VolumeOff, VolumeUp } from '@mui/icons-material';
-import { Box, Collapse, Stack, alpha, useTheme } from '@mui/material';
+import { alpha, Box, Collapse, Stack, useTheme } from '@mui/material';
 import { Image } from 'components/image';
 import { useState } from 'react';
 import { ItemSubtitle } from '../components/item-subtitle';

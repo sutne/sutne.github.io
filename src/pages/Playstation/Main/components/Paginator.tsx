@@ -2,7 +2,7 @@ import {
   KeyboardDoubleArrowLeft,
   KeyboardDoubleArrowRight,
 } from '@mui/icons-material';
-import { Box, Stack, alpha, useTheme } from '@mui/material';
+import { alpha, Box, Stack, useTheme } from '@mui/material';
 import { useRef } from 'react';
 
 export function Paginator(props: {

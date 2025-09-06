@@ -1,4 +1,4 @@
-import { Box, Typography, alpha, useTheme } from '@mui/material';
+import { alpha, Box, Typography, useTheme } from '@mui/material';
 
 export function Shimmer(props: { sx?: any }) {
   const sx = getSx();

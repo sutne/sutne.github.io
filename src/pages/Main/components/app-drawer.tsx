@@ -1,6 +1,6 @@
-import { Box, Grid, alpha } from '@mui/material';
+import { alpha, Box, Grid } from '@mui/material';
 import { useMainTheme } from 'providers/main-theme-provider';
-import { type JSX, cloneElement } from 'react';
+import { cloneElement, type JSX } from 'react';
 
 export function AppDrawer(props: {
   title: string;

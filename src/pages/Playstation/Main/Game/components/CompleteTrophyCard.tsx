@@ -1,9 +1,9 @@
 import {
+  alpha,
   Box,
   Stack,
   type SxProps,
   Typography,
-  alpha,
   useTheme,
 } from '@mui/material';
 import { useEffect, useState } from 'react';

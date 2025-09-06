@@ -1,4 +1,4 @@
-import { Box, Typography, alpha, useTheme } from '@mui/material';
+import { alpha, Box, Typography, useTheme } from '@mui/material';
 import { Shimmer, ShimmerText } from '../../../components/animated/shimmer';
 
 export function ProgressBar({ progress }: { progress: number }) {

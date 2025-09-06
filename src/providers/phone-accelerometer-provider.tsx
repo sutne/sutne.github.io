@@ -1,7 +1,7 @@
 import { useMediaQuery, useTheme } from '@mui/material';
 import {
-  type JSX,
   createContext,
+  type JSX,
   useContext,
   useEffect,
   useState,
@@ -30,7 +30,7 @@ export function PhoneAccelerometerProvider(props: { children: JSX.Element }) {
   const theme = useTheme();
   const isPhone = useMediaQuery(theme.breakpoints.only('xs'));
   const requiresAccess =
-    // @ts-ignore
+    // @ts-expect-error
     typeof DeviceOrientationEvent.requestPermission === 'function';
   const [hasAccess, setHasAccess] = useState(isPhone && !requiresAccess);
 
@@ -39,7 +39,7 @@ export function PhoneAccelerometerProvider(props: { children: JSX.Element }) {
   const [gamma, setGamma] = useState(0);
 
   function requestAccess() {
-    // @ts-ignore
+    // @ts-expect-error
     DeviceOrientationEvent.requestPermission()
       .then((response: string) => setHasAccess(response === 'granted'))
       .catch(() => setHasAccess(false));

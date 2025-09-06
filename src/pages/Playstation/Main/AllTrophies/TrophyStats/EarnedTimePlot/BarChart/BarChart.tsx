@@ -1,7 +1,7 @@
 import {
+  alpha,
   Box,
   type SxProps,
-  alpha,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
@@ -63,9 +63,9 @@ export function BarChart(props: { sections: Section[]; sx?: SxProps }) {
     requestAnimationFrame(() => update(painter));
   }
 
-  let mouse: { x: number; y: number } | undefined = undefined;
+  let mouse: { x: number; y: number } | undefined;
   let elapsed = 0;
-  let prevFrameTime: number | undefined = undefined;
+  let prevFrameTime: number | undefined;
   const animationDuration = 1000; // ms
   function update(painter: BarChartPainter) {
     const dt = prevFrameTime ? performance.now() - prevFrameTime : 0;

@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, alpha, useTheme } from '@mui/material';
+import { alpha, Box, Stack, Typography, useTheme } from '@mui/material';
 import { useMemo, useState } from 'react';
 import { Shimmer } from '../../../../../../components/animated/shimmer';
 import { GroupButton } from '../../../Game/components/GroupButton';

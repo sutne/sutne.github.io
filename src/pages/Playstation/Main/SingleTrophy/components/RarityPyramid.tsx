@@ -1,7 +1,7 @@
 import {
+  alpha,
   Box,
   type Breakpoint,
-  alpha,
   useMediaQuery,
   useTheme,
 } from '@mui/material';

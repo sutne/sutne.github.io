@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, alpha, useTheme } from '@mui/material';
+import { alpha, Box, Stack, Typography, useTheme } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export function TabBar() {
