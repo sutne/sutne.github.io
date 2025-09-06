@@ -1,11 +1,8 @@
 import { alpha, Box, Grid } from '@mui/material';
 import { useMainTheme } from 'providers/main-theme-provider';
-import { cloneElement, type JSX } from 'react';
+import { cloneElement } from 'react';
 
-export function AppDrawer(props: {
-  title: string;
-  children: JSX.Element | JSX.Element[];
-}) {
+export function AppDrawer(props: { title: string; children: React.ReactNode }) {
   const { theme } = useMainTheme();
 
   const apps = Array.isArray(props.children)

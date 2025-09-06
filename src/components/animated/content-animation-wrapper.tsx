@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { useApp } from 'providers/app-provider';
 import { useSettings } from 'providers/settings-provider';
 import type React from 'react';
-import { type JSX, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUrlScrollPosition } from '../hooks/useUrlScrollPosition';
 import { getImageCenter, getScreenCenter } from './util';
@@ -13,7 +13,7 @@ import { getImageCenter, getScreenCenter } from './util';
  */
 export function ContentAnimationWrapper(props: {
   name: string;
-  children: JSX.Element;
+  children: React.ReactNode;
 }) {
   const { getIconRef, getIsOpen, setIsOpen } = useApp();
   const { settings } = useSettings();

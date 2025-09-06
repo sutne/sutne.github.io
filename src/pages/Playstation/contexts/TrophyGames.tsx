@@ -1,10 +1,4 @@
-import {
-  createContext,
-  type JSX,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useLocalState } from '../../../hooks/useStorageState';
 import * as API from '../service/api';
 import type { TrophyGame } from '../service/types';
@@ -18,7 +12,7 @@ const TrophyGamesContext = createContext<
   | undefined
 >(undefined);
 
-export function TrophyGamesProvider(props: { children: JSX.Element }) {
+export function TrophyGamesProvider(props: { children: React.ReactNode }) {
   const [gameList, setGameList] = useState<TrophyGame[] | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
   const [storedGameCount, setStoredGameCount] = useLocalState('game-count', 5);

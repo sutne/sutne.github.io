@@ -1,10 +1,4 @@
-import {
-  createContext,
-  type JSX,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const MusicPlayerContext = createContext<
   | {
@@ -16,7 +10,7 @@ const MusicPlayerContext = createContext<
   | undefined
 >(undefined);
 
-export function MusicPlayerProvider(props: { children: JSX.Element }) {
+export function MusicPlayerProvider(props: { children: React.ReactNode }) {
   const [currentSample, setCurrentSample] = useState<HTMLAudioElement>();
   const [samples, setSamples] = useState<Map<string, HTMLAudioElement>>(
     new Map(),

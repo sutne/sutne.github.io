@@ -1,13 +1,13 @@
 import { QuestionMarkRounded } from '@mui/icons-material';
 import { alpha, Box, Stack, Typography, useTheme } from '@mui/material';
-import { type JSX, useState } from 'react';
+import { useState } from 'react';
 import { ToggleSwitch } from './toggle-switch';
 
 export function ToggleItem(props: {
   name: string;
   isToggled: boolean;
   onChange: () => void;
-  tooltip?: JSX.Element;
+  tooltip?: React.ReactNode;
   disabled?: boolean;
 }) {
   const [showTooltip, setShowTooltip] = useState(false);

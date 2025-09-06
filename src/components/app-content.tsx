@@ -11,7 +11,6 @@ import {
 import { useApp } from 'providers/app-provider';
 import { useMainTheme } from 'providers/main-theme-provider';
 import { useSettings } from 'providers/settings-provider';
-import type { JSX } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { darkTheme } from 'themes/darkTheme';
 import { lightTheme } from 'themes/lightTheme';
@@ -19,7 +18,7 @@ import { ContentAnimationWrapper } from './animated/content-animation-wrapper';
 
 export function AppContent(props: {
   name: string;
-  children: JSX.Element;
+  children: React.ReactNode;
   theme?: Theme;
   lightTheme?: Theme;
   darkTheme?: Theme;

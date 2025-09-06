@@ -4,13 +4,7 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { useSettings } from 'providers/settings-provider';
-import {
-  createContext,
-  type JSX,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { darkTheme } from 'themes/darkTheme';
 import { lightTheme } from 'themes/lightTheme';
 
@@ -23,7 +17,7 @@ const MainThemeContext = createContext<
   | undefined
 >(undefined);
 
-export function MainThemeProvider(props: { children: JSX.Element }) {
+export function MainThemeProvider(props: { children: React.ReactNode }) {
   const prefersDarkTheme = useMediaQuery('(prefers-color-scheme: dark)');
   const [theme, setTheme] = useState(prefersDarkTheme ? darkTheme : lightTheme);
 

@@ -1,4 +1,4 @@
-import React, { createContext, type JSX, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 const AppContext = createContext<
   | {
@@ -10,7 +10,7 @@ const AppContext = createContext<
   | undefined
 >(undefined);
 
-export function AppProvider(props: { children: JSX.Element }) {
+export function AppProvider(props: { children: React.ReactNode }) {
   const [iconReferences, setIconReferences] = useState(
     new Map<string, React.RefObject<HTMLImageElement | null>>(),
   );

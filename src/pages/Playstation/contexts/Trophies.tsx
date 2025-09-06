@@ -1,10 +1,4 @@
-import {
-  createContext,
-  type JSX,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import * as API from '../service/api';
 import type { CompleteTrophy } from '../service/types';
 
@@ -22,7 +16,7 @@ const TrophiesContext = createContext<
   | undefined
 >(undefined);
 
-export function TrophiesProvider(props: { children: JSX.Element }) {
+export function TrophiesProvider(props: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [allTrophies, setAllTrophies] = useState<CompleteTrophy[] | undefined>(
     undefined,

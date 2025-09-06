@@ -1,5 +1,5 @@
 import type React from 'react';
-import { createContext, type JSX, useContext } from 'react';
+import { createContext, useContext } from 'react';
 import { useSessionState } from '../hooks/useStorageState';
 
 export type SortOrder = 'asc' | 'desc';
@@ -18,7 +18,7 @@ const SortContext = createContext<
 
 export function SortProvider(props: {
   defaultSorting: Sorting;
-  children: JSX.Element;
+  children: React.ReactNode;
   storageKey: string;
 }) {
   const [sorting, setSorting] = useSessionState<Sorting>(

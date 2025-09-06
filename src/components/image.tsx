@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-import type { JSX } from 'react';
 import { Shimmer } from './animated/shimmer';
 
 export function Image(props: {
@@ -7,7 +6,7 @@ export function Image(props: {
   size?: any;
   sx?: any;
   objectFit?: string;
-  children?: JSX.Element;
+  children?: React.ReactNode;
 }) {
   const sx = getSx();
   return (
