@@ -1,6 +1,7 @@
 import { alpha, Box, Stack, useTheme } from '@mui/material';
 
 export function ItemRow(props: { children: React.ReactNode }) {
+  const theme = useTheme();
   const sx = getSx();
   return (
     <Box sx={sx.container}>
@@ -11,7 +12,6 @@ export function ItemRow(props: { children: React.ReactNode }) {
   );
 
   function getSx() {
-    const theme = useTheme();
     return {
       container: {
         overflow: 'visible',

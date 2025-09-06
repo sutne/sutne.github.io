@@ -9,8 +9,6 @@ export function TrackProgress() {
   const { track, refresh, setShouldShow } = useNowPlaying();
   const theme = useTheme();
 
-  if (!track) return <></>;
-
   let timer: NodeJS.Timeout;
   useEffect(() => {
     if (!track) return;
@@ -36,6 +34,8 @@ export function TrackProgress() {
       refresh();
     }
   }, [elapsed]);
+
+  if (!track) return <></>;
 
   const progress = Math.min(100, (100 * elapsed) / track.length);
 

@@ -33,8 +33,8 @@ function useTrophyUrl() {
 
 export function useTrophiesFromUrl(): CompleteTrophy[] {
   const { isLoading, getTrophy } = useTrophies();
-  if (isLoading) return [];
   const trophyUrl = useTrophyUrl();
+  if (isLoading) return [];
   const trophies = trophyUrl.versions
     .map((version) => getTrophy(version.id, trophyUrl.trophyId))
     .filter((trophy) => trophy !== undefined)

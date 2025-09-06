@@ -26,11 +26,11 @@ import { useTrophiesFromUrl } from './hooks/useTrophiesFromUrl';
 
 export function SingleTrophy() {
   const { isLoading } = useTrophies();
-  if (isLoading) return <SingleTrophyShimmer />;
-
   const [overrideHidden, setOverrideHidden] = useState(false);
   const trophies = useTrophiesFromUrl();
   const [trophy, setTrophy] = useState(trophies[0]);
+
+  if (isLoading) return <SingleTrophyShimmer />;
 
   const hideDetails = Boolean(
     trophy.isHidden && !trophy.isEarned && !overrideHidden,

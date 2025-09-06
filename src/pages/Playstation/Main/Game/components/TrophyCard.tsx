@@ -5,6 +5,7 @@ import { getDateString, trophyColors } from '../../../util/util';
 import { TrophyProgressBar } from './TrophyProgressBar';
 
 export function TrophyCard(props: { trophy: Trophy; onClick: () => void }) {
+  const theme = useTheme();
   const [isHolding, setIsHolding] = useState(false);
   const [overrideHidden, setOverrideHidden] = useState(false);
 
@@ -99,7 +100,6 @@ export function TrophyCard(props: { trophy: Trophy; onClick: () => void }) {
     </Box>
   );
   function getSx() {
-    const theme = useTheme();
     const iconShadow = {
       xs: 'drop-shadow(0 1px 2px rgba(0,0,0,50%))',
       sm: 'drop-shadow(0 3px 6px rgba(0,0,0,50%))',

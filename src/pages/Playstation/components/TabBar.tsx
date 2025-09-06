@@ -34,6 +34,7 @@ export function TabBar() {
 }
 
 function Tab(props: { path: string; children: React.ReactNode }) {
+  const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
   const isCurrentPath = location.pathname === props.path;
@@ -45,7 +46,6 @@ function Tab(props: { path: string; children: React.ReactNode }) {
     </Box>
   );
   function getSx() {
-    const theme = useTheme();
     return {
       tab: {
         border: `1px ${isCurrentPath ? 'solid' : 'dashed'}`,
