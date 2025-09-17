@@ -92,6 +92,7 @@ export function SingleTrophy() {
                 sx={{
                   ...sx.platform,
                   opacity: t.game.id === trophy.game.id ? 1 : 0.5,
+                  cursor: trophies.length > 1 ? 'pointer' : 'default',
                 }}
                 onMouseOver={() => setTrophy(t)}
                 onClick={() => setTrophy(t)}
@@ -243,6 +244,8 @@ function getSx(
         width: '100%',
         objectFit: 'contain',
         borderRadius: 'inherit',
+        WebkitTransform: 'translate3d(0, 0, 0)',
+        MozTransform: 'translate3d(0, 0, 0)',
         filter: {
           xs: 'grayscale(100%) blur(8px)',
           sm: 'grayscale(100%) blur(12px)',

@@ -237,6 +237,8 @@ function getSx(trophy?: CompleteTrophy) {
         alignSelf: 'center',
         objectFit: 'contain',
         borderRadius: { xs: '4px', sm: '6px' },
+        WebkitTransform: 'translate3d(0, 0, 0)',
+        MozTransform: 'translate3d(0, 0, 0)',
         filter: 'grayscale(100%) blur(4px)',
         WebkitFilter: 'grayscale(100%) blur(4px)',
         opacity: 0.075,
