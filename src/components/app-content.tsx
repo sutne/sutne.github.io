@@ -63,14 +63,7 @@ export function AppContent(props: {
       <ContentAnimationWrapper name={props.name}>
         <Box sx={sx.content}>
           <Stack sx={sx.title_bar} direction='row'>
-            <Box
-              sx={sx.title_icon}
-              component='img'
-              src={
-                new URL(`/src/assets/apps/${props.name}.png`, import.meta.url)
-                  .href
-              }
-            />
+            <Box sx={sx.title_icon} />
             <Typography sx={sx.title_name} alignSelf='center'>
               {props.name}
             </Typography>
@@ -104,7 +97,7 @@ export function AppContent(props: {
       },
       title_bar: {
         padding: '12px',
-        borderRadius: `${12 + 12}px ${12 + 12}px 0 0`,
+        borderRadius: `${12 + 14}px ${12 + 14}px 0 0`,
         background: appBarTheme.background,
         color: appBarTheme.textColor,
         boxShadow: '0px 3px 3px rgba(0,0,0,40%)',
@@ -112,8 +105,16 @@ export function AppContent(props: {
       title_icon: {
         width: '48px',
         height: '48px',
-        borderRadius: '12px',
-        boxShadow: '0px 2px 5px rgba(0, 0, 0, 30%)',
+        borderRadius: '14px',
+        backgroundImage: `url(${
+          new URL(`/src/assets/apps/${props.name}.png`, import.meta.url).href
+        })`,
+        backgroundSize: 'cover',
+        boxShadow: `
+          0px 2px 5px rgba(0, 0, 0, 30%),
+          inset 1px 1px 1px rgba(200, 255, 231, 0.18)
+        `,
+        flexShrink: 0,
       },
       title_name: {
         paddingLeft: '16px',

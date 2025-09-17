@@ -23,14 +23,7 @@ export function AppIcon(props: { name: string; onTap?: () => void }) {
   return (
     <IconAnimationWrapper name={props.name}>
       <Box sx={sx.container} onClick={onClick}>
-        <Box
-          ref={iconRef}
-          sx={sx.icon}
-          component='img'
-          src={
-            new URL(`/src/assets/apps/${props.name}.png`, import.meta.url).href
-          }
-        />
+        <Box ref={iconRef} sx={sx.icon} />
         <Box sx={sx.name}>{props.name}</Box>
       </Box>
     </IconAnimationWrapper>
@@ -50,8 +43,16 @@ export function AppIcon(props: { name: string; onTap?: () => void }) {
       icon: {
         width: { xs: '16mm', sm: '18mm' },
         aspectRatio: '1',
-        borderRadius: '25%',
-        boxShadow: '0px 2px 5px rgba(0, 0, 0, 30%)',
+        borderRadius: '30%',
+        backgroundImage: `url(${
+          new URL(`/src/assets/apps/${props.name}.png`, import.meta.url).href
+        })`,
+        backgroundSize: 'cover',
+        boxShadow: `
+          2px 4px 6px rgba(0, 0, 0, 30%),
+          inset 1px 1px 1px rgba(200, 255, 231, 0.18),
+          inset -2px -4px 4px -5px rgba(200, 255, 231, 0.18)
+        `,
       },
       name: {
         color: theme.palette.text.primary,
