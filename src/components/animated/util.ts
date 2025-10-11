@@ -10,9 +10,10 @@ export function getCoordinates(ref: React.RefObject<HTMLImageElement | null>): {
   y: number;
 } {
   if (!ref.current) return { x: 0, y: 0 };
+  var rect = ref.current.getBoundingClientRect();
   return {
-    x: ref.current.x,
-    y: ref.current.y,
+    x: rect.left,
+    y: rect.top,
   };
 }
 

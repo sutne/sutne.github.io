@@ -28,13 +28,14 @@ export function IconAnimationWrapper(props: {
     y: getSize(iconRef).y / 2,
   });
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: used by the getScreenCenter
   useEffect(() => {
     setOrigin(getCoordinates(iconRef));
     setTarget({
       x: getScreenCenter().x - getSize(iconRef).x / 2,
       y: getSize(iconRef).y / 2,
     });
-  }, [iconRef, window.innerWidth, window.innerHeight]);
+  }, [iconRef.current, window.innerWidth, window.innerHeight]);
 
   // translation from origin to target
   const transform = {
@@ -50,6 +51,7 @@ export function IconAnimationWrapper(props: {
         {
           transition: `transform ${animation}, opacity ${animation}`,
           opacity: 1,
+          overflow: 'hidden',
         },
         settings.useAnimations &&
           isOpen && {
