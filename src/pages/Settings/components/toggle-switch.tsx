@@ -19,8 +19,8 @@ export function ToggleSwitch(props: {
   );
 
   function getIOSStyle() {
-    const width = 42;
-    const height = 26;
+    const width = 44;
+    const height = 20;
     return {
       container: {
         width: width,
@@ -33,11 +33,10 @@ export function ToggleSwitch(props: {
         {
           height: '100%',
           width: '100%',
-          borderRadius: height / 2,
-          padding: '1px',
+          padding: '2px',
           transition: 'all 500ms',
           bgcolor: 'rgb(164,164,164)',
-          boxShadow: 'inset 0 0 3px rgba(0, 0, 0, 0.5)',
+          boxShadow: 'inset 0 0 1px rgba(0, 0, 0, 0.1)',
         },
         props.isOn && {
           bgcolor: '#2ECA45',
@@ -45,18 +44,18 @@ export function ToggleSwitch(props: {
       ],
       thumb: [
         {
-          height: height - 2,
-          width: height - 2,
+          height: height - 4,
+          width: width * 0.58,
           bgcolor: 'white',
-          borderRadius: (height - 2) / 2,
+          borderRadius: (height - 4) / 2,
           transition: 'all 300ms',
           boxShadow: `
-            inset 
+            inset
             0 -6px 8px rgba(0, 0, 0, 0.1),
             0    0 3px rgba(0, 0, 0, 0.3)`,
         },
         props.isOn && {
-          transform: `translateX(${width - height}px)`,
+          transform: `translateX(${width * 0.43 - 4}px)`,
         },
       ],
     };
