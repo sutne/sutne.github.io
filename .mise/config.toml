@@ -1,0 +1,11 @@
+[tools]
+node = "24"
+
+[task_config]
+includes = [".mise/tasks/general.toml"]
+
+[settings]
+experimental = true
+
+[hooks]
+postinstall = ["mise run install-dependencies"]
