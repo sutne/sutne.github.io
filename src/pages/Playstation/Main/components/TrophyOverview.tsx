@@ -1,4 +1,4 @@
-import { alpha, Box, Grid, useTheme } from '@mui/material';
+import { alpha, Box, Grid, type Theme, useTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import { Shimmer } from '../../../../components/animated/shimmer';
@@ -11,7 +11,7 @@ import { TrophyLevel } from './TrophyLevel';
 
 export function TrophyOverview(props: { profile: Profile }) {
   const navigate = useNavigate();
-  const sx = getSx();
+  const sx = getSx(useTheme());
 
   const trophy = (type: TrophyType) => {
     return (
@@ -44,7 +44,7 @@ export function TrophyOverview(props: { profile: Profile }) {
 }
 
 export function TrophyOverviewShimmer() {
-  const sx = getSx();
+  const sx = getSx(useTheme());
 
   const trophy = (type: TrophyType) => {
     return (
@@ -83,8 +83,7 @@ export function TrophyOverviewShimmer() {
   );
 }
 
-function getSx() {
-  const theme = useTheme();
+function getSx(theme: Theme) {
   return {
     card: {
       position: 'relative',

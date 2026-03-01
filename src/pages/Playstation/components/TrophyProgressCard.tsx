@@ -3,6 +3,7 @@ import {
   Box,
   Collapse,
   Stack,
+  type Theme,
   Typography,
   useTheme,
 } from '@mui/material';
@@ -77,7 +78,7 @@ export function TrophyProgressCard(props: {
     setExpanded((isExpanded) => !isExpanded);
   };
 
-  const sx = getSx(isInteractable);
+  const sx = getSx(useTheme(), isInteractable);
   return (
     <>
       <Stack sx={sx.container} direction='row' onClick={handleClick}>
@@ -127,7 +128,7 @@ export function TrophyProgressCard(props: {
 }
 
 export function TrophyProgressCardShimmer() {
-  const sx = getSx(false);
+  const sx = getSx(useTheme(), false);
   return (
     <Stack sx={sx.container} direction='row'>
       <ShimmerImage
@@ -153,8 +154,7 @@ export function TrophyProgressCardShimmer() {
   );
 }
 
-function getSx(isInteractable: boolean) {
-  const theme = useTheme();
+function getSx(theme: Theme, isInteractable: boolean) {
   return {
     container: {
       position: 'relative',

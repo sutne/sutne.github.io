@@ -3,6 +3,7 @@ import {
   Box,
   Stack,
   type SxProps,
+  type Theme,
   Typography,
   useTheme,
 } from '@mui/material';
@@ -68,7 +69,7 @@ export function CompleteTrophyCard(props: {
     e.cancelBubble = true;
   }
 
-  const sx = getSx(props.trophy);
+  const sx = getSx(useTheme(), props.trophy);
   return (
     <Box sx={sx.wrapper}>
       <Stack
@@ -143,7 +144,7 @@ export function CompleteTrophyCardShimmer(props: { earned?: boolean }) {
     import.meta.url,
   ).href;
 
-  const sx = getSx();
+  const sx = getSx(useTheme());
   return (
     <Box sx={sx.wrapper}>
       <Stack sx={sx.container} direction='row'>
@@ -172,8 +173,7 @@ export function CompleteTrophyCardShimmer(props: { earned?: boolean }) {
   );
 }
 
-function getSx(trophy?: CompleteTrophy) {
-  const theme = useTheme();
+function getSx(theme: Theme, trophy?: CompleteTrophy) {
   const iconShadow = {
     xs: 'drop-shadow(0 1px 2px rgba(0,0,0,50%))',
     sm: 'drop-shadow(0 3px 6px rgba(0,0,0,50%))',

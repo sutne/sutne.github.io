@@ -1,4 +1,4 @@
-import { alpha, Box, Stack, useTheme } from '@mui/material';
+import { alpha, Box, Stack, type Theme, useTheme } from '@mui/material';
 import { Image } from 'components/image';
 import { useState } from 'react';
 import { ShimmerText } from '../../../components/animated/shimmer';
@@ -18,7 +18,7 @@ export function ItemCard(props: {
     ? undefined
     : () => window.open(props.href, '_blank');
 
-  const sx = getSx();
+  const sx = getSx(useTheme());
   return (
     <Stack
       sx={sx.container}
@@ -42,7 +42,7 @@ export function ItemCard(props: {
 }
 
 export function ItemCardShimmer() {
-  const sx = getSx();
+  const sx = getSx(useTheme());
   return (
     <Stack sx={sx.container} direction='column'>
       <Image sx={sx.image} src={undefined} />
@@ -54,8 +54,7 @@ export function ItemCardShimmer() {
   );
 }
 
-function getSx() {
-  const theme = useTheme();
+function getSx(theme: Theme) {
   return {
     container: [
       {

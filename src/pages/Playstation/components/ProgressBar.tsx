@@ -1,8 +1,8 @@
-import { alpha, Box, Typography, useTheme } from '@mui/material';
+import { alpha, Box, type Theme, Typography, useTheme } from '@mui/material';
 import { Shimmer, ShimmerText } from '../../../components/animated/shimmer';
 
 export function ProgressBar({ progress }: { progress: number }) {
-  const sx = getSx(progress);
+  const sx = getSx(useTheme(), progress);
   return (
     <Box sx={sx.container}>
       <Typography sx={sx.percentage}>{progress}%</Typography>
@@ -12,7 +12,7 @@ export function ProgressBar({ progress }: { progress: number }) {
 }
 
 export function ProgressBarShimmer() {
-  const sx = getSx(0);
+  const sx = getSx(useTheme(), 0);
   return (
     <Box sx={sx.container}>
       <ShimmerText fontSize={sx.percentage.fontSize} width='32px' />
@@ -23,8 +23,7 @@ export function ProgressBarShimmer() {
   );
 }
 
-function getSx(progress: number) {
-  const theme = useTheme();
+function getSx(theme: Theme, progress: number) {
   return {
     container: {
       width: '100%',
