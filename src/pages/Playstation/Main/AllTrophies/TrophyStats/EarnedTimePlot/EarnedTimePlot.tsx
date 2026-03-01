@@ -1,4 +1,11 @@
-import { alpha, Box, Stack, Typography, useTheme } from '@mui/material';
+import {
+  alpha,
+  Box,
+  Stack,
+  type Theme,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import { useMemo, useState } from 'react';
 import { Shimmer } from '../../../../../../components/animated/shimmer';
 import { GroupButton } from '../../../Game/components/GroupButton';
@@ -32,7 +39,7 @@ export function EarnedTimePlot(props: { timestamps: (Date | undefined)[] }) {
     throw new Error(`Missing sections for ${sectionBy}`);
   }, [sectionBy, validTimestamps]);
 
-  const sx = getSx();
+  const sx = getSx(useTheme());
   return (
     <Stack sx={sx.container} spacing={{ xs: '8px', sm: '16px' }}>
       <Stack
@@ -66,7 +73,7 @@ export function EarnedTimePlot(props: { timestamps: (Date | undefined)[] }) {
 }
 
 export function EarnedTimePlotShimmer() {
-  const sx = getSx();
+  const sx = getSx(useTheme());
   return (
     <Box sx={{ ...sx.container, padding: 0, aspectRatio: 1.5 }}>
       <Shimmer sx={{ width: '100%', height: '100%' }} />
@@ -74,8 +81,7 @@ export function EarnedTimePlotShimmer() {
   );
 }
 
-function getSx() {
-  const theme = useTheme();
+function getSx(theme: Theme) {
   return {
     container: {
       background: `radial-gradient(

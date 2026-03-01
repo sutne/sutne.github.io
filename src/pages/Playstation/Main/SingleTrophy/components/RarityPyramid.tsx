@@ -2,6 +2,7 @@ import {
   alpha,
   Box,
   type Breakpoint,
+  type Theme,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
@@ -19,7 +20,8 @@ export function RarityPyramid(props: {
 
   // equilateral triangle:
   // all sides have same length, all angles are 60 degrees
-  const width = getWidth(props.pixelWidth);
+  const theme = useTheme();
+  const width = getWidth(theme, props.pixelWidth);
   const height = (Math.sqrt(3) / 2) * width;
 
   // Derived from Area and Height formula to find height to make a triangle
@@ -27,7 +29,6 @@ export function RarityPyramid(props: {
   const earnedPyramidHeight = Math.sqrt(3 * earnedRatio * width ** 2) / 2;
   const earnedHeightPercentage = 100 * (earnedPyramidHeight / height);
 
-  const theme = useTheme();
   const sx = getSx();
   return <Box sx={sx.pyramid} />;
   function getSx() {
@@ -54,8 +55,10 @@ export function RarityPyramid(props: {
   }
 }
 
-function getWidth(pixelWidth: number | PartialBreakpoints): number {
-  const theme = useTheme();
+function getWidth(
+  theme: Theme,
+  pixelWidth: number | PartialBreakpoints,
+): number {
   if (typeof pixelWidth === 'number') return pixelWidth;
   let breakpointWidth = 0;
   for (const [breakpoint, width] of Object.entries(pixelWidth)) {
