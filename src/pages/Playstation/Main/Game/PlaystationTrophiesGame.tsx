@@ -70,9 +70,9 @@ export function PlaystationTrophiesGame() {
         ) : !groups ? (
           <></>
         ) : (
-          groups.map((group, i) => (
+          groups.map((group) => (
             <SortProvider
-              key={`${group.name}-${i}`}
+              key={`${group.name}-${group.id}`}
               storageKey='playstation-trophy-sorting'
               defaultSorting={{ type: 'Default', order: 'asc' }}
             >

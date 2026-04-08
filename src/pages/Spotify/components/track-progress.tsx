@@ -9,16 +9,16 @@ export function TrackProgress() {
   const { track, refresh, setShouldShow } = useNowPlaying();
   const theme = useTheme();
 
-  let timer: NodeJS.Timeout;
+  let intervalId: number;
   useEffect(() => {
     if (!track) return;
     setElapsed(Math.max(track.elapsed - 1000, 0));
 
-    timer = setInterval(() => {
+    intervalId = setInterval(() => {
       setElapsed((prev) => Math.min(prev + 1000, track.length));
     }, 1000);
 
-    return () => clearInterval(timer);
+    return () => clearInterval(intervalId);
   }, [track]);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export function TrackProgress() {
       return;
     }
     if (remaining <= 0) {
-      clearInterval(timer);
+      clearInterval(intervalId);
       refresh();
     }
   }, [elapsed]);
