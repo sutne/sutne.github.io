@@ -12,9 +12,11 @@ export function PersonalCard() {
         container
         size={12}
         spacing={2}
-        alignItems='center'
-        justifyContent={'center'}
-        textAlign='center'
+        sx={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+        }}
       >
         <Grid size={{ xs: 12, sm: 4, md: 4 }}>
           <Image
@@ -27,12 +29,15 @@ export function PersonalCard() {
             }}
           />
         </Grid>
-        <Grid size={{ xs: 12, sm: 8, md: 8 }} alignContent={'center'}>
+        <Grid size={{ xs: 12, sm: 8, md: 8 }} sx={{ alignContent: 'center' }}>
           <Box style={{ padding: '16px' }}>
-            <Typography variant='h4' color='text.primary' marginBottom='3mm'>
+            <Typography
+              variant='h4'
+              sx={{ color: 'text.primary', marginBottom: '3mm' }}
+            >
               Sivert Utne
             </Typography>
-            <Typography variant='body1' color='text.secondary'>
+            <Typography variant='body1' sx={{ color: 'text.secondary' }}>
               Consultant at Bouvet ASA
             </Typography>
           </Box>

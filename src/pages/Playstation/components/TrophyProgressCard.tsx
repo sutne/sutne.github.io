@@ -85,9 +85,8 @@ export function TrophyProgressCard(props: {
         <Box sx={sx.image} component='img' src={props.image} />
         {props.platform && (
           <Stack
-            sx={sx.platforms}
+            sx={{ ...sx.platforms, gap: { xs: '4px', m: '6px' } }}
             direction='row'
-            gap={{ xs: '4px', m: '6px' }}
           >
             {props.platform.map((info) => (
               <PlatformChip key={info.id} platform={info.platform} />

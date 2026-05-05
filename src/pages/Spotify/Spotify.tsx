@@ -35,7 +35,7 @@ export function Spotify() {
       <Box style={{ padding: '24px' }}>
         <MusicPlayerProvider>
           {/* Remove margin from top header, regardless of which is on top */}
-          <Box marginTop='-2em'>
+          <Box sx={{ marginTop: '-2em' }}>
             <NowPlayingProvider>
               <NowPlaying />
               <RecentlyPlayed />

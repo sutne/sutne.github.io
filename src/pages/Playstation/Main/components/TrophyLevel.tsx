@@ -15,9 +15,8 @@ export function TrophyLevel(props: { level: number }) {
   return (
     <Stack
       direction='column'
-      alignItems='center'
-      justifyContent='center'
       spacing='12px'
+      sx={{ alignItems: 'center', justifyContent: 'center' }}
     >
       <Box sx={sx.image} component='img' src={icon} />
       <Typography sx={sx.text}>Level {props.level}</Typography>

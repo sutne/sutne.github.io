@@ -35,10 +35,10 @@ export function RepoList() {
           '&::-webkit-scrollbar': {
             height: '0',
           },
+          alignItems: 'center',
         }}
         direction='row'
         spacing={1}
-        alignItems={'center'}
       >
         <SortButton type='Updated' />
         <SortButton type='Created' />

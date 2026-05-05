@@ -64,7 +64,7 @@ export function AppContent(props: {
         <Box sx={sx.content}>
           <Stack sx={sx.title_bar} direction='row'>
             <Box sx={sx.title_icon} />
-            <Typography sx={sx.title_name} alignSelf='center'>
+            <Typography sx={{ ...sx.title_name, alignSelf: 'center' }}>
               {props.name}
             </Typography>
             {!isAtRoot && (

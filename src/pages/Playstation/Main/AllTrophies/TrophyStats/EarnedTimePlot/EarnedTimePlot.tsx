@@ -43,7 +43,7 @@ export function EarnedTimePlot(props: { timestamps: (Date | undefined)[] }) {
   return (
     <Stack sx={sx.container} spacing={{ xs: '8px', sm: '16px' }}>
       <Stack
-        alignItems='center'
+        sx={{ alignItems: 'center' }}
         direction={{ xs: 'column', sm: 'row' }}
         spacing={{ xs: '8px', sm: '16px' }}
       >
@@ -58,11 +58,13 @@ export function EarnedTimePlot(props: { timestamps: (Date | undefined)[] }) {
           ))}
         </Stack>
         <Typography
-          flexGrow={1}
-          color='text.secondary'
           variant='caption'
-          textAlign='right'
-          whiteSpace='no-wrap'
+          sx={{
+            flexGrow: 1,
+            color: 'text.secondary',
+            textAlign: 'right',
+            whiteSpace: 'no-wrap',
+          }}
         >
           {missingTimestampCount} earned trophies are missing timestamps
         </Typography>

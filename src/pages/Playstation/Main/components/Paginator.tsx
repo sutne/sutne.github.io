@@ -63,9 +63,7 @@ function PaginatorRow(props: {
     <Box sx={sx.wrapper}>
       <Stack
         direction='row'
-        justifyContent='center'
-        alignItems='center'
-        sx={sx.bar}
+        sx={{ ...sx.bar, justifyContent: 'center', alignItems: 'center' }}
       >
         {count <= 7 ? (
           interval(0, max).map((page) => (

@@ -20,7 +20,11 @@ export function SortButton(props: { type: string }) {
   const sx = getSx();
   return (
     <Box sx={sx.container} onClick={handleClick}>
-      <Stack sx={sx.content} direction='row' spacing={1} alignItems={'center'}>
+      <Stack
+        sx={{ ...sx.content, alignItems: 'center' }}
+        direction='row'
+        spacing={1}
+      >
         {isSelected && <KeyboardArrowDownRounded sx={sx.icon} />}
         <Typography sx={sx.label} variant='body2'>
           {props.type}

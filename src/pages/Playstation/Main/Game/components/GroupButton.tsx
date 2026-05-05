@@ -10,7 +10,11 @@ export function GroupButton(props: {
   const sx = getSx();
   return (
     <Box sx={sx.container} onClick={props.onClick}>
-      <Stack sx={sx.content} direction='row' spacing={1} alignItems={'center'}>
+      <Stack
+        sx={{ ...sx.content, alignItems: 'center' }}
+        direction='row'
+        spacing={1}
+      >
         <Typography sx={sx.label} variant='body2'>
           {props.type}
         </Typography>
