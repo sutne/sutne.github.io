@@ -82,7 +82,7 @@ export function TrophyCard(props: { trophy: Trophy; onClick: () => void }) {
           <Typography sx={sx.description}>
             {hideDetails ? 'Description is hidden.' : props.trophy.description}
           </Typography>
-          <Stack direction='row' alignItems='end'>
+          <Stack direction='row' sx={{ alignItems: 'end' }}>
             <Box sx={sx.trophyIcon} component='img' src={trophyIcon} />
             <Typography sx={sx.rarity}>{props.trophy.rarity}%</Typography>
             {props.trophy.isEarned ? (

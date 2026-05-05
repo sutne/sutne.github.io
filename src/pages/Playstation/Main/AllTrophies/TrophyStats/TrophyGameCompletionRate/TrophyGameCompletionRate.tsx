@@ -17,7 +17,7 @@ export function TrophyGameCompletion() {
   const unearnedTrophyCount = unearnedTrophies?.length ?? 0;
 
   return (
-    <Stack direction='row' justifyContent='space-evenly' spacing={2}>
+    <Stack direction='row' sx={{ justifyContent: 'space-evenly' }} spacing={2}>
       <Detail
         label='Games Played'
         value={gameCount}
@@ -49,7 +49,10 @@ function Detail(props: {
 }) {
   const sx = getSx();
   return (
-    <Stack direction='column' justifyContent='center' alignItems='center'>
+    <Stack
+      direction='column'
+      sx={{ justifyContent: 'center', alignItems: 'center' }}
+    >
       {props.isLoading ? (
         <ShimmerText fontSize={sx.value.fontSize} />
       ) : (

@@ -30,7 +30,7 @@ export function TrophyList(props: { list: Trophy[] }) {
           <SortButton type='Grade' />
         </Stack>
       )}
-      <Stack spacing={'4px'} alignItems={'center'}>
+      <Stack spacing={'4px'} sx={{ alignItems: 'center' }}>
         {trophies.map((trophy) => (
           <TrophyCard
             key={trophy.id}

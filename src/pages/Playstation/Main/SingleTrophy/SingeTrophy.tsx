@@ -67,8 +67,7 @@ export function SingleTrophy() {
       <Stack
         direction='row'
         spacing={2}
-        justifyContent='center'
-        alignItems='center'
+        sx={{ justifyContent: 'center', alignItems: 'center' }}
       >
         <Box sx={sx.groupIcon} component='img' src={trophy.group.icon} />
         <Stack sx={{ flexGrow: 1 }}>
@@ -103,20 +102,20 @@ export function SingleTrophy() {
         </Stack>
       </Stack>
 
-      <Stack direction='row' spacing={2} alignItems='end'>
-        <Stack width='50%' alignItems='center'>
+      <Stack direction='row' spacing={2} sx={{ alignItems: 'end' }}>
+        <Stack sx={{ width: '50%', alignItems: 'center' }}>
           <Box sx={sx.trophyIcon} component='img' src={trophyIcon} />
           <Typography sx={sx.text}>{capitalize(trophyType ?? '')}</Typography>
           <Typography sx={sx.label}>Grade</Typography>
         </Stack>
-        <Stack width='50%' alignItems='center'>
+        <Stack sx={{ width: '50%', alignItems: 'center' }}>
           {trophy.rarity && (
             <>
               <RarityPyramid
                 rarity={trophy.rarity}
                 pixelWidth={{ xs: 76, md: 112 }}
               />
-              <Typography sx={sx.text} whiteSpace='pre'>
+              <Typography sx={{ ...sx.text, whiteSpace: 'pre' }}>
                 {`${getRarityDescription(trophy.rarity)}  ${trophy.rarity}%`}
               </Typography>
               <Typography sx={sx.label}>Rarity</Typography>
@@ -128,16 +127,15 @@ export function SingleTrophy() {
       <Stack
         direction={{ xs: 'column', sm: 'row' }}
         spacing={2}
-        alignItems='end'
-        paddingTop='12px'
+        sx={{ alignItems: 'end', paddingTop: '12px' }}
       >
-        <Stack width={{ xs: '100%', sm: '50%' }} alignItems='start'>
+        <Stack sx={{ width: { xs: '100%', sm: '50%' }, alignItems: 'start' }}>
           <Typography sx={sx.label}>Description</Typography>
           <Typography sx={sx.text}>
             {hideDetails ? 'Description is hidden.' : trophy.description}
           </Typography>
         </Stack>
-        <Stack width={{ xs: '100%', sm: '50%' }} alignItems='end'>
+        <Stack sx={{ width: { xs: '100%', sm: '50%' }, alignItems: 'end' }}>
           {trophy.isEarned ? (
             <>
               <Typography sx={sx.label}>Earned</Typography>
@@ -169,8 +167,7 @@ export function SingleTrophyShimmer() {
       <Stack
         direction='row'
         spacing={2}
-        justifyContent='center'
-        alignItems='center'
+        sx={{ justifyContent: 'center', alignItems: 'center' }}
       >
         <ShimmerImage width={sx.groupIcon.width} />
         <Stack sx={{ flexGrow: 1 }}>
@@ -179,13 +176,13 @@ export function SingleTrophyShimmer() {
         </Stack>
       </Stack>
 
-      <Stack direction='row' spacing={2} alignItems='end'>
-        <Stack width='50%' alignItems='center'>
+      <Stack direction='row' spacing={2} sx={{ alignItems: 'end' }}>
+        <Stack sx={{ width: '50%', alignItems: 'center' }}>
           <ShimmerImage width={sx.trophyIcon[0].width} />
           <ShimmerText numLines={1} fontSize={sx.text.fontSize} />
           <Typography sx={sx.label}>Grade</Typography>
         </Stack>
-        <Stack width='50%' alignItems='center'>
+        <Stack sx={{ width: '50%', alignItems: 'center' }}>
           <ShimmerImage width={sx.trophyIcon[0].width} />
           <ShimmerText numLines={1} fontSize={sx.text.fontSize} />
           <Typography sx={sx.label}>Rarity</Typography>
@@ -195,9 +192,9 @@ export function SingleTrophyShimmer() {
       <Stack
         direction={{ xs: 'column', sm: 'row' }}
         spacing={2}
-        alignItems='end'
+        sx={{ alignItems: 'end' }}
       >
-        <Stack width={{ xs: '100%', sm: '50%' }} alignItems='start'>
+        <Stack sx={{ width: { xs: '100%', sm: '50%' }, alignItems: 'start' }}>
           <Typography sx={sx.label}>Description</Typography>
           <ShimmerText numLines={2} fontSize={sx.text.fontSize} />
         </Stack>

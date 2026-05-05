@@ -20,7 +20,7 @@ export function ProfileOverviewShimmer() {
         width={sx.avatar.width}
         sx={{ borderRadius: sx.avatar.borderRadius }}
       />
-      <Box width={{ xs: '96px', sm: '128px', md: '256px' }}>
+      <Box sx={{ width: { xs: '96px', sm: '128px', md: '256px' } }}>
         <ShimmerText fontSize={sx.onlineId.fontSize} width='100%' />
       </Box>
     </Stack>
