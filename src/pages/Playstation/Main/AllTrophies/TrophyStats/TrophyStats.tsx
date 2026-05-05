@@ -3,6 +3,10 @@ import { ShimmerText } from '../../../../../components/animated/shimmer';
 import { TabBar } from '../../../components/TabBar';
 import { useTrophies } from '../../../contexts/Trophies';
 import {
+  ContributionGraph,
+  ContributionGraphShimmer,
+} from './ContributionGraph/ContributionGraph';
+import {
   EarnedTimePlot,
   EarnedTimePlotShimmer,
 } from './EarnedTimePlot/EarnedTimePlot';
@@ -27,6 +31,11 @@ export function PlaystationTrophyStats() {
           )}
           <Typography sx={sx.header}> earned trophies</Typography>
         </Stack>
+        {isLoading ? (
+          <ContributionGraphShimmer />
+        ) : (
+          <ContributionGraph timestamps={earnedTimestamps ?? []} />
+        )}
         {isLoading ? (
           <EarnedTimePlotShimmer />
         ) : (
