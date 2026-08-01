@@ -5,10 +5,13 @@ on:
     branches:
       - main
 
-jobs:
-  lint-and-format:
-    uses: ./.github/workflows/lint-and-format.yaml
+permissions:
+  contents: read
 
-  build-and-deploy:
-    needs: lint-and-format
-    uses: ./.github/workflows/build-and-deploy.yaml
+jobs:
+  lint:
+    uses: ./.github/workflows/lint.yaml
+
+  deploy:
+    needs: lint
+    uses: ./.github/workflows/deploy.yaml
