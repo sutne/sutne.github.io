@@ -1,11 +1,10 @@
-name: on-pull-request
+name: pr
 
 on:
   pull_request:
 
-permissions:
-  contents: read
-
 jobs:
   lint:
+    permissions:
+      contents: read
     uses: ./.github/workflows/lint.yaml

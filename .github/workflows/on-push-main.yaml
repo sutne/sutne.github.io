@@ -1,17 +1,18 @@
-name: Build & Deploy
+name: main
 
 on:
   push:
     branches:
       - main
 
-permissions:
-  contents: read
-
 jobs:
   lint:
+    permissions:
+      contents: read
     uses: ./.github/workflows/lint.yaml
 
   deploy:
     needs: lint
+    permissions:
+      contents: write
     uses: ./.github/workflows/deploy.yaml
